@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Grids, Vcl.ExtCtrls,
-  Vcl.Menus;
+  Vcl.Menus, parser, Contnrs;
 
 type
   TForm1 = class(TForm)
@@ -24,18 +24,13 @@ type
     procedure btn2Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure sg1Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
   private
     { Private declarations }
+    ObjectList : TObjectList;
   public
     { Public declarations }
   end;
-
-  TObjectRecord = record
-     Name : String;
-     ObjType : String;
-     Params : String;
-  end;
-
 
 
 var
@@ -58,31 +53,64 @@ begin
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
+var
+ S : TSimpleObject;
+ i : Integer;
 begin
- // Load settings
- with sg1 do
-   begin
-     Cells [0,1] := 'Test1';
-     Cells [1,1] := 'topc_string';
-     Cells [0,2] := 'Test2';
-     Cells [1,2] := 'topc_string_ex';
+  ObjectList := TObjectList.Create (True);
+  // чтение объектов из файла
 
-   end;
+  S := TSimpleObject.Create;
+  S.Parse('tstringex = topc_string_min_max ("Комментарий",0,100)');
+
+  ObjectList.Add(S);
+
+  S := TSimpleObject.Create;
+  S.Parse('tstring = topc_string ("Комментарий")');
+
+  ObjectList.Add(S);
+  //
+
+  sg1.RowCount := ObjectList.Count + 1;
+
+  i := 0;
+  while (i < ObjectList.Count) do
+  begin
+     sg1.Cells [0,i+1] := TSimpleObject(ObjectList[i]).Name;
+     sg1.Cells [1,i+1] := TSimpleObject(ObjectList[i]).ObjTypeToString;
+     Inc(I);
+  end;
+end;
+
+procedure TForm1.FormDestroy(Sender: TObject);
+begin
+ ObjectList.Free;
 end;
 
 procedure TForm1.sg1Click(Sender: TObject);
+var
+ ObjectType : TObjectType;
+ S : TSimpleObject;
 begin
-  if sg1.Cells [1, sg1.Row] = 'topc_string' then
-  begin
-   frmString.ParentWindow := pnl2.Handle;
-   frmString.Show;
+  S :=  TSimpleObject (ObjectList[sg1.Row-1]);
+  ObjectType := S.ObjType;
+  case ObjectType of
+    otUnck: ;
+    otString:
+     begin
+      frmString.ParentWindow := pnl2.Handle;
+      frmString.Init (S);
+      frmString.Show;
+     end;
+    otStringEx:
+     begin
+       frmStringEx.ParentWindow := pnl2.Handle;
+       frmStringEx.Init  (S);
+       frmStringEx.Show;
+     end;
+    otCombo: ;
+    otComboEx: ;
   end;
-  if sg1.Cells [1, sg1.Row] = 'topc_string_ex' then
-  begin
-   frmStringEx.ParentWindow := pnl2.Handle;
-   frmStringEx.Show;
-  end;
-
 end;
 
 end.

@@ -4,7 +4,7 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, parser;
 
 type
   TfrmSetSimple = class(TForm)
@@ -15,6 +15,8 @@ type
     { Private declarations }
   public
     { Public declarations }
+    FS : TSimpleObject;
+    procedure Init (S : TSimpleObject); virtual;
     procedure DoSave; virtual;
   end;
 
@@ -30,6 +32,12 @@ implementation
 procedure TfrmSetSimple.DoSave;
 begin
  ;
+end;
+
+procedure TfrmSetSimple.Init(S: TSimpleObject);
+begin
+  FS := S;
+  edt1.Text := FS.Name;
 end;
 
 end.
