@@ -131,7 +131,7 @@ begin
  Name := 'tobject_str';
  ObjType := otString;
  SetLength(slArguments,1);
- slArguments[0] := '"Комментарий"';
+ slArguments[0] := 'Комментарий';
 end;
 
 end.

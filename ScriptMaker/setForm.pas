@@ -20,6 +20,7 @@ type
     lbl6: TLabel;
     edtComment: TEdit;
     lbl3: TLabel;
+    lbl7: TLabel;
     procedure btnSaveClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
   private
@@ -30,7 +31,8 @@ type
     FNames : TStrings;
     FOnCheckName : TOnCheckName;
     FOnCancel : TNotifyEvent;
-    procedure Init (S : TSimpleObject; OnCheckName  : TOnCheckName; OnCancel : TNotifyEvent); virtual;
+    FOnOk     : TNotifyEvent;
+    procedure Init (S : TSimpleObject; OnCheckName  : TOnCheckName; OnOk, OnCancel : TNotifyEvent); virtual;
   end;
 
 var
@@ -59,13 +61,16 @@ begin
     end;
  FS.Name := edtName.Text;
  FS.Arguments[0] := edtComment.Text;
+ if Assigned (FOnOk) then
+  FOnOk (Sender);
 end;
 
 
-procedure TfrmSetSimple.Init  (S : TSimpleObject; OnCheckName  : TOnCheckName; OnCancel : TNotifyEvent);
+procedure TfrmSetSimple.Init  (S : TSimpleObject; OnCheckName  : TOnCheckName; OnOk, OnCancel : TNotifyEvent);
 begin
   FS := S;
   FOnCheckName := OnCheckName;
+  FOnOk := OnOk;
   FOnCancel := OnCancel;
   edtName.Text := FS.Name;
   edtComment.Text := FS.Arguments[0];

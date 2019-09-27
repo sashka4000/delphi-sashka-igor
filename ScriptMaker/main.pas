@@ -8,33 +8,49 @@ uses
   Vcl.Menus, parser, Contnrs, Vcl.Imaging.pngimage;
 
 type
-  TForm1 = class(TForm)
+  TfrmMain = class(TForm)
     pnl1: TPanel;
     sg1: TStringGrid;
     pnl2: TPanel;
     pm1: TPopupMenu;
-    mniLj1: TMenuItem;
-    mniN1: TMenuItem;
-    mniN2: TMenuItem;
+    mniAddString: TMenuItem;
+    mniAddStringEx: TMenuItem;
+    mniAddCombo: TMenuItem;
     mniN3: TMenuItem;
-    mniN4: TMenuItem;
+    mniDelete: TMenuItem;
     img1: TImage;
     img2: TImage;
+    img3: TImage;
+    lbl1: TLabel;
+    lbl2: TLabel;
+    lbl3: TLabel;
+    lbl4: TLabel;
+    lbl5: TLabel;
+    lbl6: TLabel;
+    lbl7: TLabel;
+    mniHelp: TMenuItem;
+    lbl8: TLabel;
+    mniN5: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure sg1Click(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure mniHelpClick(Sender: TObject);
+    procedure mniAddStringClick(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
     ObjectList : TObjectList;
     procedure CancelClicked (Sender : TObject);
+    procedure OkClicked (Sender : TObject);
     function CheckName (const Name : string) : Boolean;
+    function GetNewName (const Name : String) : String;
   public
     { Public declarations }
   end;
 
 
 var
-  Form1: TForm1;
+  frmMain: TfrmMain;
 
 
 implementation
@@ -42,12 +58,12 @@ Uses setForm, setString, setStringEx;
 
 {$R *.dfm}
 
-procedure TForm1.CancelClicked(Sender: TObject);
+procedure TfrmMain.CancelClicked(Sender: TObject);
 begin
   sg1Click(nil);
 end;
 
-function TForm1.CheckName(const Name: string): Boolean;
+function TfrmMain.CheckName(const Name: string): Boolean;
 begin
  Result := True;
  // Игорь - необходимо написать Текст процедуры проверки
@@ -56,14 +72,27 @@ begin
  // Result = false  - имя уже используется
 end;
 
-procedure TForm1.FormCreate(Sender: TObject);
+procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if Application.MessageBox('Сохранить выполненные изменения в файле?',
+    PChar(Application.Title), MB_OKCANCEL + MB_ICONQUESTION) = IDCANCEL then
+    Exit;
+  //  Код сохранения ObjList to File
+  // ....
+  //
+end;
+
+procedure TfrmMain.FormCreate(Sender: TObject);
 var
  S : TSimpleObject;
  i : Integer;
 begin
   ObjectList := TObjectList.Create (True);
   // чтение объектов из файла
+  // ....
+  //
 
+  // После добавления чтения этот код обрыть
   S := TSimpleObject.Create;
   S.Parse('obj1 = topc_string_min_max ("Комментарий",0,100)');
 
@@ -73,7 +102,7 @@ begin
   S.Parse('obj2 = topc_string ("Комментарий")');
 
   ObjectList.Add(S);
-  //
+  // -------------------------------------------
 
   sg1.RowCount := ObjectList.Count + 1;
 
@@ -90,12 +119,54 @@ begin
 
 end;
 
-procedure TForm1.FormDestroy(Sender: TObject);
+procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
  ObjectList.Free;
 end;
 
-procedure TForm1.sg1Click(Sender: TObject);
+function TfrmMain.GetNewName(const Name: String): String;
+var
+ i : Integer;
+begin
+ i := 0;
+ while (True) do
+ begin
+    Result := Name + IntToStr(i);
+    if CheckName(Result) then
+     Exit;
+    inc (i);
+ end;
+end;
+
+procedure TfrmMain.mniAddStringClick(Sender: TObject);
+var
+ Name : String;
+ S    : TStringParser;
+begin
+  Name := GetNewName ('str');
+  S := TStringParser.Create;
+  S.Name := Name;
+  ObjectList.Add(S);
+  sg1.RowCount := sg1.RowCount + 1;
+  sg1.Row := sg1.RowCount-1;
+  sg1.Cells [0, sg1.RowCount-1] := S.Name;
+  sg1.Cells [1, sg1.RowCount-1] := S.ObjTypeToString;
+  sg1Click(nil);
+end;
+
+procedure TfrmMain.mniHelpClick(Sender: TObject);
+begin
+ frmString.Hide;
+ frmStringEx.Hide;
+ pnl2.Invalidate;
+end;
+
+procedure TfrmMain.OkClicked(Sender: TObject);
+begin
+ sg1.Cells [0, sg1.Row] := TSimpleObject (ObjectList[sg1.Row-1]).Name;
+end;
+
+procedure TfrmMain.sg1Click(Sender: TObject);
 var
  ObjectType : TObjectType;
  S : TSimpleObject;
@@ -107,13 +178,13 @@ begin
     otString:
      begin
       frmString.Parent := pnl2;
-      frmString.Init (S, CheckName, CancelClicked);
+      frmString.Init (S, CheckName, OkClicked, CancelClicked);
       frmString.Show;
      end;
     otStringEx:
      begin
        frmStringEx.Parent:= pnl2;
-       frmStringEx.Init  (S, CheckName, CancelClicked);
+       frmStringEx.Init  (S, CheckName, OkClicked, CancelClicked);
        frmStringEx.Show;
      end;
     otCombo: ;
