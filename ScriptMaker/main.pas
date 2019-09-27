@@ -37,6 +37,7 @@ type
     procedure mniHelpClick(Sender: TObject);
     procedure mniAddStringClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure mniAddComboClick(Sender: TObject);
   private
     { Private declarations }
     ObjectList : TObjectList;
@@ -54,7 +55,7 @@ var
 
 
 implementation
-Uses setForm, setString, setStringEx;
+Uses setForm, setString, setStringEx, setComboEx;
 
 {$R *.dfm}
 
@@ -73,6 +74,9 @@ begin
 end;
 
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+var
+  i: Integer;
+  S : String;
 begin
   if Application.MessageBox('Сохранить выполненные изменения в файле?',
     PChar(Application.Title), MB_OKCANCEL + MB_ICONQUESTION) = IDCANCEL then
@@ -80,6 +84,12 @@ begin
   //  Код сохранения ObjList to File
   // ....
   //
+  S := '';
+  for i := 0 to ObjectList.Count-1 do
+  begin
+    S := S + TSimpleObject(ObjectList.Items[i]).ToString + #13#10;
+  end;
+  ShowMessage(S);
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
@@ -93,12 +103,12 @@ begin
   //
 
   // После добавления чтения этот код обрыть
-  S := TSimpleObject.Create;
+  S := TSimpleObject.Create ('');
   S.Parse('obj1 = topc_string_min_max ("Комментарий",0,100)');
 
   ObjectList.Add(S);
 
-  S := TSimpleObject.Create;
+  S := TSimpleObject.Create ('');
   S.Parse('obj2 = topc_string ("Комментарий")');
 
   ObjectList.Add(S);
@@ -138,14 +148,24 @@ begin
  end;
 end;
 
+procedure TfrmMain.mniAddComboClick(Sender: TObject);
+var
+ S    : TComboParser;
+begin
+  S := TComboParser.Create (GetNewName ('cmb'));
+  ObjectList.Add(S);
+  sg1.RowCount := sg1.RowCount + 1;
+  sg1.Row := sg1.RowCount-1;
+  sg1.Cells [0, sg1.RowCount-1] := S.Name;
+  sg1.Cells [1, sg1.RowCount-1] := S.ObjTypeToString;
+  sg1Click(nil);
+end;
+
 procedure TfrmMain.mniAddStringClick(Sender: TObject);
 var
- Name : String;
  S    : TStringParser;
 begin
-  Name := GetNewName ('str');
-  S := TStringParser.Create;
-  S.Name := Name;
+  S := TStringParser.Create (GetNewName ('str'));
   ObjectList.Add(S);
   sg1.RowCount := sg1.RowCount + 1;
   sg1.Row := sg1.RowCount-1;
@@ -187,8 +207,12 @@ begin
        frmStringEx.Init  (S, CheckName, OkClicked, CancelClicked);
        frmStringEx.Show;
      end;
-    otCombo: ;
-    otComboEx: ;
+    otComboEx:
+    begin
+     frmComboEx.Parent := pnl2;
+     frmComboEx.Init  (S, CheckName, OkClicked, CancelClicked);
+     frmComboEx.Show;
+    end;
   end;
 end;
 

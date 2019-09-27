@@ -39,7 +39,6 @@ object frmMain: TfrmMain
       PopupMenu = pm1
       TabOrder = 0
       OnClick = sg1Click
-      ExplicitHeight = 409
       ColWidths = (
         158
         128)
@@ -718,6 +717,7 @@ object frmMain: TfrmMain
     end
     object mniAddCombo: TMenuItem
       Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1057#1087#1080#1089#1086#1082
+      OnClick = mniAddComboClick
     end
     object mniN3: TMenuItem
       Caption = '-'
