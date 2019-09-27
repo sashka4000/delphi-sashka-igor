@@ -4,17 +4,15 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, setForm, Vcl.StdCtrls, parser;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, setForm, Vcl.StdCtrls, parser,
+  Vcl.Imaging.pngimage, Vcl.ExtCtrls;
 
 type
   TfrmString = class(TfrmSetSimple)
-    edt2: TEdit;
-    lbl3: TLabel;
   private
     { Private declarations }
   public
     { Public declarations }
-     procedure Init (S : TSimpleObject); override;
   end;
 
 var
@@ -24,10 +22,6 @@ implementation
 
 {$R *.dfm}
 
-procedure TfrmString.Init(S: TSimpleObject);
-begin
-  inherited;
-  edt2.Text := FS.Arguments[0];
-end;
+
 
 end.
