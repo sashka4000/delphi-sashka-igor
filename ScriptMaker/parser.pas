@@ -32,6 +32,16 @@ type
     constructor Create (const Name : String);
   end;
 
+//*** Igor *** Конструктор для TStingParser ************************************
+  TStringExParser = class (TSimpleObject)
+  private
+  public
+    constructor Create (const Name : String);
+  end;
+
+//******************************************************************************
+
+
   TComboParser = class (TSimpleObject)
   private
   public
@@ -172,6 +182,18 @@ constructor TStringParser.Create (const Name : String);
 begin
  inherited;
  ObjType := otString;
+end;
+
+//*** Igor *** Конструктор для TStingParser ************************************
+{ TStringExParser }
+
+constructor TStringExParser.Create (const Name : String);
+begin
+ inherited;
+ ObjType := otStringEx;
+ SetLength(slArguments,3);
+ slArguments[1] := 'Min';
+ slArguments[2] := 'Max';
 end;
 
 { TComboParser }

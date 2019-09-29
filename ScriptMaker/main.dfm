@@ -714,6 +714,7 @@ object frmMain: TfrmMain
     end
     object mniAddStringEx: TMenuItem
       Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1057#1090#1088#1086#1082#1072' '#1089' '#1075#1088#1072#1085#1080#1094#1072#1084#1080
+      OnClick = mniAddStringExClick
     end
     object mniAddCombo: TMenuItem
       Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1057#1087#1080#1089#1086#1082

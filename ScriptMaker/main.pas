@@ -38,6 +38,7 @@ type
     procedure mniAddStringClick(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure mniAddComboClick(Sender: TObject);
+    procedure mniAddStringExClick(Sender: TObject);
   private
     { Private declarations }
     ObjectList : TObjectList;
@@ -102,7 +103,7 @@ begin
   // ....
   //
 
-  // После добавления чтения этот код обрыть
+  // После добавления чтения этот код убрать
   S := TSimpleObject.Create ('');
   S.Parse('obj1 = topc_string_min_max ("Комментарий",0,100)');
 
@@ -166,6 +167,19 @@ var
  S    : TStringParser;
 begin
   S := TStringParser.Create (GetNewName ('str'));
+  ObjectList.Add(S);
+  sg1.RowCount := sg1.RowCount + 1;
+  sg1.Row := sg1.RowCount-1;
+  sg1.Cells [0, sg1.RowCount-1] := S.Name;
+  sg1.Cells [1, sg1.RowCount-1] := S.ObjTypeToString;
+  sg1Click(nil);
+end;
+
+procedure TfrmMain.mniAddStringExClick(Sender: TObject);
+var
+ S : TStringExParser;
+begin
+  S := TStringExParser.Create (GetNewName ('strEx'));
   ObjectList.Add(S);
   sg1.RowCount := sg1.RowCount + 1;
   sg1.Row := sg1.RowCount-1;
