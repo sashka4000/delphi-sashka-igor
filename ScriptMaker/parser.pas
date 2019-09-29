@@ -192,8 +192,8 @@ begin
  inherited;
  ObjType := otStringEx;
  SetLength(slArguments,3);
- slArguments[1] := 'Min';
- slArguments[2] := 'Max';
+ slArguments[1] := '0';
+ slArguments[2] := '100';
 end;
 
 { TComboParser }
