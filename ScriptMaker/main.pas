@@ -66,8 +66,25 @@ begin
 end;
 
 function TfrmMain.CheckName(const Name: string): Boolean;
+var
+  fName : string;
+  i : Integer;
 begin
- Result := True;
+  fName := Name;
+  for I := 0 to ObjectList.Count-1 do
+    begin
+// код проверки Name
+      if fName = TSimpleObject(ObjectList[i]).Name  then
+        begin
+          ShowMessage('Данное имя уже существует ' + #10 + 'Присвойте другое имя.');
+          Result := False;
+          Abort
+        end;
+
+    end;
+
+
+  Result := True;
  // Игорь - необходимо написать Текст процедуры проверки
  // что Имя Name, которое ввел пользователь еще не используется
  // Result = true   - все Ок, Имя еще не используется
@@ -111,6 +128,11 @@ begin
 
   S := TSimpleObject.Create ('');
   S.Parse('obj2 = topc_string ("Комментарий")');
+
+  ObjectList.Add(S);
+
+  S := TSimpleObject.Create ('');
+  S.Parse('obj3 = topc_string ("Комментарий")');
 
   ObjectList.Add(S);
   // -------------------------------------------
