@@ -230,6 +230,5 @@ inherited frmStringEx: TfrmStringEx
   end
   inherited btnSave: TButton
     TabOrder = 4
-    OnClick = nil
   end
 end

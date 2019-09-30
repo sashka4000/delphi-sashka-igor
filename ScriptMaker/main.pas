@@ -67,24 +67,20 @@ end;
 
 function TfrmMain.CheckName(const Name: string): Boolean;
 var
-  fName : string;
   i : Integer;
 begin
-  fName := Name;
+ // код проверки Name
+  Result := True;
   for I := 0 to ObjectList.Count-1 do
     begin
-// код проверки Name
-      if fName = TSimpleObject(ObjectList[i]).Name  then
+      if i = sg1.Row-1 then
+       Continue;
+      if Name = TSimpleObject(ObjectList[i]).Name  then
         begin
-          ShowMessage('Данное имя уже существует ' + #10 + 'Присвойте другое имя.');
           Result := False;
-          Abort
+          Exit;
         end;
-
     end;
-
-
-  Result := True;
  // Игорь - необходимо написать Текст процедуры проверки
  // что Имя Name, которое ввел пользователь еще не используется
  // Result = true   - все Ок, Имя еще не используется
@@ -188,6 +184,7 @@ procedure TfrmMain.mniAddStringClick(Sender: TObject);
 var
  S    : TStringParser;
 begin
+  sg1.Row := 1;
   S := TStringParser.Create (GetNewName ('str'));
   ObjectList.Add(S);
   sg1.RowCount := sg1.RowCount + 1;
