@@ -216,6 +216,7 @@ inherited frmStringEx: TfrmStringEx
     Height = 21
     TabOrder = 2
     Text = 'edt1'
+    OnKeyPress = edtMinKeyPress
   end
   object edtMax: TEdit [9]
     Left = 80
@@ -224,6 +225,7 @@ inherited frmStringEx: TfrmStringEx
     Height = 21
     TabOrder = 3
     Text = 'edt1'
+    OnKeyPress = edtMaxKeyPress
   end
   inherited btnCancel: TButton
     TabOrder = 5
