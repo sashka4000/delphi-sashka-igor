@@ -11,6 +11,8 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
   PixelsPerInch = 96
   TextHeight = 13
   object lbl1: TLabel
@@ -57,6 +59,7 @@ object Form1: TForm1
     Height = 230
     ItemHeight = 13
     TabOrder = 0
+    OnClick = lstObjectClick
   end
   object lstFunctions: TListBox
     Left = 408

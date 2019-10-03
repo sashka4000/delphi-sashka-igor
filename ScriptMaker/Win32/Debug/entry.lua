@@ -14,7 +14,7 @@ topc_object6 = topc_string_min_max ("[Коментарий]",78,100)
 topc_object7 = topc_string ("[Коментарий]")
 topc_object8 = topc_string ("[Коментарий]")
 topc_object9 = topc_string_min_max ("[Коментарий]",0,33)
-topc_object10 = topc_string_min_max ("[Коментарий]",1,10)
+topc_object10 = topc_string_min_max ("[Коментарий]",0,100)
 -- Конец специальной секции
 -- **
 
