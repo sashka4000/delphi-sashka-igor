@@ -48,12 +48,21 @@ type
     function GetNewName (const Name : String) : String;
   public
     { Public declarations }
+//************** Добавляю из своего проекта для чтения файла **********
+  const
+    fileScripts = 'entry.lua'; // Имя файла скрипта
+    strDofile2 = 'dofile2 ("..\built-in\\prim_basec.lua")'; // Константа для вставки в
+   var
+    strList, strListTwo : TStringList;  // Переменая класса TStringList
+    fPath : string;         // Путь к файлу entry.lua                                                          // скрипт строки
+
   end;
 
 
 var
   frmMain: TfrmMain;
-
+  fObject : Boolean = True;   // флаг наличие константы "strDofile2"
+  fSection : Boolean = True;  // флаг секции
 
 implementation
 Uses setForm, setString, setStringEx, setComboEx;
@@ -117,6 +126,75 @@ begin
   //
 
   // После добавления чтения этот код убрать
+  begin
+    strList := TStringList.Create;
+    fPath:= ExtractFilePath(Application.ExeName) + fileScripts;
+    if not(FileExists(fPath)) then
+      begin
+        ShowMessage('Файл entry.lua не найден');
+      end
+      else
+        begin
+          strList.LoadFromFile(fPath);   // чтение из файла entry.lua
+        end;
+  end;
+
+  // проверка файла на наличие специальной секции и вставка первой строки при её
+// отсуствии - "dofile2 ... "
+   for i := 0 to strList.Count -1 do
+     begin
+
+
+          if strList.Strings[i] = strDofile2 then
+            begin
+              fObject := False;
+            end;
+          if strList.Strings[i] = '-- **' then
+            begin
+               fSection := False;
+            end;
+     end;
+          if fObject then
+          begin
+            strList.Insert(0, strDofile2) ;
+          end;
+          if fSection then
+          begin
+            strList.Insert(1, '') ;
+            strList.Insert(2, '-- Это специальная секция, созданная утилитой ') ;
+            strList.Insert(3, '-- gui_scripts.exe ') ;
+            strList.Insert(4, '-- Пожалуйста, не выполняйте редактирование вручную') ;
+            strList.Insert(5, '-- **') ;
+            strList.Insert(6, '') ;
+            strList.Insert(7, '-- **') ;
+            strList.Insert(8, '-- Конец специальной секции') ;
+            strList.Insert(9, '') ;
+          end;
+  strList.SaveToFile(fileScripts);  // запись в файл
+
+ // ******************** Работа с сформированным StringList *********************
+      fSection := False;
+      strListTwo := TStringList.Create;
+  for I := 0 to strList.Count - 1 do
+      begin
+        if strList.Strings[i] = '-- **' then
+          begin
+            if not(fSection) then
+                  begin
+                    fSection := True;
+                  end
+            else fSection := False;
+          end;
+
+        if fSection then
+           begin
+             strListTwo.Add(strList.Strings[i + 1]); // текс секции
+           end;
+      end;
+     strListTwo.Delete(strListTwo.Count - 1); // удаление флага конца секции
+     strList.Free;
+ //     strListTwo.SaveToFile('config.txt');
+  {
   S := TSimpleObject.Create ('');
   S.Parse('obj1 = topc_string_min_max ("Комментарий",0,100)');
 
@@ -131,7 +209,17 @@ begin
   S.Parse('obj3 = topc_string ("Комментарий")');
 
   ObjectList.Add(S);
+  }
   // -------------------------------------------
+  //*********  Формируем ObjectList ******************************************************
+    for I := 0 to strListTwo.Count - 1  do
+      begin
+        S := TSimpleObject.Create ('');
+        S.Parse(strListTwo.Strings[i]);
+        ObjectList.Add(S);
+      end;
+    strListTwo.Free;
+  //**************************************************************************************
 
   sg1.RowCount := ObjectList.Count + 1;
 

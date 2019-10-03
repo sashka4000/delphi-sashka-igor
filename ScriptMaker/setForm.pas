@@ -28,6 +28,8 @@ type
   public
     { Public declarations }
     FS : TSimpleObject;
+
+
     FNames : TStrings;
     FOnCheckName : TOnCheckName;
     FOnCancel : TNotifyEvent;
@@ -41,6 +43,8 @@ var
 implementation
 
 {$R *.dfm}
+
+uses setStringEx;
 
 { TForm2 }
 
@@ -59,6 +63,7 @@ begin
        PChar(Application.Title), MB_OK + MB_ICONSTOP);
      Exit;
     end;
+
  FS.Name := edtName.Text;
  FS.Arguments[0] := edtComment.Text;
  if Assigned (FOnOk) then
