@@ -39,30 +39,28 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure mniAddComboClick(Sender: TObject);
     procedure mniAddStringExClick(Sender: TObject);
+    procedure mniDeleteClick(Sender: TObject);
   private
     { Private declarations }
     ObjectList : TObjectList;
+    strList, strListTwo : TStringList;  // Переменая класса TStringList
+    fPath : string;         // Путь к файлу entry.lua                                                          // скрипт строк
+    fObject : Boolean;   // флаг наличие константы "strDofile2"
+    fSection : Boolean;  // флаг секции
+   const
+    fileScripts = 'entry.lua'; // Имя файла скрипта
+    strDofile2 = 'dofile2 ("..\\built-in\\prim_basec.lua")'; // Константа для вставки в
     procedure CancelClicked (Sender : TObject);
     procedure OkClicked (Sender : TObject);
     function CheckName (const Name : string) : Boolean;
     function GetNewName (const Name : String) : String;
   public
     { Public declarations }
-//************** Добавляю из своего проекта для чтения файла **********
-  const
-    fileScripts = 'entry.lua'; // Имя файла скрипта
-    strDofile2 = 'dofile2 ("..\built-in\\prim_basec.lua")'; // Константа для вставки в
-   var
-    strList, strListTwo : TStringList;  // Переменая класса TStringList
-    fPath : string;         // Путь к файлу entry.lua                                                          // скрипт строки
-
   end;
 
 
 var
   frmMain: TfrmMain;
-  fObject : Boolean = True;   // флаг наличие константы "strDofile2"
-  fSection : Boolean = True;  // флаг секции
 
 implementation
 Uses setForm, setString, setStringEx, setComboEx;
@@ -90,29 +88,54 @@ begin
           Exit;
         end;
     end;
- // Игорь - необходимо написать Текст процедуры проверки
- // что Имя Name, которое ввел пользователь еще не используется
- // Result = true   - все Ок, Имя еще не используется
- // Result = false  - имя уже используется
 end;
 
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
 var
-  i: Integer;
+  i,j: Integer;
   S : String;
+  sl : TStringList;
 begin
   if Application.MessageBox('Сохранить выполненные изменения в файле?',
     PChar(Application.Title), MB_OKCANCEL + MB_ICONQUESTION) = IDCANCEL then
     Exit;
-  //  Код сохранения ObjList to File
-  // ....
-  //
-  S := '';
-  for i := 0 to ObjectList.Count-1 do
+
+  if fObject then
+   strList.Insert(0, strDofile2);
+
+  // Ищем первую заполненную строчку после всех dofile2
+  i := 0;
+  while (i < strList.Count)  do
   begin
-    S := S + TSimpleObject(ObjectList.Items[i]).ToString + #13#10;
+     if strList[i] = '' then
+     begin
+       strList.Delete(i);
+       Continue;
+     end;
+     if pos ('dofile2',strList[i]) <= 0 then
+       Break;
+     inc(i);
   end;
-  ShowMessage(S);
+
+  sl := TStringList.Create;
+
+  sl.Add('') ;
+  sl.Add('-- **') ;
+  sl.Add('-- Это специальная секция, созданная утилитой ') ;
+  sl.Add('-- gui_scripts.exe ') ;
+  sl.Add('-- Пожалуйста, не выполняйте редактирование вручную') ;
+  for j := 0 to ObjectList.Count-1 do
+   sl.Add ('  ' + TSimpleObject(ObjectList.Items[j]).ToString);
+  sl.Add('-- Конец специальной секции') ;
+  sl.Add('-- **') ;
+  sl.Add('') ;
+
+  for j := 0 to sl.Count-1 do
+    strList.Insert(i+j, sl.Strings[j]);
+
+  sl.Free;
+
+  strList.SaveToFile(fileScripts);  // запись в файл
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
@@ -121,105 +144,60 @@ var
  i : Integer;
 begin
   ObjectList := TObjectList.Create (True);
-  // чтение объектов из файла
-  // ....
-  //
 
-  // После добавления чтения этот код убрать
+  strList := TStringList.Create;
+  strListTwo := TStringList.Create;
+
+  fPath:= ExtractFilePath(Application.ExeName) + fileScripts;
+
+  if not(FileExists(fPath)) then
   begin
-    strList := TStringList.Create;
-    fPath:= ExtractFilePath(Application.ExeName) + fileScripts;
-    if not(FileExists(fPath)) then
-      begin
-        ShowMessage('Файл entry.lua не найден');
-      end
-      else
-        begin
-          strList.LoadFromFile(fPath);   // чтение из файла entry.lua
-        end;
+    Application.MessageBox('Файл entry.lua не найден',
+       PChar(Application.Title), MB_OK + MB_ICONSTOP);
+    Exit; // Если его нет это оч плохо
+  end
+  else
+  begin
+      strList.LoadFromFile(fPath);   // чтение из файла entry.lua
   end;
 
-  // проверка файла на наличие специальной секции и вставка первой строки при её
-// отсуствии - "dofile2 ... "
-   for i := 0 to strList.Count -1 do
-     begin
+  fObject := True;
+  fSection := True;
 
+  i := 0;
+  while (i< strList.Count) do
+  begin
+     if strList.Strings[i] = strDofile2 then
+      fObject := False;
+     if (strList.Strings[i] = '-- **') then
+      fSection := not fSection;
+     if (not fSection) or (strList.Strings[i] = '-- **') then
+       begin
+         strListTwo.Add(strList.Strings[i]);
+         strList.Delete(i);
+         Continue;
+       end;
+     inc (i);
+  end;
 
-          if strList.Strings[i] = strDofile2 then
-            begin
-              fObject := False;
-            end;
-          if strList.Strings[i] = '-- **' then
-            begin
-               fSection := False;
-            end;
-     end;
-          if fObject then
-          begin
-            strList.Insert(0, strDofile2) ;
-          end;
-          if fSection then
-          begin
-            strList.Insert(1, '') ;
-            strList.Insert(2, '-- Это специальная секция, созданная утилитой ') ;
-            strList.Insert(3, '-- gui_scripts.exe ') ;
-            strList.Insert(4, '-- Пожалуйста, не выполняйте редактирование вручную') ;
-            strList.Insert(5, '-- **') ;
-            strList.Insert(6, '') ;
-            strList.Insert(7, '-- **') ;
-            strList.Insert(8, '-- Конец специальной секции') ;
-            strList.Insert(9, '') ;
-          end;
-  strList.SaveToFile(fileScripts);  // запись в файл
-
- // ******************** Работа с сформированным StringList *********************
-      fSection := False;
-      strListTwo := TStringList.Create;
-  for I := 0 to strList.Count - 1 do
-      begin
-        if strList.Strings[i] = '-- **' then
-          begin
-            if not(fSection) then
-                  begin
-                    fSection := True;
-                  end
-            else fSection := False;
-          end;
-
-        if fSection then
-           begin
-             strListTwo.Add(strList.Strings[i + 1]); // текс секции
-           end;
-      end;
-     strListTwo.Delete(strListTwo.Count - 1); // удаление флага конца секции
-     strList.Free;
- //     strListTwo.SaveToFile('config.txt');
-  {
+  //*********  Формируем ObjectList ***************
+  // Вдруг в секции будет на наш объект
   S := TSimpleObject.Create ('');
-  S.Parse('obj1 = topc_string_min_max ("Комментарий",0,100)');
 
-  ObjectList.Add(S);
+  for I := 0 to strListTwo.Count - 1  do
+  begin
+   S.Parse(strListTwo.Strings[i]);
+   if S.ObjType <> otUnck then
+   begin
+    ObjectList.Add(S);
+    S := TSimpleObject.Create ('');
+   end;
+  end;
 
-  S := TSimpleObject.Create ('');
-  S.Parse('obj2 = topc_string ("Комментарий")');
+  S.Free;
 
-  ObjectList.Add(S);
-
-  S := TSimpleObject.Create ('');
-  S.Parse('obj3 = topc_string ("Комментарий")');
-
-  ObjectList.Add(S);
-  }
-  // -------------------------------------------
-  //*********  Формируем ObjectList ******************************************************
-    for I := 0 to strListTwo.Count - 1  do
-      begin
-        S := TSimpleObject.Create ('');
-        S.Parse(strListTwo.Strings[i]);
-        ObjectList.Add(S);
-      end;
-    strListTwo.Free;
-  //**************************************************************************************
+  strListTwo.Free;
+  //************************************************
 
   sg1.RowCount := ObjectList.Count + 1;
 
@@ -239,6 +217,7 @@ end;
 procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
  ObjectList.Free;
+ strList.Free;
 end;
 
 function TfrmMain.GetNewName(const Name: String): String;
@@ -293,6 +272,11 @@ begin
   sg1.Cells [0, sg1.RowCount-1] := S.Name;
   sg1.Cells [1, sg1.RowCount-1] := S.ObjTypeToString;
   sg1Click(nil);
+end;
+
+procedure TfrmMain.mniDeleteClick(Sender: TObject);
+begin
+  // Игорь, код удаления не описан
 end;
 
 procedure TfrmMain.mniHelpClick(Sender: TObject);

@@ -28,9 +28,6 @@ type
   public
     { Public declarations }
     FS : TSimpleObject;
-
-
-    FNames : TStrings;
     FOnCheckName : TOnCheckName;
     FOnCancel : TNotifyEvent;
     FOnOk     : TNotifyEvent;
@@ -43,8 +40,6 @@ var
 implementation
 
 {$R *.dfm}
-
-uses setStringEx;
 
 { TForm2 }
 

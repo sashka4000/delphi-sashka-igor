@@ -725,6 +725,7 @@ object frmMain: TfrmMain
     end
     object mniDelete: TMenuItem
       Caption = #1059#1076#1072#1083#1080#1090#1100' '#1086#1073#1098#1077#1082#1090
+      OnClick = mniDeleteClick
     end
   end
 end
