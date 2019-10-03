@@ -1,0 +1,160 @@
+  Программа должна сканировать файлы в папке SCRIPTS
+  и вычленять из файлов название функций и объектов, реализованных внутри
+  данных файлов.
+
+  Программа должна отображать в lstObject -  имена объектов
+  При нажатии на объект следует отобразить в mmoObjectCode - код объекта
+
+  Аналогично для функций.
+
+  Примерный вид классов для хранения данных
+
+  type
+    TLUAObject = class
+     Name : String;     // Имя
+     Code : String;     // Код объекта
+    end;
+
+  Пример
+  twrite = topc_string_min_max ("  Комментарий",0,100)
+
+  twrite - Имя
+  twrite = topc_string_min_max ("  Комментарий",0,100)  - Код
+
+
+ type
+  TLUAFunction = class
+     Name : String;     // Имя
+     Code : String;     // Код функции
+     ParamCount: Integer; // число входных параметров
+     ParamNames : String; // Входные параметры
+    end;
+
+ Пример фунции
+ function Regim (val,qual)
+ local RToStr =
+ {
+ [0] = "Выключено",
+ [1] = "Включено",
+ [2] = "Режим 2",
+ [3] = "Режим 3"
+ }
+ if qual ~= opc.da.tekon.ItemData.QUALITY_GOOD then
+		return "---"
+ end
+ local s = RToStr [val.Integer]
+ if s == nil
+  then return "Неизвестно: "..val.Integer
+  else return s
+ end
+end
+
+Name -  Regim
+Code -  Полный текст функции
+ParamCount - 2
+ParamNames - (val,qual)
+
+Программа должна создать два ObjectList в одном из которых лежат
+  TLUAObject в другом  TLUAFunction
+
+  ---------------------------------
+
+  Как прочитать файлы в Каталоге
+
+  Uses System.IOUtils, System.Types
+
+  ...
+  var
+   Files : TStringDynArray;
+  begin
+    Files := TDirectory.GetFiles('SCRIPTS','*.lua');
+  ...
+  end;
+
+  ---------------------------------
+
+  Файлы:
+  Scripts \ entry.lua - основной загрузочный файл
+
+  В нем есть ссылки на подключение прочих файлов из данной директории в виде
+
+  dofile2 ("prim_basic.lua")
+
+  Если файл из каталога SCRIPT отстутствует в dofile2 entry.lua  - то его
+  внутренности - не анализировать. Т.е. файл этот игнорировать.
+
+  Т.е. файл entry.lua  -анализируется всегда.
+  Остальные файлы в каталоге  - только если на них есть ссылка в entry.lua
+
+  Функция из entry.lua
+
+  function main_custom()
+  end
+
+  - должна быть проигнорирована
+
+
+ Как искать объекты и функции:
+
+ Перебором строк файла
+
+ Объект
+
+ const
+  objecttypes : array [0..1] of String =
+  (
+   ('topc_string'),
+   ('topc_string_min_max')
+  )
+
+ var
+  sl : TstringList;
+  i, j : Integer;
+  LO : TLUAObject;
+
+ begin
+ ...
+ i := 0;
+ while (i < sl.Count)
+ begin
+  for j := 0 to High (objecttypes) do
+  begin
+   if pos  (objecttypes[j], sl.Strings[i]) > 0 then
+   begin
+      // Это объект  -
+      LO := TLUAObjectl.Create;
+      // заполнить поля LO  распарсив строку объекта
+      LO.Name := ...
+      LO.Code :=  sl.Strings[i];
+      OL_Object.Add (LO);
+      break; // выход из цикла
+   end;
+  end;
+  inc (i);
+ end
+
+
+ С парсингом функций  немного сложнее
+ Надо проверять строку на вхождение слово function
+ - далее парсить строчку выделя имя и определяя тип параметров
+
+ А далее вычленить текст функции  для этого сканировать следующие строчки
+
+  function Test (val)
+   ....   code ...
+  end
+
+  до конца файла или следующего function
+  при этом тело функции будет от  function до последнего найденного end
+
+
+  Примеры текстовых файлов:
+
+  entry.lua
+  demo1.lua
+  demo2.lua
+  demo3.lua - должен быть проигнрирован, т.к. отстуствует в dofile2
+
+
+
+
