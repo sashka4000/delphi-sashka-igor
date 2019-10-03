@@ -150,7 +150,7 @@ begin
     begin
       Result := Result + '"';
       if Length(slArguments[i]) > 0 then
-       Result := Result + ' ';
+//       Result := Result + '';
       Result := Result +  slArguments[i] + '",';
     end else
     begin

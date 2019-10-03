@@ -125,7 +125,7 @@ begin
   sl.Add('-- gui_scripts.exe ') ;
   sl.Add('-- Пожалуйста, не выполняйте редактирование вручную') ;
   for j := 0 to ObjectList.Count-1 do
-   sl.Add ('  ' + TSimpleObject(ObjectList.Items[j]).ToString);
+   sl.Add (TSimpleObject(ObjectList.Items[j]).ToString);
   sl.Add('-- Конец специальной секции') ;
   sl.Add('-- **') ;
   sl.Add('') ;
