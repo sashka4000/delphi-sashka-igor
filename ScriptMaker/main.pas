@@ -44,12 +44,12 @@ type
     { Private declarations }
     ObjectList : TObjectList;
     strList, strListTwo : TStringList;  // Переменая класса TStringList
-    fPath : string;         // Путь к файлу entry.lua                                                          // скрипт строк
+    fPath : string;         // Путь к файлу entry.lua
     fObject : Boolean;   // флаг наличие константы "strDofile2"
     fSection : Boolean;  // флаг секции
    const
     fileScripts = 'entry.lua'; // Имя файла скрипта
-    strDofile2 = 'dofile2 ("..\\built-in\\prim_basec.lua")'; // Константа для вставки в
+    strDofile2 = 'dofile2 ("..\\built-in\\prim_basec.lua")'; // Константа для вставки в скрипт строк
     procedure CancelClicked (Sender : TObject);
     procedure OkClicked (Sender : TObject);
     function CheckName (const Name : string) : Boolean;
@@ -181,7 +181,7 @@ begin
   end;
 
   //*********  Формируем ObjectList ***************
-  // Вдруг в секции будет на наш объект
+  // Вдруг в секции будет не наш объект
   S := TSimpleObject.Create ('');
 
   for I := 0 to strListTwo.Count - 1  do
@@ -274,10 +274,12 @@ begin
   sg1Click(nil);
 end;
 
+//********* Описание кода удаления объекта ***********************************************
 procedure TfrmMain.mniDeleteClick(Sender: TObject);
 begin
   // Игорь, код удаления не описан
 end;
+//****************************************************************************************
 
 procedure TfrmMain.mniHelpClick(Sender: TObject);
 begin
