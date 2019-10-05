@@ -54,8 +54,8 @@ type
     strDofile2 = 'dofile2 ("..\\built-in\\prim_basec.lua")'; // Константа для вставки в скрипт строк
     procedure CancelClicked (Sender : TObject);
     procedure OkClicked (Sender : TObject);
-    procedure createTable(Sender : TObject);
-    procedure addString(const nameStr : string);
+    procedure CreateTable;
+    procedure AddObjectToGrid (S : TSimpleObject);
     function CheckName (const Name : string) : Boolean;
     function GetNewName (const Name : String) : String;
   public
@@ -209,8 +209,7 @@ begin
   strListTwo.Free;
   //************************************************
 
-  sg1.RowCount := ObjectList.Count + 1;
-  createTable(nil);
+  CreateTable;
   sg1.Cells [0,0] := 'Имя объекта';
   sg1.Cells [1,0] := 'Тип объекта';
 
@@ -238,27 +237,26 @@ end;
 // ********************* Процедуру добавления объектов ****************************************
 procedure TfrmMain.mniAddStringClick(Sender: TObject);
 var
-  nameObject : string;
-  begin
-    nameObject := 'str';
-    addString(nameObject);
-
-  end;
+ S : TStringParser;
+begin
+ S := TStringParser.Create(GetNewName('str'));
+ AddObjectToGrid(S);
+end;
 
 procedure TfrmMain.mniAddStringExClick(Sender: TObject);
 var
-  nameObject : string;
+ S : TStringExParser;
 begin
-  nameObject := 'strEx';
-  addString(nameObject);
+ S := TStringExParser.Create(GetNewName('strEx'));
+ AddObjectToGrid(S);
 end;
 
 procedure TfrmMain.mniAddComboClick(Sender: TObject);
 var
-  nameObject : string;
+ S : TComboParser;
 begin
-  nameObject := 'cmd';
-  addString(nameObject);
+ S := TComboParser.Create(GetNewName('combo'));
+ AddObjectToGrid(S);
 end;
 //*********************************************************************************************
 
@@ -275,14 +273,13 @@ begin
     ObjectList.Delete(sg1.Row -1);
     for I := 1 to sg1.RowCount -1 do
       sg1.Rows[i].clear;
-    sg1.RowCount := ObjectList.Count + 1;
-    createTable(nil);
-  if sg1.RowCount > 1 then
-  begin
-   sg1.Row := sg1.RowCount-1;
-   sg1Click(nil);
-  end else
-   fSelectedIndex := -1;
+    CreateTable;
+    if sg1.RowCount > 1 then
+    begin
+     sg1.Row := sg1.RowCount-1;
+     sg1Click(nil);
+    end else
+     fSelectedIndex := -1;
 end;
 //****************************************************************************************
 
@@ -332,11 +329,12 @@ begin
 end;
 
 //******************* Процедура формирования таблицы ******************************************
-procedure TfrmMain.createTable(Sender : TObject);
+procedure TfrmMain.CreateTable;
 var
   i : Integer;
 begin
- i := 0;
+  sg1.RowCount := ObjectList.Count + 1;
+  i := 0;
   while (i < ObjectList.Count) do
   begin
      sg1.Cells [0,i+1] := TSimpleObject(ObjectList[i]).Name;
@@ -347,23 +345,16 @@ end;
 //*********************************************************************************************
 
 //********************** Процедура присоединение строки ***************************************
-procedure TfrmMain.addString(const nameStr : string);
-var
- S : TSimpleObject;
+procedure TfrmMain.AddObjectToGrid(S: TSimpleObject);
 begin
-  fSelectedIndex := -1;
-  if nameStr = 'str' then
-     S := TStringParser.Create (GetNewName (nameStr))
-  else if nameStr = 'strEx' then
-     S := TStringExParser.Create (GetNewName (nameStr))
-  else
-     S := TComboParser.Create (GetNewName (nameStr));
   ObjectList.Add(S);
   sg1.RowCount := sg1.RowCount + 1;
   sg1.Cells [0, sg1.RowCount-1] := S.Name;
   sg1.Cells [1, sg1.RowCount-1] := S.ObjTypeToString;
   sg1Click(nil);
-  end;
+
+end;
+
 
 //*********************************************************************************************
 end.

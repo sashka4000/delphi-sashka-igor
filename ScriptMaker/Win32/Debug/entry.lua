@@ -18,6 +18,8 @@ topc_object10 = topc_string_min_max ("[Коментарий]",0,100)
 -- Конец специальной секции
 -- **
 
+kkkk
+
 function main_custom()
 
 end

@@ -58,8 +58,6 @@ procedure TfrmStringEx.Init(S: TSimpleObject; OnCheckName: TOnCheckName; OnOk,
   OnCancel: TNotifyEvent);
 begin
   inherited;
-  // Ќачальные значени€ Min, Max не присваиваютс€
-  // см. код в setComboEx
   edtMin.Text  :=  FS.Arguments[1];
   edtMax.Text  :=  FS.Arguments[2];
 end;
