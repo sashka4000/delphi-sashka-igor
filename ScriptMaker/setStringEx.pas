@@ -45,6 +45,8 @@ begin
   begin
      Application.MessageBox('√раничные значени€ указаны не верно. Min >= Max',
        PChar(Application.Title), MB_OK + MB_ICONSTOP);
+        edtMax.Clear;
+        edtMax.SetFocus;
      Exit;
   end;
 
@@ -58,6 +60,8 @@ begin
   inherited;
   // Ќачальные значени€ Min, Max не присваиваютс€
   // см. код в setComboEx
+  edtMin.Text  :=  FS.Arguments[1];
+  edtMax.Text  :=  FS.Arguments[2];
 end;
 
 end.

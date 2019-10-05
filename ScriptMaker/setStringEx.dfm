@@ -229,6 +229,8 @@ inherited frmStringEx: TfrmStringEx
     TabOrder = 5
   end
   inherited btnSave: TButton
+    Top = 294
     TabOrder = 4
+    ExplicitTop = 294
   end
 end

@@ -40,6 +40,7 @@ type
     procedure mniAddComboClick(Sender: TObject);
     procedure mniAddStringExClick(Sender: TObject);
     procedure mniDeleteClick(Sender: TObject);
+
   private
     { Private declarations }
     ObjectList : TObjectList;
@@ -47,11 +48,14 @@ type
     fPath : string;         // Путь к файлу entry.lua
     fObject : Boolean;   // флаг наличие константы "strDofile2"
     fSection : Boolean;  // флаг секции
+    fSelectedIndex : Integer;
    const
     fileScripts = 'entry.lua'; // Имя файла скрипта
     strDofile2 = 'dofile2 ("..\\built-in\\prim_basec.lua")'; // Константа для вставки в скрипт строк
     procedure CancelClicked (Sender : TObject);
     procedure OkClicked (Sender : TObject);
+    procedure createTable(Sender : TObject);
+    procedure addString(const nameStr : string);
     function CheckName (const Name : string) : Boolean;
     function GetNewName (const Name : String) : String;
   public
@@ -67,6 +71,10 @@ Uses setForm, setString, setStringEx, setComboEx;
 
 {$R *.dfm}
 
+//********************************
+
+//****************************************************************************************
+
 procedure TfrmMain.CancelClicked(Sender: TObject);
 begin
   sg1Click(nil);
@@ -80,7 +88,7 @@ begin
   Result := True;
   for I := 0 to ObjectList.Count-1 do
     begin
-      if i = sg1.Row-1 then
+      if i = fSelectedIndex then
        Continue;
       if Name = TSimpleObject(ObjectList[i]).Name  then
         begin
@@ -93,7 +101,7 @@ end;
 procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
 var
   i,j: Integer;
-  S : String;
+//  S : String;
   sl : TStringList;
 begin
   if Application.MessageBox('Сохранить выполненные изменения в файле?',
@@ -148,6 +156,8 @@ begin
   strList := TStringList.Create;
   strListTwo := TStringList.Create;
 
+  fSelectedIndex := -1;
+
   fPath:= ExtractFilePath(Application.ExeName) + fileScripts;
 
   if not(FileExists(fPath)) then
@@ -200,15 +210,7 @@ begin
   //************************************************
 
   sg1.RowCount := ObjectList.Count + 1;
-
-  i := 0;
-  while (i < ObjectList.Count) do
-  begin
-     sg1.Cells [0,i+1] := TSimpleObject(ObjectList[i]).Name;
-     sg1.Cells [1,i+1] := TSimpleObject(ObjectList[i]).ObjTypeToString;
-     Inc(I);
-  end;
-
+  createTable(nil);
   sg1.Cells [0,0] := 'Имя объекта';
   sg1.Cells [1,0] := 'Тип объекта';
 
@@ -233,51 +235,54 @@ begin
     inc (i);
  end;
 end;
-
-procedure TfrmMain.mniAddComboClick(Sender: TObject);
-var
- S    : TComboParser;
-begin
-  S := TComboParser.Create (GetNewName ('cmb'));
-  ObjectList.Add(S);
-  sg1.RowCount := sg1.RowCount + 1;
-  sg1.Row := sg1.RowCount-1;
-  sg1.Cells [0, sg1.RowCount-1] := S.Name;
-  sg1.Cells [1, sg1.RowCount-1] := S.ObjTypeToString;
-  sg1Click(nil);
-end;
-
+// ********************* Процедуру добавления объектов ****************************************
 procedure TfrmMain.mniAddStringClick(Sender: TObject);
 var
- S    : TStringParser;
-begin
-  sg1.Row := 1;
-  S := TStringParser.Create (GetNewName ('str'));
-  ObjectList.Add(S);
-  sg1.RowCount := sg1.RowCount + 1;
-  sg1.Row := sg1.RowCount-1;
-  sg1.Cells [0, sg1.RowCount-1] := S.Name;
-  sg1.Cells [1, sg1.RowCount-1] := S.ObjTypeToString;
-  sg1Click(nil);
-end;
+  nameObject : string;
+  begin
+    nameObject := 'str';
+    addString(nameObject);
+
+  end;
 
 procedure TfrmMain.mniAddStringExClick(Sender: TObject);
 var
- S : TStringExParser;
+  nameObject : string;
 begin
-  S := TStringExParser.Create (GetNewName ('strEx'));
-  ObjectList.Add(S);
-  sg1.RowCount := sg1.RowCount + 1;
-  sg1.Row := sg1.RowCount-1;
-  sg1.Cells [0, sg1.RowCount-1] := S.Name;
-  sg1.Cells [1, sg1.RowCount-1] := S.ObjTypeToString;
-  sg1Click(nil);
+  nameObject := 'strEx';
+  addString(nameObject);
 end;
+
+procedure TfrmMain.mniAddComboClick(Sender: TObject);
+var
+  nameObject : string;
+begin
+  nameObject := 'cmd';
+  addString(nameObject);
+end;
+//*********************************************************************************************
 
 //********* Описание кода удаления объекта ***********************************************
 procedure TfrmMain.mniDeleteClick(Sender: TObject);
+var
+  i : Integer;
 begin
-  // Игорь, код удаления не описан
+   if sg1.RowCount = 1 then
+    Exit;
+   if Application.MessageBox('Вы уверены, что хотите удалить объект?',
+    PChar(Application.Title), MB_OKCANCEL + MB_ICONQUESTION) = IDCANCEL then
+    Exit;
+    ObjectList.Delete(sg1.Row -1);
+    for I := 1 to sg1.RowCount -1 do
+      sg1.Rows[i].clear;
+    sg1.RowCount := ObjectList.Count + 1;
+    createTable(nil);
+  if sg1.RowCount > 1 then
+  begin
+   sg1.Row := sg1.RowCount-1;
+   sg1Click(nil);
+  end else
+   fSelectedIndex := -1;
 end;
 //****************************************************************************************
 
@@ -298,7 +303,10 @@ var
  ObjectType : TObjectType;
  S : TSimpleObject;
 begin
-  S :=  TSimpleObject (ObjectList[sg1.Row-1]);
+  if sg1.Row = 0 then
+   Exit;
+  fSelectedIndex := sg1.Row-1;
+  S :=  TSimpleObject (ObjectList[fSelectedIndex]);
   ObjectType := S.ObjType;
   case ObjectType of
     otUnck: ;
@@ -323,4 +331,39 @@ begin
   end;
 end;
 
+//******************* Процедура формирования таблицы ******************************************
+procedure TfrmMain.createTable(Sender : TObject);
+var
+  i : Integer;
+begin
+ i := 0;
+  while (i < ObjectList.Count) do
+  begin
+     sg1.Cells [0,i+1] := TSimpleObject(ObjectList[i]).Name;
+     sg1.Cells [1,i+1] := TSimpleObject(ObjectList[i]).ObjTypeToString;
+     Inc(I);
+  end;
+end;
+//*********************************************************************************************
+
+//********************** Процедура присоединение строки ***************************************
+procedure TfrmMain.addString(const nameStr : string);
+var
+ S : TSimpleObject;
+begin
+  fSelectedIndex := -1;
+  if nameStr = 'str' then
+     S := TStringParser.Create (GetNewName (nameStr))
+  else if nameStr = 'strEx' then
+     S := TStringExParser.Create (GetNewName (nameStr))
+  else
+     S := TComboParser.Create (GetNewName (nameStr));
+  ObjectList.Add(S);
+  sg1.RowCount := sg1.RowCount + 1;
+  sg1.Cells [0, sg1.RowCount-1] := S.Name;
+  sg1.Cells [1, sg1.RowCount-1] := S.ObjTypeToString;
+  sg1Click(nil);
+  end;
+
+//*********************************************************************************************
 end.
