@@ -52,7 +52,7 @@ implementation
 Uses IdGlobal;
 
 {$R *.dfm}
-// Привет
+
 const
   objecttypes : array [0..1] of String =
   (
