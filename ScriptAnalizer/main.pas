@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls,
-  System.Contnrs, System.types;
+  System.Contnrs, System.types, System.IOUtils;
 
 type
   TLUAObject = class
@@ -38,6 +38,7 @@ type
     { Private declarations }
     OL_Object : TObjectList;
     OL_Function : TObjectList;
+    function SearchFileEntry_LUA : TStringList;
   public
     { Public declarations }
     function GetFilesForScan : TStringDynArray;
@@ -47,7 +48,7 @@ type
 
 var
   Form1: TForm1;
-
+  FilesArray : TStringDynArray;
 implementation
 Uses IdGlobal;
 
@@ -59,6 +60,7 @@ const
    ('topc_string'),
    ('topc_string_min_max')
   );
+
 
 procedure TForm1.FormCreate(Sender: TObject);
 var
@@ -87,11 +89,65 @@ begin
   OL_Function.Free;
 end;
 
+//*************** Функция поиска и парсинга файла entry.lua ******************************
+function TForm1.SearchFileEntry_LUA : TStringList;
+var
+  sList, ssList : TStringList;
+  fPath, nameTemp, lTemp : string;
+  i, posishen : Integer;
+  begin
+    fPath := ExtractFilePath(Application.ExeName) + 'scripts\' ;
+    if bool(TDirectory.GetFiles(fPath, 'entry.lua')) then
+      begin
+        sList := TStringList.Create;
+        ssList := TStringList.Create;
+        sList.LoadFromFile(fPath + 'entry.lua');
+        for I := 0 to sList.Count -1 do
+          begin
+            lTemp := sList[i];
+            if ltemp.IndexOf('dofile2') > -1 then
+              begin
+                Fetch(lTemp,'("');
+                lTemp := Fetch(lTemp, '"');
+                ssList.Add(lTemp);
+              end;
+          end;
+        ssList.Insert(0,'entry.lua');
+        Result := ssList;
+        ssList.SaveToFile('config.txt');
+      end;
+      sList.Free;
+      ssList.free;
+ end;
+//****************************************************************************************
+
 function TForm1.GetFilesForScan: TStringDynArray;
+var
+  sList, ssList : TStringList;
+  i : Integer;
+  fPath : string;
+  fFile : file;
 begin
   // Функция должна получить список файлов для дальнейшего анализа
+//******************* Реализация функции список файлов  **********************************
+  sList := TStringList.Create;
+  ssList := TStringList.Create;
+  sList := SearchFileEntry_LUA;
+  fPath := ExtractFilePath(Application.ExeName) + 'scripts\';
+  FilesArray := TDirectory.GetFiles( fPath, '*.lua');
+ // Дальше буду думать как содержимое всех файлов слить в один StringList для парсинга
+{  for I := 0 to Length(FilesArray) - 1 do
+    if FilesArray[i] = (fPath + sList[i]) then
+      begin
+        fFile
+        fFile := filesArray[i];
+        ssList.LoadFromFile(fFile);
+      end; }
+    end;
 
-end;
+
+
+//****************************************************************************************
 
 procedure TForm1.lstObjectClick(Sender: TObject);
 begin
