@@ -91,8 +91,8 @@ begin
    lstObject.AddItem(TLUAObject(OL_Object[i]).Name,nil);
 
   for i := 0 to OL_Function.Count-1 do
-   lstFunctions.AddItem(TLUAFunction(OL_Object[i]).Name,nil);
-
+   lstFunctions.AddItem(TLUAFunction(OL_Function[i]).Name,nil); // было написано и взрывалось
+//  lstFunctions.AddItem(TLUAFunction(OL_Object[i]).Name,nil);
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -168,11 +168,19 @@ begin
              Continue
            else
              begin
-
                tmp := sl.Strings[i];
                LF := TLUAFunction.Create;
+               LF.ParamCount :=0;
                Fetch(tmp,'function');
                LF.Name := Trim(Fetch(tmp,'('));
+               LF.ParamNames := '(' + tmp;
+               tmp := Trim(Fetch(tmp, ')'));
+               while tmp <> '' do
+                 begin
+                   Trim(Fetch(tmp, ','));
+                   Inc(LF.ParamCount);
+                 end;
+               OL_Function.Add(LF);
              end;
        end;
 
