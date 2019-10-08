@@ -73,7 +73,7 @@ begin
 
   FileNames := GetFilesForScan;
 
-  if FileNames.Count = 0 then
+  if (FileNames = nil) or (FileNames.Count = 0) then
   begin
     ShowMessage('Ничего не найдено');
     Exit;
@@ -85,11 +85,14 @@ begin
      ScanFileForFunction(FileNames[i]);
   end;
 
+  FileNames.Free;
+
   for i := 0 to OL_Object.Count-1 do
    lstObject.AddItem(TLUAObject(OL_Object[i]).Name,nil);
 
   for i := 0 to OL_Function.Count-1 do
    lstFunctions.AddItem(TLUAFunction(OL_Object[i]).Name,nil);
+
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -141,12 +144,45 @@ begin
   mmoObjectCode.Text := TLUAObject (OL_Object[lstObject.ItemIndex]).Code;
 end;
 
+//*************************** Процедура поиска функций ***********************************
 procedure TForm1.ScanFileForFunction(const FileName: string);
+var
+  sl : TStringList;
+  i, j : Integer;
+  LF : TLUAFunction;
+  tmp, parTmp  : String;
 begin
   // сканирование файла для поиска функций и заполнение OL_Function
+ sl := TStringList.Create;
+ sl.LoadFromFile(FileName);
+ i := 0;
+ while (i < sl.Count) do
+   begin
+//   ищем строку с заголовком "function"
+     for I := 0  to sl.Count - 1 do
+       begin
+         if not(sl.Strings[i].IndexOf('function') > -1) then
+           Continue
+         else if
+           sl.Strings[i].IndexOf('function main_custom') > -1 then
+             Continue
+           else
+             begin
+
+               tmp := sl.Strings[i];
+               LF := TLUAFunction.Create;
+               Fetch(tmp,'function');
+               LF.Name := Trim(Fetch(tmp,'('));
+             end;
+       end;
+
+   end;
+
 
 end;
+//****************************************************************************************
 
+//*************************** Процедура поиска объектов **********************************
 procedure TForm1.ScanFileForObject(const Filename: String);
 var
  sl : TStringList;
@@ -177,11 +213,11 @@ begin
       break; // выход из цикла
    end;
   end;
-  // берем следуюзую строку
+  // берем следующую строку
   inc (i);
  end;
 
  sl.Free;
 end;
-
+//****************************************************************************************
 end.
