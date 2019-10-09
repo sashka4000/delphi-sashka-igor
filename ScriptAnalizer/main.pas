@@ -177,64 +177,68 @@ begin
  i:= 0;
  indexBegin := 0;
  indexEnd  := 0;
- while (i < sl.Count) do
-   begin
 //   ищем строку с заголовком "function"
-     for I := 0  to sl.Count - 1 do
+     while I < sl.Count - 1  do
        begin
          if not(sl.Strings[i].IndexOf('function') > -1) then
+         begin
+           Inc(i);
            Continue
+         end
          else if
 // исключаем функцию 'function main_custom', не хотелось в первом "if" городить
 // сложное условие
            sl.Strings[i].IndexOf('function main_custom') > -1 then
-             Continue
-             else
              begin
-               indexBegin := i;
-               tmp := sl.Strings[i];
-               LF := TLUAFunction.Create;
-               LF.ParamCount :=0;
-               Fetch(tmp,'function');
-               LF.Name := Trim(Fetch(tmp,'('));
-               LF.ParamNames := '(' + tmp;
-               tmp := Trim(Fetch(tmp, ')'));
+               Inc(i);
+               Continue ;
+             end;
+
+
+             LF := TLUAFunction.Create;
+             LF.Code := TStringList.Create;
+             indexBegin := i;
+             tmp := sl.Strings[i];
+             LF.ParamCount :=0;
+             Fetch(tmp,'function');
+             LF.Name := Trim(Fetch(tmp,'('));
+             LF.ParamNames := '(' + tmp;
+             tmp := Trim(Fetch(tmp, ')'));
                while tmp <> '' do
                  begin
                    Trim(Fetch(tmp, ','));
                    Inc(LF.ParamCount);
                  end;
-
+              inc(i);
 //************** Вырезаю тело функции ****************************************************
-               LF.Code := TStringList.Create;
-               for j := indexBegin + 1 to sl.Count - 1 do
-                 begin
-                   if sl.Strings[j].IndexOf('end') > -1 then
-                   begin
-                     indexEnd := j;
-                     Continue
-                   end
-//                   else if not(sl.Strings[j].IndexOf('end') > -1) then
-//                      Continue
-                   else if (sl.Strings[j].IndexOf('function main_custom()') > -1) or (j = sl.Count -1) or (sl.Strings[j].IndexOf('function') > -1)then
-                   begin
-                     for k := indexBegin to indexEnd do
-                       LF.Code.add(sl.Strings[k]);
-                     Break
-                   end;
-
-                 end;
-
+           while i < sl.Count  do
+             if sl.Strings[i].IndexOf('end') > -1 then
+               begin
+                 indexEnd := i;
+                 inc(i);
+                 Continue
+               end
+             else if
+              (sl.Strings[i].IndexOf('function') > -1)  then
+                begin
+                  for j :=indexBegin to indexEnd do
+                    LF.Code.add(sl.Strings[j]);
+                  OL_Function.Add(LF);
+                  Break;
+                end
+              else if i = sl.Count  then
+                begin
+                 for j :=indexBegin to indexEnd do
+                   LF.Code.add(sl.Strings[j]);
+                  OL_Function.Add(LF);
+                end
+             else  inc(i);
 
 //************** Запись в объект *********************************************************
-               OL_Function.Add(LF);
-             end;
+
        end;
-//     sl.Free;
    end;
 
-
-end;
 //****************************************************************************************
 
 //*************************** Процедура поиска объектов **********************************
