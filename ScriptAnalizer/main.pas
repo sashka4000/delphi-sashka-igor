@@ -15,7 +15,7 @@ type
 
    TLUAFunction = class
      Name : String;     // Имя
-     Code : String;     // Код функции
+     Code : TStringList;     // Код функции
      ParamCount: Integer; // число входных параметров
      ParamNames : String; // Входные параметры
     end;
@@ -138,6 +138,8 @@ end;
 
 //****************** Выбор из TListBox ***************************************************
 procedure TForm1.lstFunctionsClick(Sender: TObject);
+var
+  i : integer;
 begin
   if lstFunctions.ItemIndex < 0 then
     Exit;
@@ -145,7 +147,9 @@ begin
   mmoFunctionCode.Lines[0] := 'Имя : ' + TLUAFunction (OL_Function[lstFunctions.ItemIndex]).Name;
   mmoFunctionCode.Lines.Add('Количество параметров : ' + IntToStr(TLUAFunction (OL_Function[lstFunctions.ItemIndex]).ParamCount));
   mmoFunctionCode.Lines.Add('Имена параметров : ' + TLUAFunction (OL_Function[lstFunctions.ItemIndex]).ParamNames);
-  mmoFunctionCode.Lines.Add('Текс функции : ' + TLUAFunction (OL_Function[lstFunctions.ItemIndex]).Code);
+  mmoFunctionCode.Lines.Add('Текс функции : ');
+  for I := 0 to TLUAFunction (OL_Function[lstFunctions.ItemIndex]).Code.Count -1 do
+    mmoFunctionCode.Lines.Add(TLUAFunction (OL_Function[lstFunctions.ItemIndex]).Code.Strings[i]);
 
 end;
 
@@ -163,14 +167,16 @@ end;
 procedure TForm1.ScanFileForFunction(const FileName: string);
 var
   sl : TStringList;
-  i, j : Integer;
-  LF : TLUAFunction;
-  tmp, parTmp  : String;
+  i, j, k, indexBegin, indexEnd : Integer;
+  LF  : TLUAFunction;
+  tmp : String;
 begin
   // сканирование файла для поиска функций и заполнение OL_Function
  sl := TStringList.Create;
  sl.LoadFromFile(FileName);
- i := 0;
+ i:= 0;
+ indexBegin := 0;
+ indexEnd  := 0;
  while (i < sl.Count) do
    begin
 //   ищем строку с заголовком "function"
@@ -183,8 +189,9 @@ begin
 // сложное условие
            sl.Strings[i].IndexOf('function main_custom') > -1 then
              Continue
-           else
+             else
              begin
+               indexBegin := i;
                tmp := sl.Strings[i];
                LF := TLUAFunction.Create;
                LF.ParamCount :=0;
@@ -197,10 +204,33 @@ begin
                    Trim(Fetch(tmp, ','));
                    Inc(LF.ParamCount);
                  end;
+
+//************** Вырезаю тело функции ****************************************************
+               LF.Code := TStringList.Create;
+               for j := indexBegin + 1 to sl.Count - 1 do
+                 begin
+                   if sl.Strings[j].IndexOf('end') > -1 then
+                   begin
+                     indexEnd := j;
+                     Continue
+                   end
+                   else if not(sl.Strings[j].IndexOf('end') > -1) then
+                      Continue
+                   else if (sl.Strings[j].IndexOf('function') > -1) or (j = sl.Count -1)then
+                   begin
+                     for k := indexBegin to indexEnd do
+                       LF.Code.add(sl.Strings[k]);
+                     Break
+                   end;
+
+                 end;
+
+
+//************** Запись в объект *********************************************************
                OL_Function.Add(LF);
              end;
        end;
-
+     sl.Free;
    end;
 
 
