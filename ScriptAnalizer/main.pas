@@ -214,9 +214,9 @@ begin
                      indexEnd := j;
                      Continue
                    end
-                   else if not(sl.Strings[j].IndexOf('end') > -1) then
-                      Continue
-                   else if (sl.Strings[j].IndexOf('function') > -1) or (j = sl.Count -1)then
+//                   else if not(sl.Strings[j].IndexOf('end') > -1) then
+//                      Continue
+                   else if (sl.Strings[j].IndexOf('function main_custom()') > -1) or (j = sl.Count -1) or (sl.Strings[j].IndexOf('function') > -1)then
                    begin
                      for k := indexBegin to indexEnd do
                        LF.Code.add(sl.Strings[k]);
@@ -230,7 +230,7 @@ begin
                OL_Function.Add(LF);
              end;
        end;
-     sl.Free;
+//     sl.Free;
    end;
 
 

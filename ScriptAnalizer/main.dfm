@@ -2,7 +2,7 @@ object Form1: TForm1
   Left = 0
   Top = 0
   Caption = 'Form1'
-  ClientHeight = 554
+  ClientHeight = 620
   ClientWidth = 829
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -47,7 +47,7 @@ object Form1: TForm1
     Left = 8
     Top = 312
     Width = 321
-    Height = 217
+    Height = 273
     Lines.Strings = (
       'mmo1')
     TabOrder = 2
@@ -64,7 +64,7 @@ object Form1: TForm1
   object lstFunctions: TListBox
     Left = 408
     Top = 35
-    Width = 321
+    Width = 353
     Height = 230
     ItemHeight = 13
     TabOrder = 1
@@ -73,8 +73,8 @@ object Form1: TForm1
   object mmoFunctionCode: TMemo
     Left = 408
     Top = 312
-    Width = 321
-    Height = 217
+    Width = 353
+    Height = 273
     Lines.Strings = (
       'mmo1')
     TabOrder = 3
