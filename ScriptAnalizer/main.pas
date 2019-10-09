@@ -34,6 +34,7 @@ type
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure lstObjectClick(Sender: TObject);
+    procedure lstFunctionsClick(Sender: TObject);
   private
     { Private declarations }
     OL_Object : TObjectList;
@@ -91,8 +92,7 @@ begin
    lstObject.AddItem(TLUAObject(OL_Object[i]).Name,nil);
 
   for i := 0 to OL_Function.Count-1 do
-   lstFunctions.AddItem(TLUAFunction(OL_Function[i]).Name,nil); // было написано и взрывалось
-//  lstFunctions.AddItem(TLUAFunction(OL_Object[i]).Name,nil);
+   lstFunctions.AddItem(TLUAFunction(OL_Function[i]).Name,nil); 
 end;
 
 procedure TForm1.FormDestroy(Sender: TObject);
@@ -136,6 +136,19 @@ end;
 
 //****************************************************************************************
 
+//****************** Выбор из TListBox ***************************************************
+procedure TForm1.lstFunctionsClick(Sender: TObject);
+begin
+  if lstFunctions.ItemIndex < 0 then
+    Exit;
+  mmoFunctionCode.Clear;
+  mmoFunctionCode.Lines[0] := 'Имя : ' + TLUAFunction (OL_Function[lstFunctions.ItemIndex]).Name;
+  mmoFunctionCode.Lines.Add('Количество параметров : ' + IntToStr(TLUAFunction (OL_Function[lstFunctions.ItemIndex]).ParamCount));
+  mmoFunctionCode.Lines.Add('Имена параметров : ' + TLUAFunction (OL_Function[lstFunctions.ItemIndex]).ParamNames);
+  mmoFunctionCode.Lines.Add('Текс функции : ' + TLUAFunction (OL_Function[lstFunctions.ItemIndex]).Code);
+
+end;
+
 procedure TForm1.lstObjectClick(Sender: TObject);
 begin
   // выбрано ли что-то ?
@@ -143,6 +156,8 @@ begin
     Exit;
   mmoObjectCode.Text := TLUAObject (OL_Object[lstObject.ItemIndex]).Code;
 end;
+//****************************************************************************************
+
 
 //*************************** Процедура поиска функций ***********************************
 procedure TForm1.ScanFileForFunction(const FileName: string);

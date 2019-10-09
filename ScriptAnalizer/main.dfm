@@ -68,6 +68,7 @@ object Form1: TForm1
     Height = 230
     ItemHeight = 13
     TabOrder = 1
+    OnClick = lstFunctionsClick
   end
   object mmoFunctionCode: TMemo
     Left = 408
