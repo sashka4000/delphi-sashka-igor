@@ -164,6 +164,8 @@ begin
          if not(sl.Strings[i].IndexOf('function') > -1) then
            Continue
          else if
+// исключаем функцию 'function main_custom', не хотелось в первом "if" городить
+// сложное условие
            sl.Strings[i].IndexOf('function main_custom') > -1 then
              Continue
            else
