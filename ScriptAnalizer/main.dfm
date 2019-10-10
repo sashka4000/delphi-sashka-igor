@@ -77,6 +77,7 @@ object Form1: TForm1
     Height = 273
     Lines.Strings = (
       'mmo1')
+    ScrollBars = ssBoth
     TabOrder = 3
   end
 end
