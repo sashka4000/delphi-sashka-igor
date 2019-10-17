@@ -112,23 +112,82 @@ var
 begin
   // Чтобы Доска перерисовывалась нормально рисовать нужно в этом методе
   // Пример определения центра для вывода текста
+  //******************** Прорисовываем основную подложку *********************************************
+  with pb1.Canvas do
+    begin
+      Pen.Width := 1;
+      Pen.Color := clBlue;
+      Pen.Style := psSolid;
+      Rectangle(100,0,450,600);
+    end;
+//**************************************************************************************************
+
+
   if DeviceName <> '' then
   begin
      w := pb1.Canvas.TextWidth(DeviceName);
      X := pb1.Width div 2 - W div 2;
      pb1.Canvas.TextOut(X,5,DeviceName);
   end;
+{
+//******************** Прорисовываем основную подложку *********************************************
+  with pb1.Canvas do
+    begin
+      Pen.Width := 1;
+      Pen.Color := clBlue;
+      Pen.Style := psSolid;
+      Rectangle(100,0,450,600);
+    end;
+//**************************************************************************************************
+ }
+  if (LS = nil) or (RS =nil) then
 
-  if (LS = nil)  and (RS = nil) then
+  else
   begin
-    // линия
-    pb1.Canvas.MoveTo(0,0);
-    pb1.Canvas.LineTo(50,50);
-    // прямоуголник
-    pb1.Canvas.Rectangle(150,150,450,450);
-    // текст
-    pb1.Canvas.TextOut(50,50,'Это мой первый рисунок');
-  end;
+  var i : Integer := LS.Count;
+  var j : Integer := RS.Count;
+  var heightColodka : Integer := 0;
+   while (i > 0 ) or (j > 0 ) do
+     begin
+       if i > 0   then
+         begin
+       // линия
+//           pb1.Canvas.MoveTo(0,0);
+//           pb1.Canvas.LineTo(50,50);
+       // прямоуголник
+           with pb1.Canvas do
+             begin
+               Pen.Color := clBlack;
+               Pen.Style := psSolid;
+               Rectangle(100,100 + heightColodka,200,200 + heightColodka);
+               MoveTo(130,100 + heightColodka);
+               LineTo(130,200 + heightColodka);
+       // текст
+//               TextOut(50,50,'Это мой первый рисунок');
+             end;
+           Dec(i);
+           heightColodka := heightColodka +160;
+         end;
+       if j > 0   then
+         begin
+       // линия
+//           pb1.Canvas.MoveTo(10,10);
+//           pb1.Canvas.LineTo(10,110);
+       // прямоуголник
+           with pb1.Canvas do
+             begin
+               Pen.Color := clBlack;
+               Pen.Style := psSolid;
+               Rectangle(350,275,450,325);
+               MoveTo(420,275);
+               LineTo(420,325);
+             end;
+       // текст
+//           pb1.Canvas.TextOut(200,50,'Это мой первый рисунок');
+           Dec(j);
+         end;
+     end;
+    end;
 end;
 
 
@@ -153,5 +212,5 @@ begin
   Contacts.Free;
   inherited;
 end;
-
+// Вопрос ? А где деструктор для TContact
 end.

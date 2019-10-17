@@ -2,8 +2,8 @@ object frmMain: TfrmMain
   Left = 0
   Top = 0
   Caption = 'frmMain'
-  ClientHeight = 674
-  ClientWidth = 909
+  ClientHeight = 689
+  ClientWidth = 934
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,8 +18,8 @@ object frmMain: TfrmMain
   object pb1: TPaintBox
     Left = 8
     Top = 35
-    Width = 529
-    Height = 631
+    Width = 550
+    Height = 635
     OnPaint = pb1Paint
   end
   object lbl1: TLabel
