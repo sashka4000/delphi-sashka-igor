@@ -41,14 +41,13 @@ implementation
 procedure TForm1.btn1Click(Sender: TObject);
 var
  i : Integer;
- l : TArray<Integer>;
- S : String;
- TC : Integer;
- fc  : Integer;
- sl : Integer;
-  j: Integer;
-  k: Integer;
-  z: Integer;
+ l : TArray<Integer>;    // массив колодок по 1 2 3 4 контакта
+ TC : Integer;           // Число колодок
+ fc  : Integer;          // Число пропуском между колодками
+ sl : Integer;           // Общее число контактов
+ j: Integer;
+ k: Integer;
+ z: Integer;
 begin
  sg1.ColCount := String(edt5.Text).ToInteger();
 
@@ -80,29 +79,35 @@ begin
  fc := fc - sl;
 
 
- fc := fc div  (tc - 1);
+ if tc < 2
+ then
+  fc := 0
+ else
+  fc := fc div  (tc - 1);
 
 
+  // обнуляем массив квадратиков
 
   for i := 0 to High(A) do
     A[i] := '';
 
+ // заполняем массив квадратиков
  i := 0;
-   for j := 0 to 3 do
+ for j := 0 to 3 do
+ begin
+   if l[j] = 0  then  Continue;
+   for k := 0 to l[j]-1 do
    begin
-     if l[j] = 0  then  Continue;
-     for k := 0 to l[j]-1 do
+     for z := 1 to j+1 do
      begin
-       for z := 1 to j+1 do
-       begin
-         A[i] := '1';
-         Inc(i);
-       end;
-       inc (I,fc);
+       A[i] := '1';
+       Inc(i);
      end;
+     inc (I,fc);
    end;
+ end;
 
-
+ // выводим на экран
  for i := 0 to High(A) do
     sg1.Cells [i,0] := A[i];
 
