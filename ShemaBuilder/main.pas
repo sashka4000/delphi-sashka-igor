@@ -42,6 +42,8 @@ type
     LS, RS  : TObjectList; //  Коллекция объектов TColodka для Левой и Правой сторон устройства
     function differenceColodka(LObject : TObjectList): integer;
    	procedure buildingColodka(const diffCol : Integer;LOject : TObjectList);
+    // Нашел красивую функцию отрисовки Текста
+    function DrawTextCentered(Canvas: TCanvas; const R: TRect; S: String): Integer;
   public
     { Public declarations }
     // в этой процедуре должно происходить рисование
@@ -183,14 +185,14 @@ end;
 
 //********************************* Функция ******************************************************************
 function TfrmMain.differenceColodka(LObject : TObjectList): integer;
-  var
-    countColodka, countContact : Integer;
-    i : Integer;
   const
     heightContact = 15; // высота шрифта +2 пиксела
     widthContact  = 20; // ширина 3 символов +2 пиксела
     HeightWind = 600;
     widthWind = 450;
+  var
+    countColodka, countContact : Integer;
+    i : Integer;
   begin
   countColodka := LObject.Count;
   countContact := 0;
@@ -203,22 +205,44 @@ function TfrmMain.differenceColodka(LObject : TObjectList): integer;
   Result := Round(((HeightWind - heightContact * countContact)/(countColodka +1)));
   end;
 
+function TfrmMain.DrawTextCentered(Canvas: TCanvas; const R: TRect;
+  S: String): Integer;
+var
+  DrawRect: TRect;
+  DrawFlags: Cardinal;
+  DrawParams: TDrawTextParams;
+begin
+  DrawRect := R;
+  DrawFlags := DT_END_ELLIPSIS or DT_NOPREFIX or DT_WORDBREAK or
+    DT_EDITCONTROL or DT_CENTER;
+  DrawText(Canvas.Handle, PChar(S), -1, DrawRect, DrawFlags or DT_CALCRECT);
+  DrawRect.Right := R.Right;
+  if DrawRect.Bottom < R.Bottom then
+    OffsetRect(DrawRect, 0, (R.Bottom - DrawRect.Bottom) div 2)
+  else
+    DrawRect.Bottom := R.Bottom;
+  ZeroMemory(@DrawParams, SizeOf(DrawParams));
+  DrawParams.cbSize := SizeOf(DrawParams);
+  DrawTextEx(Canvas.Handle, PChar(S), -1, DrawRect, DrawFlags, @DrawParams);
+  Result := DrawParams.uiLengthDrawn;
+end;
+
 //********************************* Процедура *************************************************
  procedure TfrmMain.buildingColodka(const diffCol : Integer;LOject : TObjectList);
- var
-  yIndexBeginColodka, yIndexEndColodka : Integer;
-  countColodka : Integer;
-  yIndex : Integer;
-  differnceHeight : Integer;
-  i, j, k : Integer;
-
- const
+  const
    XBeginIndexContactLS = 100;  // Начальная координата контакта
    XEndIndexContactLS = 125;    // Конечная  координата контакта
    heightContact = 15; // высота шрифта +2 пиксела
    widthContact  = 25; // ширина 3 символов +2 пиксела
    HeightWind = 600;
    widthWind = 450;
+ var
+  yIndexBeginColodka, yIndexEndColodka : Integer;
+  countColodka : Integer;
+  yIndex : Integer;
+  differnceHeight : Integer;
+  i, j, k : Integer;
+  R : TRect;
  begin
    differnceHeight := diffCol;
    with pb1.Canvas do
@@ -240,8 +264,9 @@ function TfrmMain.differenceColodka(LObject : TObjectList): integer;
            yIndex := yIndex + heightContact;
          end;
       yIndexEndColodka := yIndex;
-      pb1.Canvas.Rectangle(XEndIndexContactLS, yIndexBeginColodka, XEndIndexContactLS +90, yIndexEndColodka);
-      pb1.Canvas.TextOut(XEndIndexContactLS + 5, yIndexBeginColodka + 3, TColodka(LS.Items[i]).Name);
+      R := TRect.Create(XEndIndexContactLS, yIndexBeginColodka, XEndIndexContactLS +90, yIndexEndColodka);
+      pb1.Canvas.Rectangle(R);
+      DrawTextCentered(pb1.Canvas, R, TColodka(LS.Items[i]).Name);
       yIndex := yIndexEndColodka + differnceHeight;
       Inc(i);
      end;

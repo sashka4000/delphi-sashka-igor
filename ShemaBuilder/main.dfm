@@ -13,6 +13,9 @@ object frmMain: TfrmMain
   OldCreateOrder = False
   OnCreate = FormCreate
   OnDestroy = FormDestroy
+  DesignSize = (
+    934
+    689)
   PixelsPerInch = 96
   TextHeight = 13
   object pb1: TPaintBox
@@ -20,6 +23,7 @@ object frmMain: TfrmMain
     Top = 35
     Width = 550
     Height = 635
+    Anchors = [akLeft, akTop, akBottom]
     OnPaint = pb1Paint
   end
   object lbl1: TLabel
