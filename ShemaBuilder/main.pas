@@ -28,6 +28,13 @@ type
     destructor Destroy; override;
   end;
 
+  TJumpAddress = class    // Адрес выставленный перемычками
+   public
+    Number : Integer;   // нужный номер
+    Description : array of String; // содержит число перемычке и подписи под ними
+    JumpersType : Integer; // 2 - двух контактные, 3 - трех контактные
+  end;
+
   TfrmMain = class(TForm)
     pb1: TPaintBox;
     lbl1: TLabel;
@@ -40,6 +47,7 @@ type
     { Private declarations }
     DeviceName : String;    // Имя устройства
     LS, RS  : TObjectList; //  Коллекция объектов TColodka для Левой и Правой сторон устройства
+    JA : TJumpAddress;
     function differenceColodka(LObject : TObjectList): integer;
    	procedure buildingColodka(const diffCol : Integer;LOject : TObjectList);
     procedure rayPaint(const diffCol : Integer; const Text : string; LOject : TObjectList);
@@ -65,12 +73,25 @@ begin
   // Освобождаю то что раньше было
   LS.Free;
   RS.Free;
+  JA.Free;
 
   // Создаю новый набор
 
   DeviceName := 'КУН-2Д.1';
 
   // Левая сторона
+
+  JA := TJumpAddress.Create;
+  SetLength(Ja.Description,5);
+  JA.Description[0] := 'A1';
+  JA.Description[1] := 'A2';
+  JA.Description[2] := 'A3';
+  JA.Description[3] := 'A4';
+  JA.Description[4] := 'A5';
+
+  JA.Number := 18;
+  JA.JumpersType := 3;
+
 
   LS := TObjectList.Create (true);
   C := TColodka.Create('Входы кнопок ПГУ');
@@ -108,22 +129,6 @@ begin
   C.Contacts.Add(TContact.Create('1','Тест'));
   RS.Add(C);
 
-  C := TColodka.Create('Тестовые выходы');
-  C.Contacts.Add(TContact.Create('$','Земля'));
-  C.Contacts.Add(TContact.Create('K1',''));
-  C.Contacts.Add(TContact.Create('K2','Подъезд'));
-  C.Contacts.Add(TContact.Create('K3','Подъезд2'));
-  C.Contacts.Add(TContact.Create('K4',''));
-  RS.Add(C);
-
-  C := TColodka.Create('Шина земли');
-  C.Contacts.Add(TContact.Create('$','Земля'));
-  RS.Add(C);
-
-  C := TColodka.Create('Тест');
-  C.Contacts.Add(TContact.Create('2','Тест'));
-  RS.Add(C);
-
   // Вызываем перерисовку Доски
 
   pb1.Repaint;
@@ -138,6 +143,7 @@ procedure TfrmMain.FormDestroy(Sender: TObject);
 begin
   LS.Free;
   RS.Free;
+  JA.Free;
 end;
 
 procedure TfrmMain.pb1Paint(Sender: TObject);
