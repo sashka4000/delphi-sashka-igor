@@ -42,6 +42,7 @@ type
     LS, RS  : TObjectList; //  Коллекция объектов TColodka для Левой и Правой сторон устройства
     function differenceColodka(LObject : TObjectList): integer;
    	procedure buildingColodka(const diffCol : Integer;LOject : TObjectList);
+    procedure rayPaint(const diffCol : Integer; const Text : string; LOject : TObjectList);
     // Нашел красивую функцию отрисовки Текста
     function DrawTextCentered(Canvas: TCanvas; const R: TRect; S: String): Integer;
   public
@@ -99,13 +100,28 @@ begin
   C.Contacts.Add(TContact.Create('K2','Подъезд'));
   C.Contacts.Add(TContact.Create('K3','Подъезд2'));
   C.Contacts.Add(TContact.Create('K4',''));
-  C.Contacts.Add(TContact.Create('K5',''));
+  C.Contacts.Add(TContact.Create('$',''));
   LS.Add(C);
 //**********************************************
-
   RS := TObjectList.Create (true);
   C := TColodka.Create('Тест');
   C.Contacts.Add(TContact.Create('1','Тест'));
+  RS.Add(C);
+
+  C := TColodka.Create('Тестовые выходы');
+  C.Contacts.Add(TContact.Create('$','Земля'));
+  C.Contacts.Add(TContact.Create('K1',''));
+  C.Contacts.Add(TContact.Create('K2','Подъезд'));
+  C.Contacts.Add(TContact.Create('K3','Подъезд2'));
+  C.Contacts.Add(TContact.Create('K4',''));
+  RS.Add(C);
+
+  C := TColodka.Create('Шина земли');
+  C.Contacts.Add(TContact.Create('$','Земля'));
+  RS.Add(C);
+
+  C := TColodka.Create('Тест');
+  C.Contacts.Add(TContact.Create('2','Тест'));
   RS.Add(C);
 
   // Вызываем перерисовку Доски
@@ -126,12 +142,9 @@ end;
 
 procedure TfrmMain.pb1Paint(Sender: TObject);
 var
- W : Integer;
- X : Integer;
+  X, W : Integer;
  differnceHeight : Integer;  // шаг между колодками
 begin
-  // Чтобы Доска перерисовывалась нормально рисовать нужно в этом методе
-  // Пример определения центра для вывода текста
   //******************** Прорисовываем основную подложку **************************************
   with pb1.Canvas do
     begin
@@ -155,7 +168,8 @@ begin
     begin
       differnceHeight := differenceColodka(LS);
       buildingColodka(differnceHeight, LS);
-
+      differnceHeight := differenceColodka(RS);
+      buildingColodka(differnceHeight, RS);
 
 
     end;
@@ -194,16 +208,19 @@ function TfrmMain.differenceColodka(LObject : TObjectList): integer;
     countColodka, countContact : Integer;
     i : Integer;
   begin
-  countColodka := LObject.Count;
-  countContact := 0;
-  i := 0;
-  while i <= countColodka - 1 do
-      begin
-        countContact := countContact + TColodka (LS.Items[i]).Contacts.Count;
-        Inc(i);
-      end;
+     countColodka := LObject.Count;
+     countContact := 0;
+     i := 0;
+        while i <= countColodka - 1 do
+          begin
+            countContact := countContact + TColodka (LObject.Items[i]).Contacts.Count;
+            Inc(i);
+          end;
   Result := Round(((HeightWind - heightContact * countContact)/(countColodka +1)));
   end;
+
+
+//****************************** Функция отрисовки и цетровки текста **************************
 
 function TfrmMain.DrawTextCentered(Canvas: TCanvas; const R: TRect;
   S: String): Integer;
@@ -230,46 +247,120 @@ end;
 //********************************* Процедура *************************************************
  procedure TfrmMain.buildingColodka(const diffCol : Integer;LOject : TObjectList);
   const
-   XBeginIndexContactLS = 100;  // Начальная координата контакта
-   XEndIndexContactLS = 125;    // Конечная  координата контакта
+   XBeginIndexContactLS = 100;  // Начальная координата контакта LS
+   XEndIndexContactLS = 125;    // Конечная  координата контакта LS
+   XBeginIndexContactRS = 425;  // Начальная координата контакта RS
+   XEndIndexContactRS = 450;    // Конечная  координата контакта RS
    heightContact = 15; // высота шрифта +2 пиксела
    widthContact  = 25; // ширина 3 символов +2 пиксела
-   HeightWind = 600;
    widthWind = 450;
  var
+  HeightWind : Integer;
   yIndexBeginColodka, yIndexEndColodka : Integer;
   countColodka : Integer;
   yIndex : Integer;
   differnceHeight : Integer;
   i, j, k : Integer;
   R : TRect;
+  Text : string;
  begin
+    HeightWind := pb1.Height;
    differnceHeight := diffCol;
+
    with pb1.Canvas do
      begin
        Pen.Color := clBlack;
        Pen.Style := psSolid;
      end;
-   countColodka := LS.Count;
+
+   countColodka := LOject.Count;     // Количество колодок (LS, RS)
    i := 0;
-   yIndex := differnceHeight;
+   yIndex := differnceHeight;        // Начальный отступ в зависимости от количества колодок
    while i <= countColodka -1 do
      begin
-       k := TColodka (LS.Items[i]).Contacts.Count -1;
+       k := TColodka (LOject.Items[i]).Contacts.Count -1;
        yIndexBeginColodka := yIndex;
        for j := 0 to k do
          begin
-           pb1.Canvas.Rectangle(XBeginIndexContactLS, yIndex, XEndIndexContactLS, yIndex + heightContact);
-           pb1.Canvas.TextOut(XBeginIndexContactLS + 5, yIndex +1, TContact( TColodka(LS.Items[i]).Contacts.Items[j]).Contact);
-           yIndex := yIndex + heightContact;
+           if LOject = LS then
+             begin
+               pb1.Canvas.Rectangle(XBeginIndexContactLS, yIndex, XEndIndexContactLS, yIndex + heightContact);
+// Пробую подмену
+               if TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Contact = '$' then  // Код подмены
+                 pb1.Canvas.TextOut( XBeginIndexContactLS + 5, yIndex + 1 ,   #9178)         // ************
+               else
+                 pb1.Canvas.TextOut( XBeginIndexContactLS + 5, yIndex + 1 , TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Contact);
+               Text := TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Description;
+               if not(Text = '') then
+                  rayPaint(yIndex, Text, LOject);
+
+               yIndex := yIndex + heightContact;  // Приращение на высоту контакта
+             end
+           else
+             begin
+               pb1.Canvas.Rectangle(XBeginIndexContactRS, yIndex, XEndIndexContactRS, yIndex + heightContact);
+// Пробую подмену
+               if TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Contact = '$' then    // Код подмены
+                pb1.Canvas.TextOut(XBeginIndexContactRS + 3, yIndex + 1 ,   #9178)             // ***********
+               else
+                 pb1.Canvas.TextOut(XBeginIndexContactRS + 3, yIndex + 1 , TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Contact);
+               Text := TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Description;
+               if not(Text = '') then
+                  rayPaint(yIndex, Text, LOject);
+
+               yIndex := yIndex + heightContact;   // Приращение на высоту контакта
+             end;
          end;
       yIndexEndColodka := yIndex;
-      R := TRect.Create(XEndIndexContactLS, yIndexBeginColodka, XEndIndexContactLS +90, yIndexEndColodka);
-      pb1.Canvas.Rectangle(R);
-      DrawTextCentered(pb1.Canvas, R, TColodka(LS.Items[i]).Name);
-      yIndex := yIndexEndColodka + differnceHeight;
+      if LOject = LS then
+        begin
+          R := TRect.Create(XEndIndexContactLS, yIndexBeginColodka, XEndIndexContactLS +90, yIndexEndColodka);
+          pb1.Canvas.Rectangle(R);
+          DrawTextCentered(pb1.Canvas, R, TColodka(LOject.Items[i]).Name);
+          yIndex := yIndexEndColodka + differnceHeight;
+        end
+      else
+        begin
+          R := TRect.Create( XEndIndexContactRS - 100, yIndexBeginColodka,XBeginIndexContactRS , yIndexEndColodka);
+          pb1.Canvas.Rectangle(R);
+          DrawTextCentered(pb1.Canvas, R, TColodka(LOject.Items[i]).Name);
+          yIndex := yIndexEndColodka + differnceHeight;
+        end;
       Inc(i);
      end;
+ end;
+
+// ************************** Процедура прорисовки лучей ***********************************
+ procedure TfrmMain.rayPaint(const diffCol : Integer; const Text : string; LOject : TObjectList);
+ const
+   StepColodka = 7;
+   XindexbeginLS = 0;
+   XindexendLS = 100;
+   XindexbeginRS = 450;
+   XindexendRS = 550;
+ var
+ yIndex : Integer;
+ i : Integer;
+ fText : string;
+ begin
+  fText := Text;
+  yIndex := diffCol;
+  if LOject = LS then
+    begin
+      pb1.Canvas.MoveTo(XindexbeginLS, yIndex + StepColodka);
+      pb1.Canvas.LineTo(XindexendLS, yIndex + StepColodka);
+      pb1.Canvas.TextOut( XindexbeginLS + 2, yIndex - StepColodka +1, Text);
+    end
+  else
+    begin
+      pb1.Canvas.MoveTo(XindexbeginRS, yIndex + StepColodka);
+      pb1.Canvas.LineTo(XindexendRS, yIndex + StepColodka);
+      pb1.Canvas.TextOut( XindexbeginRS + 4, yIndex - StepColodka +1, Text);
+    end;
+
+
 
  end;
+
+// ***************************************************************************************
 end.
