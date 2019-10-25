@@ -98,7 +98,7 @@ begin
   JA.Description[4] := 'A5';
 
   JA.Number := 18;
-  JA.JumpersType := 3;
+  JA.JumpersType := 2;
 
 
   LS := TObjectList.Create (true);
@@ -458,11 +458,11 @@ var
        for I :=0 to 4 do
          begin
            if Position[i + 1] = '1'  then     // для А_=1
-              pb1.Canvas.Rectangle(XrecBeginThree + stepRecAndEllipse, YrecBeginThreeUp,// + stepRecAndEllipse,
-                                    XrecEndThree + stepRecAndEllipse, YrecEndThreeUp)// + stepRecAndEllipse)
+              pb1.Canvas.Rectangle(XrecBeginThree + stepRecAndEllipse, YrecBeginThreeUp,
+                                    XrecEndThree + stepRecAndEllipse, YrecEndThreeUp)
            else                                   // для А_=0
-              pb1.Canvas.Rectangle(XrecBeginThree + stepRecAndEllipse, YrecBeginThreeDown,// + stepRecAndEllipse,
-                                    XrecEndThree + stepRecAndEllipse, YrecEndThreeDown);// + stepRecAndEllipse);
+              pb1.Canvas.Rectangle(XrecBeginThree + stepRecAndEllipse, YrecBeginThreeDown,
+                                    XrecEndThree + stepRecAndEllipse, YrecEndThreeDown);
          pb1.Canvas.Brush.Color := clBlack;
          stepEll := 0;
          for j := 0 to 2 do            // Рисуем для трех контактных
@@ -474,15 +474,30 @@ var
          pb1.Canvas.Brush.Style := bsClear;
          pb1.Canvas.TextOut(XbeginText + stepRecAndEllipse,53, JA.Description[i]);
          stepRecAndEllipse := stepRecAndEllipse + 20;
-
          end;
      end
    else
 // выбор количесво джамперов (для двух контактных)
      begin
+      for I :=0 to 4 do
+         begin
+           if Position[i + 1] = '1'  then     // для А_=1
+           else                                   // для А_=0
+              pb1.Canvas.Rectangle(XrecBeginThree + stepRecAndEllipse, YrecBeginThreeUp,
+                                    XrecEndThree + stepRecAndEllipse, YrecEndThreeUp);
+         pb1.Canvas.Brush.Color := clBlack;
+         stepEll := 0;
+         for j := 0 to 1 do            // Рисуем для двух контактных
+           begin
+             pb1.Canvas.Ellipse(XellBeginThree + stepRecAndEllipse, YellBeginThree + stepEll,
+                                XellEndThree + stepRecAndEllipse, YellEndThree + stepEll  );
+             stepEll := stepEll + 10;
+           end;
+         pb1.Canvas.Brush.Style := bsClear;
+         pb1.Canvas.TextOut(XbeginText + stepRecAndEllipse,48, JA.Description[i]);
+         stepRecAndEllipse := stepRecAndEllipse + 20;
 
+         end;
      end;
-
  end;
-
 end.
