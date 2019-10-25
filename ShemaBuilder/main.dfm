@@ -3,7 +3,7 @@ object frmMain: TfrmMain
   Top = 0
   Caption = 'frmMain'
   ClientHeight = 689
-  ClientWidth = 934
+  ClientWidth = 750
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,7 +14,7 @@ object frmMain: TfrmMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   DesignSize = (
-    934
+    750
     689)
   PixelsPerInch = 96
   TextHeight = 13
@@ -22,7 +22,7 @@ object frmMain: TfrmMain
     Left = 8
     Top = 35
     Width = 550
-    Height = 635
+    Height = 600
     Anchors = [akLeft, akTop, akBottom]
     OnPaint = pb1Paint
   end

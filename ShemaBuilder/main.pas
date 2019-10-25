@@ -8,6 +8,7 @@ uses
   Vcl.StdCtrls;
 
 type
+  TDescription = array of String;
 
   TContact = class
    public
@@ -31,8 +32,12 @@ type
   TJumpAddress = class    // Адрес выставленный перемычками
    public
     Number : Integer;   // нужный номер
-    Description : array of String; // содержит число перемычке и подписи под ними
+    Description : TDescription; // содержит число перемычке и подписи под ними
     JumpersType : Integer; // 2 - двух контактные, 3 - трех контактные
+    constructor Create (const jumNumber, jumJumpersType : Integer);
+// ************* Добавляю переменные
+
+
   end;
 
   TfrmMain = class(TForm)
@@ -49,8 +54,10 @@ type
     LS, RS  : TObjectList; //  Коллекция объектов TColodka для Левой и Правой сторон устройства
     JA : TJumpAddress;
     function differenceColodka(LObject : TObjectList): integer;
+    function changeDecToString(const Value : Integer): string;
    	procedure buildingColodka(const diffCol : Integer;LOject : TObjectList);
     procedure rayPaint(const diffCol : Integer; const Text : string; LOject : TObjectList);
+    procedure jumpPosition (jumPos : string);
     // Нашел красивую функцию отрисовки Текста
     function DrawTextCentered(Canvas: TCanvas; const R: TRect; S: String): Integer;
   public
@@ -60,7 +67,6 @@ type
 
 var
   frmMain: TfrmMain;
-
 implementation
 
 {$R *.dfm}
@@ -75,14 +81,16 @@ begin
   RS.Free;
   JA.Free;
 
+
   // Создаю новый набор
 
   DeviceName := 'КУН-2Д.1';
 
   // Левая сторона
 
-  JA := TJumpAddress.Create;
-  SetLength(Ja.Description,5);
+  JA := TJumpAddress.Create(0,0);
+
+  SetLength(JA.Description,5);
   JA.Description[0] := 'A1';
   JA.Description[1] := 'A2';
   JA.Description[2] := 'A3';
@@ -136,7 +144,7 @@ end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-  DeviceName := 'K99';
+  DeviceName := 'Пустой лист';
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
@@ -145,6 +153,31 @@ begin
   RS.Free;
   JA.Free;
 end;
+
+//************************** Реализация функции changeDecToString *********************************
+function TfrmMain.changeDecToString(const Value : Integer): string;
+var
+vArray : array of Integer;
+i : Integer;
+v : Integer;
+  begin
+    Result := '';
+    v := Value;
+    SetLength(vArray,5);
+    if (v >= 0) and (v <= 31) then
+    begin
+    for I := 0 to High(vArray) do
+      begin
+        vArray[i] := v and 1 ;
+        v := v shr 1;
+      end;
+    for I := 0 to High(vArray) do
+      Result := Result + vArray[i].ToString;
+    end
+    else
+      ShowMessage('Ошибка адреса диапозона');
+  end;
+//****************************************************************************************
 
 procedure TfrmMain.pb1Paint(Sender: TObject);
 var
@@ -157,10 +190,9 @@ begin
       Pen.Width := 1;
       Pen.Color := clBlue;
       Pen.Style := psSolid;
-      Rectangle(100,0,450,600);
+      Rectangle(100, 0, 450, pb1.Height);
+      Pen.Color := clBlack;
     end;
-
-
 
   if DeviceName <> '' then
   begin
@@ -176,8 +208,27 @@ begin
       buildingColodka(differnceHeight, LS);
       differnceHeight := differenceColodka(RS);
       buildingColodka(differnceHeight, RS);
+{//****************************************************************************************
+//******************************* Для тренировки *****************************************
 
+  k := 0;
+  for I := 0 to 4 do
+   begin
+     pb1.Canvas.Rectangle(230 +k, 34, 240 +k, 54);
+     pb1.Canvas.Brush.Color := clBlack;
+     pb1.Canvas.Ellipse(232 +k,26,238 +k,32);
+     pb1.Canvas.Ellipse(232+k,36,238+k,42);
+     pb1.Canvas.Ellipse(232+k,46,238+k,52);
+     pb1.Canvas.Brush.Style := bsClear;
+//     pb1.Canvas.TextOut(228 + k, 53, 'A' + IntToStr(i + 1));
+     pb1.Canvas.TextOut(228 + k, 53, JA.Description[i]);
+     k := k + 20;
 
+   end;
+//****************************************************************************************
+
+}
+       jumpPosition(changeDecToString(JA.Number));
     end;
 end;
 
@@ -197,6 +248,14 @@ begin
  Contacts := TObjectList.Create (True);
 end;
 
+{ TJumpAddress }
+
+constructor TJumpAddress.Create(const jumNumber, jumJumpersType : Integer);
+begin
+  Number := jumNumber;
+  JumpersType := jumJumpersType;
+end;
+
 destructor TColodka.Destroy;
 begin
   Contacts.Free;
@@ -208,12 +267,12 @@ function TfrmMain.differenceColodka(LObject : TObjectList): integer;
   const
     heightContact = 15; // высота шрифта +2 пиксела
     widthContact  = 20; // ширина 3 символов +2 пиксела
-    HeightWind = 600;
     widthWind = 450;
   var
-    countColodka, countContact : Integer;
+    countColodka, countContact, HeightWind : Integer;
     i : Integer;
   begin
+     HeightWind := pb1.Height;
      countColodka := LObject.Count;
      countContact := 0;
      i := 0;
@@ -369,4 +428,61 @@ end;
  end;
 
 // ***************************************************************************************
+
+// ***************************************  Реализация jumpPosition  *********************
+procedure TfrmMain.jumpPosition (jumPos : string);
+const
+  XrecBeginThree = 230;     // Координата по Х начало прямоугольника
+  XrecEndThree = 240;       // Координата по Х конец прямоугольника
+  XellBeginThree =232;      // Координата по Х начало эллипса
+  XellEndThree =238;        // Координата по Х конец эллипса
+  YellBeginThree = 26;      // Координата по Y начало эллипса
+  YellEndThree = 32;        // Координата по Y конец эллипса
+  YrecBeginThreeUp = 24;    // Координата по Y начоло прямоугольника    А_=1
+  YrecBeginThreeDown = 34;  // Координата по Y начоло прямоугольника    А_=0
+  YrecEndThreeUp = 44;      // Координата по Y конец прямоугольника      А_=1
+  YrecEndThreeDown = 54;    // Координата по Y конец прямоугольника      А_=0
+  XbeginText = 228;         // Начало текста
+
+var
+  stepRecAndEllipse : Integer; // общее приращение по X
+  stepEll : Integer;           // общее приращение для построения группы из двух/трёх эллипсов
+  i, j: Integer;           // Переменные циклов
+  Position: string;           // Строка положения перемычек
+ begin
+   stepRecAndEllipse := 0; // общее приращение по X
+   Position := jumPos;
+   if ja.JumpersType = 3 then
+// выбор количесво джамперов (для трех контактных)
+     begin
+       for I :=0 to 4 do
+         begin
+           if Position[i + 1] = '1'  then     // для А_=1
+              pb1.Canvas.Rectangle(XrecBeginThree + stepRecAndEllipse, YrecBeginThreeUp,// + stepRecAndEllipse,
+                                    XrecEndThree + stepRecAndEllipse, YrecEndThreeUp)// + stepRecAndEllipse)
+           else                                   // для А_=0
+              pb1.Canvas.Rectangle(XrecBeginThree + stepRecAndEllipse, YrecBeginThreeDown,// + stepRecAndEllipse,
+                                    XrecEndThree + stepRecAndEllipse, YrecEndThreeDown);// + stepRecAndEllipse);
+         pb1.Canvas.Brush.Color := clBlack;
+         stepEll := 0;
+         for j := 0 to 2 do            // Рисуем для трех контактных
+           begin
+             pb1.Canvas.Ellipse(XellBeginThree + stepRecAndEllipse, YellBeginThree + stepEll,
+                                XellEndThree + stepRecAndEllipse, YellEndThree + stepEll  );
+             stepEll := stepEll + 10;
+           end;
+         pb1.Canvas.Brush.Style := bsClear;
+         pb1.Canvas.TextOut(XbeginText + stepRecAndEllipse,53, JA.Description[i]);
+         stepRecAndEllipse := stepRecAndEllipse + 20;
+
+         end;
+     end
+   else
+// выбор количесво джамперов (для двух контактных)
+     begin
+
+     end;
+
+ end;
+
 end.
