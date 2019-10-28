@@ -53,7 +53,6 @@ type
     DeviceName : String;    // Èìÿ óñòğîéñòâà
     LS, RS  : TObjectList; //  Êîëëåêöèÿ îáúåêòîâ TColodka äëÿ Ëåâîé è Ïğàâîé ñòîğîí óñòğîéñòâà
     JA : TJumpAddress;
-    DesCount : Integer;   // êîëè÷åñòâî ïåğåìû÷åê
     function differenceColodka(LObject : TObjectList): integer;
     function changeDecToString(const Value : Integer): string;
    	procedure buildingColodka(const diffCol : Integer;LOject : TObjectList);
@@ -65,7 +64,19 @@ type
     { Public declarations }
     // â ıòîé ïğîöåäóğå äîëæíî ïğîèñõîäèòü ğèñîâàíèå
   end;
+//****************** Ïğîïèñûâàåì ãëîáàëüíûå êîíñòàíòû ************************************
+const
+RayWidth  = 100;    // Ëó÷
+StartXRec = 230;    // Êîîğäèíàòû ïî X íà÷àëî ïğÿìîóãîëüíèêà
+StartYUp = 24;      // Êîîğäèíàòû ïî Y íà÷àëî ïğÿìîóãîëüíèêà À_=1
+StartYDown = 34;    // Êîîğäèíàòû ïî Y íà÷àëî ïğÿìîóãîëüíèêà À_=0
 
+StartXEll = 232;    // Êîîğäèíàòû ïî X íà÷àëî ıëëèïñà
+StartYEll = 26;     // Êîîğäèíàòû ïî Y íà÷àëî ıëëèïñà
+
+dRec = 10;          // Ïğèğàùåíèå äëÿ ïğÿìîóãîëüíèêà
+dEll = 6;           // Ïğèğàùåíèå äëÿ ıëëèïñà
+//****************************************************************************************
 var
   frmMain: TfrmMain;
 implementation
@@ -75,13 +86,11 @@ implementation
 procedure TfrmMain.btnTest1Click(Sender: TObject);
 var
  C : TColodka;
- i : Integer;
 begin
   // Îñâîáîæäàş òî ÷òî ğàíüøå áûëî
   LS.Free;
   RS.Free;
   JA.Free;
-  DesCount := 0;
   // Ñîçäàş íîâûé íàáîğ
 
   DeviceName := 'ÊÓÍ-2Ä.1';
@@ -90,18 +99,15 @@ begin
 
   JA := TJumpAddress.Create(0,0);
 
-  SetLength(JA.Description,3);
+  SetLength(JA.Description,5);
   JA.Description[0] := 'A1';
   JA.Description[1] := 'A2';
   JA.Description[2] := 'A3';
-// JA.Description[3] := 'A4';
-// JA.Description[4] := 'A5';
+  JA.Description[3] := 'A4';
+  JA.Description[4] := 'A5';
 
- for I := 0 to High(JA.Description) do     // Âû÷èñëÿåì êîëè÷åñòâî ïåğåìû÷åê
-   inc(DesCount);
-
-  JA.Number := 5;
-  JA.JumpersType := 3;
+  JA.Number := 18;
+  JA.JumpersType := 2;
 
 
   LS := TObjectList.Create (true);
@@ -166,7 +172,7 @@ v : Integer;
   begin
     Result := '';
     v := Value;
-    SetLength(vArray,DesCount);
+    SetLength(vArray,Length(JA.Description));
     if (v >= 0) and (v <= 31) then
     begin
     for I := 0 to High(vArray) do
@@ -193,7 +199,7 @@ begin
       Pen.Width := 1;
       Pen.Color := clBlue;
       Pen.Style := psSolid;
-      Rectangle(100, 0, 450, pb1.Height);
+      Rectangle(RayWidth, 0, pb1.Width - RayWidth, pb1.Height);
       Pen.Color := clBlack;
     end;
 
@@ -211,27 +217,7 @@ begin
       buildingColodka(differnceHeight, LS);
       differnceHeight := differenceColodka(RS);
       buildingColodka(differnceHeight, RS);
-{//****************************************************************************************
-//******************************* Äëÿ òğåíèğîâêè *****************************************
-
-  k := 0;
-  for I := 0 to 4 do
-   begin
-     pb1.Canvas.Rectangle(230 +k, 34, 240 +k, 54);
-     pb1.Canvas.Brush.Color := clBlack;
-     pb1.Canvas.Ellipse(232 +k,26,238 +k,32);
-     pb1.Canvas.Ellipse(232+k,36,238+k,42);
-     pb1.Canvas.Ellipse(232+k,46,238+k,52);
-     pb1.Canvas.Brush.Style := bsClear;
-//     pb1.Canvas.TextOut(228 + k, 53, 'A' + IntToStr(i + 1));
-     pb1.Canvas.TextOut(228 + k, 53, JA.Description[i]);
-     k := k + 20;
-
-   end;
-//****************************************************************************************
-
-}
-       jumpPosition(changeDecToString(JA.Number));
+      jumpPosition(changeDecToString(JA.Number));
     end;
 end;
 
@@ -270,7 +256,6 @@ function TfrmMain.differenceColodka(LObject : TObjectList): integer;
   const
     heightContact = 15; // âûñîòà øğèôòà +2 ïèêñåëà
     widthContact  = 20; // øèğèíà 3 ñèìâîëîâ +2 ïèêñåëà
-    widthWind = 450;
   var
     countColodka, countContact, HeightWind : Integer;
     i : Integer;
@@ -321,7 +306,6 @@ end;
    XEndIndexContactRS = 450;    // Êîíå÷íàÿ  êîîğäèíàòà êîíòàêòà RS
    heightContact = 15; // âûñîòà øğèôòà +2 ïèêñåëà
    widthContact  = 25; // øèğèíà 3 ñèìâîëîâ +2 ïèêñåëà
-   widthWind = 450;
  var
   HeightWind : Integer;
   yIndexBeginColodka, yIndexEndColodka : Integer;
@@ -403,9 +387,7 @@ end;
  const
    StepColodka = 7;
    XindexbeginLS = 0;
-   XindexendLS = 100;
-   XindexbeginRS = 450;
-   XindexendRS = 550;
+   XindexendLS = RayWidth;
  var
  yIndex : Integer;
  i : Integer;
@@ -421,9 +403,9 @@ end;
     end
   else
     begin
-      pb1.Canvas.MoveTo(XindexbeginRS, yIndex + StepColodka);
-      pb1.Canvas.LineTo(XindexendRS, yIndex + StepColodka);
-      pb1.Canvas.TextOut( XindexbeginRS + 4, yIndex - StepColodka +1, Text);
+      pb1.Canvas.MoveTo(pb1.Width - RayWidth, yIndex + StepColodka);
+      pb1.Canvas.LineTo(pb1.Width, yIndex + StepColodka);
+      pb1.Canvas.TextOut( pb1.Width - RayWidth + 4, yIndex - StepColodka +1, Text);
     end;
 
 
@@ -435,43 +417,31 @@ end;
 // ***************************************  Ğåàëèçàöèÿ jumpPosition  *********************
 procedure TfrmMain.jumpPosition (jumPos : string);
 const
-  XrecBeginThree = 230;     // Êîîğäèíàòà ïî Õ íà÷àëî ïğÿìîóãîëüíèêà
-  XrecEndThree = 240;       // Êîîğäèíàòà ïî Õ êîíåö ïğÿìîóãîëüíèêà
-  XellBeginThree =232;      // Êîîğäèíàòà ïî Õ íà÷àëî ıëëèïñà
-  XellEndThree =238;        // Êîîğäèíàòà ïî Õ êîíåö ıëëèïñà
-  YellBeginThree = 26;      // Êîîğäèíàòà ïî Y íà÷àëî ıëëèïñà
-  YellEndThree = 32;        // Êîîğäèíàòà ïî Y êîíåö ıëëèïñà
-  YrecBeginThreeUp = 24;    // Êîîğäèíàòà ïî Y íà÷îëî ïğÿìîóãîëüíèêà    À_=1
-  YrecBeginThreeDown = 34;  // Êîîğäèíàòà ïî Y íà÷îëî ïğÿìîóãîëüíèêà    À_=0
-  YrecEndThreeUp = 44;      // Êîîğäèíàòà ïî Y êîíåö ïğÿìîóãîëüíèêà      À_=1
-  YrecEndThreeDown = 54;    // Êîîğäèíàòà ïî Y êîíåö ïğÿìîóãîëüíèêà      À_=0
   XbeginText = 228;         // Íà÷àëî òåêñòà
 
 var
   stepRecAndEllipse : Integer; // îáùåå ïğèğàùåíèå ïî X
   stepEll : Integer;           // îáùåå ïğèğàùåíèå äëÿ ïîñòğîåíèÿ ãğóïïû èç äâóõ/òğ¸õ ıëëèïñîâ
   i, j: Integer;           // Ïåğåìåííûå öèêëîâ
-//  Position: string;           // Ñòğîêà ïîëîæåíèÿ ïåğåìû÷åê
  begin
    stepRecAndEllipse := 0; // îáùåå ïğèğàùåíèå ïî X
-//   Position := jumPos;
    if ja.JumpersType = 3 then
 // âûáîğ êîëè÷åñâî äæàìïåğîâ (äëÿ òğåõ êîíòàêòíûõ)
      begin
-       for I :=0 to DesCount -1 do
+       for I :=0 to Length(JA.Description) - 1 do
          begin
            if jumPos[i + 1] = '1'  then     // äëÿ À_=1
-              pb1.Canvas.Rectangle(XrecBeginThree + stepRecAndEllipse, YrecBeginThreeUp,
-                                    XrecEndThree + stepRecAndEllipse, YrecEndThreeUp)
+              pb1.Canvas.Rectangle(StartXRec + stepRecAndEllipse, StartYUp,
+                                    StartXRec + dRec + stepRecAndEllipse, StartYUp + dRec *2)
            else                                   // äëÿ À_=0
-              pb1.Canvas.Rectangle(XrecBeginThree + stepRecAndEllipse, YrecBeginThreeDown,
-                                    XrecEndThree + stepRecAndEllipse, YrecEndThreeDown);
+              pb1.Canvas.Rectangle(StartXRec + stepRecAndEllipse, StartYDown,
+                                    StartXRec + dRec + stepRecAndEllipse, StartYDown + dRec *2);
          pb1.Canvas.Brush.Color := clBlack;
          stepEll := 0;
          for j := 0 to 2 do            // Ğèñóåì äëÿ òğåõ êîíòàêòíûõ
            begin
-             pb1.Canvas.Ellipse(XellBeginThree + stepRecAndEllipse, YellBeginThree + stepEll,
-                                XellEndThree + stepRecAndEllipse, YellEndThree + stepEll  );
+             pb1.Canvas.Ellipse(StartXEll + stepRecAndEllipse, StartYEll + stepEll,
+                                StartXEll + dEll + stepRecAndEllipse, StartYEll + dEll + stepEll);
              stepEll := stepEll + 10;
            end;
          pb1.Canvas.Brush.Style := bsClear;
@@ -482,18 +452,18 @@ var
    else
 // âûáîğ êîëè÷åñâî äæàìïåğîâ (äëÿ äâóõ êîíòàêòíûõ)
      begin
-      for I :=0 to DesCount -1 do
+      for I :=0 to Length(JA.Description) -1 do
          begin
            if jumPos[i + 1] = '1'  then     // äëÿ À_=1
            else                                   // äëÿ À_=0
-              pb1.Canvas.Rectangle(XrecBeginThree + stepRecAndEllipse, YrecBeginThreeUp,
-                                    XrecEndThree + stepRecAndEllipse, YrecEndThreeUp);
+              pb1.Canvas.Rectangle(StartXRec + stepRecAndEllipse, StartYUp,
+                                   StartXRec +dRec + stepRecAndEllipse, StartYUp + dRec *2);
          pb1.Canvas.Brush.Color := clBlack;
          stepEll := 0;
          for j := 0 to 1 do            // Ğèñóåì äëÿ äâóõ êîíòàêòíûõ
            begin
-             pb1.Canvas.Ellipse(XellBeginThree + stepRecAndEllipse, YellBeginThree + stepEll,
-                                XellEndThree + stepRecAndEllipse, YellEndThree + stepEll  );
+             pb1.Canvas.Ellipse(StartXEll + stepRecAndEllipse, StartYEll + stepEll,
+                                StartXEll + dEll + stepRecAndEllipse, StartYEll + dEll + stepEll);
              stepEll := stepEll + 10;
            end;
          pb1.Canvas.Brush.Style := bsClear;
