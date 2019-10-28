@@ -53,6 +53,7 @@ type
     DeviceName : String;    // Èìÿ óñòğîéñòâà
     LS, RS  : TObjectList; //  Êîëëåêöèÿ îáúåêòîâ TColodka äëÿ Ëåâîé è Ïğàâîé ñòîğîí óñòğîéñòâà
     JA : TJumpAddress;
+    DesCount : Integer;   // êîëè÷åñòâî ïåğåìû÷åê
     function differenceColodka(LObject : TObjectList): integer;
     function changeDecToString(const Value : Integer): string;
    	procedure buildingColodka(const diffCol : Integer;LOject : TObjectList);
@@ -74,14 +75,13 @@ implementation
 procedure TfrmMain.btnTest1Click(Sender: TObject);
 var
  C : TColodka;
-
+ i : Integer;
 begin
   // Îñâîáîæäàş òî ÷òî ğàíüøå áûëî
   LS.Free;
   RS.Free;
   JA.Free;
-
-
+  DesCount := 0;
   // Ñîçäàş íîâûé íàáîğ
 
   DeviceName := 'ÊÓÍ-2Ä.1';
@@ -90,15 +90,18 @@ begin
 
   JA := TJumpAddress.Create(0,0);
 
-  SetLength(JA.Description,5);
+  SetLength(JA.Description,3);
   JA.Description[0] := 'A1';
   JA.Description[1] := 'A2';
   JA.Description[2] := 'A3';
-  JA.Description[3] := 'A4';
-  JA.Description[4] := 'A5';
+// JA.Description[3] := 'A4';
+// JA.Description[4] := 'A5';
 
-  JA.Number := 18;
-  JA.JumpersType := 2;
+ for I := 0 to High(JA.Description) do     // Âû÷èñëÿåì êîëè÷åñòâî ïåğåìû÷åê
+   inc(DesCount);
+
+  JA.Number := 5;
+  JA.JumpersType := 3;
 
 
   LS := TObjectList.Create (true);
@@ -163,7 +166,7 @@ v : Integer;
   begin
     Result := '';
     v := Value;
-    SetLength(vArray,5);
+    SetLength(vArray,DesCount);
     if (v >= 0) and (v <= 31) then
     begin
     for I := 0 to High(vArray) do
@@ -448,16 +451,16 @@ var
   stepRecAndEllipse : Integer; // îáùåå ïğèğàùåíèå ïî X
   stepEll : Integer;           // îáùåå ïğèğàùåíèå äëÿ ïîñòğîåíèÿ ãğóïïû èç äâóõ/òğ¸õ ıëëèïñîâ
   i, j: Integer;           // Ïåğåìåííûå öèêëîâ
-  Position: string;           // Ñòğîêà ïîëîæåíèÿ ïåğåìû÷åê
+//  Position: string;           // Ñòğîêà ïîëîæåíèÿ ïåğåìû÷åê
  begin
    stepRecAndEllipse := 0; // îáùåå ïğèğàùåíèå ïî X
-   Position := jumPos;
+//   Position := jumPos;
    if ja.JumpersType = 3 then
 // âûáîğ êîëè÷åñâî äæàìïåğîâ (äëÿ òğåõ êîíòàêòíûõ)
      begin
-       for I :=0 to 4 do
+       for I :=0 to DesCount -1 do
          begin
-           if Position[i + 1] = '1'  then     // äëÿ À_=1
+           if jumPos[i + 1] = '1'  then     // äëÿ À_=1
               pb1.Canvas.Rectangle(XrecBeginThree + stepRecAndEllipse, YrecBeginThreeUp,
                                     XrecEndThree + stepRecAndEllipse, YrecEndThreeUp)
            else                                   // äëÿ À_=0
@@ -479,9 +482,9 @@ var
    else
 // âûáîğ êîëè÷åñâî äæàìïåğîâ (äëÿ äâóõ êîíòàêòíûõ)
      begin
-      for I :=0 to 4 do
+      for I :=0 to DesCount -1 do
          begin
-           if Position[i + 1] = '1'  then     // äëÿ À_=1
+           if jumPos[i + 1] = '1'  then     // äëÿ À_=1
            else                                   // äëÿ À_=0
               pb1.Canvas.Rectangle(XrecBeginThree + stepRecAndEllipse, YrecBeginThreeUp,
                                     XrecEndThree + stepRecAndEllipse, YrecEndThreeUp);
