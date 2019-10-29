@@ -35,8 +35,11 @@ type
     Description : TDescription; // содержит число перемычке и подписи под ними
     JumpersType : Integer; // 2 - двух контактные, 3 - трех контактные
     constructor Create (const jumNumber, jumJumpersType : Integer);
-// ************* Добавляю переменные
-
+  end;
+// Необходимо добавить класс TBitmap
+  TPictureBitmap = class (TBitmap)
+    public
+    FileName : string;
 
   end;
 
@@ -44,15 +47,19 @@ type
     pb1: TPaintBox;
     lbl1: TLabel;
     btnTest1: TButton;
+    btnSave: TButton;
     procedure pb1Paint(Sender: TObject);
     procedure btnTest1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
+    procedure frmMainToBitmap(pb1 : TPaintBox; var PBitmap : TPictureBitmap);
+    procedure btnSaveClick(Sender: TObject);
   private
     { Private declarations }
     DeviceName : String;    // Имя устройства
     LS, RS  : TObjectList; //  Коллекция объектов TColodka для Левой и Правой сторон устройства
     JA : TJumpAddress;
+    PBitmap : TPictureBitmap;
     function differenceColodka(LObject : TObjectList): integer;
     function changeDecToString(const Value : Integer): string;
    	procedure buildingColodka(const diffCol : Integer;LOject : TObjectList);
@@ -82,6 +89,7 @@ begin
   LS.Free;
   RS.Free;
   JA.Free;
+  PBitmap.Free;
   // Создаю новый набор
 
   DeviceName := 'КУН-2Д.1';
@@ -235,6 +243,12 @@ begin
   Number := jumNumber;
   JumpersType := jumJumpersType;
 end;
+
+{ TPictureBitmap }
+{
+constructor TPictureBitmap.Create(const FileName : string);
+begin
+end; }
 
 destructor TColodka.Destroy;
 begin
@@ -473,5 +487,35 @@ var
          end;
      end;
  end;
+
+//**************** Работа с кнопкой записи в файл *********************************************
+procedure TfrmMain.btnSaveClick(Sender: TObject);
+begin
+  frmMainToBitmap(pb1,PBitmap);
+  PBitmap.SaveToFile('picture.bmp');
+end;
+
+//*********************************************************************************************
+
+//**************************** Тренинг с Bitmap ***********************************************
+
+procedure TfrmMain.frmMainToBitmap(pb1 : TPaintBox; var PBitmap : TPictureBitmap);
+var
+  fFile : string;
+  r : TRect;
+begin
+// Задаём прямоугольную область
+  r.Left := 0;
+  r.Right := pb1.Width;
+  r.Top := 0;
+  r.Bottom := pb1.Height;
+// Создаём Bitmap
+  PBitmap := TPictureBitmap.Create;
+  PBitmap.Width := pb1.Width;
+  PBitmap.Height := pb1.Height;
+// Копируем картинку из формы в Bitmap
+  PBitmap.Canvas.CopyRect(r,pb1.Canvas,r);
+end;
+//*********************************************************************************************
 end.
 

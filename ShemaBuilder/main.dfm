@@ -49,4 +49,13 @@ object frmMain: TfrmMain
     TabOrder = 0
     OnClick = btnTest1Click
   end
+  object btnSave: TButton
+    Left = 584
+    Top = 80
+    Width = 137
+    Height = 25
+    Caption = 'Save to File  *.bmp'
+    TabOrder = 1
+    OnClick = btnSaveClick
+  end
 end
