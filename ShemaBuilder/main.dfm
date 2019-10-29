@@ -23,7 +23,7 @@ object frmMain: TfrmMain
     Top = 35
     Width = 550
     Height = 600
-    Anchors = [akLeft, akTop, akBottom]
+    Anchors = [akLeft, akTop, akRight, akBottom]
     OnPaint = pb1Paint
   end
   object lbl1: TLabel
@@ -44,6 +44,7 @@ object frmMain: TfrmMain
     Top = 32
     Width = 137
     Height = 25
+    Anchors = [akTop, akRight]
     Caption = 'Test Draw 1'
     TabOrder = 0
     OnClick = btnTest1Click

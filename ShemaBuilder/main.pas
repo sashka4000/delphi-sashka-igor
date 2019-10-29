@@ -64,19 +64,10 @@ type
     { Public declarations }
     // в этой процедуре должно происходить рисование
   end;
-//****************** Прописываем глобальные константы ************************************
+
 const
 RayWidth  = 100;    // Луч
-StartXRec = 230;    // Координаты по X начало прямоугольника
-StartYUp = 24;      // Координаты по Y начало прямоугольника А_=1
-StartYDown = 34;    // Координаты по Y начало прямоугольника А_=0
 
-StartXEll = 232;    // Координаты по X начало эллипса
-StartYEll = 26;     // Координаты по Y начало эллипса
-
-dRec = 10;          // Приращение для прямоугольника
-dEll = 6;           // Приращение для эллипса
-//****************************************************************************************
 var
   frmMain: TfrmMain;
 implementation
@@ -300,10 +291,6 @@ end;
 //********************************* Процедура *************************************************
  procedure TfrmMain.buildingColodka(const diffCol : Integer;LOject : TObjectList);
   const
-   XBeginIndexContactLS = 100;  // Начальная координата контакта LS
-   XEndIndexContactLS = 125;    // Конечная  координата контакта LS
-   XBeginIndexContactRS = 425;  // Начальная координата контакта RS
-   XEndIndexContactRS = 450;    // Конечная  координата контакта RS
    heightContact = 15; // высота шрифта +2 пиксела
    widthContact  = 25; // ширина 3 символов +2 пиксела
  var
@@ -336,12 +323,12 @@ end;
          begin
            if LOject = LS then
              begin
-               pb1.Canvas.Rectangle(XBeginIndexContactLS, yIndex, XEndIndexContactLS, yIndex + heightContact);
+               pb1.Canvas.Rectangle(RayWidth, yIndex, RayWidth + widthContact, yIndex + heightContact);
 // Пробую подмену
                if TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Contact = '$' then  // Код подмены
-                 pb1.Canvas.TextOut( XBeginIndexContactLS + 5, yIndex + 1 ,   #9178)         // ************
+                 pb1.Canvas.TextOut( RayWidth + 5, yIndex + 1 ,   #9178)                     // ************
                else
-                 pb1.Canvas.TextOut( XBeginIndexContactLS + 5, yIndex + 1 , TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Contact);
+                 pb1.Canvas.TextOut( RayWidth + 5, yIndex + 1 , TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Contact);
                Text := TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Description;
                if not(Text = '') then
                   rayPaint(yIndex, Text, LOject);
@@ -350,12 +337,12 @@ end;
              end
            else
              begin
-               pb1.Canvas.Rectangle(XBeginIndexContactRS, yIndex, XEndIndexContactRS, yIndex + heightContact);
+               pb1.Canvas.Rectangle(pb1.Width - RayWidth - widthContact, yIndex, pb1.Width - RayWidth, yIndex + heightContact);
 // Пробую подмену
                if TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Contact = '$' then    // Код подмены
-                pb1.Canvas.TextOut(XBeginIndexContactRS + 3, yIndex + 1 ,   #9178)             // ***********
+                pb1.Canvas.TextOut(pb1.Width - RayWidth - widthContact + 3, yIndex + 1 ,   #9178)             // ***********
                else
-                 pb1.Canvas.TextOut(XBeginIndexContactRS + 3, yIndex + 1 , TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Contact);
+                 pb1.Canvas.TextOut(pb1.Width - RayWidth - widthContact + 3, yIndex + 1 , TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Contact);
                Text := TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Description;
                if not(Text = '') then
                   rayPaint(yIndex, Text, LOject);
@@ -366,14 +353,14 @@ end;
       yIndexEndColodka := yIndex;
       if LOject = LS then
         begin
-          R := TRect.Create(XEndIndexContactLS, yIndexBeginColodka, XEndIndexContactLS +90, yIndexEndColodka);
+          R := TRect.Create(RayWidth + widthContact, yIndexBeginColodka, RayWidth + widthContact + 90, yIndexEndColodka);
           pb1.Canvas.Rectangle(R);
           DrawTextCentered(pb1.Canvas, R, TColodka(LOject.Items[i]).Name);
           yIndex := yIndexEndColodka + differnceHeight;
         end
       else
         begin
-          R := TRect.Create( XEndIndexContactRS - 100, yIndexBeginColodka,XBeginIndexContactRS , yIndexEndColodka);
+          R := TRect.Create( pb1.Width - RayWidth - 100, yIndexBeginColodka,pb1.Width - RayWidth - widthContact , yIndexEndColodka);
           pb1.Canvas.Rectangle(R);
           DrawTextCentered(pb1.Canvas, R, TColodka(LOject.Items[i]).Name);
           yIndex := yIndexEndColodka + differnceHeight;
@@ -386,8 +373,6 @@ end;
  procedure TfrmMain.rayPaint(const diffCol : Integer; const Text : string; LOject : TObjectList);
  const
    StepColodka = 7;
-   XindexbeginLS = 0;
-   XindexendLS = RayWidth;
  var
  yIndex : Integer;
  i : Integer;
@@ -397,9 +382,9 @@ end;
   yIndex := diffCol;
   if LOject = LS then
     begin
-      pb1.Canvas.MoveTo(XindexbeginLS, yIndex + StepColodka);
-      pb1.Canvas.LineTo(XindexendLS, yIndex + StepColodka);
-      pb1.Canvas.TextOut( XindexbeginLS + 2, yIndex - StepColodka +1, Text);
+      pb1.Canvas.MoveTo(0, yIndex + StepColodka);
+      pb1.Canvas.LineTo(RayWidth, yIndex + StepColodka);
+      pb1.Canvas.TextOut( 2, yIndex - StepColodka +1, Text);
     end
   else
     begin
@@ -407,23 +392,38 @@ end;
       pb1.Canvas.LineTo(pb1.Width, yIndex + StepColodka);
       pb1.Canvas.TextOut( pb1.Width - RayWidth + 4, yIndex - StepColodka +1, Text);
     end;
-
-
-
  end;
-
 // ***************************************************************************************
 
 // ***************************************  Реализация jumpPosition  *********************
 procedure TfrmMain.jumpPosition (jumPos : string);
 const
-  XbeginText = 228;         // Начало текста
-
+  dRec = 10;          // Приращение для прямоугольника
+  dEll = 6;           // Приращение для эллипса
 var
+  XbeginText : Integer;
+  StartXRec  : Integer;
+  StartXEll  : Integer;
+  StartYUp   : Integer;
+  StartYDown : Integer;
+  StartYEll  : Integer;
+
   stepRecAndEllipse : Integer; // общее приращение по X
   stepEll : Integer;           // общее приращение для построения группы из двух/трёх эллипсов
   i, j: Integer;           // Переменные циклов
  begin
+   StartXRec   := pb1.Width - 320;   // Координаты по X начало прямоугольника
+   StartXEll   := pb1.Width - 318;   // Координаты по X начало эллипса
+ // Привязка по высоте неудачна, нужно думать к чему привязывать что-бы всё неуплывало?
+//   StartYUp    := pb1.Height - 576;  // Координаты по Y начало прямоугольника А_=1
+//   StartYDown  := pb1.Height - 566 ; // Координаты по Y начало прямоугольника А_=0
+//   StartYEll   := pb1.Height - 574 ; // Координаты по Y начало эллипса
+
+   StartYUp    := 24;  // Координаты по Y начало прямоугольника А_=1
+   StartYDown  := 34 ; // Координаты по Y начало прямоугольника А_=0
+   StartYEll   := 26 ; // Координаты по Y начало эллипса
+
+   XbeginText := pb1.Width - 322;  // Начало текста
    stepRecAndEllipse := 0; // общее приращение по X
    if ja.JumpersType = 3 then
 // выбор количесво джамперов (для трех контактных)
@@ -474,3 +474,4 @@ var
      end;
  end;
 end.
+
