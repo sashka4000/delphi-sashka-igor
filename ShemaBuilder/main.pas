@@ -47,12 +47,14 @@ type
     lbl1: TLabel;
     btnTest1: TButton;
     btnSave: TButton;
+    btnSaveToWord: TButton;
     procedure pb1Paint(Sender: TObject);
     procedure btnTest1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     procedure FormDestroy(Sender: TObject);
     procedure frmMainToBitmap(pb1 : TPaintBox; var PBitmap : TPictureBitmap);
     procedure btnSaveClick(Sender: TObject);
+    procedure btnSaveToWordClick(Sender: TObject);
   private
     { Private declarations }
     DeviceName : String;    // Имя устройства
@@ -77,6 +79,7 @@ RayWidth  = 100;    // Луч
 var
   frmMain: TfrmMain;
 implementation
+Uses System.Win.ComObj;
 
 {$R *.dfm}
 
@@ -482,6 +485,37 @@ var
  end;
 
 //**************** Работа с кнопкой записи в файл *********************************************
+procedure TfrmMain.btnSaveToWordClick(Sender: TObject);
+const
+  wdAlignParagraphCenter = 1;
+  wdAlignParagraphLeft = 0;
+  wdAlignParagraphRight = 2;
+var
+ wd : Variant;
+ s  : Variant;
+ fname : String;
+begin
+ fname := ExtractFilePath(Application.ExeName) + 'picture.bmp';
+ if not FileExists(fname) then
+  Exit;
+
+//
+ wd:= CreateOleObject('Word.Application');
+ wd.Documents.Add;
+ wd.ActiveDocument.Select;
+ wd.Selection.Copy;
+ wd.Selection.ParagraphFormat.Alignment := wdAlignParagraphCenter;
+ wd.Selection.Font.Bold := True;
+ wd.Selection.TypeText('TEST PICTURE');
+ wd.Selection.TypeParagraph;
+ wd.Selection.ParagraphFormat.Alignment := wdAlignParagraphCenter;
+ // Вставим изображение
+ wd.Selection.InlineShapes.AddPicture(fname, True, True);
+ wd.ActiveDocument.SaveAs (ExtractFilePath(Application.ExeName) + 'test.doc');
+ wd.Quit;
+ wd := Unassigned;
+end;
+
 procedure TfrmMain.btnSaveClick(Sender: TObject);
 begin
   frmMainToBitmap(pb1,PBitmap);

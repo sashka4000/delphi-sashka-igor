@@ -58,4 +58,13 @@ object frmMain: TfrmMain
     TabOrder = 1
     OnClick = btnSaveClick
   end
+  object btnSaveToWord: TButton
+    Left = 584
+    Top = 128
+    Width = 137
+    Height = 25
+    Caption = 'Save File to Word'
+    TabOrder = 2
+    OnClick = btnSaveToWordClick
+  end
 end
