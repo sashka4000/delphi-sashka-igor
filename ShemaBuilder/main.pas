@@ -40,7 +40,6 @@ type
   TPictureBitmap = class (TBitmap)
     public
     FileName : string;
-
   end;
 
   TfrmMain = class(TForm)
@@ -89,7 +88,6 @@ begin
   LS.Free;
   RS.Free;
   JA.Free;
-  PBitmap.Free;
   // Создаю новый набор
 
   DeviceName := 'КУН-2Д.1';
@@ -244,11 +242,6 @@ begin
   JumpersType := jumJumpersType;
 end;
 
-{ TPictureBitmap }
-{
-constructor TPictureBitmap.Create(const FileName : string);
-begin
-end; }
 
 destructor TColodka.Destroy;
 begin
@@ -493,11 +486,12 @@ procedure TfrmMain.btnSaveClick(Sender: TObject);
 begin
   frmMainToBitmap(pb1,PBitmap);
   PBitmap.SaveToFile('picture.bmp');
+  PBitmap.Free;
 end;
 
 //*********************************************************************************************
 
-//**************************** Тренинг с Bitmap ***********************************************
+//**************************** Создаем экзепляр класса Bitmap ***********************************************
 
 procedure TfrmMain.frmMainToBitmap(pb1 : TPaintBox; var PBitmap : TPictureBitmap);
 var
