@@ -92,7 +92,6 @@ begin
   RS.Free;
   JA.Free;
   // Создаю новый набор
-
   DeviceName := 'КУН-2Д.1';
 
   // Левая сторона
@@ -194,6 +193,9 @@ var
  differnceHeight : Integer;  // шаг между колодками
 begin
   //******************** Прорисовываем основную подложку **************************************
+  pb1.Canvas.Brush.Color := clWhite;
+//  pb1.Canvas.Rectangle(-1,-1,pb1.Width+1,pb1.Height+1);
+    pb1.Canvas.FillRect( pb1.Canvas.ClipRect);
   with pb1.Canvas do
     begin
       Pen.Width := 1;
@@ -484,7 +486,7 @@ var
      end;
  end;
 
-//**************** Работа с кнопкой записи в файл *********************************************
+//**************** Запись в файл MS Word    ***************************************************
 procedure TfrmMain.btnSaveToWordClick(Sender: TObject);
 const
   wdAlignParagraphCenter = 1;
@@ -515,7 +517,7 @@ begin
  wd.Quit;
  wd := Unassigned;
 end;
-
+// **************************Запись в файл  .bmp   *************************************
 procedure TfrmMain.btnSaveClick(Sender: TObject);
 begin
   frmMainToBitmap(pb1,PBitmap);
@@ -537,6 +539,7 @@ begin
   r.Right := pb1.Width;
   r.Top := 0;
   r.Bottom := pb1.Height;
+
 // Создаём Bitmap
   PBitmap := TPictureBitmap.Create;
   PBitmap.Width := pb1.Width;
