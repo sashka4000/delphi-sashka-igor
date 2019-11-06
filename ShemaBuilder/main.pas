@@ -70,7 +70,6 @@ type
     function DrawTextCentered(Canvas: TCanvas; const R: TRect; S: String): Integer;
   public
     { Public declarations }
-    // в этой процедуре должно происходить рисование
   end;
 
 const
@@ -106,7 +105,7 @@ begin
   JA.Description[4] := 'A5';
 
   JA.Number := 18;
-  JA.JumpersType := 2;
+  JA.JumpersType := 3;
 
 
   LS := TObjectList.Create (true);
@@ -194,7 +193,6 @@ var
 begin
   //******************** Прорисовываем основную подложку **************************************
   pb1.Canvas.Brush.Color := clWhite;
-//  pb1.Canvas.Rectangle(-1,-1,pb1.Width+1,pb1.Height+1);
     pb1.Canvas.FillRect( pb1.Canvas.ClipRect);
   with pb1.Canvas do
     begin
@@ -426,11 +424,7 @@ var
  begin
    StartXRec   := pb1.Width - 320;   // Координаты по X начало прямоугольника
    StartXEll   := pb1.Width - 318;   // Координаты по X начало эллипса
- // Привязка по высоте неудачна, нужно думать к чему привязывать что-бы всё неуплывало?
-//   StartYUp    := pb1.Height - 576;  // Координаты по Y начало прямоугольника А_=1
-//   StartYDown  := pb1.Height - 566 ; // Координаты по Y начало прямоугольника А_=0
-//   StartYEll   := pb1.Height - 574 ; // Координаты по Y начало эллипса
-
+   // Координаты по Y
    StartYUp    := 24;  // Координаты по Y начало прямоугольника А_=1
    StartYDown  := 34 ; // Координаты по Y начало прямоугольника А_=0
    StartYEll   := 26 ; // Координаты по Y начало эллипса
