@@ -54,7 +54,7 @@ object frmMain: TfrmMain
     Top = 80
     Width = 137
     Height = 25
-    Caption = 'Save File  to  *.bmp'
+    Caption = 'Save to File  *.bmp'
     TabOrder = 1
     OnClick = btnSaveClick
   end

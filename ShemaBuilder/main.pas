@@ -36,7 +36,7 @@ type
     JumpersType : Integer; // 2 - двух контактные, 3 - трех контактные
     constructor Create (const jumNumber, jumJumpersType : Integer);
   end;
-// Необходимо добавить класс TBitmap
+
   TPictureBitmap = class (TBitmap)
     public
     FileName : string;
@@ -151,7 +151,7 @@ end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-  DeviceName := 'Пустой лист';
+  DeviceName := 'Empty List';
 end;
 
 procedure TfrmMain.FormDestroy(Sender: TObject);
@@ -334,7 +334,6 @@ end;
            if LOject = LS then
              begin
                pb1.Canvas.Rectangle(RayWidth, yIndex, RayWidth + widthContact, yIndex + heightContact);
-// Пробую подмену
                if TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Contact = '$' then  // Код подмены
                  pb1.Canvas.TextOut( RayWidth + 5, yIndex + 1 ,   #9178)                     // ************
                else
@@ -348,7 +347,6 @@ end;
            else
              begin
                pb1.Canvas.Rectangle(pb1.Width - RayWidth - widthContact, yIndex, pb1.Width - RayWidth, yIndex + heightContact);
-// Пробую подмену
                if TContact( TColodka(LOject.Items[i]).Contacts.Items[j]).Contact = '$' then    // Код подмены
                 pb1.Canvas.TextOut(pb1.Width - RayWidth - widthContact + 3, yIndex + 1 ,   #9178)             // ***********
                else
