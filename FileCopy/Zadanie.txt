@@ -1,0 +1,88 @@
+Программа предназначена для копирования файлов сборки программного обеспечения
+из общей папки в указанный каталог согласно файла задания.
+
+Файл задания имеет расширение .iss   - должен быть выбран
+
+Папка источник  - должна быть выбрана - это папка, где лежат все файлы
+
+Папка назначения - должна быть выбрана - это папка куда будет выполняться
+ копирование
+
+В mmo1 - выводить протокол работы:
+ информацию о файлах, которые должны были быть скопированы, но отстуствуют в
+ папке источник
+
+Как разбирать iss файл
+
+Работа начинается с секции [Files]
+
+нас интересуют строки вида
+
+Source: drivers\h323\yealink.drv; DestDir: {app}\SCADA\drivers\h323; Components: client; Flags:   ignoreversion 32bit
+
+Взять файл  "Папка источник\drivers\h323\yealink.drv" и скопировать в папку
+"Папка назначение\SCADA\drivers\h323"
+
+Source: extensions\bootstrap-4\js\*.*; DestDir: {app}\SCADA\extensions\bootstrap-4\js;
+
+Скопировать папку
+"Папка источник\extensions\bootstrap-4\js\" в папку
+"Папка назначение\SCADA\extensions\bootstrap-4\js"
+
+
+Записи вида -  должны быть проигнорированы
+
+;Source   - где первый символ ";"
+
+Source: !_shared\opccore.msi; DestDir: {tmp}; Components: client server; Flags: deleteafterinstall ignoreversion 32bit
+
+Начинающиеся с "!_shared"  - проигнорированы
+
+Source: haspdinst.exe; DestDir: {app}\Ext; Flags: uninsneveruninstall ignoreversion 32bit; Components: client
+
+Начинающиеся с   "hasp" - проигнорированы
+
+
+По самой форме:
+
+Форма должна отображаться по центру экрана после старта
+При увеличении ширины формы компоенты Edt, mmo1  должны растягиваться
+При изменении  высоты mmo1 должен менять размер, нижняя кнопка - должна всегда
+быть привязана к нижнему правому углу.
+
+- все это делается через свойства Anshors компонент
+
+
+В качестве примера SourceFolder  - Папка источник
+
+SourceFolder
+ - extenstions
+     exttools.fx
+     topcda_drvmgr.fx
+ - modules
+     conc_table_view.psm
+     ajournal.psm
+ extluabind32u.dll
+ extboostsystem32u.dll
+ !unreg_opc.bat
+
+Должно превратится  в
+
+DestFolder
+ - SCADA
+ - extenstions
+     exttools.fx
+ - modules
+     ajournal.psm
+ extluabind32u.dll
+ extboostsystem32u.dll
+ -OPC Server
+ - extenstions
+     topcda_drvmgr.fx
+ - modules
+     conc_table_view.psm
+ extboostsystem32u.dll
+ !unreg_opc.bat
+
+
+
