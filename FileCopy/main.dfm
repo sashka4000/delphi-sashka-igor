@@ -11,6 +11,7 @@ object frmMain: TfrmMain
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  PopupMode = pmAuto
   PixelsPerInch = 96
   TextHeight = 13
   object lbl1: TLabel
@@ -56,6 +57,7 @@ object frmMain: TfrmMain
     Height = 25
     Caption = '...'
     TabOrder = 0
+    OnClick = btnSelectFileClick
   end
   object edtSourceFolder: TEdit
     Left = 16
@@ -72,6 +74,7 @@ object frmMain: TfrmMain
     Height = 25
     Caption = '...'
     TabOrder = 2
+    OnClick = btnSelectSourceFolderClick
   end
   object edtDestFolder: TEdit
     Left = 16
@@ -88,6 +91,7 @@ object frmMain: TfrmMain
     Height = 25
     Caption = '...'
     TabOrder = 4
+    OnClick = btnSelectDestFolderClick
   end
   object btnDoWork: TButton
     Left = 486
@@ -107,7 +111,7 @@ object frmMain: TfrmMain
     TabOrder = 6
   end
   object dlgOpen1: TOpenDialog
-    Left = 384
-    Top = 56
+    Filter = #1060#1072#1081#1083' '#1079#1072#1076#1072#1085#1080#1103' (iss)|*.iss'
+    Left = 96
   end
 end
