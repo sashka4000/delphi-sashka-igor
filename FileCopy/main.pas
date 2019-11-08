@@ -4,7 +4,8 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.FileCtrl;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.FileCtrl, Vcl.StdCtrls,
+   System.Contnrs, System.types, System.IOUtils, IdGlobal;
 
 type
   TfrmMain = class(TForm)
@@ -24,10 +25,13 @@ type
     procedure btnSelectFileClick(Sender: TObject);
     procedure btnSelectSourceFolderClick(Sender: TObject);
     procedure btnSelectDestFolderClick(Sender: TObject);
+    procedure btnDoWorkClick(Sender: TObject);
   private
     { Private declarations }
+    PathSList : TStringList;
   public
     { Public declarations }
+      soursePath, destPath : string; // Пути к источнику и приёмнику файлов
   end;
 
 var
@@ -39,82 +43,59 @@ implementation
 
 //**************************** Процедура выбора файла *****************************************
  procedure TfrmMain.btnSelectFileClick(Sender: TObject);
-var
-  oneSList, twoSList : TStringList;
-  fString : string ;
-  soursePath, destPath : string;
-  i, j : Integer;
 begin
  if dlgOpen1.Execute then
    begin
      dlgOpen1.FilterIndex := 1;
      edtFlieName.Text  := dlgOpen1.FileName;
-     oneSList := TStringList.Create(True);
-     oneSList.LoadFromFile(edtFlieName.Text);
-     twoSList := TStringList.Create(True);
-     i := oneSList.Count;
-     j := 0;
-     while i > 0 do
-       begin
-         if oneSList.Strings[j] = '[Files]' then
-           while oneSList.Strings[j] <> '[Icons]' do
-             begin
-               twoSList.Add(oneSList.Strings[j]);
-               Inc(j);
-               Dec(i);
-             end
-         else
-           begin
-             Dec(i);
-             Inc(j);
-             Continue;
-           end;
-       end;
-//     twoSList.SaveToFile('test.txt');
- oneSList.Clear;
-     for I := 0 to twoSList.Count -1 do
-         begin
-           j := twoSList.Strings[i].IndexOf('Source:');
-           if j = 0 then
-             oneSList.add(twoSList[i]);
-         end;
-   twoSList.Clear;
-     for i := 0 to oneSList.Count -1 do
-       begin
-       fString := oneSList[i];
-       if not((fString.IndexOf('!_shared') > -1) or (fString.IndexOf('hasp') > -1)) then
-         twoSList.add(oneSList.Strings[i]);
-       end;
-  oneSList.Clear;
-  twoSList.SaveToFile('test.txt');
-
-
-
    end;
 end;
 //*********************************************************************************************
 
 procedure TfrmMain.btnSelectDestFolderClick(Sender: TObject);
-var
-  outDirectory : string ;
 begin
- if SelectDirectory('Выберите папку назначения', '', outDirectory) then
+ if SelectDirectory('Выберите папку назначения', '', destPath) then
    begin
-     edtDestFolder.Text := outDirectory;
-
+     edtDestFolder.Text := destPath;
    end;
 end;
 
 
 procedure TfrmMain.btnSelectSourceFolderClick(Sender: TObject);
-var
-  inDirectory : string ;
 begin
- if SelectDirectory('Выберите папку источник', '', inDirectory) then
+ if SelectDirectory('Выберите папку источник', '', soursePath) then
    begin
-     edtSourceFolder.Text := inDirectory;
-
+     edtSourceFolder.Text := soursePath;
    end;
 end;
 
+//************************ Процедура перезаписи файлов ****************************************
+procedure TfrmMain.btnDoWorkClick(Sender: TObject);
+var
+  ss : TStringList;
+  i : Integer;
+  PathTemp,Ftemp : string;
+begin
+  ss := TStringList.Create(True);
+  ss.Clear;
+  PathSList := TStringList.Create(True);
+  PathSList.LoadFromFile(edtFlieName.Text);
+//     PathSList.SaveToFile('test.txt');
+  for I := 0 to PathSList.Count -1 do
+    begin
+      Ftemp := Copy(PathSList.Strings[i],0,7);
+      if Ftemp = 'Source' then
+
+
+{        else if Copy(PathSList.Strings[i],8,4) = 'hasp' then
+          Continue
+          else if Copy(PathSList.Strings[i],8,8) = '!_shared'  then
+            Continue
+             else if  = 'Source:' then }
+                   ss.Add(PathSList[i]);
+    end;
+   ss.SaveToFile('test.txt');
+end;
+
+//*********************************************************************************************
 end.

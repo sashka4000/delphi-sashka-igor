@@ -12,6 +12,10 @@ object frmMain: TfrmMain
   Font.Style = []
   OldCreateOrder = False
   PopupMode = pmAuto
+  Position = poScreenCenter
+  DesignSize = (
+    579
+    346)
   PixelsPerInch = 96
   TextHeight = 13
   object lbl1: TLabel
@@ -47,6 +51,7 @@ object frmMain: TfrmMain
     Top = 35
     Width = 506
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     TabOrder = 1
     Text = 'edtFlieName'
   end
@@ -55,6 +60,7 @@ object frmMain: TfrmMain
     Top = 33
     Width = 33
     Height = 25
+    Anchors = [akTop, akRight]
     Caption = '...'
     TabOrder = 0
     OnClick = btnSelectFileClick
@@ -64,6 +70,7 @@ object frmMain: TfrmMain
     Top = 91
     Width = 506
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     TabOrder = 3
     Text = 'edt1'
   end
@@ -72,6 +79,7 @@ object frmMain: TfrmMain
     Top = 89
     Width = 33
     Height = 25
+    Anchors = [akTop, akRight]
     Caption = '...'
     TabOrder = 2
     OnClick = btnSelectSourceFolderClick
@@ -81,6 +89,7 @@ object frmMain: TfrmMain
     Top = 147
     Width = 506
     Height = 21
+    Anchors = [akLeft, akTop, akRight]
     TabOrder = 5
     Text = 'edt1'
   end
@@ -89,6 +98,7 @@ object frmMain: TfrmMain
     Top = 145
     Width = 33
     Height = 25
+    Anchors = [akTop, akRight]
     Caption = '...'
     TabOrder = 4
     OnClick = btnSelectDestFolderClick
@@ -98,14 +108,17 @@ object frmMain: TfrmMain
     Top = 313
     Width = 75
     Height = 25
+    Anchors = [akRight, akBottom]
     Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
     TabOrder = 7
+    OnClick = btnDoWorkClick
   end
   object mmo1: TMemo
     Left = 16
     Top = 203
     Width = 545
     Height = 104
+    Anchors = [akLeft, akTop, akRight, akBottom]
     Lines.Strings = (
       'mmo1')
     TabOrder = 6
