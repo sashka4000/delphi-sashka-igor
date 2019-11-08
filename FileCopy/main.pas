@@ -37,6 +37,63 @@ implementation
 
 {$R *.dfm}
 
+//**************************** Процедура выбора файла *****************************************
+ procedure TfrmMain.btnSelectFileClick(Sender: TObject);
+var
+  oneSList, twoSList : TStringList;
+  fString : string ;
+  soursePath, destPath : string;
+  i, j : Integer;
+begin
+ if dlgOpen1.Execute then
+   begin
+     dlgOpen1.FilterIndex := 1;
+     edtFlieName.Text  := dlgOpen1.FileName;
+     oneSList := TStringList.Create(True);
+     oneSList.LoadFromFile(edtFlieName.Text);
+     twoSList := TStringList.Create(True);
+     i := oneSList.Count;
+     j := 0;
+     while i > 0 do
+       begin
+         if oneSList.Strings[j] = '[Files]' then
+           while oneSList.Strings[j] <> '[Icons]' do
+             begin
+               twoSList.Add(oneSList.Strings[j]);
+               Inc(j);
+               Dec(i);
+             end
+         else
+           begin
+             Dec(i);
+             Inc(j);
+             Continue;
+           end;
+       end;
+//     twoSList.SaveToFile('test.txt');
+ oneSList.Clear;
+     for I := 0 to twoSList.Count -1 do
+         begin
+           j := twoSList.Strings[i].IndexOf('Source:');
+           if j = 0 then
+             oneSList.add(twoSList[i]);
+         end;
+   twoSList.Clear;
+     for i := 0 to oneSList.Count -1 do
+       begin
+       fString := oneSList[i];
+       if not((fString.IndexOf('!_shared') > -1) or (fString.IndexOf('hasp') > -1)) then
+         twoSList.add(oneSList.Strings[i]);
+       end;
+  oneSList.Clear;
+  twoSList.SaveToFile('test.txt');
+
+
+
+   end;
+end;
+//*********************************************************************************************
+
 procedure TfrmMain.btnSelectDestFolderClick(Sender: TObject);
 var
   outDirectory : string ;
@@ -48,17 +105,6 @@ begin
    end;
 end;
 
-procedure TfrmMain.btnSelectFileClick(Sender: TObject);
-var
-  inFile : string ;
-begin
- if dlgOpen1.Execute then
-   begin
-     dlgOpen1.FilterIndex := 1;
-     edtFlieName.Text  := dlgOpen1.FileName;
-
-   end;
-end;
 
 procedure TfrmMain.btnSelectSourceFolderClick(Sender: TObject);
 var
