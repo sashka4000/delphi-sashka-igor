@@ -53,7 +53,7 @@ object frmMain: TfrmMain
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 1
-    Text = 'edtFlieName'
+    Text = 'InputFile'
   end
   object btnSelectFile: TButton
     Left = 528
@@ -72,7 +72,7 @@ object frmMain: TfrmMain
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 3
-    Text = 'edt1'
+    Text = 'SourceFolder'
   end
   object btnSelectSourceFolder: TButton
     Left = 528
@@ -91,7 +91,7 @@ object frmMain: TfrmMain
     Height = 21
     Anchors = [akLeft, akTop, akRight]
     TabOrder = 5
-    Text = 'edt1'
+    Text = 'DestFolder'
   end
   object btnSelectDestFolder: TButton
     Left = 528
@@ -110,6 +110,7 @@ object frmMain: TfrmMain
     Height = 25
     Anchors = [akRight, akBottom]
     Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
+    Enabled = False
     TabOrder = 7
     OnClick = btnDoWorkClick
   end
@@ -121,6 +122,7 @@ object frmMain: TfrmMain
     Anchors = [akLeft, akTop, akRight, akBottom]
     Lines.Strings = (
       'mmo1')
+    ScrollBars = ssBoth
     TabOrder = 6
   end
   object dlgOpen1: TOpenDialog

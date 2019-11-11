@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.FileCtrl, Vcl.StdCtrls,
-   System.Contnrs, System.types, System.IOUtils, IdGlobal;
+   System.Contnrs, System.types, System.IOUtils, IdGlobal, ShellApi;
 
 type
   TfrmMain = class(TForm)
@@ -48,6 +48,7 @@ begin
    begin
      dlgOpen1.FilterIndex := 1;
      edtFlieName.Text  := dlgOpen1.FileName;
+     btnDoWork.Enabled := True;
    end;
 end;
 //*********************************************************************************************
@@ -75,26 +76,46 @@ var
   ss : TStringList;
   i : Integer;
   PathTemp,Ftemp : string;
+  PathSource, PathDest : string;
 begin
-  ss := TStringList.Create(True);
-  ss.Clear;
+  mmo1.clear;
   PathSList := TStringList.Create(True);
   PathSList.LoadFromFile(edtFlieName.Text);
-//     PathSList.SaveToFile('test.txt');
+  if (destPath = '') or (soursePath = '') then
+    ShowMessage('¬ведите все параметры')
+  else
+  begin
   for I := 0 to PathSList.Count -1 do
     begin
-      Ftemp := Copy(PathSList.Strings[i],0,7);
-      if Ftemp = 'Source' then
+      Ftemp := Copy(PathSList.Strings[i],1,7);
+      if Ftemp <> 'Source:' then
+        Continue
+      else
+         begin
+           Ftemp := PathSList.Strings[i];
+           Fetch(Ftemp,'Source: ');
+           if  (Copy(Ftemp,0,8) = '!_shared') or (Copy(Ftemp,0,4) = 'hasp') then
+             Continue
+           else
+             begin
+               PathSource := soursePath + '\' + Fetch(Ftemp,';');
+               Fetch(Ftemp,'{app}');
+               PathDest := destPath + Fetch(Ftemp,';') + '\' + ExtractFileName(PathSource);
 
+               begin
+                 if FileExists(PathSource) then
+                   begin
+                     TDirectory.CreateDirectory(ExtractFilePath (PathDest));
+                     CopyFile(PWideChar(PathSource), PWideChar(PathDest), False);
+                   end
+                 else
+                   mmo1.Lines.Add(PathSource);
+               end;
 
-{        else if Copy(PathSList.Strings[i],8,4) = 'hasp' then
-          Continue
-          else if Copy(PathSList.Strings[i],8,8) = '!_shared'  then
-            Continue
-             else if  = 'Source:' then }
-                   ss.Add(PathSList[i]);
+             end;
+         end;
     end;
-   ss.SaveToFile('test.txt');
+   end;
 end;
 
 //*********************************************************************************************
