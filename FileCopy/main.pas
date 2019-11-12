@@ -73,7 +73,6 @@ end;
 //************************ Процедура перезаписи файлов ****************************************
 procedure TfrmMain.btnDoWorkClick(Sender: TObject);
 var
-  ss : TStringList;
   i : Integer;
   PathTemp,Ftemp : string;
   PathSource, PathDest : string;
@@ -82,7 +81,6 @@ begin
   mmo1.clear;
   PathSList := TStringList.Create;
   PathSList.LoadFromFile(edtFlieName.Text);
-  ss := TStringList.Create;
   if (destPath = '') or (soursePath = '') then
     ShowMessage('Введите все параметры')
   else
@@ -91,47 +89,36 @@ begin
     begin
       Ftemp := Copy(PathSList.Strings[i],1,7);
       if Ftemp <> 'Source:' then
+        Continue ;
+      Ftemp := PathSList.Strings[i];
+      Fetch(Ftemp,'Source: ');
+      if  (Copy(Ftemp,1,8) = '!_shared') or (Copy(Ftemp,1,4) = 'hasp') then
         Continue
       else
-         begin
-           Ftemp := PathSList.Strings[i];
-           Fetch(Ftemp,'Source: ');
-           if  (Copy(Ftemp,0,8) = '!_shared') or (Copy(Ftemp,0,4) = 'hasp') then
-             Continue
-           else
-             begin
-               PathSource := soursePath + '\' + Fetch(Ftemp,';');
-               Fetch(Ftemp,'{app}');
-//               PathDest := destPath + Fetch(Ftemp,';') + '\' + ExtractFileName(PathSource);
-                 fIndex := PathSource.IndexOf('*.*');
-                 if fIndex >= 0 then
-// Попытка скопировать весь каталог помеченый как *.*, но есть и запись вида /*- ?
-                 begin
-                   PathTemp := PathSource.Remove(fIndex);
-                   if TDirectory.Exists(PathTemp) then
-                     begin
-                       PathDest := destPath + Fetch(Ftemp,';') + '\';
-                       TDirectory.Copy(PathTemp, PathDest);
-                       ss.Add(PathTemp);
-                       ss.Add(PathDest);
-                       Continue;
-                     end;
-                 end;
-// Стандартное копирование файл в файл
-                 if FileExists(PathSource) then
-                   begin
-                     PathDest := destPath + Fetch(Ftemp,';') + '\' + ExtractFileName(PathSource);
-                     TDirectory.CreateDirectory(ExtractFilePath (PathDest));
-                     CopyFile(PWideChar(PathSource), PWideChar(PathDest), False);
-                     ss.Add(PathSource);
-                     ss.Add(PathDest);
-                   end
-                 else
-                   mmo1.Lines.Add(PathSource);
-               end;
- ss.SaveToFile('test.txt');
+        begin
+          PathSource := soursePath + '\' + Fetch(Ftemp,';');
+          Fetch(Ftemp,'{app}');
+          fIndex := PathSource.IndexOf('\*');
+          if fIndex >= 0 then
+            begin
+              PathTemp := PathSource.Remove(fIndex +1);
+              if TDirectory.Exists(PathTemp) then
+                begin
+                  PathDest := destPath + Fetch(Ftemp,';') + '\';
+                  TDirectory.Copy(PathTemp, PathDest);
+                  Continue;
+                end;
+            end;
+          if FileExists(PathSource) then
+            begin
+              PathDest := destPath + Fetch(Ftemp,';') + '\' + ExtractFileName(PathSource);
+              TDirectory.CreateDirectory(ExtractFilePath (PathDest));
+              CopyFile(PWideChar(PathSource), PWideChar(PathDest), False);
+            end
+            else
+              mmo1.Lines.Add(PathSource);
+        end;
 
-         end;
     end;
    end;
 end;
