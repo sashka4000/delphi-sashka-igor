@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.FileCtrl, Vcl.StdCtrls,
-   System.Contnrs, System.types, System.IOUtils, IdGlobal, ShellApi;
+   System.Contnrs, System.types, System.IOUtils, IdGlobal;
 
 type
   TfrmMain = class(TForm)
@@ -77,10 +77,12 @@ var
   i : Integer;
   PathTemp,Ftemp : string;
   PathSource, PathDest : string;
+  fIndex : Integer;
 begin
   mmo1.clear;
-  PathSList := TStringList.Create(True);
+  PathSList := TStringList.Create;
   PathSList.LoadFromFile(edtFlieName.Text);
+  ss := TStringList.Create;
   if (destPath = '') or (soursePath = '') then
     ShowMessage('Введите все параметры')
   else
@@ -100,19 +102,35 @@ begin
              begin
                PathSource := soursePath + '\' + Fetch(Ftemp,';');
                Fetch(Ftemp,'{app}');
-               PathDest := destPath + Fetch(Ftemp,';') + '\' + ExtractFileName(PathSource);
-
-               begin
+//               PathDest := destPath + Fetch(Ftemp,';') + '\' + ExtractFileName(PathSource);
+                 fIndex := PathSource.IndexOf('*.*');
+                 if fIndex >= 0 then
+// Попытка скопировать весь каталог помеченый как *.*, но есть и запись вида /*- ?
+                 begin
+                   PathTemp := PathSource.Remove(fIndex);
+                   if TDirectory.Exists(PathTemp) then
+                     begin
+                       PathDest := destPath + Fetch(Ftemp,';') + '\';
+                       TDirectory.Copy(PathTemp, PathDest);
+                       ss.Add(PathTemp);
+                       ss.Add(PathDest);
+                       Continue;
+                     end;
+                 end;
+// Стандартное копирование файл в файл
                  if FileExists(PathSource) then
                    begin
+                     PathDest := destPath + Fetch(Ftemp,';') + '\' + ExtractFileName(PathSource);
                      TDirectory.CreateDirectory(ExtractFilePath (PathDest));
                      CopyFile(PWideChar(PathSource), PWideChar(PathDest), False);
+                     ss.Add(PathSource);
+                     ss.Add(PathDest);
                    end
                  else
                    mmo1.Lines.Add(PathSource);
                end;
+ ss.SaveToFile('test.txt');
 
-             end;
          end;
     end;
    end;
