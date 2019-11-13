@@ -28,7 +28,6 @@ type
     procedure btnDoWorkClick(Sender: TObject);
   private
     { Private declarations }
-    PathSList : TStringList;
   public
     { Public declarations }
       soursePath, destPath : string; // Пути к источнику и приёмнику файлов
@@ -72,11 +71,15 @@ end;
 
 //************************ Процедура перезаписи файлов ****************************************
 procedure TfrmMain.btnDoWorkClick(Sender: TObject);
+const
+  IgnorList : array[0..1] of string = ('!_shared','hasp');
 var
-  i : Integer;
+  PathSList : TStringList;
+  i, j : Integer;
   PathTemp,Ftemp : string;
   PathSource, PathDest : string;
   fIndex : Integer;
+  maskIgnor : Boolean;
 begin
   mmo1.clear;
   PathSList := TStringList.Create;
@@ -92,35 +95,36 @@ begin
         Continue ;
       Ftemp := PathSList.Strings[i];
       Fetch(Ftemp,'Source: ');
-      if  (Copy(Ftemp,1,8) = '!_shared') or (Copy(Ftemp,1,4) = 'hasp') then
-        Continue
-      else
+      maskIgnor := False;
+      for j := 0 to 1 do
+        if  Copy(Ftemp,1,IgnorList[j].Length) = IgnorList[j] then
+          maskIgnor := True;
+        if  maskIgnor then Continue;
+      PathSource := soursePath + '\' + Fetch(Ftemp,';');
+      Fetch(Ftemp,'{app}');
+      fIndex := PathSource.IndexOf('\*');
+      if fIndex >= 0 then
         begin
-          PathSource := soursePath + '\' + Fetch(Ftemp,';');
-          Fetch(Ftemp,'{app}');
-          fIndex := PathSource.IndexOf('\*');
-          if fIndex >= 0 then
+          PathTemp := PathSource.Remove(fIndex +1);
+          if TDirectory.Exists(PathTemp) then
             begin
-              PathTemp := PathSource.Remove(fIndex +1);
-              if TDirectory.Exists(PathTemp) then
-                begin
-                  PathDest := destPath + Fetch(Ftemp,';') + '\';
-                  TDirectory.Copy(PathTemp, PathDest);
-                  Continue;
-                end;
+              PathDest := destPath + Fetch(Ftemp,';') + '\';
+              TDirectory.Copy(PathTemp, PathDest);
+              Continue;
             end;
-          if FileExists(PathSource) then
-            begin
-              PathDest := destPath + Fetch(Ftemp,';') + '\' + ExtractFileName(PathSource);
-              TDirectory.CreateDirectory(ExtractFilePath (PathDest));
-              CopyFile(PWideChar(PathSource), PWideChar(PathDest), False);
-            end
-            else
-              mmo1.Lines.Add(PathSource);
         end;
-
+      if FileExists(PathSource) then
+        begin
+          PathDest := destPath + Fetch(Ftemp,';') + '\' + ExtractFileName(PathSource);
+          TDirectory.CreateDirectory(ExtractFilePath (PathDest));
+          CopyFile(PWideChar(PathSource), PWideChar(PathDest), False);
+          end
+        else
+          mmo1.Lines.Add(PathSource);
     end;
+  PathSList.Free;
    end;
+
 end;
 
 //*********************************************************************************************
