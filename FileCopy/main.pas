@@ -96,7 +96,7 @@ begin
       Ftemp := PathSList.Strings[i];
       Fetch(Ftemp,'Source: ');
       maskIgnor := False;
-      for j := 0 to 1 do
+      for j := 0 to Length(IgnorList)-1 do
         if  Copy(Ftemp,1,IgnorList[j].Length) = IgnorList[j] then
           maskIgnor := True;
         if  maskIgnor then Continue;
