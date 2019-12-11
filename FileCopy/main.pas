@@ -39,7 +39,7 @@ var
 implementation
 
 {$R *.dfm}
-
+//
 //**************************** Процедура выбора файла *****************************************
  procedure TfrmMain.btnSelectFileClick(Sender: TObject);
 begin
