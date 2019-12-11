@@ -68,7 +68,7 @@ var
 
 implementation
 Uses setForm, setString, setStringEx, setComboEx;
-//
+
 {$R *.dfm}
 
 //********************************

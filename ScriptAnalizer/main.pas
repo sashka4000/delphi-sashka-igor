@@ -51,7 +51,7 @@ var
   FilesArray : TStringDynArray;
 implementation
 Uses IdGlobal;
-//
+
 {$R *.dfm}
 
 const

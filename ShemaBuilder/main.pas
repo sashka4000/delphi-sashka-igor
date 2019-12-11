@@ -79,7 +79,7 @@ var
   frmMain: TfrmMain;
 implementation
 Uses System.Win.ComObj;
-//
+
 {$R *.dfm}
 
 procedure TfrmMain.btnTest1Click(Sender: TObject);
