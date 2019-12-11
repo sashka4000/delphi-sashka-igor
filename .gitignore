@@ -64,9 +64,4 @@ __recovery/
 
 # Castalia statistics file (since XE7 Castalia is distributed with Delphi)
 *.stat
-# Не работает игнорирование папок
-# Ignore folder
-#/FileCopy
-#/ScriptAnalizer
-#/ScriptMaker
-#/SchemaBuilder
+
