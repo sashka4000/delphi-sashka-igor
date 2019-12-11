@@ -1,0 +1,10 @@
+D:\SourceFolder\extensions\exttools.fx
+D:\DestFolder\SCADA\extensions\exttools.fx
+D:\SourceFolder\modules\ajournal.psm
+D:\DestFolder\A_JOURNAL\modules\ajournal.psm
+D:\SourceFolder\!unreg_opc.bat
+D:\DestFolder\OPC Server\!unreg_opc.bat
+D:\SourceFolder\extensions\topcda_drvmgr.fx
+D:\DestFolder\OPC Server\extensions\topcda_drvmgr.fx
+D:\SourceFolder\modules\conc_table_view.psm
+D:\DestFolder\OPC Server\modules\conc_table_view.psm
