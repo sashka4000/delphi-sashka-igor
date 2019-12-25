@@ -15,6 +15,9 @@
         <Projects Include="FileCopy\filecopy.dproj">
             <Dependencies/>
         </Projects>
+        <Projects Include="ShemaPrinter\shemaprint.dproj">
+            <Dependencies/>
+        </Projects>
     </ItemGroup>
     <ProjectExtensions>
         <Borland.Personality>Default.Personality.12</Borland.Personality>
@@ -59,14 +62,23 @@
     <Target Name="filecopy:Make">
         <MSBuild Projects="FileCopy\filecopy.dproj" Targets="Make"/>
     </Target>
+    <Target Name="shemaprint">
+        <MSBuild Projects="ShemaPrinter\shemaprint.dproj"/>
+    </Target>
+    <Target Name="shemaprint:Clean">
+        <MSBuild Projects="ShemaPrinter\shemaprint.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="shemaprint:Make">
+        <MSBuild Projects="ShemaPrinter\shemaprint.dproj" Targets="Make"/>
+    </Target>
     <Target Name="Build">
-        <CallTarget Targets="shema;analizer;Project1;filecopy"/>
+        <CallTarget Targets="shema;analizer;Project1;filecopy;shemaprint"/>
     </Target>
     <Target Name="Clean">
-        <CallTarget Targets="shema:Clean;analizer:Clean;Project1:Clean;filecopy:Clean"/>
+        <CallTarget Targets="shema:Clean;analizer:Clean;Project1:Clean;filecopy:Clean;shemaprint:Clean"/>
     </Target>
     <Target Name="Make">
-        <CallTarget Targets="shema:Make;analizer:Make;Project1:Make;filecopy:Make"/>
+        <CallTarget Targets="shema:Make;analizer:Make;Project1:Make;filecopy:Make;shemaprint:Make"/>
     </Target>
     <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
 </Project>
