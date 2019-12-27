@@ -56,8 +56,8 @@ object Form1: TForm1
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 43826.456025625000000000
-    ReportOptions.LastChange = 43826.627867453700000000
+    ReportOptions.CreateDate = 43826.695016412040000000
+    ReportOptions.LastChange = 43826.695016412040000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -73,7 +73,7 @@ object Form1: TForm1
       Height = 1000.000000000000000000
       Width = 1000.000000000000000000
     end
-    object ReportOne: TfrxReportPage
+    object Page1: TfrxReportPage
       PaperWidth = 210.000000000000000000
       PaperHeight = 297.000000000000000000
       PaperSize = 9
@@ -123,5 +123,24 @@ object Form1: TForm1
     AutoSize = False
     Left = 120
     Top = 248
+  end
+  object frxDBDataset1: TfrxDBDataset
+    UserName = 'frxDBDataset1'
+    CloseDataSource = False
+    BCDToCurrency = False
+    Left = 760
+    Top = 32
+  end
+  object ADOTable1: TADOTable
+    Left = 752
+    Top = 120
+  end
+  object OpenPictureDialog1: TOpenPictureDialog
+    Left = 760
+    Top = 200
+  end
+  object SavePictureDialog1: TSavePictureDialog
+    Left = 760
+    Top = 264
   end
 end
