@@ -124,7 +124,23 @@ object Form1: TForm1
     Left = 120
     Top = 248
   end
-  object FDMemTable1: TFDMemTable
+  object fdmtb1: TFDMemTable
+    Active = True
+    FieldDefs = <
+      item
+        Name = 'ID'
+        DataType = ftInteger
+      end
+      item
+        Name = 'Name'
+        DataType = ftString
+        Size = 50
+      end
+      item
+        Name = 'Image'
+        DataType = ftBlob
+      end>
+    IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvSilentMode]
@@ -132,7 +148,13 @@ object Form1: TForm1
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
     Left = 40
     Top = 320
+  end
+  object DS1: TDataSource
+    DataSet = fdmtb1
+    Left = 32
+    Top = 376
   end
 end

@@ -17,7 +17,8 @@ type
     frxrprt1: TfrxReport;
     frxpdfxprt1: TfrxPDFExport;
     frxrtfxprt1: TfrxRTFExport;
-    FDMemTable1: TFDMemTable;
+    fdmtb1: TFDMemTable;
+    DS1: TDataSource;
     procedure btn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
     function GetFileCount(Dir: string):integer;
@@ -66,9 +67,31 @@ end;
 
 
 procedure TForm1.FormCreate(Sender: TObject);
+var
+  stFileList : TStringList;
+  i : Integer;
 begin
+stFileList := TStringList.Create;
+//************ Определение пути к папке shema и вычисление количества файлов bmp *******************
   fPath := ExtractFilePath(Application.ExeName) + 'shema\';
   fCountFile := GetFileCount(fPath);
+  while fCountFile > 0 do
+  begin
+    stFileList.Clear;
+    stFileList.Add(fPath);
+    Inc(fCountFile);
+  end;
+//**************************************************************************************************
+for I := 1 to fCountFile do
+  begin
+    fdmtb1.Insert;
+    fdmtb1.Fields[0].AsInteger := i;
+    fdmtb1.fields[1].AsString := i.ToString;
+    (fdmtb1.FieldByName('IMAGE') as TBlobField).Assign(stFileList.Strings[i -1]);
+    fdmtb1.Post;
+  end;
+
+
 end;
 
 function TForm1.GetFileCount(Dir: string):integer;
