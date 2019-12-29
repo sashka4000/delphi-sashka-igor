@@ -124,23 +124,15 @@ object Form1: TForm1
     Left = 120
     Top = 248
   end
-  object frxDBDataset1: TfrxDBDataset
-    UserName = 'frxDBDataset1'
-    CloseDataSource = False
-    BCDToCurrency = False
-    Left = 760
-    Top = 32
-  end
-  object ADOTable1: TADOTable
-    Left = 752
-    Top = 120
-  end
-  object OpenPictureDialog1: TOpenPictureDialog
-    Left = 760
-    Top = 200
-  end
-  object SavePictureDialog1: TSavePictureDialog
-    Left = 760
-    Top = 264
+  object FDMemTable1: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 40
+    Top = 320
   end
 end

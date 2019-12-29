@@ -5,8 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.ExtCtrls, frxClass,
-  frxExportRTF, frxExportBaseDialog, frxExportPDF, frxDBSet, frxOLE, jpeg, Data.DB,
-  Data.Win.ADODB, Vcl.ExtDlgs;
+  frxExportRTF, frxExportBaseDialog, frxExportPDF, frxDBSet, frxOLE, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TForm1 = class(TForm)
@@ -16,10 +17,7 @@ type
     frxrprt1: TfrxReport;
     frxpdfxprt1: TfrxPDFExport;
     frxrtfxprt1: TfrxRTFExport;
-    frxDBDataset1: TfrxDBDataset;
-    ADOTable1: TADOTable;
-    OpenPictureDialog1: TOpenPictureDialog;
-    SavePictureDialog1: TSavePictureDialog;
+    FDMemTable1: TFDMemTable;
     procedure btn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
   private
@@ -66,52 +64,10 @@ end;
 
 
 procedure TForm1.FormCreate(Sender: TObject);
-var
-  jpeg: TJPEGImage;
-  bmp: TBitmap;
 begin
   fPath := ExtractFilePath(Application.ExeName) + 'shema\';
- // frxrprt1.PrepareReport();
-  if  OpenPictureDialog1.Execute then
-      begin
-        jpeg := TJPEGImage.Create;
-        bmp := TBitmap.Create;
-        try
-          jpeg.LoadFromFile(OpenPictureDialog1.FileName);
-          bmp.Assign(jpeg);
-          ADOTable1.Edit;                  // режим редактирования
-          ADOTable1.FieldByName('Foto').Assign(bmp);//загрузка фото
-          ADOTable1.Post;                  // сохраняем данные
-        finally
-          jpeg.Free;
-          bmp.Free;
-        end;
-      end;
+
 end;
 
-{
-uses jpeg;
 
-    procedure TForm1.Button1Click(Sender: TObject);
-    var
-      jpeg: TJPEGImage;
-      bmp: TBitmap;
-    begin
-      if  PictureDialog1.Execute then
-      begin
-        jpeg := TJPEGImage.Create;
-        bmp := TBitmap.Create;
-        try
-          jpeg.LoadFromFile(PictureDialog1.FileName);
-          bmp.Assign(jpeg);
-          ADOTable1.Edit;                  // режим редактирования
-          ADOTable1.FieldByName('Foto').Assign(bmp);//загрузка фото
-          ADOTable1.Post;                  // сохраняем данные
-        finally
-          jpeg.Free;
-          bmp.Free;
-        end;
-      end;
-    end;
- }
 end.
