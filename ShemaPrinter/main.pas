@@ -20,6 +20,7 @@ type
     FDMemTable1: TFDMemTable;
     procedure btn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    function GetFileCount(Dir: string):integer;
   private
     { Private declarations }
   public
@@ -29,6 +30,7 @@ type
 var
   Form1: TForm1;
   fPath : string;
+  fCountFile : Integer;
 implementation
 
 {$R *.dfm}
@@ -66,8 +68,24 @@ end;
 procedure TForm1.FormCreate(Sender: TObject);
 begin
   fPath := ExtractFilePath(Application.ExeName) + 'shema\';
-
+  fCountFile := GetFileCount(fPath);
 end;
 
+function TForm1.GetFileCount(Dir: string):integer;
+var
+  fs: TSearchRec;
+  countfile : Integer;
+begin
+    countfile:=0;
+  if FindFirst(Dir+'\*.bmp', faAnyFile - faDirectory - faVolumeID, fs) = 0
+    then
+    repeat
+      inc(countfile);
+    until
+      FindNext(fs) <> 0;
+  FindClose(fs);
+
+Result := countfile;
+end;
 
 end.
