@@ -50,8 +50,6 @@ object Form1: TForm1
   end
   object frxrprt1: TfrxReport
     Version = '6.2.1'
-    DataSet = frxDBDataset1
-    DataSetName = 'frxDBDataset1'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
@@ -59,7 +57,7 @@ object Form1: TForm1
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43829.457077442100000000
-    ReportOptions.LastChange = 43829.619619294000000000
+    ReportOptions.LastChange = 43829.932456932870000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -87,35 +85,34 @@ object Form1: TForm1
       RightMargin = 10.000000000000000000
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
-      Duplex = dmVertical
+      Columns = 2
+      ColumnWidth = 138.500000000000000000
+      ColumnPositions.Strings = (
+        '0'
+        '138,5')
       Frame.Typ = []
-      object Picture1: TfrxPictureView
-        AllowVectorExport = True
-        Left = 11.338590000000000000
-        Top = 15.118120000000000000
-        Width = 532.913730000000000000
-        Height = 695.433520000000000000
-        DataField = 'Image'
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 18.897650000000000000
+        Width = 523.464905000000100000
         DataSet = frxDBDataset1
         DataSetName = 'frxDBDataset1'
-        Frame.Typ = []
-        HightQuality = False
-        Transparent = False
-        TransparentColor = clWhite
-      end
-      object Picture2: TfrxPictureView
-        AllowVectorExport = True
-        Left = 566.929500000000000000
-        Top = 11.338590000000000000
-        Width = 472.441250000000000000
-        Height = 702.992580000000000000
-        DataField = 'Image'
-        DataSet = frxDBDataset1
-        DataSetName = 'frxDBDataset1'
-        Frame.Typ = []
-        HightQuality = False
-        Transparent = False
-        TransparentColor = clWhite
+        RowCount = 1
+        object Picture1: TfrxPictureView
+          AllowVectorExport = True
+          Top = 22.677180000000000000
+          Width = 525.354670000000000000
+          Height = 672.756340000000000000
+          DataField = 'Image'
+          DataSet = frxDBDataset1
+          DataSetName = 'frxDBDataset1'
+          Frame.Typ = []
+          HightQuality = False
+          Transparent = False
+          TransparentColor = clWhite
+        end
       end
     end
   end
@@ -187,17 +184,12 @@ object Form1: TForm1
     Left = 40
     Top = 320
   end
-  object DS1: TDataSource
-    DataSet = fdmtb1
-    Left = 32
-    Top = 376
-  end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxDBDataset1'
     CloseDataSource = False
     DataSet = fdmtb1
     BCDToCurrency = False
-    Left = 32
-    Top = 432
+    Left = 104
+    Top = 320
   end
 end

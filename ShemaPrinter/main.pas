@@ -19,7 +19,6 @@ type
     frxpdfxprt1: TfrxPDFExport;
     frxrtfxprt1: TfrxRTFExport;
     fdmtb1: TFDMemTable;
-    DS1: TDataSource;
     frxDBDataset1: TfrxDBDataset;
     procedure btn1Click(Sender: TObject);
     procedure FormCreate(Sender: TObject);
@@ -33,19 +32,32 @@ var
   Form1: TForm1;
   fPath: string;
   sFileRec: TSearchRec;
-
+  stFileList: TStringList;
 implementation
 
 {$R *.dfm}
 
 procedure TForm1.btn1Click(Sender: TObject);
+var
+  i : Integer;
 begin
-  frxrprt1.LoadFromFile(ExtractFilePath(Application.ExeName) + 'big.fr3');
+  frxrprt1.LoadFromFile(ExtractFilePath(Application.ExeName) + 'ReportBig.fr3');
   if rg2.ItemIndex = 1 then
   begin
-//    fOneList := False;
-  frxrprt1.LoadFromFile(ExtractFilePath(Application.ExeName) + 'small.fr3');
+  frxrprt1.LoadFromFile(ExtractFilePath(Application.ExeName) + 'ReportSmall.fr3');
   end;
+//**************************************************************************************************
+  for i := 1 to stFileList.Count do
+  begin
+    fdmtb1.Insert;
+    fdmtb1.Fields[0].AsInteger := i;
+    fdmtb1.fields[1].AsString := stFileList.Strings[i - 1];
+    (fdmtb1.FieldByName('IMAGE') as TBlobField).LoadFromFile(stFileList.Strings[i - 1]);
+    fdmtb1.Post;
+  end;
+//   self.frxrprt1.PrepareReport();
+stFileList.Free;
+//**************************************************************************************************
   if rg1.ItemIndex = 2 then
   begin
     frxrprt1.ShowReport();
@@ -70,11 +82,10 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 var
-  stFileList: TStringList;
+//  stFileList: TStringList;
   i, fMask: Integer;
 begin
   stFileList := TStringList.Create;
-//************ Определение пути к папке shema и вычисление количества файлов bmp *******************
   fPath := ExtractFilePath(Application.ExeName) + 'shema\';
     fMask := FindFirst(fPath + '*.bmp',faAnyFile, sFileRec);
     if fMask = 0 then
@@ -84,7 +95,7 @@ begin
         while 0 = FindNext(sFileRec) do
           stFileList.add('shema\' + sFileRec.Name);
       end;
-
+ {
 
 //**************************************************************************************************
   for i := 1 to stFileList.Count do
@@ -95,7 +106,7 @@ begin
     (fdmtb1.FieldByName('IMAGE') as TBlobField).LoadFromFile(stFileList.Strings[i - 1]);
     fdmtb1.Post;
   end;
-stFileList.Free;
+stFileList.Free; }
 end;
 end.
 
