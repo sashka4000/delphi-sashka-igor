@@ -48,16 +48,18 @@ object Form1: TForm1
     TabOrder = 2
     OnClick = btn1Click
   end
-  object frxrprt1: TfrxReport
+  object frxrprtBig: TfrxReport
     Version = '6.2.1'
+    DataSet = frxDBDataset1
+    DataSetName = 'frxDBDataset1'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
     PreviewOptions.Zoom = 1.000000000000000000
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
-    ReportOptions.CreateDate = 43826.695016412040000000
-    ReportOptions.LastChange = 43826.695016412040000000
+    ReportOptions.CreateDate = 43826.695016412000000000
+    ReportOptions.LastChange = 43829.455152314820000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -66,7 +68,11 @@ object Form1: TForm1
       'end.')
     Left = 232
     Top = 248
-    Datasets = <>
+    Datasets = <
+      item
+        DataSet = frxDBDataset1
+        DataSetName = 'frxDBDataset1'
+      end>
     Variables = <>
     Style = <>
     object Data: TfrxDataPage
@@ -82,6 +88,54 @@ object Form1: TForm1
       TopMargin = 10.000000000000000000
       BottomMargin = 10.000000000000000000
       Frame.Typ = []
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 18.897650000000000000
+        Width = 718.110700000000000000
+        object frxDBDataset1ID: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Top = 3.779530000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'ID'
+          DataSet = frxDBDataset1
+          DataSetName = 'frxDBDataset1'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDBDataset1."ID"]')
+        end
+        object frxDBDataset1Name: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 313.700990000000000000
+          Top = 3.779530000000000000
+          Width = 400.630180000000000000
+          Height = 18.897650000000000000
+          DataField = 'Name'
+          DataSet = frxDBDataset1
+          DataSetName = 'frxDBDataset1'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDBDataset1."Name"]')
+        end
+      end
+      object Picture1: TfrxPictureView
+        AllowVectorExport = True
+        Top = 52.913420000000000000
+        Width = 718.110700000000000000
+        Height = 986.457330000000000000
+        DataField = 'Image'
+        DataSet = frxDBDataset1
+        DataSetName = 'frxDBDataset1'
+        Frame.Typ = []
+        HightQuality = False
+        Transparent = False
+        TransparentColor = clWhite
+      end
     end
   end
   object frxpdfxprt1: TfrxPDFExport
@@ -156,5 +210,143 @@ object Form1: TForm1
     DataSet = fdmtb1
     Left = 32
     Top = 376
+  end
+  object frxDBDataset1: TfrxDBDataset
+    UserName = 'frxDBDataset1'
+    CloseDataSource = False
+    DataSet = fdmtb1
+    BCDToCurrency = False
+    Left = 32
+    Top = 432
+  end
+  object frxrprtSmall: TfrxReport
+    Version = '6.2.1'
+    DataSet = frxDBDataset1
+    DataSetName = 'frxDBDataset1'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 43829.457077442100000000
+    ReportOptions.LastChange = 43829.460148263890000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 296
+    Top = 248
+    Datasets = <
+      item
+        DataSet = frxDBDataset1
+        DataSetName = 'frxDBDataset1'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      Orientation = poLandscape
+      PaperWidth = 297.000000000000000000
+      PaperHeight = 210.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Frame.Typ = []
+      object ReportTitle1: TfrxReportTitle
+        FillType = ftBrush
+        Frame.Typ = []
+        Height = 22.677180000000000000
+        Top = 18.897650000000000000
+        Width = 1046.929810000000000000
+        object frxDBDataset1ID: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Top = 3.779530000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'ID'
+          DataSet = frxDBDataset1
+          DataSetName = 'frxDBDataset1'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDBDataset1."ID"]')
+        end
+        object frxDBDataset1Name: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 90.708720000000000000
+          Width = 400.630180000000000000
+          Height = 18.897650000000000000
+          DataField = 'Name'
+          DataSet = frxDBDataset1
+          DataSetName = 'frxDBDataset1'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDBDataset1."Name"]')
+        end
+        object frxDBDataset1ID1: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 536.693260000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'ID'
+          DataSet = frxDBDataset1
+          DataSetName = 'frxDBDataset1'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDBDataset1."ID"]')
+        end
+        object frxDBDataset1Name1: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 623.622450000000000000
+          Width = 400.630180000000000000
+          Height = 18.897650000000000000
+          DataField = 'Name'
+          DataSet = frxDBDataset1
+          DataSetName = 'frxDBDataset1'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDBDataset1."Name"]')
+        end
+        object frxDBDataset1Image: TfrxMemoView
+          IndexTag = 1
+          AllowVectorExport = True
+          Left = 3.779530000000000000
+          Top = 22.677180000000000000
+          Width = 529.134200000000000000
+          Height = 665.197280000000000000
+          DataField = 'Image'
+          DataSet = frxDBDataset1
+          DataSetName = 'frxDBDataset1'
+          Frame.Typ = []
+          Memo.UTF8W = (
+            '[frxDBDataset1."Image"]')
+        end
+      end
+      object frxDBDataset1Image1: TfrxMemoView
+        IndexTag = 1
+        AllowVectorExport = True
+        Left = 536.693260000000000000
+        Top = 45.354360000000000000
+        Width = 529.134200000000000000
+        Height = 661.417750000000000000
+        DataField = 'Image'
+        DataSet = frxDBDataset1
+        DataSetName = 'frxDBDataset1'
+        Frame.Typ = []
+        Memo.UTF8W = (
+          '[frxDBDataset1."Image"]')
+      end
+    end
   end
 end
