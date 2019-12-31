@@ -48,7 +48,7 @@ object Form1: TForm1
     TabOrder = 2
     OnClick = btn1Click
   end
-  object frxrprt1: TfrxReport
+  object frxrprtSmall: TfrxReport
     Version = '6.2.1'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
@@ -57,7 +57,7 @@ object Form1: TForm1
     PrintOptions.Printer = 'Default'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 43829.457077442100000000
-    ReportOptions.LastChange = 43829.932456932870000000
+    ReportOptions.LastChange = 43829.932456932900000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -89,22 +89,23 @@ object Form1: TForm1
       ColumnWidth = 138.500000000000000000
       ColumnPositions.Strings = (
         '0'
-        '138,5')
+        '138,50')
       Frame.Typ = []
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Frame.Typ = []
-        Height = 22.677180000000000000
+        Height = 661.417750000000000000
         Top = 18.897650000000000000
-        Width = 523.464905000000100000
+        Width = 523.464905000000000000
         DataSet = frxDBDataset1
         DataSetName = 'frxDBDataset1'
-        RowCount = 1
+        RowCount = 0
         object Picture1: TfrxPictureView
           AllowVectorExport = True
+          Left = 15.118120000000000000
           Top = 22.677180000000000000
-          Width = 525.354670000000000000
-          Height = 672.756340000000000000
+          Width = 483.779840000000000000
+          Height = 544.252320000000000000
           DataField = 'Image'
           DataSet = frxDBDataset1
           DataSetName = 'frxDBDataset1'
@@ -183,13 +184,82 @@ object Form1: TForm1
     StoreDefs = True
     Left = 40
     Top = 320
+    object intgrfldfdmtb1ID: TIntegerField
+      FieldName = 'ID'
+    end
+    object strngfldfdmtb1Name: TStringField
+      FieldName = 'Name'
+      Size = 50
+    end
+    object blbfldfdmtb1Image: TBlobField
+      FieldName = 'Image'
+    end
   end
   object frxDBDataset1: TfrxDBDataset
     UserName = 'frxDBDataset1'
     CloseDataSource = False
     DataSet = fdmtb1
     BCDToCurrency = False
-    Left = 104
+    Left = 120
     Top = 320
+  end
+  object frxrprtBig: TfrxReport
+    Version = '6.2.1'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick, pbCopy, pbSelection]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Default'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 43829.457077442100000000
+    ReportOptions.LastChange = 43829.932456932900000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      ''
+      'end.')
+    Left = 336
+    Top = 248
+    Datasets = <
+      item
+        DataSet = frxDBDataset1
+        DataSetName = 'frxDBDataset1'
+      end>
+    Variables = <>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 210.000000000000000000
+      PaperHeight = 297.000000000000000000
+      PaperSize = 9
+      LeftMargin = 10.000000000000000000
+      RightMargin = 10.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      Columns = 1
+      ColumnWidth = 277.000000000000000000
+      ColumnPositions.Strings = (
+        '0')
+      DataSet = frxDBDataset1
+      DataSetName = 'frxDBDataset1'
+      Frame.Typ = []
+      object Picture1: TfrxPictureView
+        AllowVectorExport = True
+        Left = 109.606370000000000000
+        Top = 113.385900000000000000
+        Width = 483.779840000000000000
+        Height = 544.252320000000100000
+        DataField = 'Image'
+        DataSet = frxDBDataset1
+        DataSetName = 'frxDBDataset1'
+        Frame.Typ = []
+        HightQuality = False
+        Transparent = False
+        TransparentColor = clWhite
+      end
+    end
   end
 end
