@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Visible = True
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -104,8 +105,8 @@ object Form1: TForm1
           AllowVectorExport = True
           Left = 15.118120000000000000
           Top = 22.677180000000000000
-          Width = 483.779840000000000000
-          Height = 544.252320000000000000
+          Width = 491.338900000000000000
+          Height = 623.622450000000000000
           DataField = 'Image'
           DataSet = frxDBDataset1
           DataSetName = 'frxDBDataset1'
@@ -248,10 +249,10 @@ object Form1: TForm1
       Frame.Typ = []
       object Picture1: TfrxPictureView
         AllowVectorExport = True
-        Left = 109.606370000000000000
-        Top = 113.385900000000000000
-        Width = 483.779840000000000000
-        Height = 544.252320000000100000
+        Left = 7.559060000000000000
+        Top = 15.118120000000000000
+        Width = 714.331170000000000000
+        Height = 1016.693570000000000000
         DataField = 'Image'
         DataSet = frxDBDataset1
         DataSetName = 'frxDBDataset1'
