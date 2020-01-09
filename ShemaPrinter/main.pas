@@ -55,14 +55,14 @@ begin
 
   if rg1.ItemIndex = 2 then
   begin
-    Report.ShowReport();
+//    Report.ShowReport();
     frxpdfxprt1.FileName := 'allShemas.pdf';
     frxpdfxprt1.ShowDialog := true;
     Report.Export(frxpdfxprt1);
   end
   else if rg1.ItemIndex = 1 then
   begin
-    Report.ShowReport();
+//   Report.ShowReport();
     frxrtfxprt1.FileName := 'allShemas.rtf';
     frxrtfxprt1.ShowDialog := true;
     Report.Export(frxrtfxprt1);
@@ -78,12 +78,14 @@ end;
 
 procedure TForm1.FormCreate(Sender: TObject);
 var
-  sFileRec: TSearchRec;
-  fPath: string;
-  stFileList: TStringList;
-  i, fMask: Integer;
+//  sFileRec: TSearchRec;
+//  fPath: string;
+//  stFileList: TStringList;
+  Files : TStringDynArray;
+  i: Integer;
+//  fMask : Integer;
 begin
-  stFileList := TStringList.Create;
+ { stFileList := TStringList.Create;
 
   fPath := ExtractFilePath(Application.ExeName) + 'shema\';
   fMask := FindFirst(fPath + '*.bmp',faAnyFile, sFileRec);
@@ -94,17 +96,17 @@ begin
         while 0 = FindNext(sFileRec) do
           stFileList.add('shema\' + sFileRec.Name);
       end;
-   FindClose(sFileRec);
-{
+   FindClose(sFileRec); }
+
   // Вообще эту конструкцию уже редко кто использует
   //  обрати внимание на
   //   var
   //   Files : TStringDynArray;
   //   ...
-  //   Files :=  TDirectory.GetFiles( ExtractFilePath(Application.ExeName) + 'shema\','*.bmp');
- }
+  Files :=  TDirectory.GetFiles( ExtractFilePath(Application.ExeName) + 'shema\','*.bmp');
 
-   for i := 0 to stFileList.Count-1 do
+
+ {  for i := 0 to stFileList.Count-1 do
   begin
     fdmtb1.Insert;
     fdmtb1.Fields[0].AsInteger := i;
@@ -112,7 +114,16 @@ begin
     (fdmtb1.FieldByName('IMAGE') as TBlobField).LoadFromFile(stFileList.Strings[i]);
     fdmtb1.Post;
   end;
-  stFileList.Free;
+  stFileList.Free;}
+  for I := 0 to Length(Files) - 1 do
+    begin
+    fdmtb1.Insert;
+    fdmtb1.Fields[0].AsInteger := i;
+    fdmtb1.fields[1].AsString := Files[i];
+    (fdmtb1.FieldByName('IMAGE') as TBlobField).LoadFromFile(Files[i]);
+    fdmtb1.Post;
+    end;
+
 end;
 end.
 
