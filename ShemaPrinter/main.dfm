@@ -1,9 +1,11 @@
 object Form1: TForm1
   Left = 0
   Top = 0
-  Caption = 'Form1'
-  ClientHeight = 505
-  ClientWidth = 824
+  BorderIcons = [biSystemMenu]
+  BorderStyle = bsSingle
+  Caption = #1054#1090#1095#1105#1090
+  ClientHeight = 276
+  ClientWidth = 191
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -11,6 +13,7 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   Visible = True
   OnCreate = FormCreate
   PixelsPerInch = 96
@@ -18,7 +21,7 @@ object Form1: TForm1
   object rg1: TRadioGroup
     Left = 8
     Top = 8
-    Width = 577
+    Width = 105
     Height = 105
     Caption = #1050#1072#1082' '#1085#1072#1087#1077#1095#1072#1090#1072#1090#1100
     ItemIndex = 0
@@ -31,7 +34,7 @@ object Form1: TForm1
   object rg2: TRadioGroup
     Left = 8
     Top = 119
-    Width = 577
+    Width = 161
     Height = 105
     Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099' '#1087#1077#1095#1072#1090#1080
     ItemIndex = 0
@@ -41,11 +44,11 @@ object Form1: TForm1
     TabOrder = 1
   end
   object btn1: TButton
-    Left = 510
-    Top = 248
+    Left = 70
+    Top = 240
     Width = 75
     Height = 25
-    Caption = 'btn1'
+    Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
     TabOrder = 2
     OnClick = btn1Click
   end
@@ -64,8 +67,8 @@ object Form1: TForm1
       'begin'
       ''
       'end.')
-    Left = 232
-    Top = 248
+    Left = 120
+    Top = 48
     Datasets = <
       item
         DataSet = frxDBDataset1
@@ -103,10 +106,10 @@ object Form1: TForm1
         RowCount = 0
         object Picture1: TfrxPictureView
           AllowVectorExport = True
-          Left = 15.118120000000000000
-          Top = 22.677180000000000000
-          Width = 491.338900000000000000
-          Height = 623.622450000000000000
+          Left = 22.677180000000000000
+          Top = 49.133890000000000000
+          Width = 464.882190000000000000
+          Height = 548.031850000000000000
           DataField = 'Image'
           DataSet = frxDBDataset1
           DataSetName = 'frxDBDataset1'
@@ -140,8 +143,8 @@ object Form1: TForm1
     CenterWindow = False
     PrintScaling = False
     PdfA = False
-    Left = 48
-    Top = 248
+    Left = 16
+    Top = 232
   end
   object frxrtfxprt1: TfrxRTFExport
     UseFileCache = True
@@ -155,8 +158,8 @@ object Form1: TForm1
     SuppressPageHeadersFooters = False
     HeaderFooterMode = hfText
     AutoSize = False
-    Left = 120
-    Top = 248
+    Left = 56
+    Top = 232
   end
   object fdmtb1: TFDMemTable
     Active = True
@@ -183,8 +186,8 @@ object Form1: TForm1
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 40
-    Top = 320
+    Left = 152
+    Top = 16
     object intgrfldfdmtb1ID: TIntegerField
       FieldName = 'ID'
     end
@@ -202,7 +205,7 @@ object Form1: TForm1
     DataSet = fdmtb1
     BCDToCurrency = False
     Left = 120
-    Top = 320
+    Top = 96
   end
   object frxrprtBig: TfrxReport
     Version = '6.2.1'
@@ -219,8 +222,8 @@ object Form1: TForm1
       'begin'
       ''
       'end.')
-    Left = 336
-    Top = 248
+    Left = 120
+    Top = 8
     Datasets = <
       item
         DataSet = frxDBDataset1
@@ -249,10 +252,10 @@ object Form1: TForm1
       Frame.Typ = []
       object Picture1: TfrxPictureView
         AllowVectorExport = True
-        Left = 7.559060000000000000
-        Top = 15.118120000000000000
-        Width = 714.331170000000000000
-        Height = 1016.693570000000000000
+        Left = 52.913420000000000000
+        Top = 94.488250000000000000
+        Width = 597.165740000000000000
+        Height = 842.835190000000000000
         DataField = 'Image'
         DataSet = frxDBDataset1
         DataSetName = 'frxDBDataset1'
