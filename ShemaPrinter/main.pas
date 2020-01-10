@@ -26,7 +26,7 @@ type
     blbfldfdmtb1Image: TBlobField;
     frxrprtBig: TfrxReport;
     procedure btn1Click(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
+//    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -35,19 +35,48 @@ type
 
 var
   Form1: TForm1;
+
 implementation
-Uses System.IOUtils, System.Types;
+
+uses
+  System.IOUtils, System.Types;
 
 {$R *.dfm}
 
 procedure TForm1.btn1Click(Sender: TObject);
 var
-  Report : TfrxReport;
+  Report: TfrxReport;
+  Files: TStringDynArray;
+  i: Integer;
 begin
+//****************************************************************************************
+  while (fdmtb1.RecordCount > 0) do
+    fdmtb1.Delete;
+  if TDirectory.Exists(ExtractFilePath(Application.ExeName) + 'shema\') then
+  begin
+    Files := TDirectory.GetFiles(ExtractFilePath(Application.ExeName) + 'shema\', '*.bmp');
+    for i := 0 to Length(Files) - 1 do
+    begin
+      fdmtb1.Insert;
+      fdmtb1.Fields[0].AsInteger := i;
+      fdmtb1.fields[1].AsString := Files[i];
+      (fdmtb1.FieldByName('IMAGE') as TBlobField).LoadFromFile(Files[i]);
+      fdmtb1.Post;
+    end;
+  end
+  else
+  begin
+    ShowMessage('Папка \Shema не найдена!');
+    Exit;
+  end;
+
+
+//****************************************************************************************
+
   if fdmtb1.RecordCount = 0 then
   begin
     ShowMessage('Не найдено ни одной схемы в папке \Shema');
-    Form1.Close;
+    Exit;
   end
   else
   begin
@@ -78,36 +107,13 @@ begin
     end
     else
     begin
-      Report.PrepareReport();
+//      Report.PrepareReport();
+      Report.ShowReport();
       Report.Print;
     end;
   end;
 
 end;
 
-
-procedure TForm1.FormCreate(Sender: TObject);
-var
-  Files : TStringDynArray;
-  i: Integer;
-begin
-if TDirectory.Exists(ExtractFilePath(Application.ExeName) + 'shema\') then
-begin
-  Files :=  TDirectory.GetFiles( ExtractFilePath(Application.ExeName) + 'shema\','*.bmp');
-  for I := 0 to Length(Files) - 1 do
-    begin
-    fdmtb1.Insert;
-    fdmtb1.Fields[0].AsInteger := i;
-    fdmtb1.fields[1].AsString := Files[i];
-    (fdmtb1.FieldByName('IMAGE') as TBlobField).LoadFromFile(Files[i]);
-    fdmtb1.Post;
-    end;
-end;
-{else
-begin
-  ShowMessage('Папка Shema не обнаружена');
-end;}
-
-end;
 end.
 
