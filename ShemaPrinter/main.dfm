@@ -5,7 +5,7 @@ object Form1: TForm1
   BorderStyle = bsSingle
   Caption = #1054#1090#1095#1105#1090
   ClientHeight = 255
-  ClientWidth = 162
+  ClientWidth = 174
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,9 +18,9 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object rg1: TRadioGroup
-    Left = 8
+    Left = 13
     Top = 8
-    Width = 105
+    Width = 148
     Height = 105
     Caption = #1050#1072#1082' '#1085#1072#1087#1077#1095#1072#1090#1072#1090#1100
     ItemIndex = 0
@@ -31,9 +31,9 @@ object Form1: TForm1
     TabOrder = 0
   end
   object rg2: TRadioGroup
-    Left = 8
+    Left = 13
     Top = 119
-    Width = 145
+    Width = 148
     Height = 105
     Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099' '#1087#1077#1095#1072#1090#1080
     ItemIndex = 0
@@ -43,9 +43,9 @@ object Form1: TForm1
     TabOrder = 1
   end
   object btn1: TButton
-    Left = 46
-    Top = 225
-    Width = 75
+    Left = 47
+    Top = 226
+    Width = 80
     Height = 25
     Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
     TabOrder = 2
@@ -66,8 +66,8 @@ object Form1: TForm1
       'begin'
       ''
       'end.')
-    Left = 120
-    Top = 48
+    Left = 57
+    Top = 56
     Datasets = <
       item
         DataSet = frxDBDataset1
@@ -142,8 +142,8 @@ object Form1: TForm1
     CenterWindow = False
     PrintScaling = False
     PdfA = False
-    Left = 16
-    Top = 232
+    Left = 25
+    Top = 160
   end
   object frxrtfxprt1: TfrxRTFExport
     UseFileCache = True
@@ -157,8 +157,8 @@ object Form1: TForm1
     SuppressPageHeadersFooters = False
     HeaderFooterMode = hfText
     AutoSize = False
-    Left = 56
-    Top = 232
+    Left = 65
+    Top = 160
   end
   object fdmtb1: TFDMemTable
     Active = True
@@ -185,8 +185,8 @@ object Form1: TForm1
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     StoreDefs = True
-    Left = 152
-    Top = 16
+    Left = 81
+    Top = 24
     object intgrfldfdmtb1ID: TIntegerField
       FieldName = 'ID'
     end
@@ -203,8 +203,8 @@ object Form1: TForm1
     CloseDataSource = False
     DataSet = fdmtb1
     BCDToCurrency = False
-    Left = 120
-    Top = 96
+    Left = 97
+    Top = 72
   end
   object frxrprtBig: TfrxReport
     Version = '6.2.1'
@@ -221,8 +221,8 @@ object Form1: TForm1
       'begin'
       ''
       'end.')
-    Left = 120
-    Top = 8
+    Left = 33
+    Top = 24
     Datasets = <
       item
         DataSet = frxDBDataset1
