@@ -26,7 +26,6 @@ type
     blbfldfdmtb1Image: TBlobField;
     frxrprtBig: TfrxReport;
     procedure btn1Click(Sender: TObject);
-//    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,7 +48,6 @@ var
   Files: TStringDynArray;
   i: Integer;
 begin
-//****************************************************************************************
   while (fdmtb1.RecordCount > 0) do
     fdmtb1.Delete;
   if TDirectory.Exists(ExtractFilePath(Application.ExeName) + 'shema\') then
@@ -70,9 +68,6 @@ begin
     Exit;
   end;
 
-
-//****************************************************************************************
-
   if fdmtb1.RecordCount = 0 then
   begin
     ShowMessage('Не найдено ни одной схемы в папке \Shema');
@@ -80,10 +75,7 @@ begin
   end
   else
   begin
-   // Это довольно типовое решение - когда надо выбрать
-   // одного из потомков класса для дальнейшей работы
-   // Оба нащих отчета занаследованы от TfrxReport
-   // поэтому можно написать так ....  и работать дальше с объектом Report
+
     case rg2.ItemIndex of
       0:
         Report := frxrprtBig;        // Report - просто ссылка на большой отчет
@@ -107,8 +99,7 @@ begin
     end
     else
     begin
-//      Report.PrepareReport();
-      Report.ShowReport();
+      Report.PrepareReport();
       Report.Print;
     end;
   end;

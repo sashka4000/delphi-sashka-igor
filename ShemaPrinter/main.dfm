@@ -4,8 +4,8 @@ object Form1: TForm1
   BorderIcons = [biSystemMenu]
   BorderStyle = bsSingle
   Caption = #1054#1090#1095#1105#1090
-  ClientHeight = 276
-  ClientWidth = 191
+  ClientHeight = 255
+  ClientWidth = 162
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -33,7 +33,7 @@ object Form1: TForm1
   object rg2: TRadioGroup
     Left = 8
     Top = 119
-    Width = 161
+    Width = 145
     Height = 105
     Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099' '#1087#1077#1095#1072#1090#1080
     ItemIndex = 0
@@ -43,8 +43,8 @@ object Form1: TForm1
     TabOrder = 1
   end
   object btn1: TButton
-    Left = 70
-    Top = 240
+    Left = 46
+    Top = 225
     Width = 75
     Height = 25
     Caption = #1042#1099#1087#1086#1083#1085#1080#1090#1100
@@ -105,10 +105,10 @@ object Form1: TForm1
         RowCount = 0
         object Picture1: TfrxPictureView
           AllowVectorExport = True
-          Left = 22.677180000000000000
-          Top = 49.133890000000000000
-          Width = 464.882190000000000000
-          Height = 548.031850000000000000
+          Left = 37.795300000000000000
+          Top = 30.236240000000000000
+          Width = 449.764070000000000000
+          Height = 574.488560000000000000
           DataField = 'Image'
           DataSet = frxDBDataset1
           DataSetName = 'frxDBDataset1'
