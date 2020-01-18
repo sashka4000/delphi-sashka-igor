@@ -30,5 +30,7 @@ var
 implementation
 
 {$R *.dfm}
-
+ function fSQRT(i : Integer): Real; stdcall; external 'ProjectDll.dll';
+ function fCompare(i : Integer): Integer; stdcall; external 'ProjectDll.dll';
+ function fRevers(fChar : PChar): PChar; stdcall; external 'ProjectDll.dll';
 end.
