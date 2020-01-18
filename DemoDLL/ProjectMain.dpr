@@ -2,7 +2,7 @@ program ProjectMain;
 
 uses
   Vcl.Forms,
-  maindyn in 'maindyn.pas' {Form1};
+  main in 'main.pas' {Form1};
 
 {$R *.res}
 

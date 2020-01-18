@@ -18,7 +18,7 @@ object Form1: TForm1
     Top = 24
     Width = 114
     Height = 25
-    Caption = 'X*X'
+    Caption = 'SQRT(x)'
     TabOrder = 0
   end
   object edtX: TEdit
