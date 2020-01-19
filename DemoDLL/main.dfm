@@ -11,6 +11,7 @@ object Form1: TForm1
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   object btnXX: TButton
@@ -20,6 +21,7 @@ object Form1: TForm1
     Height = 25
     Caption = 'SQRT(x)'
     TabOrder = 0
+    OnClick = btnXXClick
   end
   object edtX: TEdit
     Left = 24
@@ -44,6 +46,7 @@ object Form1: TForm1
     Height = 25
     Caption = #1063#1090#1086' '#1073#1086#1083#1100#1096#1077
     TabOrder = 5
+    OnClick = btnBigSmallClick
   end
   object edtA: TEdit
     Left = 24
@@ -76,6 +79,7 @@ object Form1: TForm1
     Height = 25
     Caption = #1056#1077#1074#1077#1088#1089' '#1089#1090#1088#1086#1082#1080
     TabOrder = 8
+    OnClick = btn1Click
   end
   object edtStrNormal: TEdit
     Left = 24
