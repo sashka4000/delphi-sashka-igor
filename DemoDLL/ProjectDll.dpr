@@ -23,18 +23,14 @@ end;
 
 function fRevers(fChar: PWideChar): PWideChar; stdcall;
 var
-  farray: array of string;
-  fs: string;
+  fs, fs2 : string;
   i: Integer;
 begin
   fs := fChar;
-  SetLength(farray, Length(fs));
-  for i := 1 to Length(fs) do
-    farray[i - 1] := fs[i];
-  fs := '';
-  for i := Length(farray) - 1 downto 0 do
-    fs := fs + farray[i];
-  Result := PWideChar(fs);
+  fs2 := '';
+  for I := Length(fs) downto 1 do
+    fs2 := fs2 + fs[i];
+  fRevers := PWidechar(fs2);
 end;
 
 exports
