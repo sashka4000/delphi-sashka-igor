@@ -45,6 +45,7 @@ var
   fRevers  : function (fChar: PWideChar): PWideChar; stdcall;
 procedure TForm1.btn1Click(Sender: TObject);
 begin
+if H = 0 then
 H := LoadLibrary('ProjectDll.dll');
 if H <> 0 then
 begin
@@ -58,6 +59,7 @@ end;
 
 procedure TForm1.btnBigSmallClick(Sender: TObject);
 begin
+if H = 0 then
 H := LoadLibrary('ProjectDll.dll');
 if H <> 0 then
 begin
@@ -70,6 +72,7 @@ end;
 
 procedure TForm1.btnXXClick(Sender: TObject);
 begin
+if H = 0 then
 H := LoadLibrary('ProjectDll.dll');
 if H <> 0 then
 begin
@@ -83,7 +86,7 @@ end;
 
 procedure TForm1.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
- while FreeLibrary(H) do
+ FreeLibrary(H)
 end;
 
 procedure TForm1.FormCreate(Sender: TObject);
