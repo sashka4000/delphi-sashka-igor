@@ -43,7 +43,7 @@ function fRevers(fChar: PWideChar): PWideChar; stdcall; external 'ProjectDll.dll
 
 procedure TForm1.btn1Click(Sender: TObject);
 begin
-  edtReverse.Text := fRevers(PWideChar(edtStrNormal.Text));
+  edtReverse.Text := fRevers(PWideChar(edtStrNormal.Text)) ;
 end;
 
 procedure TForm1.btnBigSmallClick(Sender: TObject);
