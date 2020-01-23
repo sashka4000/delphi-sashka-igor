@@ -1,0 +1,674 @@
+WEB_unigui_test.exe: 00000EAC: 08:46:02 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000EAC: 08:46:02 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000EAC: 08:46:02 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00000EAC: 08:46:02 [TUniServerModule]:Global Cache Folder Erased. <3> Files deleted.
+WEB_unigui_test.exe: 00000EAC: 08:46:03 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000EAC: 08:46:03 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 0000130C: 08:49:40 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 0000130C: 08:49:40 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 0000130C: 08:49:40 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 0000130C: 08:49:40 [TUniServerModule]:Global Cache Folder Erased. <3> Files deleted.
+WEB_unigui_test.exe: 0000130C: 08:49:40 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 0000130C: 08:49:40 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000012E4: 08:50:52 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000012E4: 08:50:52 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000012E4: 08:50:52 [TUniServerModule]:Global Cache Folder Erased. <4> Files deleted.
+WEB_unigui_test.exe: 000012E4: 08:50:52 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000012E4: 08:50:52 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000012E4: 08:56:23 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 000012E4: 08:56:23 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 000012E4: 08:56:24 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 000012E4: 08:56:24 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 000012E4: 08:56:24 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 000012E4: 08:56:24 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 000012E4: 08:56:24 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 000012E4: 08:56:24 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 000012E4: 08:56:24 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 000012E4: 08:56:24 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 000012E4: 08:56:24 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00000EAC: 08:56:45 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000EAC: 08:56:45 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000EAC: 08:56:45 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00000EAC: 08:56:45 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000EAC: 08:56:45 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000EAC: 08:57:31 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00000EAC: 08:57:31 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00000EAC: 08:57:32 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00000EAC: 08:57:32 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00000EAC: 08:57:32 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00000EAC: 08:57:32 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00000EAC: 08:57:32 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00000EAC: 08:57:32 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00000EAC: 08:57:32 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00000EAC: 08:57:32 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00000EAC: 08:57:32 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00001340: 08:58:05 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001340: 08:58:05 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001340: 08:58:05 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001340: 08:58:05 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001340: 08:58:45 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00001340: 08:58:45 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00001340: 08:58:46 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00001340: 08:58:46 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00001340: 08:58:46 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00001340: 08:58:46 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00001340: 08:58:46 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00001340: 08:58:46 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00001340: 08:58:46 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00001340: 08:58:46 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00001340: 08:58:46 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00000988: 08:59:36 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000988: 08:59:36 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000988: 08:59:36 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00000988: 08:59:36 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000988: 08:59:36 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000988: 09:00:33 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00000988: 09:00:33 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00000E90: 09:00:58 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000E90: 09:00:58 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000E90: 09:00:58 [TUniServerModule]:Global Cache Folder Erased. <4> Files deleted.
+WEB_unigui_test.exe: 00000E90: 09:00:58 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000E90: 09:00:58 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000E90: 09:02:02 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00000E90: 09:02:02 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00000E90: 09:02:03 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00000E90: 09:02:03 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00000E90: 09:02:03 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00000E90: 09:02:03 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00000E90: 09:02:03 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00000E90: 09:02:03 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00000E90: 09:02:03 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00000E90: 09:02:03 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00000E90: 09:02:03 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00001304: 09:02:40 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001304: 09:02:40 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001304: 09:02:40 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001304: 09:02:40 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001304: 09:02:40 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001304: 09:03:07 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00001304: 09:03:07 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00001304: 09:03:11 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00001304: 09:03:11 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00001304: 09:03:11 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00001304: 09:03:11 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00001304: 09:03:11 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00001304: 09:03:11 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00001304: 09:03:11 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00001304: 09:03:11 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00001304: 09:03:11 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00000A2C: 09:03:39 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000A2C: 09:03:39 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000A2C: 09:03:39 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000A2C: 09:03:39 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000A2C: 09:04:16 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00000A2C: 09:04:16 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00000A2C: 09:04:17 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00000A2C: 09:04:17 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00000A2C: 09:04:17 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00000A2C: 09:04:17 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00000A2C: 09:04:17 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00000A2C: 09:04:17 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00000A2C: 09:04:17 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00000A2C: 09:04:17 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00000A2C: 09:04:17 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00000494: 09:04:55 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000494: 09:04:55 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000494: 09:04:55 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000494: 09:04:55 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000494: 09:06:15 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00000494: 09:06:15 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00000494: 09:06:16 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00000494: 09:06:16 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00000494: 09:06:16 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00000494: 09:06:16 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00000494: 09:06:16 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00000494: 09:06:16 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00000494: 09:06:16 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00000494: 09:06:16 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00000494: 09:06:16 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00001B44: 09:07:49 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001B44: 09:07:49 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001B44: 09:07:49 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001B44: 09:07:50 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001B44: 09:07:50 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001B44: 09:08:33 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00001B44: 09:08:33 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00001B44: 09:08:34 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00001B44: 09:08:34 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00001B44: 09:08:34 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00001B44: 09:08:34 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00001B44: 09:08:34 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00001B44: 09:08:34 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00001B44: 09:08:34 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00001B44: 09:08:34 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00001B44: 09:08:34 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 000017B4: 09:09:02 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000017B4: 09:09:02 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000017B4: 09:09:02 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 000017B4: 09:09:02 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000017B4: 09:09:02 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000684: 09:09:31 [127.0.0.1]:EAccessViolation : Access violation at address 0079464F in module 'WEB_unigui_test.exe'. Read of address 3174C209 : Addr: $0079464F
+WEB_unigui_test.exe: 000017B4: 09:09:45 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 000017B4: 09:09:45 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 000017B4: 09:09:46 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 000017B4: 09:09:46 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 000017B4: 09:09:46 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 000017B4: 09:09:46 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 000017B4: 09:09:46 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 000017B4: 09:09:46 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 000017B4: 09:09:46 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 000017B4: 09:09:46 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 000017B4: 09:09:46 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00000634: 09:10:46 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000634: 09:10:46 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000634: 09:10:46 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00000634: 09:10:46 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000634: 09:10:46 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000634: 09:12:36 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00000634: 09:12:36 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 000009E0: 09:13:58 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000009E0: 09:13:58 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000009E0: 09:13:58 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 000009E0: 09:13:58 [TUniServerModule]:Global Cache Folder Erased. <4> Files deleted.
+WEB_unigui_test.exe: 000009E0: 09:13:59 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000009E0: 09:13:59 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000009E0: 09:14:40 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 000009E0: 09:14:40 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 0000083C: 09:16:45 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 0000083C: 09:16:45 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 0000083C: 09:16:45 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 0000083C: 09:16:45 [TUniServerModule]:Global Cache Folder Erased. <2> Files deleted.
+WEB_unigui_test.exe: 0000083C: 09:16:45 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 0000083C: 09:16:45 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000750: 09:17:56 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000750: 09:17:56 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000750: 09:17:56 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00000750: 09:17:56 [TUniServerModule]:Global Cache Folder Erased. <3> Files deleted.
+WEB_unigui_test.exe: 00000750: 09:17:56 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000750: 09:17:56 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001808: 09:18:17 [127.0.0.1]:EAccessViolation : Access violation at address 0070EF47 in module 'WEB_unigui_test.exe'. Read of address EC8B55C0 : Addr: $0070EF47
+WEB_unigui_test.exe: 00000DA0: 09:19:13 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000DA0: 09:19:13 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000DA0: 09:19:13 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00000DA0: 09:19:13 [TUniServerModule]:Global Cache Folder Erased. <3> Files deleted.
+WEB_unigui_test.exe: 00000DA0: 09:19:13 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000DA0: 09:19:13 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000009E0: 09:22:09 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000009E0: 09:22:09 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000009E0: 09:22:09 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 000009E0: 09:22:09 [TUniServerModule]:Global Cache Folder Erased. <4> Files deleted.
+WEB_unigui_test.exe: 000009E0: 09:22:09 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000009E0: 09:22:09 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000012F4: 09:23:47 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000012F4: 09:23:47 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000012F4: 09:23:47 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 000012F4: 09:23:47 [TUniServerModule]:Global Cache Folder Erased. <2> Files deleted.
+WEB_unigui_test.exe: 000012F4: 09:23:47 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000012F4: 09:23:48 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001648: 09:24:46 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001648: 09:24:46 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001648: 09:24:46 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001648: 09:24:46 [TUniServerModule]:Global Cache Folder Erased. <1> Files deleted.
+WEB_unigui_test.exe: 00001648: 09:24:46 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001648: 09:24:46 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000984: 09:25:02 [127.0.0.1]:EAccessViolation : Access violation at address 0079463D in module 'WEB_unigui_test.exe'. Read of address 3174C215 : Addr: $0079463D
+WEB_unigui_test.exe: 00001008: 09:27:53 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001008: 09:27:53 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001008: 09:27:53 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001008: 09:27:53 [TUniServerModule]:Global Cache Folder Erased. <2> Files deleted.
+WEB_unigui_test.exe: 00001008: 09:27:53 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001008: 09:27:53 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 0000165C: 09:28:42 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 0000165C: 09:28:42 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 0000165C: 09:28:42 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 0000165C: 09:28:42 [TUniServerModule]:Global Cache Folder Erased. <3> Files deleted.
+WEB_unigui_test.exe: 0000165C: 09:28:42 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 0000165C: 09:28:42 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000015DC: 09:28:57 [127.0.0.1]:EAccessViolation : Access violation at address 0070EF47 in module 'WEB_unigui_test.exe'. Read of address EC8B55C0 : Addr: $0070EF47
+WEB_unigui_test.exe: 0000165C: 09:29:13 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 0000165C: 09:29:13 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 0000165C: 09:29:13 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 0000165C: 09:29:13 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 0000165C: 09:29:13 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 0000165C: 09:29:13 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 0000165C: 09:29:13 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 0000165C: 09:29:13 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 0000165C: 09:29:13 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 0000165C: 09:29:13 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 0000165C: 09:29:13 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 000017BC: 09:29:23 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000017BC: 09:29:23 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000017BC: 09:29:23 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 000017BC: 09:29:23 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000017BC: 09:29:23 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000017BC: 09:30:58 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 000017BC: 09:30:58 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 000017BC: 09:30:59 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 000017BC: 09:30:59 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 000017BC: 09:30:59 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 000017BC: 09:30:59 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 000017BC: 09:30:59 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 000017BC: 09:30:59 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 000017BC: 09:30:59 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 000017BC: 09:30:59 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 000017BC: 09:30:59 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 0000174C: 09:32:40 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 0000174C: 09:32:40 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 0000174C: 09:32:40 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 0000174C: 09:32:40 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 0000174C: 09:32:40 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 0000174C: 09:33:29 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 0000174C: 09:33:29 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 0000174C: 09:33:29 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 0000174C: 09:33:29 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 0000174C: 09:33:29 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 0000174C: 09:33:29 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 0000174C: 09:33:29 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 0000174C: 09:33:29 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 0000174C: 09:33:29 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 0000174C: 09:33:29 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 0000174C: 09:33:29 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00001344: 09:33:57 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001344: 09:33:57 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001344: 09:33:57 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001344: 09:33:57 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001344: 09:33:58 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001344: 09:34:25 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00001344: 09:34:25 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00001344: 09:34:25 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00001344: 09:34:25 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00001344: 09:34:25 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00001344: 09:34:25 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00001344: 09:34:25 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00001344: 09:34:25 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00001344: 09:34:25 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00001344: 09:34:25 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00001344: 09:34:25 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 000017AC: 09:35:25 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000017AC: 09:35:25 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000017AC: 09:35:25 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 000017AC: 09:35:25 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000017AC: 09:35:25 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000017AC: 09:35:39 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 000017AC: 09:35:39 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 000017AC: 09:35:39 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 000017AC: 09:35:39 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 000017AC: 09:35:39 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 000017AC: 09:35:39 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 000017AC: 09:35:39 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 000017AC: 09:35:39 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 000017AC: 09:35:39 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 000017AC: 09:35:39 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 000017AC: 09:35:39 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 0000115C: 09:36:05 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 0000115C: 09:36:05 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 0000115C: 09:36:05 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 0000115C: 09:36:05 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 0000115C: 09:36:05 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000AB0: 09:37:03 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000AB0: 09:37:03 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000AB0: 09:37:03 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00000AB0: 09:37:03 [TUniServerModule]:Global Cache Folder Erased. <1> Files deleted.
+WEB_unigui_test.exe: 00000AB0: 09:37:03 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000AB0: 09:37:03 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000AB0: 09:37:56 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00000AB0: 09:37:56 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00000AB0: 09:37:56 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00000AB0: 09:37:56 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00000AB0: 09:37:56 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00000AB0: 09:37:56 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00000AB0: 09:37:56 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00000AB0: 09:37:56 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00000AB0: 09:37:57 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00000AB0: 09:37:57 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00000AB0: 09:37:57 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00001728: 09:40:53 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001728: 09:40:53 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001728: 09:40:53 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001728: 09:40:53 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001728: 09:40:53 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000015A0: 09:41:14 [127.0.0.1]:EAccessViolation : Access violation at address 0070EF47 in module 'WEB_unigui_test.exe'. Read of address EC8B55C0 : Addr: $0070EF47
+WEB_unigui_test.exe: 00000F44: 09:41:22 [127.0.0.1]:EAccessViolation : Access violation at address 0070EF47 in module 'WEB_unigui_test.exe'. Read of address EC8B55C0 : Addr: $0070EF47
+WEB_unigui_test.exe: 00001728: 09:41:31 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00001728: 09:41:31 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00001728: 09:41:32 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00001728: 09:41:32 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00001728: 09:41:32 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00001728: 09:41:32 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00001728: 09:41:32 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00001728: 09:41:32 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00001728: 09:41:32 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00001728: 09:41:32 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00001728: 09:41:32 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 0000058C: 09:45:36 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 0000058C: 09:45:36 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 0000058C: 09:45:36 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 0000058C: 09:45:36 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 0000058C: 09:45:36 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 0000058C: 09:46:15 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 0000058C: 09:46:15 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 0000058C: 09:46:15 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 0000058C: 09:46:15 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 0000058C: 09:46:15 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 0000058C: 09:46:15 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 0000058C: 09:46:15 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 0000058C: 09:46:15 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 0000058C: 09:46:15 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 0000058C: 09:46:15 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 0000058C: 09:46:15 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 0000054C: 09:48:08 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 0000054C: 09:48:08 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 0000054C: 09:48:08 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 0000054C: 09:48:08 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 0000054C: 09:48:08 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 0000054C: 09:48:34 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 0000054C: 09:48:34 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 0000054C: 09:48:35 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 0000054C: 09:48:35 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 0000054C: 09:48:35 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 0000054C: 09:48:35 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 0000054C: 09:48:35 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 0000054C: 09:48:35 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 0000054C: 09:48:35 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 0000054C: 09:48:35 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 0000054C: 09:48:35 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 0000122C: 09:48:49 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 0000122C: 09:48:49 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 0000122C: 09:48:49 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 0000122C: 09:48:49 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 0000122C: 09:48:50 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 0000122C: 09:49:25 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 0000122C: 09:49:25 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 0000122C: 09:49:26 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 0000122C: 09:49:26 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 0000122C: 09:49:26 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 0000122C: 09:49:26 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 0000122C: 09:49:26 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 0000122C: 09:49:26 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 0000122C: 09:49:26 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 0000122C: 09:49:26 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 0000122C: 09:49:26 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 000007E4: 09:50:43 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000007E4: 09:50:43 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000007E4: 09:50:43 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 000007E4: 09:50:43 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000007E4: 09:50:43 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000007E4: 09:51:06 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 000007E4: 09:51:06 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 000007E4: 09:51:07 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 000007E4: 09:51:07 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 000007E4: 09:51:07 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 000007E4: 09:51:07 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 000007E4: 09:51:07 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 000007E4: 09:51:07 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 000007E4: 09:51:07 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 000007E4: 09:51:07 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 000007E4: 09:51:07 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00001BB4: 09:51:25 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001BB4: 09:51:25 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001BB4: 09:51:25 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001BB4: 09:51:25 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001BB4: 09:51:25 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001BB4: 09:51:42 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00001BB4: 09:51:42 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00001BB4: 09:51:43 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00001BB4: 09:51:43 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00001BB4: 09:51:43 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00001BB4: 09:51:43 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00001BB4: 09:51:43 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00001BB4: 09:51:43 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00001BB4: 09:51:43 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00001BB4: 09:51:43 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00001BB4: 09:51:43 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00000FA4: 09:52:34 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000FA4: 09:52:34 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000FA4: 09:52:34 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00000FA4: 09:52:34 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000FA4: 09:52:34 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000160: 09:53:20 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000160: 09:53:20 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000160: 09:53:20 [TUniServerModule]:Global Cache Folder Erased. <1> Files deleted.
+WEB_unigui_test.exe: 00000160: 09:53:20 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000160: 09:53:20 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000160: 09:53:41 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00000160: 09:53:41 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00000160: 09:53:42 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00000160: 09:53:42 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00000160: 09:53:42 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00000160: 09:53:42 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00000160: 09:53:42 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00000160: 09:53:42 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00000160: 09:53:42 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00000160: 09:53:42 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00000160: 09:53:42 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 000009E0: 09:54:10 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000009E0: 09:54:10 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000009E0: 09:54:10 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 000009E0: 09:54:10 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000009E0: 09:54:10 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000009E0: 09:54:32 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 000009E0: 09:54:32 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 000009E0: 09:54:32 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 000009E0: 09:54:32 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 000009E0: 09:54:32 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 000009E0: 09:54:32 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 000009E0: 09:54:32 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 000009E0: 09:54:32 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 000009E0: 09:54:32 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 000009E0: 09:54:32 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 000009E0: 09:54:32 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 0000128C: 09:55:03 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 0000128C: 09:55:03 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 0000128C: 09:55:03 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 0000128C: 09:55:03 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 0000128C: 09:55:03 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 0000128C: 09:55:25 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 0000128C: 09:55:25 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 0000128C: 09:55:26 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 0000128C: 09:55:26 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 0000128C: 09:55:26 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 0000128C: 09:55:26 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 0000128C: 09:55:26 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 0000128C: 09:55:26 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 0000128C: 09:55:26 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 0000128C: 09:55:26 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 0000128C: 09:55:26 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00001900: 09:56:08 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001900: 09:56:08 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001900: 09:56:08 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001900: 09:56:09 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001900: 09:56:09 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001900: 09:58:37 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00001900: 09:58:37 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00001900: 09:58:37 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00001900: 09:58:37 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00001900: 09:58:37 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00001900: 09:58:37 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00001900: 09:58:37 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00001900: 09:58:37 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00001900: 09:58:38 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00001900: 09:58:38 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00001900: 09:58:38 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00001804: 10:01:13 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001804: 10:01:13 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001804: 10:01:13 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001804: 10:01:13 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001804: 10:01:13 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001D24: 10:01:48 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. (Session not found: JUZ5gs8T7W10562ED4F ) : Addr: $00770A42
+WEB_unigui_test.exe: 000019A4: 10:05:14 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000019A4: 10:05:14 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000019A4: 10:05:14 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 000019A4: 10:05:14 [TUniServerModule]:Global Cache Folder Erased. <4> Files deleted.
+WEB_unigui_test.exe: 000019A4: 10:05:15 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000019A4: 10:05:15 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000019A4: 10:05:39 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 000019A4: 10:05:39 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 000019A4: 10:05:39 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 000019A4: 10:05:39 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 000019A4: 10:05:39 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 000019A4: 10:05:39 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 000019A4: 10:05:39 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 000019A4: 10:05:39 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 000019A4: 10:05:39 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 000019A4: 10:05:39 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 000019A4: 10:05:39 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00001290: 10:06:42 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001290: 10:06:42 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001290: 10:06:42 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001290: 10:06:42 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001290: 10:06:42 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001290: 10:07:36 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00001290: 10:07:36 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00001290: 10:07:36 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00001290: 10:07:36 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00001290: 10:07:36 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00001290: 10:07:36 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00001290: 10:07:36 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00001290: 10:07:36 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00001290: 10:07:36 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00001290: 10:07:36 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00001290: 10:07:36 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 0000197C: 10:43:59 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 0000197C: 10:43:59 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 0000197C: 10:43:59 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 0000197C: 10:43:59 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 0000197C: 10:43:59 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 0000197C: 10:44:27 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 0000197C: 10:44:27 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 0000197C: 10:44:28 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 0000197C: 10:44:28 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 0000197C: 10:44:28 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 0000197C: 10:44:28 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 0000197C: 10:44:28 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 0000197C: 10:44:28 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 0000197C: 10:44:28 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 0000197C: 10:44:28 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 0000197C: 10:44:28 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00000EF0: 10:46:59 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000EF0: 10:46:59 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000EF0: 10:46:59 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00000EF0: 10:46:59 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000EF0: 10:46:59 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000EF0: 10:47:23 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00000EF0: 10:47:23 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00000EF0: 10:47:24 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00000EF0: 10:47:24 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00000EF0: 10:47:24 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00000EF0: 10:47:24 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00000EF0: 10:47:24 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00000EF0: 10:47:24 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00000EF0: 10:47:24 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00000EF0: 10:47:24 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00000EF0: 10:47:24 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00001670: 10:48:13 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001670: 10:48:13 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001670: 10:48:13 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001670: 10:48:13 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001670: 10:48:13 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001670: 10:48:38 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00001670: 10:48:38 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00001670: 10:48:39 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00001670: 10:48:39 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00001670: 10:48:39 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00001670: 10:48:39 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00001670: 10:48:39 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00001670: 10:48:39 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00001670: 10:48:39 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00001670: 10:48:39 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00001670: 10:48:39 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00001288: 10:50:25 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001288: 10:50:25 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001288: 10:50:25 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001288: 10:50:25 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001288: 10:50:25 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001288: 10:50:59 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00001288: 10:50:59 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00001288: 10:50:59 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00001288: 10:50:59 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00001288: 10:50:59 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00001288: 10:50:59 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00001288: 10:50:59 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00001288: 10:50:59 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00001288: 10:50:59 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00001288: 10:50:59 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00001288: 10:50:59 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 000018FC: 11:00:28 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000018FC: 11:00:28 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000018FC: 11:00:28 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 000018FC: 11:00:28 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000018FC: 11:00:28 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000018FC: 11:01:15 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 000018FC: 11:01:15 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 000018FC: 11:01:16 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 000018FC: 11:01:16 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 000018FC: 11:01:16 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 000018FC: 11:01:16 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 000018FC: 11:01:16 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 000018FC: 11:01:16 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 000018FC: 11:01:16 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 000018FC: 11:01:16 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 000018FC: 11:01:16 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 000018E8: 11:09:23 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000018E8: 11:09:23 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000018E8: 11:09:23 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 000018E8: 11:09:23 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000018E8: 11:09:23 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000018E8: 11:09:58 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 000018E8: 11:09:58 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 000018E8: 11:10:01 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 000018E8: 11:10:01 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 000018E8: 11:10:01 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 000018E8: 11:10:01 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 000018E8: 11:10:01 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 000018E8: 11:10:01 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 000018E8: 11:10:01 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 000018E8: 11:10:01 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 000018E8: 11:10:01 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00000E10: 11:13:12 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000E10: 11:13:12 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000E10: 11:13:12 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00000E10: 11:13:12 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000E10: 11:13:12 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000E10: 11:13:47 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00000E10: 11:13:47 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00000E10: 11:13:47 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00000E10: 11:13:47 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00000E10: 11:13:47 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00000E10: 11:13:47 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00000E10: 11:13:47 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00000E10: 11:13:47 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00000E10: 11:13:47 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00000E10: 11:13:47 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00000E10: 11:13:47 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00001FA0: 11:15:49 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001FA0: 11:15:49 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001FA0: 11:15:49 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001FA0: 11:15:49 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001FA0: 11:15:49 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001FA0: 11:16:41 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00001FA0: 11:16:41 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00001FA0: 11:16:42 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 00001FA0: 11:16:42 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 00001FA0: 11:16:42 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 00001FA0: 11:16:42 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 00001FA0: 11:16:42 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 00001FA0: 11:16:42 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 00001FA0: 11:16:42 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 00001FA0: 11:16:42 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 00001FA0: 11:16:42 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 000016FC: 11:18:04 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000016FC: 11:18:04 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000016FC: 11:18:04 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 000016FC: 11:18:04 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000016FC: 11:18:05 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 000016FC: 11:18:39 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 000016FC: 11:18:39 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 000016FC: 11:18:40 [TUniServerModule]:HTTP Server Stopped.
+WEB_unigui_test.exe: 000016FC: 11:18:40 [TUniGUISessionManager]:Terminating Session manager.
+WEB_unigui_test.exe: 000016FC: 11:18:40 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_unigui_test.exe: 000016FC: 11:18:40 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_unigui_test.exe: 000016FC: 11:18:40 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_unigui_test.exe: 000016FC: 11:18:40 [TUniGUISessionManager]:Session manager terminated.
+WEB_unigui_test.exe: 000016FC: 11:18:40 [TUniServerModule]:Server Shutdown Completed.
+WEB_unigui_test.exe: 000016FC: 11:18:40 []:<-------------------------------------------------------------->
+WEB_unigui_test.exe: 000016FC: 11:18:40 [Terminated]:Exit Code: 0
