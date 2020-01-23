@@ -5,11 +5,13 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics,
   Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
-  uniGUIClasses, uniGUIRegClasses, uniGUIForm, uniGUIBaseClasses, uniLabel;
+  uniGUIClasses, uniGUIRegClasses, uniGUIForm, uniGUIBaseClasses, uniLabel, uniBasicGrid,
+  uniDBGrid;
 
 type
   TMainForm = class(TUniForm)
     UniLabel1: TUniLabel;
+    undbgrd1: TUniDBGrid;
   private
     { Private declarations }
   public

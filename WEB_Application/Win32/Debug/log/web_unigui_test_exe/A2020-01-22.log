@@ -30,3 +30,60 @@ WEB_unigui_test.exe: 0000165C: 10:56:16 [TUniGUISessionManager]:Session manager 
 WEB_unigui_test.exe: 0000165C: 10:56:16 [TUniServerModule]:Server Shutdown Completed.
 WEB_unigui_test.exe: 0000165C: 10:56:16 []:<-------------------------------------------------------------->
 WEB_unigui_test.exe: 0000165C: 10:56:16 [Terminated]:Exit Code: 0
+WEB_unigui_test.exe: 00001ABC: 15:08:40 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001ABC: 15:08:40 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001ABC: 15:08:40 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001ABC: 15:08:40 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001ABC: 15:08:40 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001ABC: 15:09:30 [TUniServerModule]:Shutting Down Server.
+WEB_unigui_test.exe: 00001ABC: 15:09:30 [TUniServerModule]:Stopping HTTP Server.
+WEB_unigui_test.exe: 00001A40: 15:11:55 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001A40: 15:11:55 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001A40: 15:11:55 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001A40: 15:11:55 [TUniServerModule]:Global Cache Folder Erased. <1> Files deleted.
+WEB_unigui_test.exe: 00001A40: 15:11:55 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001A40: 15:11:55 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001BAC: 15:19:21 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001BAC: 15:19:21 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001BAC: 15:19:21 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001BAC: 15:19:21 [TUniServerModule]:Global Cache Folder Erased. <2> Files deleted.
+WEB_unigui_test.exe: 00001BAC: 15:19:21 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001BAC: 15:19:21 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00000B20: 16:16:09 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00000B20: 16:16:09 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00000B20: 16:16:09 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00000B20: 16:16:09 [TUniServerModule]:Global Cache Folder Erased. <2> Files deleted.
+WEB_unigui_test.exe: 00000B20: 16:16:09 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00000B20: 16:16:10 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001470: 16:23:11 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001470: 16:23:11 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001470: 16:23:11 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001470: 16:23:11 [TUniServerModule]:Global Cache Folder Erased. <2> Files deleted.
+WEB_unigui_test.exe: 00001470: 16:23:11 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001470: 16:23:11 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001B6C: 16:32:56 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001B6C: 16:32:56 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001B6C: 16:32:56 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001B6C: 16:32:56 [TUniServerModule]:Global Cache Folder Erased. <3> Files deleted.
+WEB_unigui_test.exe: 00001B6C: 16:32:56 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001B6C: 16:32:56 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001AB8: 16:33:02 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. (Session not found: SqsszWnRFb10561E27A ) : Addr: $0077086A
+WEB_unigui_test.exe: 000017E0: 16:35:35 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 000017E0: 16:35:35 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 000017E0: 16:35:35 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 000017E0: 16:35:35 [TUniServerModule]:Global Cache Folder Erased. <3> Files deleted.
+WEB_unigui_test.exe: 000017E0: 16:35:35 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 000017E0: 16:35:35 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001C6C: 16:35:44 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. (Session not found: bCuHQMT1vr10561E4DD ) : Addr: $0077086A
+WEB_unigui_test.exe: 00001BB8: 16:36:46 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001BB8: 16:36:46 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001BB8: 16:36:46 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001BB8: 16:36:46 [TUniServerModule]:Global Cache Folder Erased. <3> Files deleted.
+WEB_unigui_test.exe: 00001BB8: 16:36:46 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001BB8: 16:36:46 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_unigui_test.exe: 00001EB4: 17:39:24 []:>--------------------------------------------------------------<
+WEB_unigui_test.exe: 00001EB4: 17:39:24 [TUniServerModule]:Server First Init.
+WEB_unigui_test.exe: 00001EB4: 17:39:24 [TUniServerModule]:Debug Mode = ON
+WEB_unigui_test.exe: 00001EB4: 17:39:24 [TUniServerModule]:Global Cache Folder Erased. <3> Files deleted.
+WEB_unigui_test.exe: 00001EB4: 17:39:24 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_unigui_test.exe: 00001EB4: 17:39:24 [TUniServerModule]:HTTP Server Started on Port: 8077
