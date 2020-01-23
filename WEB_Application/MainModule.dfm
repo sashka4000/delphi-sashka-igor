@@ -1,10 +1,10 @@
 object UniMainModule: TUniMainModule
   OldCreateOrder = False
+  OnCreate = UniGUIMainModuleCreate
   MonitoredKeys.Keys = <>
   Height = 426
   Width = 635
   object fdmtblOne: TFDMemTable
-    Active = True
     FieldDefs = <
       item
         Name = 'ID'

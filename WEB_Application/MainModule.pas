@@ -13,6 +13,7 @@ type
     fdmtblOne: TFDMemTable;
     frxdbdtstOne: TfrxDBDataset;
     ds1: TDataSource;
+    procedure UniGUIMainModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -30,7 +31,16 @@ uses
 
 function UniMainModule: TUniMainModule;
 begin
-  Result := TUniMainModule(UniApplication.UniMainModule)
+  Result := TUniMainModule(UniApplication.UniMainModule);
+end;
+
+procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);
+begin
+fdmtblOne.Active := True;
+fdmtblOne.Insert;
+fdmtblOne.Fields[0].AsInteger := 1;
+fdmtblOne.Fields[1].AsString := 'Шишкин';
+fdmtblOne.Post;
 end;
 
 initialization
