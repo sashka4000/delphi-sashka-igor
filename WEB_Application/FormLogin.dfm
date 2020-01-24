@@ -98,5 +98,6 @@ object LoginForm: TLoginForm
     ParentFont = False
     Font.Height = -13
     TabOrder = 7
+    OnClick = btnRegClick
   end
 end

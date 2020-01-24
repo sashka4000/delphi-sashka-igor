@@ -19,6 +19,7 @@ type
     btnReg: TUniButton;
     procedure btnCancelClick(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
+    procedure btnRegClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,7 +33,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uniGUIVars, MainModule, uniGUIApplication, FGreeting;
+  uniGUIVars, MainModule, uniGUIApplication, FGreeting, FRegistration;
 
 function LoginForm: TLoginForm;
 begin
@@ -57,6 +58,13 @@ begin
   end
   else
     btnOk.ModalResult := mrCancel;
+end;
+
+procedure TLoginForm.btnRegClick(Sender: TObject);
+begin
+  LoginForm.Hide;
+  FRegistration.frmRegistration.Show(nil);
+
 end;
 
 initialization

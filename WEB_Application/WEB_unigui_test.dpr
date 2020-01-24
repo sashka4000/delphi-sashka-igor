@@ -6,7 +6,8 @@ uses
   MainModule in 'MainModule.pas' {UniMainModule: TUniGUIMainModule},
   Main in 'Main.pas' {MainForm: TUniForm},
   FormLogin in 'FormLogin.pas' {LoginForm: TUniLoginForm},
-  FGreeting in 'FGreeting.pas' {frmGreeting: TUniForm};
+  FGreeting in 'FGreeting.pas' {frmGreeting: TUniForm},
+  FRegistration in 'FRegistration.pas' {frmRegistration: TUniForm};
 
 {$R *.res}
 
