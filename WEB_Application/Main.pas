@@ -6,12 +6,12 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics,
   Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
   uniGUIClasses, uniGUIRegClasses, uniGUIForm, uniGUIBaseClasses, uniLabel, uniBasicGrid,
-  uniDBGrid;
+  uniDBGrid, Vcl.Imaging.jpeg, uniImage;
 
 type
   TMainForm = class(TUniForm)
     UniLabel1: TUniLabel;
-    undbgrd1: TUniDBGrid;
+    img1: TUniImage;
   private
     { Private declarations }
   public

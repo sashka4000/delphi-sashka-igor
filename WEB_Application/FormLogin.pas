@@ -5,7 +5,11 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   uniGUITypes, uniGUIAbstractClasses, uniGUIClasses, uniGUIRegClasses,
-  uniGUIForm, uniButton, uniEdit, uniGUIBaseClasses, uniLabel;
+  uniGUIForm, uniButton, uniEdit, uniGUIBaseClasses, uniLabel, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS,
+  FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt,
+  Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client,
+  FireDAC.Phys.SQLiteVDataSet;
 
 type
   TLoginForm = class(TUniLoginForm)
@@ -17,6 +21,8 @@ type
     btnCancel: TUniButton;
     btnOk: TUniButton;
     btnReg: TUniButton;
+    fdq: TFDQuery;
+    fdlclsql: TFDLocalSQL;
     procedure btnCancelClick(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
     procedure btnRegClick(Sender: TObject);
@@ -49,15 +55,18 @@ end;
 
 procedure TLoginForm.btnOkClick(Sender: TObject);
 begin
-  if (undtLogin.Text = '') and (undtPassword.Text = '') then
-  begin
-
-    LoginForm.Hide;
-    FGreeting.frmGreeting.Show(nil);
-
-  end
+  fdq.Close;
+  fdq.SQL.Clear;
+  fdq.SQL.Add('select id from Tb1 where Login=:username and Password=:password');
+  fdq.ParamByName('username').Value := undtLogin.Text;
+  fdq.ParamByName('password').Value := undtPassword.Text;
+  fdq.Open;
+  if fdq.RecordCount = 0 then
+    ShowMessage('Incorrect Username or Password!')
   else
-    btnOk.ModalResult := mrCancel;
+  begin
+    ModalResult := mrOk;
+  end;
 end;
 
 procedure TLoginForm.btnRegClick(Sender: TObject);

@@ -5,6 +5,7 @@ object UniMainModule: TUniMainModule
   Height = 426
   Width = 635
   object fdmtblOne: TFDMemTable
+    Active = True
     FieldDefs = <
       item
         Name = 'ID'
@@ -37,17 +38,11 @@ object UniMainModule: TUniMainModule
     Left = 40
     Top = 40
   end
-  object frxdbdtstOne: TfrxDBDataset
-    UserName = 'frxDBDataset1'
-    CloseDataSource = False
-    DataSet = fdmtblOne
-    BCDToCurrency = False
-    Left = 40
-    Top = 104
-  end
-  object ds1: TDataSource
-    DataSet = fdmtblOne
-    Left = 136
-    Top = 56
+  object con1: TFDConnection
+    Params.Strings = (
+      'DriverID=SQLite')
+    Connected = True
+    Left = 96
+    Top = 40
   end
 end

@@ -6,13 +6,14 @@ uses
   uniGUIMainModule, SysUtils, Classes, FireDAC.Stan.Intf, FireDAC.Stan.Option,
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, frxClass, frxDBSet, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, Data.Win.ADODB;
+  FireDAC.Comp.Client, Data.Win.ADODB, FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
+  FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
+  FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait, FireDAC.Phys.SQLiteVDataSet;
 
 type
   TUniMainModule = class(TUniGUIMainModule)
     fdmtblOne: TFDMemTable;
-    frxdbdtstOne: TfrxDBDataset;
-    ds1: TDataSource;
+    con1: TFDConnection;
     procedure UniGUIMainModuleCreate(Sender: TObject);
   private
     { Private declarations }

@@ -100,4 +100,20 @@ object LoginForm: TLoginForm
     TabOrder = 7
     OnClick = btnRegClick
   end
+  object fdq: TFDQuery
+    Connection = UniMainModule.con1
+    Left = 16
+    Top = 24
+  end
+  object fdlclsql: TFDLocalSQL
+    Connection = UniMainModule.con1
+    Active = True
+    DataSets = <
+      item
+        DataSet = UniMainModule.fdmtblOne
+        Name = 'Tb1'
+      end>
+    Left = 232
+    Top = 40
+  end
 end
