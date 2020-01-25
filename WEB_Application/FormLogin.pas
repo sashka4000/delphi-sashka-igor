@@ -21,8 +21,6 @@ type
     btnCancel: TUniButton;
     btnOk: TUniButton;
     btnReg: TUniButton;
-    fdq: TFDQuery;
-    fdlclsql: TFDLocalSQL;
     procedure btnCancelClick(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
     procedure btnRegClick(Sender: TObject);
@@ -55,13 +53,13 @@ end;
 
 procedure TLoginForm.btnOkClick(Sender: TObject);
 begin
-  fdq.Close;
-  fdq.SQL.Clear;
-  fdq.SQL.Add('select id from Tb1 where Login=:username and Password=:password');
-  fdq.ParamByName('username').Value := undtLogin.Text;
-  fdq.ParamByName('password').Value := undtPassword.Text;
-  fdq.Open;
-  if fdq.RecordCount = 0 then
+  UniMainModule.fdqryfdq.Close;
+  UniMainModule.fdqryfdq.SQL.Clear;
+  UniMainModule.fdqryfdq.SQL.Add('select id from Tb1 where Login=:username and Password=:password');
+  UniMainModule.fdqryfdq.ParamByName('username').Value := undtLogin.Text;
+  UniMainModule.fdqryfdq.ParamByName('password').Value := undtPassword.Text;
+  UniMainModule.fdqryfdq.Open;
+  if UniMainModule.fdqryfdq.RecordCount = 0 then
     ShowMessage('Incorrect Username or Password!')
   else
   begin

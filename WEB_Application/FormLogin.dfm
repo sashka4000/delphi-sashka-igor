@@ -9,6 +9,7 @@ object LoginForm: TLoginForm
   OldCreateOrder = False
   BorderIcons = [biSystemMenu]
   MonitoredKeys.Keys = <>
+  ActiveControl = undtLogin
   PixelsPerInch = 96
   TextHeight = 13
   object lb_Welcome: TUniLabel
@@ -44,7 +45,7 @@ object LoginForm: TLoginForm
     Caption = #1055#1072#1088#1086#1083#1100
     ParentFont = False
     Font.Height = -15
-    TabOrder = 2
+    TabOrder = 4
   end
   object undtLogin: TUniEdit
     Left = 68
@@ -52,7 +53,7 @@ object LoginForm: TLoginForm
     Width = 180
     Hint = ''
     Text = ''
-    TabOrder = 3
+    TabOrder = 2
   end
   object undtPassword: TUniEdit
     Left = 68
@@ -61,7 +62,7 @@ object LoginForm: TLoginForm
     Hint = ''
     PasswordChar = '*'
     Text = ''
-    TabOrder = 4
+    TabOrder = 3
   end
   object btnCancel: TUniButton
     Left = 8
@@ -99,21 +100,5 @@ object LoginForm: TLoginForm
     Font.Height = -13
     TabOrder = 7
     OnClick = btnRegClick
-  end
-  object fdq: TFDQuery
-    Connection = UniMainModule.con1
-    Left = 16
-    Top = 24
-  end
-  object fdlclsql: TFDLocalSQL
-    Connection = UniMainModule.con1
-    Active = True
-    DataSets = <
-      item
-        DataSet = UniMainModule.fdmtblOne
-        Name = 'Tb1'
-      end>
-    Left = 232
-    Top = 40
   end
 end

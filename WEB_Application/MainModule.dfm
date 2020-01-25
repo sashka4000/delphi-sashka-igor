@@ -41,8 +41,24 @@ object UniMainModule: TUniMainModule
   object con1: TFDConnection
     Params.Strings = (
       'DriverID=SQLite')
-    Connected = True
+    LoginPrompt = False
     Left = 96
+    Top = 40
+  end
+  object fdlclsql: TFDLocalSQL
+    Connection = con1
+    Active = True
+    DataSets = <
+      item
+        DataSet = fdmtblOne
+        Name = 'Tb1'
+      end>
+    Left = 160
+    Top = 40
+  end
+  object fdqryfdq: TFDQuery
+    Connection = con1
+    Left = 216
     Top = 40
   end
 end

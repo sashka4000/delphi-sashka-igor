@@ -8,12 +8,15 @@ uses
   FireDAC.DApt.Intf, frxClass, frxDBSet, Data.DB, FireDAC.Comp.DataSet,
   FireDAC.Comp.Client, Data.Win.ADODB, FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
-  FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait, FireDAC.Phys.SQLiteVDataSet;
+  FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait, FireDAC.Phys.SQLiteVDataSet,
+  FireDAC.DApt;
 
 type
   TUniMainModule = class(TUniGUIMainModule)
     fdmtblOne: TFDMemTable;
     con1: TFDConnection;
+    fdlclsql: TFDLocalSQL;
+    fdqryfdq: TFDQuery;
     procedure UniGUIMainModuleCreate(Sender: TObject);
   private
     { Private declarations }
