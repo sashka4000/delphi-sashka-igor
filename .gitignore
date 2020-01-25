@@ -66,4 +66,5 @@ __recovery/
 *.stat
 ShemaPrinter/Win32/Release/
 ShemaPrinter/Win32/Shema/
-
+WEB_Application/Win32/Debug/cache/
+WEB_Application/Win32/Debug/log/
