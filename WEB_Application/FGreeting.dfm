@@ -1,9 +1,10 @@
 object frmGreeting: TfrmGreeting
   Left = 0
   Top = 0
-  ClientHeight = 178
+  ClientHeight = 225
   ClientWidth = 423
   Caption = 'Greeting'
+  OnShow = UniFormShow
   BorderStyle = bsNone
   Position = poDesktopCenter
   OldCreateOrder = False
@@ -14,7 +15,7 @@ object frmGreeting: TfrmGreeting
     Left = 32
     Top = 8
     Width = 361
-    Height = 97
+    Height = 89
     Hint = ''
     Alignment = taCenter
     AutoSize = False
@@ -28,7 +29,7 @@ object frmGreeting: TfrmGreeting
   end
   object btnGreetingOk: TUniButton
     Left = 160
-    Top = 136
+    Top = 176
     Width = 75
     Height = 25
     Hint = ''
@@ -37,5 +38,16 @@ object frmGreeting: TfrmGreeting
     Font.Height = -16
     TabOrder = 1
     OnClick = btnGreetingOkClick
+  end
+  object unlbl1: TUniLabel
+    Left = 160
+    Top = 120
+    Width = 62
+    Height = 29
+    Hint = ''
+    Caption = 'unlbl1'
+    ParentFont = False
+    Font.Height = -24
+    TabOrder = 2
   end
 end

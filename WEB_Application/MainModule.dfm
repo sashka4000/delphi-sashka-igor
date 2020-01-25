@@ -61,4 +61,8 @@ object UniMainModule: TUniMainModule
     Left = 216
     Top = 40
   end
+  object fdstnstrgjsnlnk1: TFDStanStorageJSONLink
+    Left = 56
+    Top = 120
+  end
 end

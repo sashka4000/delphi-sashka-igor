@@ -9,7 +9,7 @@ uses
   FireDAC.Comp.Client, Data.Win.ADODB, FireDAC.UI.Intf, FireDAC.Stan.Def, FireDAC.Stan.Pool,
   FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite, FireDAC.Phys.SQLiteDef,
   FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait, FireDAC.Phys.SQLiteVDataSet,
-  FireDAC.DApt;
+  FireDAC.DApt, FireDAC.Stan.StorageJSON;
 
 type
   TUniMainModule = class(TUniGUIMainModule)
@@ -17,12 +17,16 @@ type
     con1: TFDConnection;
     fdlclsql: TFDLocalSQL;
     fdqryfdq: TFDQuery;
+    fdstnstrgjsnlnk1: TFDStanStorageJSONLink;
     procedure UniGUIMainModuleCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    UserName : String;
+    UserID   : Integer;
   end;
+
 
 function UniMainModule: TUniMainModule;
 
@@ -40,19 +44,28 @@ end;
 
 procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);
 begin
-fdmtblOne.Active := True;
-fdmtblOne.Insert;
-fdmtblOne.Fields[0].AsInteger := 1;
-fdmtblOne.Fields[1].AsString := 'Шишкин';
-fdmtblOne.Fields[2].AsString := 'admin';
-fdmtblOne.Fields[3].AsString := '0000';
-fdmtblOne.Post;
-fdmtblOne.Insert;
-fdmtblOne.Fields[0].AsInteger := 2;
-fdmtblOne.Fields[1].AsString := 'Иванов';
-fdmtblOne.Fields[2].AsString := '0000';
-fdmtblOne.Fields[3].AsString := 'admin';
-fdmtblOne.Post;
+//fdmtblOne.Active := True;
+//fdmtblOne.Insert;
+//fdmtblOne.Fields[0].AsInteger := 1;
+//fdmtblOne.Fields[1].AsString := 'Шишкин';
+//fdmtblOne.Fields[2].AsString := 'admin';
+//fdmtblOne.Fields[3].AsString := '0000';
+//fdmtblOne.Post;
+//fdmtblOne.Insert;
+//fdmtblOne.Fields[0].AsInteger := 2;
+//fdmtblOne.Fields[1].AsString := 'Иванов';
+//fdmtblOne.Fields[2].AsString := '0000';
+//fdmtblOne.Fields[3].AsString := 'admin';
+//fdmtblOne.Post;
+
+// fdmtblOne.SaveToFile('text',sfJSON);
+
+ // Проверить существование файла
+
+ fdmtblOne.LoadFromFile('text',sfJSON);   // text.fds
+
+UserName := '';
+UserID := 0;
 end;
 
 initialization

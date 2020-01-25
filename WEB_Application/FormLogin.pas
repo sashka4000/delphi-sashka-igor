@@ -14,14 +14,11 @@ uses
 type
   TLoginForm = class(TUniLoginForm)
     lb_Welcome: TUniLabel;
-    lb_Login: TUniLabel;
-    lb_Password: TUniLabel;
     undtLogin: TUniEdit;
     undtPassword: TUniEdit;
     btnCancel: TUniButton;
     btnOk: TUniButton;
     btnReg: TUniButton;
-    procedure btnCancelClick(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
     procedure btnRegClick(Sender: TObject);
   private
@@ -44,26 +41,24 @@ begin
   Result := TLoginForm(UniMainModule.GetFormInstance(TLoginForm));
 end;
 
-procedure TLoginForm.btnCancelClick(Sender: TObject);
+procedure TLoginForm.btnOkClick(Sender: TObject);
 var
   i: Integer;
 begin
-
-end;
-
-procedure TLoginForm.btnOkClick(Sender: TObject);
-begin
   UniMainModule.fdqryfdq.Close;
   UniMainModule.fdqryfdq.SQL.Clear;
-  UniMainModule.fdqryfdq.SQL.Add('select id from Tb1 where Login=:username and Password=:password');
-  UniMainModule.fdqryfdq.ParamByName('username').Value := undtLogin.Text;
+  UniMainModule.fdqryfdq.SQL.Add('select id, username from Tb1 where Login=:login and Password=:password');
+  UniMainModule.fdqryfdq.ParamByName('login').Value := undtLogin.Text;
   UniMainModule.fdqryfdq.ParamByName('password').Value := undtPassword.Text;
   UniMainModule.fdqryfdq.Open;
   if UniMainModule.fdqryfdq.RecordCount = 0 then
-    ShowMessage('Incorrect Username or Password!')
+    ShowMessage('Неправильный Логин или Пароль!')
   else
   begin
-    ModalResult := mrOk;
+    UniMainModule.UserName := UniMainModule.fdqryfdq.Fields [1].Value;
+    UniMainModule.UserID  := UniMainModule.fdqryfdq.Fields [0].Value;
+    LoginForm.Hide;
+    frmGreeting.Show(nil);
   end;
 end;
 

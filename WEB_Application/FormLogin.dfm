@@ -1,8 +1,8 @@
 object LoginForm: TLoginForm
   Left = 0
   Top = 0
-  ClientHeight = 214
-  ClientWidth = 270
+  ClientHeight = 193
+  ClientWidth = 263
   Caption = ''
   BorderStyle = bsNone
   Position = poDesktopCenter
@@ -25,48 +25,36 @@ object LoginForm: TLoginForm
     Font.Height = -16
     TabOrder = 0
   end
-  object lb_Login: TUniLabel
-    Left = 8
-    Top = 72
-    Width = 40
-    Height = 18
-    Hint = ''
-    Caption = #1051#1086#1075#1080#1085
-    ParentFont = False
-    Font.Height = -15
-    TabOrder = 1
-  end
-  object lb_Password: TUniLabel
-    Left = 8
-    Top = 120
-    Width = 50
-    Height = 18
-    Hint = ''
-    Caption = #1055#1072#1088#1086#1083#1100
-    ParentFont = False
-    Font.Height = -15
-    TabOrder = 4
-  end
   object undtLogin: TUniEdit
-    Left = 68
-    Top = 72
+    Left = 44
+    Top = 64
     Width = 180
     Hint = ''
     Text = ''
-    TabOrder = 2
+    ParentFont = False
+    Font.Height = -13
+    TabOrder = 1
+    EmptyText = #1051#1086#1075#1080#1085
+    ClearButton = True
+    FieldLabelFont.Height = -13
   end
   object undtPassword: TUniEdit
-    Left = 68
-    Top = 117
+    Left = 44
+    Top = 101
     Width = 180
     Hint = ''
     PasswordChar = '*'
     Text = ''
-    TabOrder = 3
+    ParentFont = False
+    Font.Height = -13
+    TabOrder = 2
+    EmptyText = #1055#1072#1088#1086#1083#1100
+    ClearButton = True
+    FieldLabelFont.Height = -13
   end
   object btnCancel: TUniButton
     Left = 8
-    Top = 160
+    Top = 144
     Width = 75
     Height = 25
     Hint = ''
@@ -74,31 +62,30 @@ object LoginForm: TLoginForm
     ModalResult = 2
     ParentFont = False
     Font.Height = -13
-    TabOrder = 5
-    OnClick = btnCancelClick
+    TabOrder = 3
   end
   object btnOk: TUniButton
     Left = 89
-    Top = 160
+    Top = 144
     Width = 64
     Height = 25
     Hint = ''
     Caption = #1042#1074#1086#1076
     ParentFont = False
     Font.Height = -13
-    TabOrder = 6
+    TabOrder = 4
     OnClick = btnOkClick
   end
   object btnReg: TUniButton
     Left = 159
-    Top = 160
+    Top = 144
     Width = 89
     Height = 25
     Hint = ''
     Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103
     ParentFont = False
     Font.Height = -13
-    TabOrder = 7
+    TabOrder = 5
     OnClick = btnRegClick
   end
 end

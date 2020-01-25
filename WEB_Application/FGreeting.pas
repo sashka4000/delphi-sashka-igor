@@ -11,7 +11,9 @@ type
   TfrmGreeting = class(TUniForm)
     UniLbGreeting: TUniLabel;
     btnGreetingOk: TUniButton;
+    unlbl1: TUniLabel;
     procedure btnGreetingOkClick(Sender: TObject);
+    procedure UniFormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -36,6 +38,11 @@ procedure TfrmGreeting.btnGreetingOkClick(Sender: TObject);
 begin
  frmGreeting.Hide;
  MainForm.Show(nil);
+end;
+
+procedure TfrmGreeting.UniFormShow(Sender: TObject);
+begin
+   unlbl1.Caption := UniMainModule.UserName;
 end;
 
 end.
