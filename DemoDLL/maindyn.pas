@@ -34,7 +34,7 @@ type
 var
   Form1: TForm1;
 
-
+// Empty
 implementation
 
 {$R *.dfm}
