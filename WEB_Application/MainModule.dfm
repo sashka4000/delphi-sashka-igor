@@ -1,6 +1,7 @@
 object UniMainModule: TUniMainModule
   OldCreateOrder = False
   OnCreate = UniGUIMainModuleCreate
+  OnDestroy = UniGUIMainModuleDestroy
   MonitoredKeys.Keys = <>
   Height = 426
   Width = 635
@@ -9,7 +10,7 @@ object UniMainModule: TUniMainModule
     FieldDefs = <
       item
         Name = 'ID'
-        DataType = ftInteger
+        DataType = ftAutoInc
       end
       item
         Name = 'UserName'
@@ -62,7 +63,7 @@ object UniMainModule: TUniMainModule
     Top = 40
   end
   object fdstnstrgjsnlnk1: TFDStanStorageJSONLink
-    Left = 56
-    Top = 120
+    Left = 24
+    Top = 96
   end
 end

@@ -42,8 +42,6 @@ begin
 end;
 
 procedure TLoginForm.btnOkClick(Sender: TObject);
-var
-  i: Integer;
 begin
   UniMainModule.fdqryfdq.Close;
   UniMainModule.fdqryfdq.SQL.Clear;

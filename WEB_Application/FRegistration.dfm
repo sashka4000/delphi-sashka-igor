@@ -28,7 +28,7 @@ object frmRegistration: TfrmRegistration
   end
   object undtUserName: TUniEdit
     Left = 32
-    Top = 102
+    Top = 96
     Width = 170
     Height = 25
     Hint = ''
@@ -39,6 +39,7 @@ object frmRegistration: TfrmRegistration
     EmptyText = #1042#1072#1096#1077' '#1080#1084#1103
     ClearButton = True
     FieldLabelFont.Height = -13
+    OnKeyPress = undtUserNameKeyPress
   end
   object undtLog: TUniEdit
     Left = 32
@@ -46,6 +47,7 @@ object frmRegistration: TfrmRegistration
     Width = 170
     Height = 25
     Hint = ''
+    Enabled = False
     Text = ''
     ParentFont = False
     Font.Height = -13
@@ -53,6 +55,7 @@ object frmRegistration: TfrmRegistration
     EmptyText = #1051#1086#1075#1080#1085
     ClearButton = True
     FieldLabelFont.Height = -13
+    OnKeyPress = undtLogKeyPress
   end
   object undtPassword: TUniEdit
     Left = 32
@@ -60,6 +63,7 @@ object frmRegistration: TfrmRegistration
     Width = 170
     Height = 25
     Hint = ''
+    Enabled = False
     Text = ''
     ParentFont = False
     Font.Height = -13
@@ -67,6 +71,7 @@ object frmRegistration: TfrmRegistration
     EmptyText = #1055#1072#1088#1086#1083#1100
     ClearButton = True
     FieldLabelFont.Height = -13
+    OnKeyPress = undtPasswordKeyPress
   end
   object undtRepPass: TUniEdit
     Left = 32
@@ -74,6 +79,7 @@ object frmRegistration: TfrmRegistration
     Width = 170
     Height = 25
     Hint = ''
+    Enabled = False
     Text = ''
     ParentFont = False
     Font.Height = -13
@@ -81,6 +87,7 @@ object frmRegistration: TfrmRegistration
     EmptyText = #1055#1086#1090#1074#1077#1088#1076#1080#1090#1077' '#1087#1072#1088#1086#1083#1100
     ClearButton = True
     FieldLabelFont.Height = -13
+    OnKeyPress = undtRepPassKeyPress
   end
   object btnReg: TUniButton
     Left = 117
@@ -92,5 +99,24 @@ object frmRegistration: TfrmRegistration
     ParentFont = False
     Font.Height = -13
     TabOrder = 5
+    OnClick = btnRegClick
+  end
+  object btnCancel: TUniButton
+    Left = 29
+    Top = 250
+    Width = 75
+    Height = 25
+    Hint = ''
+    Caption = 'btnCancel'
+    TabOrder = 6
+  end
+  object btnReset: TUniButton
+    Left = 127
+    Top = 281
+    Width = 75
+    Height = 25
+    Hint = ''
+    Caption = 'btnCancel'
+    TabOrder = 7
   end
 end
