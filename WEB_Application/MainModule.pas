@@ -44,21 +44,21 @@ end;
 
 procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);
 begin
-//fdmtblOne.Active := True;
-//fdmtblOne.Insert;
-//fdmtblOne.Fields[0].AsInteger := 1;
-//fdmtblOne.Fields[1].AsString := 'Шишкин';
-//fdmtblOne.Fields[2].AsString := 'admin';
-//fdmtblOne.Fields[3].AsString := '0000';
-//fdmtblOne.Post;
-//fdmtblOne.Insert;
-//fdmtblOne.Fields[0].AsInteger := 2;
-//fdmtblOne.Fields[1].AsString := 'Иванов';
-//fdmtblOne.Fields[2].AsString := '0000';
-//fdmtblOne.Fields[3].AsString := 'admin';
-//fdmtblOne.Post;
-
-// fdmtblOne.SaveToFile('text',sfJSON);
+fdmtblOne.Active := True;
+fdmtblOne.Insert;
+fdmtblOne.Fields[0].AsInteger := 1;
+fdmtblOne.Fields[1].AsString := 'Шишкин';
+fdmtblOne.Fields[2].AsString := 'admin';
+fdmtblOne.Fields[3].AsString := '0000';
+fdmtblOne.Post;
+fdmtblOne.Insert;
+fdmtblOne.Fields[0].AsInteger := 2;
+fdmtblOne.Fields[1].AsString := 'Иванов';
+fdmtblOne.Fields[2].AsString := '0000';
+fdmtblOne.Fields[3].AsString := 'admin';
+fdmtblOne.Post;
+//
+ fdmtblOne.SaveToFile('text',sfJSON);
 
  // Проверить существование файла
 

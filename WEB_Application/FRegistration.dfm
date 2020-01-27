@@ -1,8 +1,8 @@
 object frmRegistration: TfrmRegistration
   Left = 0
   Top = 0
-  ClientHeight = 506
-  ClientWidth = 456
+  ClientHeight = 420
+  ClientWidth = 324
   Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103
   BorderStyle = bsNone
   OldCreateOrder = False
@@ -11,116 +11,85 @@ object frmRegistration: TfrmRegistration
   PixelsPerInch = 96
   TextHeight = 13
   object lbReg: TUniLabel
-    Left = 136
-    Top = 16
-    Width = 153
-    Height = 33
+    Left = 64
+    Top = 8
+    Width = 177
+    Height = 73
     Hint = ''
-    Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103
+    Alignment = taCenter
+    AutoSize = False
+    Caption = #1055#1088#1086#1081#1076#1080#1090#1077' '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1102
     ParentFont = False
     Font.Charset = RUSSIAN_CHARSET
     Font.Height = -29
     Font.Name = 'Times New Roman'
     TabOrder = 0
   end
-  object lbuser: TUniLabel
-    Left = 35
-    Top = 166
-    Width = 43
-    Height = 27
-    Hint = ''
-    Caption = #1048#1084#1103
-    ParentFont = False
-    Font.Charset = RUSSIAN_CHARSET
-    Font.Height = -24
-    Font.Name = 'Times New Roman'
-    TabOrder = 1
-  end
-  object lblog: TUniLabel
-    Left = 35
-    Top = 229
-    Width = 63
-    Height = 27
-    Hint = ''
-    Caption = #1051#1086#1075#1080#1085
-    ParentFont = False
-    Font.Charset = RUSSIAN_CHARSET
-    Font.Height = -24
-    Font.Name = 'Times New Roman'
-    TabOrder = 2
-  end
-  object lbPassword: TUniLabel
-    Left = 35
-    Top = 292
-    Width = 75
-    Height = 27
-    Hint = ''
-    Caption = #1055#1072#1088#1086#1083#1100
-    ParentFont = False
-    Font.Charset = RUSSIAN_CHARSET
-    Font.Height = -24
-    Font.Name = 'Times New Roman'
-    TabOrder = 3
-  end
-  object lbRepPass: TUniLabel
-    Left = 35
-    Top = 355
-    Width = 150
-    Height = 27
-    Hint = ''
-    Caption = #1055#1086#1090#1074#1077#1088#1078#1076#1077#1085#1080#1077
-    ParentFont = False
-    Font.Charset = RUSSIAN_CHARSET
-    Font.Height = -24
-    Font.Name = 'Times New Roman'
-    TabOrder = 4
-  end
-  object undtuser: TUniEdit
-    Left = 232
-    Top = 172
+  object undt1: TUniEdit
+    Left = 64
+    Top = 103
     Width = 170
     Height = 25
     Hint = ''
     Text = ''
-    TabOrder = 5
-  end
-  object undtlog: TUniEdit
-    Left = 232
-    Top = 229
-    Width = 170
-    Height = 25
-    Hint = ''
-    Text = ''
-    TabOrder = 6
-  end
-  object undtpass: TUniEdit
-    Left = 232
-    Top = 298
-    Width = 170
-    Height = 25
-    Hint = ''
-    Text = ''
-    TabOrder = 7
-  end
-  object undtreppass: TUniEdit
-    Left = 232
-    Top = 355
-    Width = 170
-    Height = 25
-    Hint = ''
-    Text = ''
-    TabOrder = 8
-  end
-  object btnOk: TUniButton
-    Left = 313
-    Top = 432
-    Width = 89
-    Height = 25
-    Hint = ''
-    Caption = #1042#1074#1086#1076
     ParentFont = False
     Font.Height = -13
-    TabOrder = 9
-    OnClick = btnOkClick
+    TabOrder = 1
+    EmptyText = #1042#1072#1096#1077' '#1080#1084#1103
+    ClearButton = True
+    FieldLabelFont.Height = -13
+  end
+  object UniEdit1: TUniEdit
+    Left = 64
+    Top = 143
+    Width = 170
+    Height = 25
+    Hint = ''
+    Text = ''
+    ParentFont = False
+    Font.Height = -13
+    TabOrder = 2
+    EmptyText = #1042#1072#1096#1077' '#1080#1084#1103
+    ClearButton = True
+    FieldLabelFont.Height = -13
+  end
+  object undt2: TUniEdit
+    Left = 64
+    Top = 183
+    Width = 170
+    Height = 25
+    Hint = ''
+    Text = ''
+    ParentFont = False
+    Font.Height = -13
+    TabOrder = 3
+    EmptyText = #1042#1072#1096#1077' '#1080#1084#1103
+    ClearButton = True
+    FieldLabelFont.Height = -13
+  end
+  object undt3: TUniEdit
+    Left = 64
+    Top = 223
+    Width = 170
+    Height = 25
+    Hint = ''
+    Text = ''
+    ParentFont = False
+    Font.Height = -13
+    TabOrder = 4
+    EmptyText = #1042#1072#1096#1077' '#1080#1084#1103
+    ClearButton = True
+    FieldLabelFont.Height = -13
+  end
+  object btnReg: TUniButton
+    Left = 159
+    Top = 272
+    Width = 85
+    Height = 25
+    Hint = ''
+    Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103
+    ParentFont = False
+    Font.Height = -13
+    TabOrder = 5
   end
 end
