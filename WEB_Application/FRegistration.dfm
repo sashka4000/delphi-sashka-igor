@@ -1,8 +1,8 @@
 object frmRegistration: TfrmRegistration
   Left = 0
   Top = 0
-  ClientHeight = 327
-  ClientWidth = 242
+  ClientHeight = 326
+  ClientWidth = 225
   Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103
   BorderStyle = bsNone
   OldCreateOrder = False
@@ -28,7 +28,7 @@ object frmRegistration: TfrmRegistration
   end
   object undtUserName: TUniEdit
     Left = 32
-    Top = 96
+    Top = 102
     Width = 170
     Height = 25
     Hint = ''
@@ -91,10 +91,11 @@ object frmRegistration: TfrmRegistration
   end
   object btnReg: TUniButton
     Left = 117
-    Top = 250
+    Top = 287
     Width = 85
     Height = 25
     Hint = ''
+    Visible = False
     Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103
     ParentFont = False
     Font.Height = -13
@@ -107,16 +108,18 @@ object frmRegistration: TfrmRegistration
     Width = 75
     Height = 25
     Hint = ''
-    Caption = 'btnCancel'
+    Caption = #1057#1073#1088#1086#1089
     TabOrder = 6
+    OnClick = btnCancelClick
   end
   object btnReset: TUniButton
     Left = 127
-    Top = 281
+    Top = 250
     Width = 75
     Height = 25
     Hint = ''
-    Caption = 'btnCancel'
+    Caption = #1054#1090#1084#1077#1085#1072
     TabOrder = 7
+    OnClick = btnResetClick
   end
 end

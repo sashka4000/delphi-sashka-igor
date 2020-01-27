@@ -22,6 +22,8 @@ type
     procedure undtPasswordKeyPress(Sender: TObject; var Key: Char);
     procedure undtRepPassKeyPress(Sender: TObject; var Key: Char);
     procedure btnRegClick(Sender: TObject);
+    procedure btnCancelClick(Sender: TObject);
+    procedure btnResetClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -42,17 +44,24 @@ begin
   Result := TfrmRegistration(UniMainModule.GetFormInstance(TfrmRegistration));
 end;
 
-procedure TfrmRegistration.btnRegClick(Sender: TObject);
+procedure TfrmRegistration.undtUserNameKeyPress(Sender: TObject; var Key: Char);
 begin
-uniMainModule.fdmtblOne.Insert;
-uniMainModule.fdmtblOne.Fields[1].AsString := UniMainModule.fDataArray[0];
-uniMainModule.fdmtblOne.Fields[2].AsString := UniMainModule.fDataArray[1];
-uniMainModule.fdmtblOne.Fields[3].AsString := UniMainModule.fDataArray[2];
-uniMainModule.fdmtblOne.Post;
-  ShowMessage('Вы зарегистрировались');
-  frmRegistration.Hide;
-  FormLogin.LoginForm.Show(nil);
+  if Key = #13 then
+    if undtUserName.Text <> '' then
+    begin
+      undtLog.Enabled := true;
+      undtLog.Clear;
+      undtLog.SetFocus;
+      undtUserName.Enabled := False;
+    end
+    else
+    begin
+      ShowMessage('Введите пожалуйста ваше имя');
+      undtLog.Enabled := False;
+    end;
 end;
+
+
 
 procedure TfrmRegistration.undtLogKeyPress(Sender: TObject; var Key: Char);
 begin
@@ -75,7 +84,7 @@ begin
       else
       begin
 //****************************************************************************************
-        UniMainModule.fDataArray[1] := undtLog.Text;
+        undtLog.Enabled :=False;
         undtPassword.Enabled := True;
         undtPassword.SetFocus;
         undtRepPass.Enabled := True;
@@ -103,12 +112,11 @@ procedure TfrmRegistration.undtRepPassKeyPress(Sender: TObject; var Key: Char);
 begin
   if Key = #13 then
   begin
-    if (undtPassword.Text <> '') and (undtRepPass.Text <> '') then
+    if (undtPassword.Text <> '') then
     begin
       if undtPassword.Text = undtRepPass.Text then
       begin
-        UniMainModule.fDataArray[2] := undtPassword.Text;
-        btnRegClick(nil);
+       btnReg.Visible :=True;
       end
       else
         ShowMessage('Потвердите пароль!!!');
@@ -118,23 +126,40 @@ begin
   end;
 end;
 
-procedure TfrmRegistration.undtUserNameKeyPress(Sender: TObject; var Key: Char);
+
+
+procedure TfrmRegistration.btnRegClick(Sender: TObject);
 begin
-  if Key = #13 then
-    if undtUserName.Text <> '' then
-    begin
-      undtLog.Enabled := true;
-      undtLog.Clear;
-      UniMainModule.fDataArray[0] := undtUserName.Text;
-      undtLog.SetFocus;
-      undtUserName.Enabled := False;
-    end
-    else
-    begin
-      ShowMessage('Введите пожалуйста ваше имя');
-      undtLog.Enabled := False;
-    end;
+if (undtUserName.Text <> '') and (undtLog.Text <> '') and (undtPassword.Text <> '')
+    and (undtPassword.Text = undtRepPass.Text) then
+
+uniMainModule.fdmtblOne.Insert;
+uniMainModule.fdmtblOne.Fields[1].AsString := undtUserName.Text;
+uniMainModule.fdmtblOne.Fields[2].AsString := undtLog.Text;
+uniMainModule.fdmtblOne.Fields[3].AsString := undtPassword.Text;
+uniMainModule.fdmtblOne.Post;
+  ShowMessage('Вы зарегистрировались');
+  frmRegistration.Hide;
+  FormLogin.LoginForm.Show(nil);
 end;
 
+
+procedure TfrmRegistration.btnCancelClick(Sender: TObject);
+begin
+   undtUserName.Clear;
+   undtLog.Clear;
+   undtPassword.Clear;
+   undtRepPass.Clear;
+   undtPassword.Enabled := False;
+   undtRepPass.Enabled := False;
+   undtUserName.Enabled := True;
+   undtUserName.SetFocus;
+end;
+
+procedure TfrmRegistration.btnResetClick(Sender: TObject);
+begin
+ frmRegistration.Close;
+  FormLogin.LoginForm.Show(nil);
+end;
 end.
 

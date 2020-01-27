@@ -24,7 +24,6 @@ type
     { Private declarations }
   public
     { Public declarations }
-    fDataArray: array[0..2] of string;
     UserName: string;
     UserID: Integer;
   end;
