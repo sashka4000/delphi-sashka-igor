@@ -1,18 +1,19 @@
 object frmRegistration: TfrmRegistration
   Left = 0
   Top = 0
-  ClientHeight = 420
-  ClientWidth = 324
+  ClientHeight = 327
+  ClientWidth = 242
   Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103
   BorderStyle = bsNone
   OldCreateOrder = False
   BorderIcons = []
   MonitoredKeys.Keys = <>
+  ActiveControl = undtUserName
   PixelsPerInch = 96
   TextHeight = 13
   object lbReg: TUniLabel
-    Left = 64
-    Top = 8
+    Left = 29
+    Top = 17
     Width = 177
     Height = 73
     Hint = ''
@@ -25,9 +26,9 @@ object frmRegistration: TfrmRegistration
     Font.Name = 'Times New Roman'
     TabOrder = 0
   end
-  object undt1: TUniEdit
-    Left = 64
-    Top = 103
+  object undtUserName: TUniEdit
+    Left = 32
+    Top = 102
     Width = 170
     Height = 25
     Hint = ''
@@ -39,9 +40,9 @@ object frmRegistration: TfrmRegistration
     ClearButton = True
     FieldLabelFont.Height = -13
   end
-  object UniEdit1: TUniEdit
-    Left = 64
-    Top = 143
+  object undtLog: TUniEdit
+    Left = 32
+    Top = 139
     Width = 170
     Height = 25
     Hint = ''
@@ -49,13 +50,13 @@ object frmRegistration: TfrmRegistration
     ParentFont = False
     Font.Height = -13
     TabOrder = 2
-    EmptyText = #1042#1072#1096#1077' '#1080#1084#1103
+    EmptyText = #1051#1086#1075#1080#1085
     ClearButton = True
     FieldLabelFont.Height = -13
   end
-  object undt2: TUniEdit
-    Left = 64
-    Top = 183
+  object undtPassword: TUniEdit
+    Left = 32
+    Top = 176
     Width = 170
     Height = 25
     Hint = ''
@@ -63,13 +64,13 @@ object frmRegistration: TfrmRegistration
     ParentFont = False
     Font.Height = -13
     TabOrder = 3
-    EmptyText = #1042#1072#1096#1077' '#1080#1084#1103
+    EmptyText = #1055#1072#1088#1086#1083#1100
     ClearButton = True
     FieldLabelFont.Height = -13
   end
-  object undt3: TUniEdit
-    Left = 64
-    Top = 223
+  object undtRepPass: TUniEdit
+    Left = 32
+    Top = 213
     Width = 170
     Height = 25
     Hint = ''
@@ -77,13 +78,13 @@ object frmRegistration: TfrmRegistration
     ParentFont = False
     Font.Height = -13
     TabOrder = 4
-    EmptyText = #1042#1072#1096#1077' '#1080#1084#1103
+    EmptyText = #1055#1086#1090#1074#1077#1088#1076#1080#1090#1077' '#1087#1072#1088#1086#1083#1100
     ClearButton = True
     FieldLabelFont.Height = -13
   end
   object btnReg: TUniButton
-    Left = 159
-    Top = 272
+    Left = 117
+    Top = 250
     Width = 85
     Height = 25
     Hint = ''

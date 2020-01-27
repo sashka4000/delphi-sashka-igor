@@ -10,10 +10,10 @@ uses
 type
   TfrmRegistration = class(TUniForm)
     lbReg: TUniLabel;
-    undt1: TUniEdit;
-    UniEdit1: TUniEdit;
-    undt2: TUniEdit;
-    undt3: TUniEdit;
+    undtUserName: TUniEdit;
+    undtLog: TUniEdit;
+    undtPassword: TUniEdit;
+    undtRepPass: TUniEdit;
     btnReg: TUniButton;
     procedure btnOkClick(Sender: TObject);
   private
