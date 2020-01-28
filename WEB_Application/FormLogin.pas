@@ -62,6 +62,8 @@ end;
 
 procedure TLoginForm.btnRegClick(Sender: TObject);
 begin
+  undtLogin.Clear;
+  undtPassword.Clear;
   LoginForm.Hide;
   FRegistration.frmRegistration.Show(nil);
 
