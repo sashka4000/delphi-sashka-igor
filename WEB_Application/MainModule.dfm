@@ -1,7 +1,6 @@
 object UniMainModule: TUniMainModule
   OldCreateOrder = False
   OnCreate = UniGUIMainModuleCreate
-  OnDestroy = UniGUIMainModuleDestroy
   MonitoredKeys.Keys = <>
   Height = 426
   Width = 635

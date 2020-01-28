@@ -19,7 +19,6 @@ type
     fdqryfdq: TFDQuery;
     fdstnstrgjsnlnk1: TFDStanStorageJSONLink;
     procedure UniGUIMainModuleCreate(Sender: TObject);
-    procedure UniGUIMainModuleDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -74,10 +73,6 @@ begin
   UserID := 0;
 end;
 
-procedure TUniMainModule.UniGUIMainModuleDestroy(Sender: TObject);
-begin
-  fdmtblOne.SaveToFile('text', sfJSON);
-end;
 
 initialization
   RegisterMainModuleClass(TUniMainModule);
