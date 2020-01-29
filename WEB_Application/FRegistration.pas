@@ -5,13 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   uniGUITypes, uniGUIAbstractClasses, uniGUIClasses, uniGUIForm, uniEdit,
-  uniGUIBaseClasses, uniLabel, uniButton, FireDAC.Stan.Intf, FireDAC.Stan.Option,
-  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, frxClass, frxDBSet, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, Data.Win.ADODB, FireDAC.UI.Intf, FireDAC.Stan.Def,
-  FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
-  FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait,
-  FireDAC.Phys.SQLiteVDataSet, FireDAC.DApt, FireDAC.Stan.StorageJSON;
+  uniGUIBaseClasses, uniLabel, uniButton, FireDAC.Stan.Intf;
 
 type
   TfrmRegistration = class(TUniForm)
@@ -53,7 +47,7 @@ begin
     UniMainModule.fdqryfdq.Close;
     UniMainModule.fdqryfdq.SQL.Clear;
     UniMainModule.fdqryfdq.SQL.Add('select id, username from Tb1 where Login=:login');
-    UniMainModule.fdqryfdq.ParamByName('login').Value := undtLog.Text;
+    UniMainModule.fdqryfdq.ParamByName('login').Value := Trim(UpperCase(undtLog.Text));
     UniMainModule.fdqryfdq.Open;
 
     if UniMainModule.fdqryfdq.RecordCount > 0 then
@@ -66,7 +60,7 @@ begin
     begin
       uniMainModule.fdmtblOne.Insert;
       uniMainModule.fdmtblOne.Fields[1].AsString := undtUserName.Text;
-      uniMainModule.fdmtblOne.Fields[2].AsString := undtLog.Text;
+      uniMainModule.fdmtblOne.Fields[2].AsString := Trim(UpperCase(undtLog.Text));
       uniMainModule.fdmtblOne.Fields[3].AsString := undtPassword.Text;
       uniMainModule.fdmtblOne.Post;
       UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
