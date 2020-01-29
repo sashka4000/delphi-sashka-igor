@@ -1,0 +1,79 @@
+object LoginForm: TLoginForm
+  Left = 0
+  Top = 0
+  ClientHeight = 193
+  ClientWidth = 263
+  Caption = ''
+  BorderStyle = bsNone
+  Position = poDesktopCenter
+  OldCreateOrder = False
+  BorderIcons = [biSystemMenu]
+  MonitoredKeys.Keys = <>
+  ActiveControl = undtLogin
+  PixelsPerInch = 96
+  TextHeight = 13
+  object lb_Welcome: TUniLabel
+    Left = 20
+    Top = 8
+    Width = 228
+    Height = 41
+    Hint = ''
+    Alignment = taCenter
+    AutoSize = False
+    Caption = #1055#1086#1078#1072#1083#1091#1081#1089#1090#1072' '#1072#1074#1090#1086#1088#1080#1079#1091#1081#1090#1077#1089#1100' '#1080#1083#1080' '#1079#1072#1088#1077#1075#1080#1089#1090#1088#1080#1088#1091#1081#1090#1077#1089#1100
+    ParentFont = False
+    Font.Height = -16
+    TabOrder = 0
+  end
+  object undtLogin: TUniEdit
+    Left = 44
+    Top = 64
+    Width = 180
+    Hint = ''
+    Text = ''
+    ParentFont = False
+    Font.Height = -13
+    TabOrder = 1
+    EmptyText = #1051#1086#1075#1080#1085
+    ClearButton = True
+    FieldLabelFont.Height = -13
+  end
+  object undtPassword: TUniEdit
+    Left = 44
+    Top = 101
+    Width = 180
+    Hint = ''
+    PasswordChar = '*'
+    Text = ''
+    ParentFont = False
+    Font.Height = -13
+    TabOrder = 2
+    EmptyText = #1055#1072#1088#1086#1083#1100
+    ClearButton = True
+    FieldLabelFont.Height = -13
+  end
+  object btnCancel: TUniButton
+    Left = 8
+    Top = 144
+    Width = 75
+    Height = 25
+    Hint = ''
+    Caption = #1054#1090#1084#1077#1085#1072
+    ModalResult = 2
+    ParentFont = False
+    Font.Height = -13
+    TabOrder = 3
+  end
+  object btnOk: TUniButton
+    Left = 160
+    Top = 144
+    Width = 64
+    Height = 25
+    Hint = ''
+    Caption = #1042#1074#1086#1076
+    ParentFont = False
+    Font.Height = -13
+    TabOrder = 4
+    OnClick = btnOkClick
+  end
+end
