@@ -1,8 +1,8 @@
 object frmRegistration: TfrmRegistration
   Left = 0
   Top = 0
-  ClientHeight = 280
-  ClientWidth = 225
+  ClientHeight = 492
+  ClientWidth = 712
   Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103
   BorderStyle = bsNone
   OldCreateOrder = False
@@ -12,7 +12,7 @@ object frmRegistration: TfrmRegistration
   PixelsPerInch = 96
   TextHeight = 13
   object lbReg: TUniLabel
-    Left = 21
+    Left = 253
     Top = 8
     Width = 177
     Height = 73
@@ -55,8 +55,8 @@ object frmRegistration: TfrmRegistration
     FieldLabelFont.Height = -13
   end
   object undtPassword: TUniEdit
-    Left = 24
-    Top = 167
+    Left = 224
+    Top = 93
     Width = 170
     Height = 25
     Hint = ''
@@ -69,8 +69,8 @@ object frmRegistration: TfrmRegistration
     FieldLabelFont.Height = -13
   end
   object undtRepPass: TUniEdit
-    Left = 24
-    Top = 204
+    Left = 224
+    Top = 130
     Width = 170
     Height = 25
     Hint = ''
@@ -83,8 +83,8 @@ object frmRegistration: TfrmRegistration
     FieldLabelFont.Height = -13
   end
   object btnReg: TUniButton
-    Left = 105
-    Top = 235
+    Left = 309
+    Top = 171
     Width = 85
     Height = 25
     Hint = ''
@@ -96,12 +96,22 @@ object frmRegistration: TfrmRegistration
   end
   object btnReset: TUniButton
     Left = 24
-    Top = 235
+    Top = 171
     Width = 75
     Height = 25
     Hint = ''
     Caption = #1054#1090#1084#1077#1085#1072
     TabOrder = 6
     OnClick = btnResetClick
+  end
+  object undbgrd1: TUniDBGrid
+    Left = 16
+    Top = 216
+    Width = 688
+    Height = 241
+    Hint = ''
+    DataSource = UniMainModule.ds1
+    LoadMask.Message = 'Loading data...'
+    TabOrder = 7
   end
 end

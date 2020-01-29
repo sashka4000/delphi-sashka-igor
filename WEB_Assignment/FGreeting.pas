@@ -36,13 +36,13 @@ end;
 
 procedure TfrmGreeting.btnGreetingOkClick(Sender: TObject);
 begin
- frmGreeting.Hide;
- MainForm.Show(nil);
+// frmGreeting.Hide;
+// MainForm.Show(nil);
 end;
 
 procedure TfrmGreeting.UniFormShow(Sender: TObject);
 begin
-   unlbl1.Caption := UniMainModule.UserName;
+//   unlbl1.Caption := UniMainModule.UserName;
 end;
 
 end.

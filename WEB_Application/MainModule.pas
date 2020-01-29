@@ -50,7 +50,7 @@ begin
   begin
     fdmtblOne.Insert;
     fdmtblOne.Fields[1].AsString := 'Некто';
-    fdmtblOne.Fields[2].AsString := 'admin';
+    fdmtblOne.Fields[2].AsString := 'ADMIN';
     fdmtblOne.Fields[3].AsString := '0000';
     fdmtblOne.Post;
     fdmtblOne.SaveToFile('text', sfJSON);

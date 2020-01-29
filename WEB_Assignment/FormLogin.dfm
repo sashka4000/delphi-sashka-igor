@@ -1,8 +1,8 @@
 object LoginForm: TLoginForm
   Left = 0
   Top = 0
-  ClientHeight = 193
-  ClientWidth = 263
+  ClientHeight = 168
+  ClientWidth = 227
   Caption = ''
   BorderStyle = bsNone
   Position = poDesktopCenter
@@ -13,22 +13,22 @@ object LoginForm: TLoginForm
   PixelsPerInch = 96
   TextHeight = 13
   object lb_Welcome: TUniLabel
-    Left = 20
-    Top = 8
+    Left = 4
+    Top = 7
     Width = 228
-    Height = 41
+    Height = 18
     Hint = ''
     Alignment = taCenter
     AutoSize = False
-    Caption = #1055#1086#1078#1072#1083#1091#1081#1089#1090#1072' '#1072#1074#1090#1086#1088#1080#1079#1091#1081#1090#1077#1089#1100' '#1080#1083#1080' '#1079#1072#1088#1077#1075#1080#1089#1090#1088#1080#1088#1091#1081#1090#1077#1089#1100
+    Caption = #1055#1086#1078#1072#1083#1091#1081#1089#1090#1072' '#1072#1074#1090#1086#1088#1080#1079#1091#1081#1090#1077#1089#1100
     ParentFont = False
     Font.Height = -16
     TabOrder = 0
   end
   object undtLogin: TUniEdit
-    Left = 44
-    Top = 64
-    Width = 180
+    Left = 32
+    Top = 37
+    Width = 161
     Hint = ''
     Text = ''
     ParentFont = False
@@ -39,9 +39,9 @@ object LoginForm: TLoginForm
     FieldLabelFont.Height = -13
   end
   object undtPassword: TUniEdit
-    Left = 44
-    Top = 101
-    Width = 180
+    Left = 32
+    Top = 71
+    Width = 161
     Hint = ''
     PasswordChar = '*'
     Text = ''
@@ -53,8 +53,8 @@ object LoginForm: TLoginForm
     FieldLabelFont.Height = -13
   end
   object btnCancel: TUniButton
-    Left = 8
-    Top = 144
+    Left = 32
+    Top = 109
     Width = 75
     Height = 25
     Hint = ''
@@ -63,10 +63,11 @@ object LoginForm: TLoginForm
     ParentFont = False
     Font.Height = -13
     TabOrder = 3
+    OnClick = btnCancelClick
   end
   object btnOk: TUniButton
-    Left = 160
-    Top = 144
+    Left = 129
+    Top = 109
     Width = 64
     Height = 25
     Hint = ''

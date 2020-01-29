@@ -25,6 +25,15 @@ object UniMainModule: TUniMainModule
         Name = 'Password'
         DataType = ftString
         Size = 20
+      end
+      item
+        Name = 'Status'
+        DataType = ftBoolean
+      end
+      item
+        Name = 'Assignment'
+        DataType = ftString
+        Size = 50
       end>
     IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
@@ -41,6 +50,7 @@ object UniMainModule: TUniMainModule
   object con1: TFDConnection
     Params.Strings = (
       'DriverID=SQLite')
+    Connected = True
     LoginPrompt = False
     Left = 96
     Top = 40
@@ -63,6 +73,11 @@ object UniMainModule: TUniMainModule
   end
   object fdstnstrgjsnlnk1: TFDStanStorageJSONLink
     Left = 24
+    Top = 96
+  end
+  object ds1: TDataSource
+    DataSet = fdmtblOne
+    Left = 96
     Top = 96
   end
 end

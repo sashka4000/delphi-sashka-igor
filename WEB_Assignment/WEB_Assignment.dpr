@@ -7,7 +7,9 @@ uses
   Main in 'Main.pas' {MainForm: TUniForm},
   FormLogin in 'FormLogin.pas' {LoginForm: TUniLoginForm},
   FGreeting in 'FGreeting.pas' {frmGreeting: TUniForm},
-  FRegistration in 'FRegistration.pas' {frmRegistration: TUniForm};
+  FRegistration in 'FRegistration.pas' {frmRegistration: TUniForm},
+  FAdmin in 'FAdmin.pas' {frmAdmin: TUniForm},
+  FUser in 'FUser.pas' {frmUser: TUniForm};
 
 {$R *.res}
 

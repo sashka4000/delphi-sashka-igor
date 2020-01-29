@@ -5,7 +5,7 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   uniGUITypes, uniGUIAbstractClasses, uniGUIClasses, uniGUIForm, uniEdit,
-  uniGUIBaseClasses, uniLabel, uniButton, FireDAC.Stan.Intf;
+  uniGUIBaseClasses, uniLabel, uniButton, FireDAC.Stan.Intf, uniBasicGrid, uniDBGrid;
 
 type
   TfrmRegistration = class(TUniForm)
@@ -16,6 +16,7 @@ type
     undtRepPass: TUniEdit;
     btnReg: TUniButton;
     btnReset: TUniButton;
+    undbgrd1: TUniDBGrid;
     procedure btnRegClick(Sender: TObject);
     procedure btnResetClick(Sender: TObject);
   private
@@ -46,7 +47,7 @@ begin
   begin
     UniMainModule.fdqryfdq.Close;
     UniMainModule.fdqryfdq.SQL.Clear;
-    UniMainModule.fdqryfdq.SQL.Add('select id, username from Tb1 where Login=:login');
+    UniMainModule.fdqryfdq.SQL.Add('select id, status from Tb1 where Login=:login');
     UniMainModule.fdqryfdq.ParamByName('login').Value := Trim(UpperCase(undtLog.Text));
     UniMainModule.fdqryfdq.Open;
 
@@ -62,6 +63,8 @@ begin
       uniMainModule.fdmtblOne.Fields[1].AsString := undtUserName.Text;
       uniMainModule.fdmtblOne.Fields[2].AsString := Trim(UpperCase(undtLog.Text));
       uniMainModule.fdmtblOne.Fields[3].AsString := undtPassword.Text;
+      uniMainModule.fdmtblOne.Fields[4].AsBoolean := False;
+      uniMainModule.fdmtblOne.Fields[5].AsString := '';
       uniMainModule.fdmtblOne.Post;
       UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
       ShowMessage('Вы зарегистрировались');
