@@ -1,0 +1,12 @@
+WEB_Assignment.exe: 000010D4: 15:24:54 [127.0.0.1]:Failed Sequence Recovery: SeqId: 4, Event: click
+WEB_Assignment.exe: 000010D4: 15:24:54 [127.0.0.1]:Sequence sent from cache:  SeqId: 4
+WEB_Assignment.exe: 000010D4: 15:24:54 [127.0.0.1]:Processed: Id: 4, Evt: click, [MZkjOFQ5Eg1056C807E]
+WEB_Assignment.exe: 00000B58: 17:07:06 [127.0.0.1]:Failed Sequence Recovery: SeqId: 6, Event: click
+WEB_Assignment.exe: 00000B58: 17:07:06 [127.0.0.1]:Sequence sent from cache:  SeqId: 6
+WEB_Assignment.exe: 00000B58: 17:07:06 [127.0.0.1]:Processed: Id: 6, Evt: click, [9fklbei3OW1056C9BF9]
+WEB_Assignment.exe: 00000454: 17:07:06 [127.0.0.1]:Failed Sequence Recovery: SeqId: 6, Event: click
+WEB_Assignment.exe: 00000454: 17:07:06 [127.0.0.1]:Sequence sent from cache:  SeqId: 6
+WEB_Assignment.exe: 00000454: 17:07:06 [127.0.0.1]:Processed: Id: 6, Evt: click, [9fklbei3OW1056C9BF9]
+WEB_Assignment.exe: 0000176C: 17:07:17 [127.0.0.1]:Failed Sequence Recovery: SeqId: 6, Event: click
+WEB_Assignment.exe: 0000176C: 17:07:17 [127.0.0.1]:Sequence sent from cache:  SeqId: 6
+WEB_Assignment.exe: 0000176C: 17:07:17 [127.0.0.1]:Processed: Id: 6, Evt: click, [9fklbei3OW1056C9BF9]
