@@ -478,3 +478,243 @@ WEB_Assignment.exe: 0000159C: 16:09:40 [TUniGUISessionManager]:Session manager t
 WEB_Assignment.exe: 0000159C: 16:09:40 [TUniServerModule]:Server Shutdown Completed.
 WEB_Assignment.exe: 0000159C: 16:09:40 []:<-------------------------------------------------------------->
 WEB_Assignment.exe: 0000159C: 16:09:40 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 00001698: 16:40:13 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 00001698: 16:40:13 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 00001698: 16:40:13 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 00001698: 16:40:13 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 00001698: 16:40:13 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 00001698: 16:41:28 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 00001698: 16:41:28 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 00001698: 16:41:31 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 00001698: 16:41:31 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 00001698: 16:41:31 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 00001698: 16:41:31 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 00001698: 16:41:31 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 00001698: 16:41:31 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 00001698: 16:41:31 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 00001698: 16:41:31 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 00001698: 16:41:31 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 0000158C: 16:44:01 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 0000158C: 16:44:01 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 0000158C: 16:44:01 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 0000158C: 16:44:01 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 0000158C: 16:44:01 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 0000158C: 16:45:05 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 0000158C: 16:45:05 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 0000158C: 16:45:05 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 0000158C: 16:45:05 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 0000158C: 16:45:05 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 0000158C: 16:45:05 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 0000158C: 16:45:05 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 0000158C: 16:45:05 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 0000158C: 16:45:05 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 0000158C: 16:45:05 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 0000158C: 16:45:05 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 00000B44: 16:45:27 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 00000B44: 16:45:27 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 00000B44: 16:45:27 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 00000B44: 16:45:27 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 00000B44: 16:45:27 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 00000B44: 16:49:02 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 00000B44: 16:49:02 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 00000B44: 16:49:02 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 00000B44: 16:49:02 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 00000B44: 16:49:02 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 00000B44: 16:49:02 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 00000B44: 16:49:02 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 00000B44: 16:49:02 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 00000B44: 16:49:02 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 00000B44: 16:49:02 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 00000B44: 16:49:02 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 00001BF8: 16:52:37 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 00001BF8: 16:52:37 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 00001BF8: 16:52:37 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 00001BF8: 16:52:37 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 00001BF8: 16:52:37 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 00001BF8: 16:53:36 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 00001BF8: 16:53:36 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 00001BF8: 16:53:39 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 00001BF8: 16:53:39 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 00001BF8: 16:53:39 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 00001BF8: 16:53:39 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 00001BF8: 16:53:39 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 00001BF8: 16:53:39 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 00001BF8: 16:53:39 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 00001BF8: 16:53:39 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 00001BF8: 16:53:39 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 00000FCC: 16:54:39 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 00000FCC: 16:54:39 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 00000FCC: 16:54:39 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 00000FCC: 16:54:39 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 00000FCC: 16:54:39 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 00000FCC: 16:55:23 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 00000FCC: 16:55:23 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 00000FCC: 16:55:23 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 00000FCC: 16:55:23 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 00000FCC: 16:55:23 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 00000FCC: 16:55:23 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 00000FCC: 16:55:23 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 00000FCC: 16:55:23 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 00000FCC: 16:55:23 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 00000FCC: 16:55:23 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 00000FCC: 16:55:23 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 000019D4: 17:02:27 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 000019D4: 17:02:27 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 000019D4: 17:02:27 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 000019D4: 17:02:27 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 000019D4: 17:02:27 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 000019D4: 17:03:34 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 000019D4: 17:03:34 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 000019D4: 17:03:35 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 000019D4: 17:03:35 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 000019D4: 17:03:35 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 000019D4: 17:03:35 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 000019D4: 17:03:35 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 000019D4: 17:03:35 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 000019D4: 17:03:35 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 000019D4: 17:03:35 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 000019D4: 17:03:35 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 000014D8: 17:03:56 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 000014D8: 17:03:56 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 000014D8: 17:03:56 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 000014D8: 17:03:56 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 000014D8: 17:03:57 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 000014D8: 17:04:51 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 000014D8: 17:04:51 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 000014D8: 17:04:58 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 000014D8: 17:04:58 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 000014D8: 17:04:58 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 000014D8: 17:04:58 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 000014D8: 17:04:58 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 000014D8: 17:04:58 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 000014D8: 17:04:58 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 000014D8: 17:04:58 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 000014D8: 17:04:58 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 00000D34: 17:05:44 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 00000D34: 17:05:44 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 00000D34: 17:05:44 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 00000D34: 17:05:44 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 00000D34: 17:05:44 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 00000D34: 17:06:47 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 00000D34: 17:06:47 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 00000D34: 17:06:48 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 00000D34: 17:06:48 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 00000D34: 17:06:48 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 00000D34: 17:06:48 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 00000D34: 17:06:48 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 00000D34: 17:06:48 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 00000D34: 17:06:48 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 00000D34: 17:06:48 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 00000D34: 17:06:48 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 00001688: 17:26:53 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 00001688: 17:26:53 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 00001688: 17:26:53 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 00001688: 17:26:53 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 00001688: 17:26:53 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 00001688: 17:27:52 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 00001688: 17:27:52 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 00001688: 17:27:55 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 00001688: 17:27:55 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 00001688: 17:27:55 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 00001688: 17:27:55 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 00001688: 17:27:55 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 00001688: 17:27:55 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 00001688: 17:27:55 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 00001688: 17:27:55 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 00001688: 17:27:55 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 00000914: 17:28:42 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 00000914: 17:28:42 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 00000914: 17:28:42 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 00000914: 17:28:42 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 00000914: 17:28:42 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 00000914: 17:29:57 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 00000914: 17:29:57 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 00000914: 17:30:00 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 00000914: 17:30:00 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 00000914: 17:30:00 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 00000914: 17:30:00 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 00000914: 17:30:00 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 00000914: 17:30:00 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 00000914: 17:30:00 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 00000914: 17:30:00 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 00000914: 17:30:00 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 000018F8: 17:30:56 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 000018F8: 17:30:56 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 000018F8: 17:30:56 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 000018F8: 17:30:56 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 000018F8: 17:30:56 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 000018F8: 17:31:35 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 000018F8: 17:31:35 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 000018F8: 17:31:36 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 000018F8: 17:31:36 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 000018F8: 17:31:36 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 000018F8: 17:31:36 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 000018F8: 17:31:36 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 000018F8: 17:31:36 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 000018F8: 17:31:36 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 000018F8: 17:31:36 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 000018F8: 17:31:36 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 000010AC: 17:32:01 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 000010AC: 17:32:01 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 000010AC: 17:32:01 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 000010AC: 17:32:01 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 000010AC: 17:32:01 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 000010AC: 17:33:09 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 000010AC: 17:33:09 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 000010AC: 17:33:23 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 000010AC: 17:33:23 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 000010AC: 17:33:23 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 000010AC: 17:33:23 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 000010AC: 17:33:23 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 000010AC: 17:33:23 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 000010AC: 17:33:23 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 000010AC: 17:33:23 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 000010AC: 17:33:23 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 00001274: 17:34:20 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 00001274: 17:34:20 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 00001274: 17:34:20 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 00001274: 17:34:20 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 00001274: 17:34:20 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 00001274: 17:36:20 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 00001274: 17:36:20 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 00001274: 17:36:21 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 00001274: 17:36:21 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 00001274: 17:36:21 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 00001274: 17:36:21 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 00001274: 17:36:21 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 00001274: 17:36:21 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 00001274: 17:36:21 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 00001274: 17:36:21 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 00001274: 17:36:21 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 00001858: 17:37:46 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 00001858: 17:37:46 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 00001858: 17:37:46 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 00001858: 17:37:46 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 00001858: 17:37:46 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 00001858: 17:40:24 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 00001858: 17:40:24 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 00001858: 17:40:25 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 00001858: 17:40:25 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 00001858: 17:40:25 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 00001858: 17:40:25 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 00001858: 17:40:25 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 00001858: 17:40:25 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 00001858: 17:40:25 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 00001858: 17:40:25 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 00001858: 17:40:25 [Terminated]:Exit Code: 0
+WEB_Assignment.exe: 000004E4: 17:41:13 []:>--------------------------------------------------------------<
+WEB_Assignment.exe: 000004E4: 17:41:13 [TUniServerModule]:Server First Init.
+WEB_Assignment.exe: 000004E4: 17:41:13 [TUniServerModule]:Debug Mode = ON
+WEB_Assignment.exe: 000004E4: 17:41:13 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_Assignment.exe: 000004E4: 17:41:13 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_Assignment.exe: 000004E4: 17:41:35 [TUniServerModule]:Shutting Down Server.
+WEB_Assignment.exe: 000004E4: 17:41:35 [TUniServerModule]:Stopping HTTP Server.
+WEB_Assignment.exe: 000004E4: 17:41:39 [TUniServerModule]:HTTP Server Stopped.
+WEB_Assignment.exe: 000004E4: 17:41:39 [TUniGUISessionManager]:Terminating Session manager.
+WEB_Assignment.exe: 000004E4: 17:41:39 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_Assignment.exe: 000004E4: 17:41:39 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_Assignment.exe: 000004E4: 17:41:39 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_Assignment.exe: 000004E4: 17:41:39 [TUniGUISessionManager]:Session manager terminated.
+WEB_Assignment.exe: 000004E4: 17:41:39 [TUniServerModule]:Server Shutdown Completed.
+WEB_Assignment.exe: 000004E4: 17:41:39 []:<-------------------------------------------------------------->
+WEB_Assignment.exe: 000004E4: 17:41:39 [Terminated]:Exit Code: 0

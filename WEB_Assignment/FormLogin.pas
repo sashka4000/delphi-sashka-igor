@@ -54,7 +54,7 @@ begin
     undtLogin.Clear;
     undtPassword.Clear;
     ShowMessage('Неправильный Логин или Пароль!');
-     undtLogin.SetFocus
+
   end
   else
   begin

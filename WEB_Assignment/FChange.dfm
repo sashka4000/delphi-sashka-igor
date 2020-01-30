@@ -7,6 +7,7 @@ object frmChange: TfrmChange
   BorderStyle = bsNone
   OldCreateOrder = False
   MonitoredKeys.Keys = <>
+  ActiveControl = undtOldPass
   PixelsPerInch = 96
   TextHeight = 13
   object undtOldPass: TUniEdit

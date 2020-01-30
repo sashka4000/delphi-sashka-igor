@@ -44,8 +44,7 @@ end;
 
 procedure TfrmChange.btnOkClick(Sender: TObject);
 begin
-  if (UniMainModule.UserPassword = undtOldPass.Text) and (undtNewPass.Text = undtRepPas.Text)
-  and (UniMainModule.UserPassword <> undtNewPass.Text) then
+  if (UniMainModule.UserPassword = undtOldPass.Text) and (undtNewPass.Text = undtRepPas.Text) and (UniMainModule.UserPassword <> undtNewPass.Text) then
   begin
     UniMainModule.fdqryfdq.Close;
     UniMainModule.fdqryfdq.SQL.Clear;
@@ -57,9 +56,16 @@ begin
     UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
     frmChange.Close;
     LoginForm.Show(nil);
+  end
+  else
+  begin
+    ShowMessage(('Вы не поменяли пароль!!'));
+    undtNewPass.Clear;
+    undtRepPas.Clear;
   end;
-
 end;
+
+
 
 end.
 
