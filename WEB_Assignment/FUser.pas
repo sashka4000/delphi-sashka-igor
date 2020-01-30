@@ -12,6 +12,7 @@ type
     btn1: TUniButton;
     btnChange: TUniButton;
     procedure btnChangeClick(Sender: TObject);
+    procedure btn1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -25,11 +26,16 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication, FChange;
+  MainModule, uniGUIApplication, FChange, Main;
 
 function frmUser: TfrmUser;
 begin
   Result := TfrmUser(UniMainModule.GetFormInstance(TfrmUser));
+end;
+
+procedure TfrmUser.btn1Click(Sender: TObject);
+begin
+MainForm.Show(nil);
 end;
 
 procedure TfrmUser.btnChangeClick(Sender: TObject);

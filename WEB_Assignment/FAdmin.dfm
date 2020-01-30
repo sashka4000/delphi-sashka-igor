@@ -27,7 +27,9 @@ object frmAdmin: TfrmAdmin
     Height = 25
     Hint = ''
     Caption = #1050#1086#1084#1072#1085#1076#1080#1088#1086#1074#1082#1080
+    ModalResult = 1
     TabOrder = 1
+    OnClick = btn2Click
   end
   object btnChange: TUniButton
     Left = 141

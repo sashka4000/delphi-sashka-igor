@@ -41,8 +41,6 @@ begin
   Result := TLoginForm(UniMainModule.GetFormInstance(TLoginForm));
 end;
 
-
-
 procedure TLoginForm.btnOkClick(Sender: TObject);
 begin
   UniMainModule.fdqryfdq.Close;
@@ -52,30 +50,35 @@ begin
   UniMainModule.fdqryfdq.ParamByName('password').Value := undtPassword.Text;
   UniMainModule.fdqryfdq.Open;
   if UniMainModule.fdqryfdq.RecordCount = 0 then
-    ShowMessage('Неправильный Логин или Пароль!')
+  begin
+    undtLogin.Clear;
+    undtPassword.Clear;
+    ShowMessage('Неправильный Логин или Пароль!');
+     undtLogin.SetFocus
+  end
   else
   begin
-    UniMainModule.UserName := UniMainModule.fdqryfdq.Fields [1].Value;
-    UniMainModule.UserID  := UniMainModule.fdqryfdq.Fields [0].Value;
+    UniMainModule.UserName := UniMainModule.fdqryfdq.Fields[1].Value;
+    UniMainModule.UserID := UniMainModule.fdqryfdq.Fields[0].Value;
     UniMainModule.UserStaus := UniMainModule.fdqryfdq.Fields[2].Value;
-    UniMainModule.UserPassword := UniMainModule.fdqryfdq.Fields [3].Value;
+    UniMainModule.UserPassword := UniMainModule.fdqryfdq.Fields[3].Value;
 //************* Проверека статуса ввода логин-пароля ***********************************************
-  if UniMainModule.UserStaus then
-     begin
+    if UniMainModule.UserStaus then
+    begin
   // Показать форму admin
-     undtLogin.Clear;
-     undtPassword.Clear;
-     LoginForm.Hide;
-     frmAdmin.show(nil);
-     end
-     else
-     begin
+      undtLogin.Clear;
+      undtPassword.Clear;
+      LoginForm.Hide;
+      frmAdmin.show(nil);
+    end
+    else
+    begin
   // Показать форму пользавателя
-     undtLogin.Clear;
-     undtPassword.Clear;
-     LoginForm.Hide;
-     frmUser.show(nil);
-     end;
+      undtLogin.Clear;
+      undtPassword.Clear;
+      LoginForm.Hide;
+      frmUser.show(nil);
+    end;
 //**************************************************************************************************
 
 
@@ -84,12 +87,12 @@ end;
 
 procedure TLoginForm.UniLoginFormShow(Sender: TObject);
 begin
-ActiveControl := undtLogin;
+  ActiveControl := undtLogin;
 end;
 
 procedure TLoginForm.btnCancelClick(Sender: TObject);
 var
-i: Integer;
+  i: Integer;
 begin
 
 end;

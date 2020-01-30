@@ -44,21 +44,19 @@ end;
 
 procedure TfrmChange.btnOkClick(Sender: TObject);
 begin
-  if (UniMainModule.UserPassword = undtOldPass.Text) and (undtNewPass.Text = undtRepPas.Text) then
+  if (UniMainModule.UserPassword = undtOldPass.Text) and (undtNewPass.Text = undtRepPas.Text)
+  and (UniMainModule.UserPassword <> undtNewPass.Text) then
   begin
-//************************* Извлечение записи *****************************************
-//    UniMainModule.fdqryfdq.Close;
-//    UniMainModule.fdqryfdq.SQL.Clear;
-//    UniMainModule.fdqryfdq.SQL.Add('select id, password from Tb1 where ID=:id');
-//    UniMainModule.fdqryfdq.ParamByName('id').Value := UniMainModule.UserID;
-//    UniMainModule.fdqryfdq.Open;
-
-
-//************************* Редактирование пароля ***************************************
-//    uniMainModule.fdmtblOne.Edit;
-//    uniMainModule.fdmtblOne.Fields[3].AsString := undtNewPass.Text;
-//    uniMainModule.fdmtblOne.Post;
+    UniMainModule.fdqryfdq.Close;
+    UniMainModule.fdqryfdq.SQL.Clear;
+    UniMainModule.fdqryfdq.SQL.Add('update Tb1 set password = :p where id = :id');
+    UniMainModule.fdqryfdq.ParamByName('p').Value := undtNewPass.Text;
+    UniMainModule.fdqryfdq.ParamByName('id').Value := UniMainModule.UserID;
+    UniMainModule.fdqryfdq.ExecSQL;
+    UniMainModule.fdqryfdq.Close;
     UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
+    frmChange.Close;
+    LoginForm.Show(nil);
   end;
 
 end;

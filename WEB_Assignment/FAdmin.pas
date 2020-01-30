@@ -14,6 +14,7 @@ type
     btnChange: TUniButton;
     procedure btn1Click(Sender: TObject);
     procedure btnChangeClick(Sender: TObject);
+    procedure btn2Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -27,7 +28,7 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication, FRegistration, FChange;
+  MainModule, uniGUIApplication, FRegistration, FChange, Main;
 
 function frmAdmin: TfrmAdmin;
 begin
@@ -38,6 +39,11 @@ procedure TfrmAdmin.btn1Click(Sender: TObject);
 begin
 frmAdmin.Close;
 frmRegistration.Show(nil);
+end;
+
+procedure TfrmAdmin.btn2Click(Sender: TObject);
+begin
+MainForm.Show(nil);
 end;
 
 procedure TfrmAdmin.btnChangeClick(Sender: TObject);

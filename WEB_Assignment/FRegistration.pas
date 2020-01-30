@@ -17,8 +17,10 @@ type
     btnReg: TUniButton;
     btnReset: TUniButton;
     undbgrd1: TUniDBGrid;
+    btnChange: TUniButton;
     procedure btnRegClick(Sender: TObject);
     procedure btnResetClick(Sender: TObject);
+    procedure btnChangeClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,13 +34,19 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication, Main, FormLogin;
+  MainModule, uniGUIApplication, Main, FormLogin, FChange;
 
 function frmRegistration: TfrmRegistration;
 begin
   Result := TfrmRegistration(UniMainModule.GetFormInstance(TfrmRegistration));
 end;
 
+
+procedure TfrmRegistration.btnChangeClick(Sender: TObject);
+begin
+frmRegistration.Close;
+FChange.frmChange.Show(nil);
+end;
 
 procedure TfrmRegistration.btnRegClick(Sender: TObject);
 begin

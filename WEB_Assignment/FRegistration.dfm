@@ -83,9 +83,9 @@ object frmRegistration: TfrmRegistration
     FieldLabelFont.Height = -13
   end
   object btnReg: TUniButton
-    Left = 309
+    Left = 299
     Top = 171
-    Width = 85
+    Width = 95
     Height = 25
     Hint = ''
     Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103
@@ -113,5 +113,15 @@ object frmRegistration: TfrmRegistration
     DataSource = UniMainModule.ds1
     LoadMask.Message = 'Loading data...'
     TabOrder = 7
+  end
+  object btnChange: TUniButton
+    Left = 164
+    Top = 171
+    Width = 95
+    Height = 25
+    Hint = ''
+    Caption = #1057#1084#1077#1085#1080#1090#1100' '#1087#1072#1088#1086#1083#1100
+    TabOrder = 8
+    OnClick = btnChangeClick
   end
 end
