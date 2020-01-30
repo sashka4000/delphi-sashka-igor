@@ -9,7 +9,8 @@ uses
   FGreeting in 'FGreeting.pas' {frmGreeting: TUniForm},
   FRegistration in 'FRegistration.pas' {frmRegistration: TUniForm},
   FAdmin in 'FAdmin.pas' {frmAdmin: TUniForm},
-  FUser in 'FUser.pas' {frmUser: TUniForm};
+  FUser in 'FUser.pas' {frmUser: TUniForm},
+  FChange in 'FChange.pas' {frmChange: TUniForm};
 
 {$R *.res}
 

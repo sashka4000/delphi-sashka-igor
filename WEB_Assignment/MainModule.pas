@@ -24,6 +24,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    UserPassword : string;
     UserStaus : Boolean;
     UserName: string;
     UserID: Integer;

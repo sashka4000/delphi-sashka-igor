@@ -10,6 +10,8 @@ uses
 type
   TfrmUser = class(TUniForm)
     btn1: TUniButton;
+    btnChange: TUniButton;
+    procedure btnChangeClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -23,11 +25,17 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication;
+  MainModule, uniGUIApplication, FChange;
 
 function frmUser: TfrmUser;
 begin
   Result := TfrmUser(UniMainModule.GetFormInstance(TfrmUser));
+end;
+
+procedure TfrmUser.btnChangeClick(Sender: TObject);
+begin
+frmUser.Close;
+frmChange.Show(nil);
 end;
 
 end.

@@ -4,6 +4,7 @@ object LoginForm: TLoginForm
   ClientHeight = 168
   ClientWidth = 227
   Caption = ''
+  OnShow = UniLoginFormShow
   BorderStyle = bsNone
   Position = poDesktopCenter
   OldCreateOrder = False

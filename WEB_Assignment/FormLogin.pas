@@ -20,6 +20,7 @@ type
     btnOk: TUniButton;
     procedure btnOkClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
+    procedure UniLoginFormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -46,7 +47,7 @@ procedure TLoginForm.btnOkClick(Sender: TObject);
 begin
   UniMainModule.fdqryfdq.Close;
   UniMainModule.fdqryfdq.SQL.Clear;
-  UniMainModule.fdqryfdq.SQL.Add('select id, username, status from Tb1 where Login=:login and Password=:password');
+  UniMainModule.fdqryfdq.SQL.Add('select id, username, status, password  from Tb1 where Login=:login and Password=:password');
   UniMainModule.fdqryfdq.ParamByName('login').Value := Trim(UpperCase(undtLogin.Text));
   UniMainModule.fdqryfdq.ParamByName('password').Value := undtPassword.Text;
   UniMainModule.fdqryfdq.Open;
@@ -57,6 +58,7 @@ begin
     UniMainModule.UserName := UniMainModule.fdqryfdq.Fields [1].Value;
     UniMainModule.UserID  := UniMainModule.fdqryfdq.Fields [0].Value;
     UniMainModule.UserStaus := UniMainModule.fdqryfdq.Fields[2].Value;
+    UniMainModule.UserPassword := UniMainModule.fdqryfdq.Fields [3].Value;
 //************* Проверека статуса ввода логин-пароля ***********************************************
   if UniMainModule.UserStaus then
      begin
@@ -78,6 +80,11 @@ begin
 
 
   end;
+end;
+
+procedure TLoginForm.UniLoginFormShow(Sender: TObject);
+begin
+ActiveControl := undtLogin;
 end;
 
 procedure TLoginForm.btnCancelClick(Sender: TObject);
