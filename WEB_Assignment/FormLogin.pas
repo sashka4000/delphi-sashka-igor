@@ -60,7 +60,10 @@ begin
   begin
     UniMainModule.UserID := UniMainModule.fdqryfdq.Fields[0].Value;
     if UniMainModule.fdqryfdq.Fields[1].Value = Null then
+    begin
+    ShowMessage('Проверте корректность заполнения таблицы с логином - ' + undtLogin.Text);
     UniMainModule.UserStaus := False
+    end
     else
     UniMainModule.UserStaus := UniMainModule.fdqryfdq.Fields[1].Value;
     UniMainModule.UserPassword := UniMainModule.fdqryfdq.Fields[2].Value;
