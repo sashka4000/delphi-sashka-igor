@@ -3,9 +3,9 @@ unit FUser;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics,
-  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
-  uniGUIClasses, uniGUIForm, uniGUIBaseClasses, uniButton;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  uniGUITypes, uniGUIAbstractClasses, uniGUIClasses, uniGUIForm,
+  uniGUIBaseClasses, uniButton;
 
 type
   TfrmUser = class(TUniForm)
@@ -35,13 +35,14 @@ end;
 
 procedure TfrmUser.btn1Click(Sender: TObject);
 begin
-MainForm.Show(nil);
+  MainForm.Show(nil);
 end;
 
 procedure TfrmUser.btnChangeClick(Sender: TObject);
 begin
-frmUser.Close;
-frmChange.Show(nil);
+  frmUser.Close;
+  frmChange.Show(nil);
 end;
 
 end.
+

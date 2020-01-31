@@ -11,9 +11,7 @@ type
   TfrmAdmin = class(TUniForm)
     btn1: TUniButton;
     btn2: TUniButton;
-    btnChange: TUniButton;
     procedure btn1Click(Sender: TObject);
-    procedure btnChangeClick(Sender: TObject);
     procedure btn2Click(Sender: TObject);
   private
     { Private declarations }
@@ -44,12 +42,6 @@ end;
 procedure TfrmAdmin.btn2Click(Sender: TObject);
 begin
   MainForm.Show(nil);
-end;
-
-procedure TfrmAdmin.btnChangeClick(Sender: TObject);
-begin
-  frmAdmin.Close;
-  frmChange.Show(nil);
 end;
 
 end.

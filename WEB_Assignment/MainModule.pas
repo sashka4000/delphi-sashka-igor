@@ -53,7 +53,7 @@ begin
   begin
     fdmtblOne.Insert;
     fdmtblOne.Fields[1].AsString := 'Некто';
-    fdmtblOne.Fields[2].AsString := 'ADMIN';
+    fdmtblOne.Fields[2].AsString := 'admin';
     fdmtblOne.Fields[3].AsString := '0000';
     fdmtblOne.Fields[4].AsBoolean := True;
     fdmtblOne.Fields[5].AsString := 'Вёл аморальный образ жизни';

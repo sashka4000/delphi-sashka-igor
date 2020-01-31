@@ -46,7 +46,7 @@ begin
   UniMainModule.fdqryfdq.Close;
   UniMainModule.fdqryfdq.SQL.Clear;
   UniMainModule.fdqryfdq.SQL.Add('select id, username, status, password  from Tb1 where Login=:login and Password=:password');
-  UniMainModule.fdqryfdq.ParamByName('login').Value := Trim(UpperCase(undtLogin.Text));
+  UniMainModule.fdqryfdq.ParamByName('login').Value := undtLogin.Text;
   UniMainModule.fdqryfdq.ParamByName('password').Value := undtPassword.Text;
   UniMainModule.fdqryfdq.Open;
   if UniMainModule.fdqryfdq.RecordCount = 0 then
