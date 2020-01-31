@@ -26,7 +26,6 @@ type
     { Public declarations }
     UserPassword : string;
     UserStaus : Boolean;
-    UserName: string;
     UserID: Integer;
   end;
 
@@ -60,7 +59,6 @@ begin
     fdmtblOne.Post;
     fdmtblOne.SaveToFile('text', sfJSON);
   end;
-  UserName := '';
   UserID := 0;
   UserStaus := False;
 end;

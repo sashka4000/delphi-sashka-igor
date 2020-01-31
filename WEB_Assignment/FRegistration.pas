@@ -40,8 +40,8 @@ end;
 
 procedure TfrmRegistration.btnExitClick(Sender: TObject);
 begin
-frmRegistration.Close;
-frmAdmin.Show(nil);
+  frmRegistration.Close;
+  frmAdmin.Show(nil);
 end;
 
 procedure TfrmRegistration.btnSaveClick(Sender: TObject);
@@ -52,13 +52,6 @@ end;
 
 procedure TfrmRegistration.undbnvgtrTb1BeforeAction(Sender: TObject; Button: TNavigateBtn);
 begin
-    UniMainModule.fdmtblOne.Insert;
-    UniMainModule.fdmtblOne.Fields[1].AsString := '';
-    UniMainModule.fdmtblOne.Fields[2].AsString := '';
-    UniMainModule.fdmtblOne.Fields[3].AsString := '';
-    UniMainModule.fdmtblOne.Fields[4].AsBoolean := False;
-    UniMainModule.fdmtblOne.Fields[5].AsString := '';
-    UniMainModule.fdmtblOne.Post;
   btnSave.Enabled := (Button in [TNavigateBtn.nbDelete, TNavigateBtn.nbPost]);
 end;
 
