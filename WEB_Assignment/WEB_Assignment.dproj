@@ -109,11 +109,6 @@
             <FormType>dfm</FormType>
             <DesignClass>TUniLoginForm</DesignClass>
         </DCCReference>
-        <DCCReference Include="FGreeting.pas">
-            <Form>frmGreeting</Form>
-            <FormType>dfm</FormType>
-            <DesignClass>TUniForm</DesignClass>
-        </DCCReference>
         <DCCReference Include="FRegistration.pas">
             <Form>frmRegistration</Form>
             <FormType>dfm</FormType>

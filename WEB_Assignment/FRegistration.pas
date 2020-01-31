@@ -5,11 +5,11 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   uniGUITypes, uniGUIAbstractClasses, uniGUIClasses, uniGUIForm, uniEdit,
-  uniGUIBaseClasses, uniLabel, uniButton, FireDAC.Stan.Intf, uniBasicGrid, uniDBGrid;
+  uniGUIBaseClasses, uniLabel, uniButton, FireDAC.Stan.Intf, uniBasicGrid,
+  uniDBGrid, uniCheckBox, uniPanel;
 
 type
   TfrmRegistration = class(TUniForm)
-    lbReg: TUniLabel;
     undtUserName: TUniEdit;
     undtLog: TUniEdit;
     undtPassword: TUniEdit;
@@ -18,9 +18,19 @@ type
     btnReset: TUniButton;
     undbgrd1: TUniDBGrid;
     btnChange: TUniButton;
+    lbNameTab: TUniLabel;
+    PanReg: TUniPanel;
+    lbReg: TUniLabel;
+    unchckbxStatus: TUniCheckBox;
+    btnPanReg: TUniButton;
+    btnRefresh: TUniButton;
+    btnExit: TUniButton;
     procedure btnRegClick(Sender: TObject);
     procedure btnResetClick(Sender: TObject);
     procedure btnChangeClick(Sender: TObject);
+    procedure btnPanRegClick(Sender: TObject);
+    procedure btnRefreshClick(Sender: TObject);
+    procedure btnExitClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -34,18 +44,34 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication, Main, FormLogin, FChange;
+  MainModule, uniGUIApplication, Main, FormLogin, FChange, FAdmin;
 
 function frmRegistration: TfrmRegistration;
 begin
   Result := TfrmRegistration(UniMainModule.GetFormInstance(TfrmRegistration));
 end;
 
-
 procedure TfrmRegistration.btnChangeClick(Sender: TObject);
 begin
+  frmRegistration.Close;
+  FChange.frmChange.Show(nil);
+end;
+
+procedure TfrmRegistration.btnExitClick(Sender: TObject);
+begin
 frmRegistration.Close;
-FChange.frmChange.Show(nil);
+frmAdmin.Show(nil);
+end;
+
+procedure TfrmRegistration.btnPanRegClick(Sender: TObject);
+begin
+  btnPanReg.Visible := False;
+  PanReg.Visible := True;
+end;
+
+procedure TfrmRegistration.btnRefreshClick(Sender: TObject);
+begin
+  undbgrd1.Refresh;
 end;
 
 procedure TfrmRegistration.btnRegClick(Sender: TObject);
@@ -71,13 +97,19 @@ begin
       uniMainModule.fdmtblOne.Fields[1].AsString := undtUserName.Text;
       uniMainModule.fdmtblOne.Fields[2].AsString := Trim(UpperCase(undtLog.Text));
       uniMainModule.fdmtblOne.Fields[3].AsString := undtPassword.Text;
-      uniMainModule.fdmtblOne.Fields[4].AsBoolean := False;
+      uniMainModule.fdmtblOne.Fields[4].AsBoolean := unchckbxStatus.Checked;
       uniMainModule.fdmtblOne.Fields[5].AsString := '';
       uniMainModule.fdmtblOne.Post;
       UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
       ShowMessage('Вы зарегистрировались');
-      frmRegistration.Close;
-      FormLogin.LoginForm.Show(nil);
+      undbgrd1.Refresh;
+      btnPanReg.Visible := True;
+      PanReg.Visible := False;
+      undtUserName.Clear;
+      undtLog.Clear;
+      undtPassword.Clear;
+      undtRepPass.Clear;
+      unchckbxStatus.Checked := False;
     end
   end
   else
@@ -88,8 +120,8 @@ end;
 
 procedure TfrmRegistration.btnResetClick(Sender: TObject);
 begin
-  frmRegistration.Close;
-  FormLogin.LoginForm.Show(nil);
+   btnPanReg.Visible := True;
+   PanReg.Visible := False;
 end;
 
 end.

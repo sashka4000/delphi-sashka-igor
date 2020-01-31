@@ -3,9 +3,9 @@ unit FAdmin;
 interface
 
 uses
-  Windows, Messages, SysUtils, Variants, Classes, Graphics,
-  Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
-  uniGUIClasses, uniGUIForm, uniGUIBaseClasses, uniButton;
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  uniGUITypes, uniGUIAbstractClasses, uniGUIClasses, uniGUIForm,
+  uniGUIBaseClasses, uniButton;
 
 type
   TfrmAdmin = class(TUniForm)
@@ -37,19 +37,20 @@ end;
 
 procedure TfrmAdmin.btn1Click(Sender: TObject);
 begin
-frmAdmin.Close;
-frmRegistration.Show(nil);
+  frmAdmin.Close;
+  frmRegistration.Show(nil);
 end;
 
 procedure TfrmAdmin.btn2Click(Sender: TObject);
 begin
-MainForm.Show(nil);
+  MainForm.Show(nil);
 end;
 
 procedure TfrmAdmin.btnChangeClick(Sender: TObject);
 begin
-frmAdmin.Close;
-frmChange.Show(nil);
+  frmAdmin.Close;
+  frmChange.Show(nil);
 end;
 
 end.
+
