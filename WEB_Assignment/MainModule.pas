@@ -20,6 +20,7 @@ type
     fdstnstrgjsnlnk1: TFDStanStorageJSONLink;
     ds1: TDataSource;
     procedure UniGUIMainModuleCreate(Sender: TObject);
+    procedure fdmtblOneBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -36,11 +37,25 @@ implementation
 {$R *.dfm}
 
 uses
-  UniGUIVars, ServerModule, uniGUIApplication;
+  UniGUIVars, ServerModule, uniGUIApplication, FRegistration;
 
 function UniMainModule: TUniMainModule;
 begin
   Result := TUniMainModule(UniApplication.UniMainModule);
+end;
+
+procedure TUniMainModule.fdmtblOneBeforePost(DataSet: TDataSet);
+begin
+  fdqryfdq.Close;
+  fdqryfdq.SQL.Clear;
+  fdqryfdq.SQL.Add('select Login  from Tb1 where Login=:login');
+  fdqryfdq.ParamByName('login').Value := fdmtblOne.FieldByName('login').Value;
+
+  if fdqryfdq.RecordCount > 0 then
+  begin
+     raise Exception.Create('Такой логин уже существует!');
+  end;
+  fdqryfdq.Open;
 end;
 
 procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);

@@ -45,7 +45,7 @@ procedure TLoginForm.btnOkClick(Sender: TObject);
 begin
   UniMainModule.fdqryfdq.Close;
   UniMainModule.fdqryfdq.SQL.Clear;
-  UniMainModule.fdqryfdq.SQL.Add('select id, status, password  from Tb1 where Login=:login and Password=:password');
+  UniMainModule.fdqryfdq.SQL.Add('select id, password, status   from Tb1 where Login=:login and Password=:password');
   UniMainModule.fdqryfdq.ParamByName('login').Value := undtLogin.Text;
   UniMainModule.fdqryfdq.ParamByName('password').Value := undtPassword.Text;
   UniMainModule.fdqryfdq.Open;
@@ -58,8 +58,8 @@ begin
   else
   begin
     UniMainModule.UserID := UniMainModule.fdqryfdq.Fields[0].Value;
-    UniMainModule.UserStaus := UniMainModule.fdqryfdq.Fields[1].Value;
-    UniMainModule.UserPassword := UniMainModule.fdqryfdq.Fields[2].Value;
+    UniMainModule.UserPassword := UniMainModule.fdqryfdq.Fields[1].Value;
+    UniMainModule.UserStaus := UniMainModule.fdqryfdq.Fields[2].Value;
     UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
 //************* Проверека статуса ввода логин-пароля ***********************************************
     if UniMainModule.UserStaus then

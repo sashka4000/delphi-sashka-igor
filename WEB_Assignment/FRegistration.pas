@@ -46,12 +46,11 @@ end;
 
 procedure TfrmRegistration.btnSaveClick(Sender: TObject);
 begin
-//  Проверка поля status на Null
-    UniMainModule.fdqryfdq.Close;
-    UniMainModule.fdqryfdq.SQL.Clear;
+//  Проверка поля status на Null       Этот код выдаёт ошибку
+    UniMainModule.fdqryfdq.Close;      //  [FireDAC][Phys][SQLite]-326. Cannot perform the action,
+    UniMainModule.fdqryfdq.SQL.Clear;  //   because the previous action is in progress.
     UniMainModule.fdqryfdq.SQL.Add('UPDATE Tb1 SET status = false WHERE status = Null'); // Убираем поля Null
     UniMainModule.fdqryfdq.ExecSQL;
-    UniMainModule.fdqryfdq.Close;
 //
   UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
   btnSave.Enabled := False;
