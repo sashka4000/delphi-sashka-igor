@@ -46,6 +46,13 @@ end;
 
 procedure TfrmRegistration.btnSaveClick(Sender: TObject);
 begin
+//  Проверка поля status на Null
+    UniMainModule.fdqryfdq.Close;
+    UniMainModule.fdqryfdq.SQL.Clear;
+    UniMainModule.fdqryfdq.SQL.Add('UPDATE Tb1 SET status = false WHERE status = Null'); // Убираем поля Null
+    UniMainModule.fdqryfdq.ExecSQL;
+    UniMainModule.fdqryfdq.Close;
+//
   UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
   btnSave.Enabled := False;
 end;
