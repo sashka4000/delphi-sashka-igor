@@ -50,12 +50,13 @@ begin
   fdqryfdq.SQL.Clear;
   fdqryfdq.SQL.Add('select Login  from Tb1 where Login=:login');
   fdqryfdq.ParamByName('login').Value := fdmtblOne.FieldByName('login').Value;
-
+  fdqryfdq.Open;
   if fdqryfdq.RecordCount > 0 then
   begin
-     raise Exception.Create('Такой логин уже существует!');
+     fdqryfdq.Close;
+     raise UniErrorException.Create('Такой логин уже существует!');
   end;
-  fdqryfdq.Open;
+  fdqryfdq.close;
 end;
 
 procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);

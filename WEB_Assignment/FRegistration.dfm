@@ -18,7 +18,7 @@ object frmRegistration: TfrmRegistration
     Hint = ''
     DataSource = UniMainModule.ds1
     LoadMask.Message = 'Loading data...'
-    TabOrder = 0
+    TabOrder = 2
   end
   object lbNameTab: TUniLabel
     Left = 280
@@ -29,7 +29,7 @@ object frmRegistration: TfrmRegistration
     Caption = #1058#1072#1073#1083#1080#1094#1072' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1077#1081
     ParentFont = False
     Font.Height = -21
-    TabOrder = 1
+    TabOrder = 0
   end
   object btnSave: TUniButton
     Left = 683
@@ -39,7 +39,7 @@ object frmRegistration: TfrmRegistration
     Hint = ''
     Enabled = False
     Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
-    TabOrder = 2
+    TabOrder = 4
     OnClick = btnSaveClick
   end
   object btnExit: TUniButton
@@ -59,7 +59,7 @@ object frmRegistration: TfrmRegistration
     Height = 25
     Hint = ''
     DataSource = UniMainModule.ds1
-    TabOrder = 4
+    TabOrder = 1
     BeforeAction = undbnvgtrTb1BeforeAction
   end
 end

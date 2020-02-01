@@ -73,12 +73,12 @@ object UniMainModule: TUniMainModule
     Top = 40
   end
   object fdstnstrgjsnlnk1: TFDStanStorageJSONLink
-    Left = 24
-    Top = 96
+    Left = 32
+    Top = 104
   end
   object ds1: TDataSource
     DataSet = fdmtblOne
     Left = 96
-    Top = 96
+    Top = 104
   end
 end
