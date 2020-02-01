@@ -59,14 +59,20 @@ begin
   else
   begin
     UniMainModule.UserID := UniMainModule.fdqryfdq.Fields[0].Value;
+    UniMainModule.UserPassword := UniMainModule.fdqryfdq.Fields[2].Value;
     if UniMainModule.fdqryfdq.Fields[1].Value = Null then
     begin
-    ShowMessage('Проверте корректность заполнения таблицы с логином - ' + undtLogin.Text);
-    UniMainModule.UserStaus := False
+    UniMainModule.fdqryfdq.Close;
+    UniMainModule.fdqryfdq.SQL.Clear;
+    UniMainModule.fdqryfdq.SQL.Add('update Tb1 set status = false where id = :id');
+    UniMainModule.fdqryfdq.ParamByName('id').Value := UniMainModule.UserID;
+    UniMainModule.fdqryfdq.ExecSQL;
+    UniMainModule.fdqryfdq.Close;
+    UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
     end
     else
     UniMainModule.UserStaus := UniMainModule.fdqryfdq.Fields[1].Value;
-    UniMainModule.UserPassword := UniMainModule.fdqryfdq.Fields[2].Value;
+
 //************* Проверека статуса ввода логин-пароля ***********************************************
     if UniMainModule.UserStaus then
     begin
