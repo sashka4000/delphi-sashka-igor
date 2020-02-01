@@ -68,11 +68,11 @@ begin
     UniMainModule.fdqryfdq.ParamByName('id').Value := UniMainModule.UserID;
     UniMainModule.fdqryfdq.ExecSQL;
     UniMainModule.fdqryfdq.Close;
-    UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
+//    UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
     end
     else
     UniMainModule.UserStaus := UniMainModule.fdqryfdq.Fields[1].Value;
-
+    UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
 //************* Проверека статуса ввода логин-пароля ***********************************************
     if UniMainModule.UserStaus then
     begin
