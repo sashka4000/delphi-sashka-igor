@@ -21,6 +21,7 @@ type
     ds1: TDataSource;
     procedure UniGUIMainModuleCreate(Sender: TObject);
     procedure fdmtblOneBeforePost(DataSet: TDataSet);
+    procedure fdmtblOneAfterInsert(DataSet: TDataSet);
 //    procedure fdmtblOneBeforeInsert(DataSet: TDataSet);
   private
     { Private declarations }
@@ -44,14 +45,16 @@ function UniMainModule: TUniMainModule;
 begin
   Result := TUniMainModule(UniApplication.UniMainModule);
 end;
-{
-procedure TUniMainModule.fdmtblOneBeforeInsert(DataSet: TDataSet);
+
+
+
+procedure TUniMainModule.fdmtblOneAfterInsert(DataSet: TDataSet);
 begin
-fdmtblOne.FieldByName('UserName').AsString := 'Error';
-fdmtblOne.FieldByName('Status').AsBoolean := False;
-fdmtblOne.FieldByName('Assignment').AsString := 'empty';
+   DataSet.FieldByName('UserName').AsString := 'Error';
+  DataSet.FieldByName('Status').AsBoolean := False;
+  DataSet.FieldByName('Assignment').AsString := 'empty';
 end;
-}
+
 procedure TUniMainModule.fdmtblOneBeforePost(DataSet: TDataSet);
 begin
   fdqryfdq.Close;

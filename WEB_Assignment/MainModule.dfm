@@ -6,6 +6,7 @@ object UniMainModule: TUniMainModule
   Width = 635
   object fdmtblOne: TFDMemTable
     Active = True
+    AfterInsert = fdmtblOneAfterInsert
     BeforePost = fdmtblOneBeforePost
     FieldDefs = <
       item
