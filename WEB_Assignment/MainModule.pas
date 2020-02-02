@@ -21,6 +21,7 @@ type
     ds1: TDataSource;
     procedure UniGUIMainModuleCreate(Sender: TObject);
     procedure fdmtblOneBeforePost(DataSet: TDataSet);
+//    procedure fdmtblOneBeforeInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -43,7 +44,14 @@ function UniMainModule: TUniMainModule;
 begin
   Result := TUniMainModule(UniApplication.UniMainModule);
 end;
-
+{
+procedure TUniMainModule.fdmtblOneBeforeInsert(DataSet: TDataSet);
+begin
+fdmtblOne.FieldByName('UserName').AsString := 'Error';
+fdmtblOne.FieldByName('Status').AsBoolean := False;
+fdmtblOne.FieldByName('Assignment').AsString := 'empty';
+end;
+ }
 procedure TUniMainModule.fdmtblOneBeforePost(DataSet: TDataSet);
 begin
   fdqryfdq.Close;
@@ -54,9 +62,15 @@ begin
   if fdqryfdq.RecordCount > 0 then
   begin
      fdqryfdq.Close;
+<<<<<<< HEAD
+     raise Exception.Create('Такой логин уже существует!');
+  end;
+
+=======
      raise UniErrorException.Create('Такой логин уже существует!');
   end;
   fdqryfdq.close;
+>>>>>>> 7e8543559f2c2395545f3716a946663359d34275
 end;
 
 procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);
