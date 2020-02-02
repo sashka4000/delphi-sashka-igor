@@ -51,7 +51,7 @@ fdmtblOne.FieldByName('UserName').AsString := 'Error';
 fdmtblOne.FieldByName('Status').AsBoolean := False;
 fdmtblOne.FieldByName('Assignment').AsString := 'empty';
 end;
- }
+}
 procedure TUniMainModule.fdmtblOneBeforePost(DataSet: TDataSet);
 begin
   fdqryfdq.Close;
@@ -62,16 +62,12 @@ begin
   if fdqryfdq.RecordCount > 0 then
   begin
      fdqryfdq.Close;
-<<<<<<< HEAD
-     raise Exception.Create('Такой логин уже существует!');
-  end;
-
-=======
      raise UniErrorException.Create('Такой логин уже существует!');
   end;
-  fdqryfdq.close;
->>>>>>> 7e8543559f2c2395545f3716a946663359d34275
-end;
+
+
+  end;
+
 
 procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);
 begin
