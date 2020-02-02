@@ -22,11 +22,11 @@ type
     procedure UniGUIMainModuleCreate(Sender: TObject);
     procedure fdmtblOneBeforePost(DataSet: TDataSet);
     procedure fdmtblOneAfterInsert(DataSet: TDataSet);
-//    procedure fdmtblOneBeforeInsert(DataSet: TDataSet);
   private
     { Private declarations }
   public
     { Public declarations }
+    BlockPost : Boolean;
     UserPassword : string;
     UserStaus : Boolean;
     UserID: Integer;
@@ -50,13 +50,17 @@ end;
 
 procedure TUniMainModule.fdmtblOneAfterInsert(DataSet: TDataSet);
 begin
-   DataSet.FieldByName('UserName').AsString := 'Error';
+  DataSet.FieldByName('UserName').AsString := 'Error';
+  DataSet.FieldByName('login').AsString := '';
+  DataSet.FieldByName('password').AsString := '';
   DataSet.FieldByName('Status').AsBoolean := False;
   DataSet.FieldByName('Assignment').AsString := 'empty';
 end;
 
 procedure TUniMainModule.fdmtblOneBeforePost(DataSet: TDataSet);
 begin
+   if BlockPost then
+   Exit;
   fdqryfdq.Close;
   fdqryfdq.SQL.Clear;
   fdqryfdq.SQL.Add('select Login  from Tb1 where Login=:login');
@@ -90,6 +94,7 @@ begin
   end;
   UserID := 0;
   UserStaus := False;
+  BlockPost := False;
 end;
 
 

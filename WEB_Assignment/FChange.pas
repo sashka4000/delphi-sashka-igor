@@ -46,16 +46,21 @@ procedure TfrmChange.btnOkClick(Sender: TObject);
 begin
   if (UniMainModule.UserPassword = undtOldPass.Text) and (undtNewPass.Text = undtRepPas.Text) and (UniMainModule.UserPassword <> undtNewPass.Text) then
   begin
-    UniMainModule.fdqryfdq.Close;
-    UniMainModule.fdqryfdq.SQL.Clear;
-    UniMainModule.fdqryfdq.SQL.Add('update Tb1 set password = :p where id = :id');
-    UniMainModule.fdqryfdq.ParamByName('p').Value := undtNewPass.Text;
-    UniMainModule.fdqryfdq.ParamByName('id').Value := UniMainModule.UserID;
-    UniMainModule.fdqryfdq.ExecSQL;
-    UniMainModule.fdqryfdq.Close;
-    UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
-    frmChange.Close;
-    LoginForm.Show(nil);
+    UniMainModule.BlockPost := True;
+    try
+      UniMainModule.fdqryfdq.Close;
+      UniMainModule.fdqryfdq.SQL.Clear;
+      UniMainModule.fdqryfdq.SQL.Add('update Tb1 set password = :p where id = :id');
+      UniMainModule.fdqryfdq.ParamByName('p').Value := undtNewPass.Text;
+      UniMainModule.fdqryfdq.ParamByName('id').Value := UniMainModule.UserID;
+      UniMainModule.fdqryfdq.ExecSQL;
+      UniMainModule.fdqryfdq.Close;
+      UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
+      frmChange.Close;
+      LoginForm.Show(nil);
+    finally
+      UniMainModule.BlockPost := False;
+    end;
   end
   else
   begin
