@@ -50,7 +50,7 @@ end;
 
 procedure TUniMainModule.fdmtblOneAfterInsert(DataSet: TDataSet);
 begin
-  DataSet.FieldByName('UserName').AsString := 'Error';
+  DataSet.FieldByName('UserName').AsString := '';
   DataSet.FieldByName('login').AsString := '';
   DataSet.FieldByName('password').AsString := '';
   DataSet.FieldByName('Status').AsBoolean := False;
@@ -61,6 +61,13 @@ procedure TUniMainModule.fdmtblOneBeforePost(DataSet: TDataSet);
 begin
    if BlockPost then
    Exit;
+   if (DataSet.FieldByName('UserName').AsString = '') or
+      (DataSet.FieldByName('login').AsString = ''  )  or
+      (DataSet.FieldByName('password').AsString = '')
+   then
+   begin
+    raise UniErrorException.Create('Заполните все поля!');
+   end;
   fdqryfdq.Close;
   fdqryfdq.SQL.Clear;
   fdqryfdq.SQL.Add('select Login  from Tb1 where Login=:login');
