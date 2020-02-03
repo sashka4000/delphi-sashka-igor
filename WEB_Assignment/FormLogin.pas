@@ -93,7 +93,7 @@ procedure TLoginForm.btnCancelClick(Sender: TObject);
 var
   i: Integer;
 begin
-
+// Нет реализиции
 end;
 
 initialization

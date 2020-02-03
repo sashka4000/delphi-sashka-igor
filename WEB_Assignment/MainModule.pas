@@ -26,9 +26,9 @@ type
     { Private declarations }
   public
     { Public declarations }
-    BlockPost : Boolean;
-    UserPassword : string;
-    UserStaus : Boolean;
+    BlockPost: Boolean;
+    UserPassword: string;
+    UserStaus: Boolean;
     UserID: Integer;
   end;
 
@@ -46,8 +46,6 @@ begin
   Result := TUniMainModule(UniApplication.UniMainModule);
 end;
 
-
-
 procedure TUniMainModule.fdmtblOneAfterInsert(DataSet: TDataSet);
 begin
   DataSet.FieldByName('UserName').AsString := '';
@@ -59,15 +57,12 @@ end;
 
 procedure TUniMainModule.fdmtblOneBeforePost(DataSet: TDataSet);
 begin
-   if BlockPost then
-   Exit;
-   if (DataSet.FieldByName('UserName').AsString = '') or
-      (DataSet.FieldByName('login').AsString = ''  )  or
-      (DataSet.FieldByName('password').AsString = '')
-   then
-   begin
+  if BlockPost then
+    Exit;
+  if (DataSet.FieldByName('UserName').AsString = '') or (DataSet.FieldByName('login').AsString = '') or (DataSet.FieldByName('password').AsString = '') then
+  begin
     raise UniErrorException.Create('Заполните все поля!');
-   end;
+  end;
   fdqryfdq.Close;
   fdqryfdq.SQL.Clear;
   fdqryfdq.SQL.Add('select Login  from Tb1 where Login=:login');
@@ -75,13 +70,11 @@ begin
   fdqryfdq.Open;
   if fdqryfdq.RecordCount > 0 then
   begin
-     fdqryfdq.Close;
-     raise UniErrorException.Create('Такой логин уже существует!');
+    fdqryfdq.Close;
+    raise UniErrorException.Create('Такой логин уже существует!');
   end;
 
-
-  end;
-
+end;
 
 procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);
 begin
@@ -103,7 +96,6 @@ begin
   UserStaus := False;
   BlockPost := False;
 end;
-
 
 initialization
   RegisterMainModuleClass(TUniMainModule);
