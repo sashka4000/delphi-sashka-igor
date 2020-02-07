@@ -16,7 +16,7 @@ object frmRegistration: TfrmRegistration
     Width = 881
     Height = 250
     Hint = ''
-    DataSource = UniMainModule.dsUsers
+    DataSource = dsUsers
     LoadMask.Message = 'Loading data...'
     TabOrder = 2
     Columns = <
@@ -82,10 +82,81 @@ object frmRegistration: TfrmRegistration
   object undbnvgtrTb1: TUniDBNavigator
     Left = 8
     Top = 65
-    Width = 815
+    Width = 882
     Height = 25
     Hint = ''
-    DataSource = UniMainModule.dsUsers
+    DataSource = dsUsers
     TabOrder = 1
+  end
+  object dsUsers: TDataSource
+    DataSet = fdqryUsers
+    Left = 608
+    Top = 16
+  end
+  object fdpdtsqlUsers: TFDUpdateSQL
+    Connection = UniMainModule.confd
+    InsertSQL.Strings = (
+      'INSERT INTO USERS'
+      '(NAME, LOGIN, "PASSWORD", SUPERUSER, BLOCKED)'
+      
+        'VALUES (:NEW_NAME, :NEW_LOGIN, :NEW_PASSWORD, :NEW_SUPERUSER, :N' +
+        'EW_BLOCKED)'
+      'RETURNING NAME, LOGIN, "PASSWORD", SUPERUSER, BLOCKED')
+    ModifySQL.Strings = (
+      'UPDATE USERS'
+      
+        'SET NAME = :NEW_NAME, LOGIN = :NEW_LOGIN, "PASSWORD" = :NEW_PASS' +
+        'WORD, '
+      '  SUPERUSER = :NEW_SUPERUSER, BLOCKED = :NEW_BLOCKED'
+      'WHERE ID = :OLD_ID'
+      'RETURNING NAME, LOGIN, "PASSWORD", SUPERUSER, BLOCKED')
+    DeleteSQL.Strings = (
+      'DELETE FROM USERS'
+      'WHERE ID = :OLD_ID')
+    FetchRowSQL.Strings = (
+      
+        'SELECT ID, NAME, LOGIN, "PASSWORD" AS "PASSWORD", SUPERUSER, BLO' +
+        'CKED'
+      'FROM USERS'
+      'WHERE ID = :OLD_ID')
+    Left = 752
+    Top = 16
+  end
+  object fdqryUsers: TFDQuery
+    Active = True
+    BeforePost = fdqryUsersBeforePost
+    Connection = UniMainModule.confd
+    Transaction = UniMainModule.fdtrnsctnRead
+    UpdateTransaction = UniMainModule.fdtrnsctnWrite
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName, uvCheckRequired]
+    UpdateOptions.GeneratorName = 'GEN_USERS_ID'
+    UpdateOptions.KeyFields = 'ID'
+    UpdateOptions.AutoIncFields = 'ID'
+    SQL.Strings = (
+      'select * from users')
+    Left = 680
+    Top = 16
+  end
+  object fdqryCheckLogin: TFDQuery
+    BeforePost = fdqryUsersBeforePost
+    Connection = UniMainModule.confd
+    Transaction = UniMainModule.fdtrnsctnRead
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName, uvCheckRequired]
+    UpdateOptions.GeneratorName = 'GEN_USERS_ID'
+    UpdateOptions.KeyFields = 'ID'
+    UpdateOptions.AutoIncFields = 'ID'
+    UpdateObject = fdpdtsqlUsers
+    SQL.Strings = (
+      'select Login from users where Login=:login')
+    Left = 56
+    Top = 16
+    ParamData = <
+      item
+        Name = 'LOGIN'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 255
+        Value = Null
+      end>
   end
 end

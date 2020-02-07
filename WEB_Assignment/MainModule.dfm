@@ -1,9 +1,10 @@
 object UniMainModule: TUniMainModule
   OldCreateOrder = False
   OnCreate = UniGUIMainModuleCreate
+  OnDestroy = UniGUIMainModuleDestroy
   MonitoredKeys.Keys = <>
-  Height = 426
-  Width = 635
+  Height = 453
+  Width = 847
   object fdmtblOne: TFDMemTable
     Active = True
     FieldDefs = <
@@ -48,7 +49,7 @@ object UniMainModule: TUniMainModule
     Top = 8
   end
   object fdqryfdq: TFDQuery
-    Left = 56
+    Left = 72
     Top = 8
   end
   object fdstnstrgjsnlnk1: TFDStanStorageJSONLink
@@ -71,23 +72,23 @@ object UniMainModule: TUniMainModule
   end
   object fdphysfbdrvrlnkOne: TFDPhysFBDriverLink
     VendorLib = 'C:\Program Files (x86)\Firebird\Firebird_2_5\bin\fbclient.dll'
-    Left = 576
-    Top = 8
+    Left = 512
+    Top = 80
   end
   object fdtrnsctnRead: TFDTransaction
     Options.ReadOnly = True
     Options.AutoStop = False
     Options.EnableNested = False
     Connection = confd
-    Left = 176
-    Top = 216
+    Left = 392
+    Top = 24
   end
   object fdtrnsctnWrite: TFDTransaction
     Options.DisconnectAction = xdRollback
     Options.EnableNested = False
     Connection = confd
-    Left = 176
-    Top = 304
+    Left = 392
+    Top = 88
   end
   object fdqryTrip: TFDQuery
     Connection = confd
@@ -112,55 +113,7 @@ object UniMainModule: TUniMainModule
   end
   object fdgxwtcrsrUser: TFDGUIxWaitCursor
     Provider = 'Forms'
-    Left = 576
-    Top = 112
-  end
-  object fdqryUsers: TFDQuery
-    Active = True
-    BeforePost = fdqryUsersBeforePost
-    Connection = confd
-    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName, uvCheckRequired]
-    UpdateOptions.GeneratorName = 'GEN_USERS_ID'
-    UpdateOptions.KeyFields = 'ID'
-    UpdateOptions.AutoIncFields = 'ID'
-    UpdateObject = fdpdtsqlUsers
-    SQL.Strings = (
-      'select * from users')
-    Left = 16
-    Top = 256
-  end
-  object fdpdtsqlUsers: TFDUpdateSQL
-    Connection = confd
-    InsertSQL.Strings = (
-      'INSERT INTO USERS'
-      '(NAME, LOGIN, "PASSWORD", SUPERUSER, BLOCKED)'
-      
-        'VALUES (:NEW_NAME, :NEW_LOGIN, :NEW_PASSWORD, :NEW_SUPERUSER, :N' +
-        'EW_BLOCKED)'
-      'RETURNING NAME, LOGIN, "PASSWORD", SUPERUSER, BLOCKED')
-    ModifySQL.Strings = (
-      'UPDATE USERS'
-      
-        'SET NAME = :NEW_NAME, LOGIN = :NEW_LOGIN, "PASSWORD" = :NEW_PASS' +
-        'WORD, '
-      '  SUPERUSER = :NEW_SUPERUSER, BLOCKED = :NEW_BLOCKED'
-      'WHERE ID = :OLD_ID'
-      'RETURNING NAME, LOGIN, "PASSWORD", SUPERUSER, BLOCKED')
-    DeleteSQL.Strings = (
-      'DELETE FROM USERS'
-      'WHERE ID = :OLD_ID')
-    FetchRowSQL.Strings = (
-      
-        'SELECT ID, NAME, LOGIN, "PASSWORD" AS "PASSWORD", SUPERUSER, BLO' +
-        'CKED'
-      'FROM USERS'
-      'WHERE ID = :OLD_ID')
-    Left = 16
-    Top = 320
-  end
-  object dsUsers: TDataSource
-    DataSet = fdqryUsers
-    Left = 16
-    Top = 200
+    Left = 512
+    Top = 144
   end
 end

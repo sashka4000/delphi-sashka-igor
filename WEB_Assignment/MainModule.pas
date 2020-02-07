@@ -25,11 +25,8 @@ type
     dsTrip: TDataSource;
     fdpdtsqlTrip: TFDUpdateSQL;
     fdgxwtcrsrUser: TFDGUIxWaitCursor;
-    fdqryUsers: TFDQuery;
-    fdpdtsqlUsers: TFDUpdateSQL;
-    dsUsers: TDataSource;
     procedure UniGUIMainModuleCreate(Sender: TObject);
-    procedure fdqryUsersBeforePost(DataSet: TDataSet);
+    procedure UniGUIMainModuleDestroy(Sender: TObject);
   private
     { Private declarations }
   public
@@ -37,7 +34,6 @@ type
     BlockPost: Boolean;
     UserPassword: string;
     SuperUser: Integer;
-    Blocked : Integer;
     UserID: Integer;
   end;
 
@@ -57,33 +53,23 @@ end;
 
 
 
-procedure TUniMainModule.fdqryUsersBeforePost(DataSet: TDataSet);
-begin
-  if BlockPost then
-    Exit;
-  if (DataSet.FieldByName('UserName').AsString = '') or (DataSet.FieldByName('login').AsString = '') or (DataSet.FieldByName('password').AsString = '') then
-  begin
-    raise UniErrorException.Create('Заполните все поля!');
-  end;
-  fdqryUsers.Close;
-  fdqryUsers.SQL.Clear;
-  fdqryUsers.SQL.Add('select Login  from users where Login=:login');
-  fdqryUsers.ParamByName('login').Value := fdqryUsers.FieldByName('login').Value;
-  fdqryUsers.Open;
-  if fdqryUsers.RecordCount > 0 then
-  begin
-    fdqryUsers.Close;
-    raise UniErrorException.Create('Такой логин уже существует!');
-  end;
-
-end;
-
 procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);
 begin
   UserID := 0;
   SuperUser := 0;
-  Blocked := 0;
   BlockPost := False;
+  // Подключаемся к БД
+  confd.Connected := true;
+  // Убираем параметры READ транзакции, которые были нам удобны во время проектирования
+  self.fdtrnsctnRead.Options.AutoStart := False;
+  // стартуем Read транзакцию. Она так и будет все время запущена
+  self.fdtrnsctnRead.StartTransaction;
+end;
+
+procedure TUniMainModule.UniGUIMainModuleDestroy(Sender: TObject);
+begin
+  self.fdtrnsctnRead.Commit;
+  self.confd.Connected := false;
 end;
 
 initialization

@@ -18,6 +18,7 @@ type
     undtPassword: TUniEdit;
     btnCancel: TUniButton;
     btnOk: TUniButton;
+    fdqryCheckLogin: TFDQuery;
     procedure btnOkClick(Sender: TObject);
     procedure btnCancelClick(Sender: TObject);
     procedure UniLoginFormShow(Sender: TObject);
@@ -43,23 +44,24 @@ end;
 
 procedure TLoginForm.btnOkClick(Sender: TObject);
 begin
-  UniMainModule.fdqryUsers.Close;
-  UniMainModule.fdqryUsers.SQL.Clear;
-  UniMainModule.fdqryUsers.SQL.Add('select id, login, password, superuser, blocked   from users where Login=:login and Password=:password');
-  UniMainModule.fdqryUsers.ParamByName('login').Value := undtLogin.Text;
-  UniMainModule.fdqryUsers.ParamByName('password').Value := undtPassword.Text;
-  UniMainModule.fdqryUsers.Open;
-  if UniMainModule.fdqryUsers.RecordCount = 0 then
+  fdqryCheckLogin.ParamByName('l').Value := undtLogin.Text;
+  fdqryCheckLogin.ParamByName('p').Value := undtPassword.Text;
+  fdqryCheckLogin.Open;
+  if fdqryCheckLogin.RecordCount = 0 then
   begin
-    undtLogin.Clear;
-    undtPassword.Clear;
+    fdqryCheckLogin.Close; // не забываем закрыть запрос
     ShowMessage('Неправильный Логин или Пароль!');
   end
   else
   begin
-    UniMainModule.UserID := UniMainModule.fdqryUsers.Fields[0].Value;
-    UniMainModule.SuperUser := UniMainModule.fdqryUsers.Fields[3].Value;
-    UniMainModule.Blocked := UniMainModule.fdqryUsers.Fields[4].Value;
+    if fdqryCheckLogin.FieldByName('BLOCKED').AsInteger = 1 then
+    begin
+       fdqryCheckLogin.Close; // не забываем закрыть запрос
+       ShowMessage('Пользователь заблокирован. Обратитесь к Админу');
+    end;
+
+    UniMainModule.UserID := fdqryCheckLogin.FieldByName('ID').Value;
+    UniMainModule.SuperUser := fdqryCheckLogin.FieldByName('SUPERUSER').Value;
 
 //************* Проверека статуса ввода логин-пароля ***********************************************
     if UniMainModule.SuperUser = 1 then

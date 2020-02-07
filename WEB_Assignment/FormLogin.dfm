@@ -78,4 +78,33 @@ object LoginForm: TLoginForm
     TabOrder = 4
     OnClick = btnOkClick
   end
+  object fdqryCheckLogin: TFDQuery
+    Connection = UniMainModule.confd
+    Transaction = UniMainModule.fdtrnsctnRead
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName, uvCheckRequired]
+    UpdateOptions.GeneratorName = 'GEN_USERS_ID'
+    UpdateOptions.KeyFields = 'ID'
+    UpdateOptions.AutoIncFields = 'ID'
+    SQL.Strings = (
+      'select id, blocked,superuser'
+      ' from users'
+      ' where Login = :l and  "PASSWORD" = :p'
+      '')
+    Left = 183
+    Top = 28
+    ParamData = <
+      item
+        Name = 'L'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 255
+        Value = Null
+      end
+      item
+        Name = 'P'
+        DataType = ftString
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
 end
