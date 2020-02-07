@@ -2,7 +2,7 @@ object frmRegistration: TfrmRegistration
   Left = 0
   Top = 0
   ClientHeight = 425
-  ClientWidth = 831
+  ClientWidth = 898
   Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103
   BorderStyle = bsNone
   OldCreateOrder = False
@@ -13,12 +13,50 @@ object frmRegistration: TfrmRegistration
   object undbgrd1: TUniDBGrid
     Left = 8
     Top = 96
-    Width = 809
+    Width = 881
     Height = 250
     Hint = ''
-    DataSource = UniMainModule.ds1
+    DataSource = UniMainModule.dsUsers
     LoadMask.Message = 'Loading data...'
     TabOrder = 2
+    Columns = <
+      item
+        FieldName = 'ID'
+        Title.Alignment = taCenter
+        Title.Caption = 'ID'
+        Width = 45
+        ReadOnly = True
+      end
+      item
+        FieldName = 'NAME'
+        Title.Alignment = taCenter
+        Title.Caption = #1060#1048#1054
+        Width = 250
+      end
+      item
+        FieldName = 'LOGIN'
+        Title.Alignment = taCenter
+        Title.Caption = #1051#1086#1075#1080#1085
+        Width = 200
+      end
+      item
+        FieldName = 'PASSWORD'
+        Title.Alignment = taCenter
+        Title.Caption = #1055#1072#1088#1086#1083#1100#13#10
+        Width = 200
+      end
+      item
+        FieldName = 'SUPERUSER'
+        Title.Alignment = taCenter
+        Title.Caption = #1057#1090#1072#1090#1091#1089
+        Width = 50
+      end
+      item
+        FieldName = 'BLOCKED'
+        Title.Alignment = taCenter
+        Title.Caption = #1041#1083#1086#1082#1080#1088#1086#1074#1082#1072
+        Width = 75
+      end>
   end
   object lbNameTab: TUniLabel
     Left = 280
@@ -30,17 +68,6 @@ object frmRegistration: TfrmRegistration
     ParentFont = False
     Font.Height = -21
     TabOrder = 0
-  end
-  object btnSave: TUniButton
-    Left = 683
-    Top = 352
-    Width = 140
-    Height = 25
-    Hint = ''
-    Enabled = False
-    Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
-    TabOrder = 4
-    OnClick = btnSaveClick
   end
   object btnExit: TUniButton
     Left = 8
@@ -58,8 +85,7 @@ object frmRegistration: TfrmRegistration
     Width = 815
     Height = 25
     Hint = ''
-    DataSource = UniMainModule.ds1
+    DataSource = UniMainModule.dsUsers
     TabOrder = 1
-    BeforeAction = undbnvgtrTb1BeforeAction
   end
 end

@@ -43,13 +43,13 @@ end;
 
 procedure TLoginForm.btnOkClick(Sender: TObject);
 begin
-  UniMainModule.fdqryfdq.Close;
-  UniMainModule.fdqryfdq.SQL.Clear;
-  UniMainModule.fdqryfdq.SQL.Add('select id, password, status   from Tb1 where Login=:login and Password=:password');
-  UniMainModule.fdqryfdq.ParamByName('login').Value := undtLogin.Text;
-  UniMainModule.fdqryfdq.ParamByName('password').Value := undtPassword.Text;
-  UniMainModule.fdqryfdq.Open;
-  if UniMainModule.fdqryfdq.RecordCount = 0 then
+  UniMainModule.fdqryUsers.Close;
+  UniMainModule.fdqryUsers.SQL.Clear;
+  UniMainModule.fdqryUsers.SQL.Add('select id, login, password, superuser, blocked   from users where Login=:login and Password=:password');
+  UniMainModule.fdqryUsers.ParamByName('login').Value := undtLogin.Text;
+  UniMainModule.fdqryUsers.ParamByName('password').Value := undtPassword.Text;
+  UniMainModule.fdqryUsers.Open;
+  if UniMainModule.fdqryUsers.RecordCount = 0 then
   begin
     undtLogin.Clear;
     undtPassword.Clear;
@@ -57,12 +57,12 @@ begin
   end
   else
   begin
-    UniMainModule.UserID := UniMainModule.fdqryfdq.Fields[0].Value;
-    UniMainModule.UserPassword := UniMainModule.fdqryfdq.Fields[1].Value;
-    UniMainModule.UserStaus := UniMainModule.fdqryfdq.Fields[2].Value;
-    UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
+    UniMainModule.UserID := UniMainModule.fdqryUsers.Fields[0].Value;
+    UniMainModule.SuperUser := UniMainModule.fdqryUsers.Fields[3].Value;
+    UniMainModule.Blocked := UniMainModule.fdqryUsers.Fields[4].Value;
+
 //************* Проверека статуса ввода логин-пароля ***********************************************
-    if UniMainModule.UserStaus then
+    if UniMainModule.SuperUser = 1 then
     begin
   // Показать форму admin
       undtLogin.Clear;

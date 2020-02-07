@@ -12,12 +12,9 @@ type
   TfrmRegistration = class(TUniForm)
     undbgrd1: TUniDBGrid;
     lbNameTab: TUniLabel;
-    btnSave: TUniButton;
     btnExit: TUniButton;
     undbnvgtrTb1: TUniDBNavigator;
-    procedure btnSaveClick(Sender: TObject);
     procedure btnExitClick(Sender: TObject);
-    procedure undbnvgtrTb1BeforeAction(Sender: TObject; Button: TNavigateBtn);
   private
     { Private declarations }
   public
@@ -31,7 +28,7 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication, Main, FormLogin, FChange, FAdmin;
+  MainModule, uniGUIApplication, Main, FormLogin, FAdmin;
 
 function frmRegistration: TfrmRegistration;
 begin
@@ -44,16 +41,6 @@ begin
   frmAdmin.Show(nil);
 end;
 
-procedure TfrmRegistration.btnSaveClick(Sender: TObject);
-begin
-  UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
-  btnSave.Enabled := False;
-end;
-
-procedure TfrmRegistration.undbnvgtrTb1BeforeAction(Sender: TObject; Button: TNavigateBtn);
-begin
-  btnSave.Enabled := (Button in [TNavigateBtn.nbDelete, TNavigateBtn.nbPost]);
-end;
 
 end.
 

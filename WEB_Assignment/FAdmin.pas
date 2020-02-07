@@ -26,7 +26,7 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication, FRegistration, FChange, Main;
+  MainModule, uniGUIApplication, Main, FRegistration;
 
 function frmAdmin: TfrmAdmin;
 begin
