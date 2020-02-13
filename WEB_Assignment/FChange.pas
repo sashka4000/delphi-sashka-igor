@@ -50,12 +50,10 @@ begin
   if (UniMainModule.UserPassword = undtOldPass.Text) and (undtNewPass.Text = undtRepPas.Text) and (UniMainModule.UserPassword <> undtNewPass.Text) then
   begin
 
-      fdqryChange.Close;
-      fdqryChange.SQL.Clear;
+
       fdqryChange.ParamByName('p').Value := undtNewPass.Text;
       fdqryChange.ParamByName('id').Value := UniMainModule.UserID;
       fdqryChange.ExecSQL;
-      fdqryChange.Close;
       frmChange.Close;
       LoginForm.Show(nil);
 

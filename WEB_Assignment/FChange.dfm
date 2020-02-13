@@ -62,6 +62,7 @@ object frmChange: TfrmChange
   end
   object fdqryChange: TFDQuery
     Connection = UniMainModule.confd
+    Transaction = UniMainModule.fdtrnsctnWrite
     SQL.Strings = (
       'update users set password = :p where id = :id')
     Left = 144
