@@ -60,4 +60,24 @@ object frmChange: TfrmChange
     TabOrder = 4
     OnClick = btnOkClick
   end
+  object fdqryChange: TFDQuery
+    Connection = UniMainModule.confd
+    SQL.Strings = (
+      'update users set password = :p where id = :id')
+    Left = 144
+    Top = 32
+    ParamData = <
+      item
+        Name = 'P'
+        DataType = ftString
+        ParamType = ptInput
+        Size = 255
+        Value = Null
+      end
+      item
+        Name = 'ID'
+        DataType = ftLargeint
+        ParamType = ptInput
+      end>
+  end
 end

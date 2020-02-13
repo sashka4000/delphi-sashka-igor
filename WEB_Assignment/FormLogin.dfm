@@ -80,13 +80,12 @@ object LoginForm: TLoginForm
   end
   object fdqryCheckLogin: TFDQuery
     Connection = UniMainModule.confd
-    Transaction = UniMainModule.fdtrnsctnRead
     UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName, uvCheckRequired]
     UpdateOptions.GeneratorName = 'GEN_USERS_ID'
     UpdateOptions.KeyFields = 'ID'
     UpdateOptions.AutoIncFields = 'ID'
     SQL.Strings = (
-      'select id, blocked,superuser'
+      'select id, blocked,superuser, password'
       ' from users'
       ' where Login = :l and  "PASSWORD" = :p'
       '')

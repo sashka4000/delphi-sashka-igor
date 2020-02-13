@@ -57,7 +57,7 @@ procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);
 begin
   UserID := 0;
   SuperUser := 0;
-  BlockPost := False;
+  UserPassword :='';
   // Подключаемся к БД
   confd.Connected := true;
   // Убираем параметры READ транзакции, которые были нам удобны во время проектирования

@@ -4,6 +4,7 @@ object frmRegistration: TfrmRegistration
   ClientHeight = 425
   ClientWidth = 898
   Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103
+  OnShow = UniFormShow
   BorderStyle = bsNone
   OldCreateOrder = False
   BorderIcons = []
@@ -138,6 +139,7 @@ object frmRegistration: TfrmRegistration
     Top = 16
   end
   object fdqryCheckLogin: TFDQuery
+    Active = True
     BeforePost = fdqryUsersBeforePost
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead

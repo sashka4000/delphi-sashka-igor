@@ -62,7 +62,7 @@ begin
 
     UniMainModule.UserID := fdqryCheckLogin.FieldByName('ID').Value;
     UniMainModule.SuperUser := fdqryCheckLogin.FieldByName('SUPERUSER').Value;
-
+    UniMainModule.UserPassword := fdqryCheckLogin.FieldByName('password').Value;
 //************* Проверека статуса ввода логин-пароля ***********************************************
     if UniMainModule.SuperUser = 1 then
     begin

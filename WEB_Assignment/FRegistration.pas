@@ -23,6 +23,7 @@ type
     fdqryCheckLogin: TFDQuery;
     procedure btnExitClick(Sender: TObject);
     procedure fdqryUsersBeforePost(DataSet: TDataSet);
+    procedure UniFormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -49,21 +50,25 @@ begin
   frmAdmin.Show(nil);
 end;
 
-
 procedure TfrmRegistration.fdqryUsersBeforePost(DataSet: TDataSet);
 begin
-//   if (DataSet.FieldByName('UserName').AsString = '') or (DataSet.FieldByName('login').AsString = '') or (DataSet.FieldByName('password').AsString = '') then
-//  begin
-//    raise UniErrorException.Create('Заполните все поля!');
-//  end;
-  fdqryCheckLogin.ParamByName('login').Value := DataSet.FieldByName('login').Value;
-  fdqryCheckLogin.Open;
-  if fdqryCheckLogin.RecordCount > 0 then
+  if fdqryUsers.State in [dsInsert] then
   begin
-    fdqryCheckLogin.Close;
-    raise UniErrorException.Create('Такой логин уже существует!');
-  end else
-   fdqryCheckLogin.Close;
+    fdqryCheckLogin.ParamByName('login').Value := DataSet.FieldByName('login').Value;
+    fdqryCheckLogin.Open;
+    if fdqryCheckLogin.RecordCount > 0 then
+    begin
+      fdqryCheckLogin.Close;
+      raise UniErrorException.Create('Такой логин уже существует!');
+    end
+    else
+      fdqryCheckLogin.Close;
+  end;
+end;
+
+procedure TfrmRegistration.UniFormShow(Sender: TObject);
+begin
+fdqryUsers.Active := True;
 end;
 
 end.

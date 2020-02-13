@@ -5,7 +5,9 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   uniGUITypes, uniGUIAbstractClasses, uniGUIClasses, uniGUIForm,
-  uniGUIBaseClasses, uniEdit, uniButton;
+  uniGUIBaseClasses, uniEdit, uniButton, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
+  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TfrmChange = class(TUniForm)
@@ -14,6 +16,7 @@ type
     undtRepPas: TUniEdit;
     btnCancel: TUniButton;
     btnOk: TUniButton;
+    fdqryChange: TFDQuery;
     procedure btnCancelClick(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
   private
@@ -29,7 +32,7 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication, FormLogin, FireDAC.Stan.Intf;
+  MainModule, uniGUIApplication, FormLogin;
 
 function frmChange: TfrmChange;
 begin
@@ -46,21 +49,17 @@ procedure TfrmChange.btnOkClick(Sender: TObject);
 begin
   if (UniMainModule.UserPassword = undtOldPass.Text) and (undtNewPass.Text = undtRepPas.Text) and (UniMainModule.UserPassword <> undtNewPass.Text) then
   begin
-    UniMainModule.BlockPost := True;
-    try
-      UniMainModule.fdqryfdq.Close;
-      UniMainModule.fdqryfdq.SQL.Clear;
-      UniMainModule.fdqryfdq.SQL.Add('update Tb1 set password = :p where id = :id');
-      UniMainModule.fdqryfdq.ParamByName('p').Value := undtNewPass.Text;
-      UniMainModule.fdqryfdq.ParamByName('id').Value := UniMainModule.UserID;
-      UniMainModule.fdqryfdq.ExecSQL;
-      UniMainModule.fdqryfdq.Close;
-      UniMainModule.fdmtblOne.SaveToFile('text', sfJSON);
+
+      fdqryChange.Close;
+      fdqryChange.SQL.Clear;
+      fdqryChange.ParamByName('p').Value := undtNewPass.Text;
+      fdqryChange.ParamByName('id').Value := UniMainModule.UserID;
+      fdqryChange.ExecSQL;
+      fdqryChange.Close;
       frmChange.Close;
       LoginForm.Show(nil);
-    finally
-      UniMainModule.BlockPost := False;
-    end;
+
+
   end
   else
   begin
