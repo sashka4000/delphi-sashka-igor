@@ -80,6 +80,7 @@ object LoginForm: TLoginForm
   end
   object fdqryCheckLogin: TFDQuery
     Connection = UniMainModule.confd
+    UpdateTransaction = UniMainModule.fdtrnsctnWrite
     UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName, uvCheckRequired]
     UpdateOptions.GeneratorName = 'GEN_USERS_ID'
     UpdateOptions.KeyFields = 'ID'

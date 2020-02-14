@@ -49,15 +49,11 @@ procedure TfrmChange.btnOkClick(Sender: TObject);
 begin
   if (UniMainModule.UserPassword = undtOldPass.Text) and (undtNewPass.Text = undtRepPas.Text) and (UniMainModule.UserPassword <> undtNewPass.Text) then
   begin
-
-
       fdqryChange.ParamByName('p').Value := undtNewPass.Text;
       fdqryChange.ParamByName('id').Value := UniMainModule.UserID;
       fdqryChange.ExecSQL;
       frmChange.Close;
       LoginForm.Show(nil);
-
-
   end
   else
   begin
