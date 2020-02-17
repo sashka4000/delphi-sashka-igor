@@ -20,7 +20,6 @@ type
     btnOk: TUniButton;
     fdqryCheckLogin: TFDQuery;
     procedure btnOkClick(Sender: TObject);
-    procedure btnCancelClick(Sender: TObject);
     procedure UniLoginFormShow(Sender: TObject);
   private
     { Private declarations }
@@ -56,8 +55,8 @@ begin
   begin
     if fdqryCheckLogin.FieldByName('BLOCKED').AsInteger = 1 then
     begin
-       fdqryCheckLogin.Close; // не забываем закрыть запрос
-       ShowMessage('Пользователь заблокирован. Обратитесь к Админу');
+      fdqryCheckLogin.Close; // не забываем закрыть запрос
+      ShowMessage('Пользователь заблокирован. Обратитесь к Админу');
     end;
 
     UniMainModule.UserID := fdqryCheckLogin.FieldByName('ID').Value;
@@ -89,13 +88,6 @@ end;
 procedure TLoginForm.UniLoginFormShow(Sender: TObject);
 begin
   ActiveControl := undtLogin;
-end;
-
-procedure TLoginForm.btnCancelClick(Sender: TObject);
-var
-  i: Integer;
-begin
-// Нет реализиции
 end;
 
 initialization

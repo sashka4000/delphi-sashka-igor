@@ -68,7 +68,7 @@ end;
 
 procedure TfrmRegistration.UniFormShow(Sender: TObject);
 begin
-fdqryUsers.Active := True;
+  fdqryUsers.Active := True;
 end;
 
 end.

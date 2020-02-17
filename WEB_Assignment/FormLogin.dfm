@@ -64,7 +64,6 @@ object LoginForm: TLoginForm
     ParentFont = False
     Font.Height = -13
     TabOrder = 3
-    OnClick = btnCancelClick
   end
   object btnOk: TUniButton
     Left = 129

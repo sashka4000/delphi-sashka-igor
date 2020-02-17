@@ -9,14 +9,11 @@ uses
   FireDAC.Comp.Client, Data.Win.ADODB, FireDAC.UI.Intf, FireDAC.Stan.Def,
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
   FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait,
-  FireDAC.Phys.SQLiteVDataSet, FireDAC.DApt, FireDAC.Stan.StorageJSON, FireDAC.Phys.FB,
-  FireDAC.Phys.FBDef, FireDAC.Phys.IBBase, FireDAC.Comp.UI;
+  FireDAC.Phys.SQLiteVDataSet, FireDAC.DApt, FireDAC.Stan.StorageJSON,
+  FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase, FireDAC.Comp.UI;
 
 type
   TUniMainModule = class(TUniGUIMainModule)
-    fdmtblOne: TFDMemTable;
-    fdqryfdq: TFDQuery;
-    fdstnstrgjsnlnk1: TFDStanStorageJSONLink;
     confd: TFDConnection;
     fdphysfbdrvrlnkOne: TFDPhysFBDriverLink;
     fdtrnsctnRead: TFDTransaction;
@@ -51,17 +48,13 @@ begin
   Result := TUniMainModule(UniApplication.UniMainModule);
 end;
 
-
-
 procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);
 begin
   UserID := 0;
   SuperUser := 0;
-  UserPassword :='';
+  UserPassword := '';
   // Подключаемся к БД
   confd.Connected := true;
-  // Убираем параметры READ транзакции, которые были нам удобны во время проектирования
-  self.fdtrnsctnRead.Options.AutoStart := False;
   // стартуем Read транзакцию. Она так и будет все время запущена
   self.fdtrnsctnRead.StartTransaction;
 end;

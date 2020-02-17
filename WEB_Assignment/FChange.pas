@@ -5,9 +5,10 @@ interface
 uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
   uniGUITypes, uniGUIAbstractClasses, uniGUIClasses, uniGUIForm,
-  uniGUIBaseClasses, uniEdit, uniButton, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
-  FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
-  FireDAC.DApt, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  uniGUIBaseClasses, uniEdit, uniButton, FireDAC.Stan.Intf, FireDAC.Stan.Option,
+  FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TfrmChange = class(TUniForm)
@@ -47,17 +48,17 @@ end;
 
 procedure TfrmChange.btnOkClick(Sender: TObject);
 begin
-  if (UniMainModule.UserPassword = undtOldPass.Text) and (undtNewPass.Text = undtRepPas.Text) and (UniMainModule.UserPassword <> undtNewPass.Text) then
+  if (UniMainModule.UserPassword = undtOldPass.Text) and (undtNewPass.Text = undtRepPas.Text) and (UniMainModule.UserPassword <> undtNewPass.Text) and not (undtNewPass.Text = '') then
   begin
-      fdqryChange.ParamByName('p').Value := undtNewPass.Text;
-      fdqryChange.ParamByName('id').Value := UniMainModule.UserID;
-      fdqryChange.ExecSQL;
-      frmChange.Close;
-      LoginForm.Show(nil);
+    fdqryChange.ParamByName('p').Value := undtNewPass.Text;
+    fdqryChange.ParamByName('id').Value := UniMainModule.UserID;
+    fdqryChange.ExecSQL;
+    frmChange.Close;
+    LoginForm.Show(nil);
   end
   else
   begin
-    ShowMessage(('Вы не поменяли пароль!!'));
+    ShowMessage('Вы не поменяли пароль!!');
     undtNewPass.Clear;
     undtRepPas.Clear;
   end;

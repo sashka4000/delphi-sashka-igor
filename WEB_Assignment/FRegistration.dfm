@@ -128,10 +128,13 @@ object frmRegistration: TfrmRegistration
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead
     UpdateTransaction = UniMainModule.fdtrnsctnWrite
-    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName, uvCheckRequired]
+    FetchOptions.AssignedValues = [evItems]
+    FetchOptions.Items = [fiBlobs, fiDetails]
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName, uvCheckRequired, uvCheckReadOnly]
     UpdateOptions.GeneratorName = 'GEN_USERS_ID'
     UpdateOptions.KeyFields = 'ID'
     UpdateOptions.AutoIncFields = 'ID'
+    UpdateObject = fdpdtsqlUsers
     SQL.Strings = (
       'select * from users')
     Left = 680
@@ -145,7 +148,6 @@ object frmRegistration: TfrmRegistration
     UpdateOptions.GeneratorName = 'GEN_USERS_ID'
     UpdateOptions.KeyFields = 'ID'
     UpdateOptions.AutoIncFields = 'ID'
-    UpdateObject = fdpdtsqlUsers
     SQL.Strings = (
       'select Login from users where Login=:login')
     Left = 56

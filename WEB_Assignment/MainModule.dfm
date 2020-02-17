@@ -3,59 +3,8 @@ object UniMainModule: TUniMainModule
   OnCreate = UniGUIMainModuleCreate
   OnDestroy = UniGUIMainModuleDestroy
   MonitoredKeys.Keys = <>
-  Height = 453
-  Width = 847
-  object fdmtblOne: TFDMemTable
-    Active = True
-    FieldDefs = <
-      item
-        Name = 'ID'
-        DataType = ftAutoInc
-      end
-      item
-        Name = 'UserName'
-        DataType = ftString
-        Size = 30
-      end
-      item
-        Name = 'Login'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'Password'
-        DataType = ftString
-        Size = 20
-      end
-      item
-        Name = 'Status'
-        DataType = ftBoolean
-      end
-      item
-        Name = 'Assignment'
-        DataType = ftString
-        Size = 50
-      end>
-    IndexDefs = <>
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    StoreDefs = True
-    Left = 16
-    Top = 8
-  end
-  object fdqryfdq: TFDQuery
-    Left = 72
-    Top = 8
-  end
-  object fdstnstrgjsnlnk1: TFDStanStorageJSONLink
-    Left = 144
-    Top = 16
-  end
+  Height = 231
+  Width = 316
   object confd: TFDConnection
     Params.Strings = (
       'Database=C:\DB\TEKONDB.FDB'
@@ -67,28 +16,29 @@ object UniMainModule: TUniMainModule
       'DriverID=FB')
     Connected = True
     LoginPrompt = False
-    Left = 512
+    Left = 16
     Top = 16
   end
   object fdphysfbdrvrlnkOne: TFDPhysFBDriverLink
     VendorLib = 'C:\Program Files (x86)\Firebird\Firebird_2_5\bin\fbclient.dll'
-    Left = 512
+    Left = 24
     Top = 80
   end
   object fdtrnsctnRead: TFDTransaction
     Options.ReadOnly = True
+    Options.AutoStart = False
     Options.AutoStop = False
     Options.EnableNested = False
     Connection = confd
-    Left = 392
+    Left = 88
     Top = 24
   end
   object fdtrnsctnWrite: TFDTransaction
     Options.DisconnectAction = xdRollback
     Options.EnableNested = False
     Connection = confd
-    Left = 392
-    Top = 88
+    Left = 136
+    Top = 24
   end
   object fdqryTrip: TFDQuery
     Connection = confd
@@ -98,22 +48,22 @@ object UniMainModule: TUniMainModule
     UpdateOptions.GeneratorName = 'GEN_USERS_ID'
     SQL.Strings = (
       'select * from trip')
-    Left = 96
-    Top = 256
+    Left = 216
+    Top = 88
   end
   object dsTrip: TDataSource
     DataSet = fdqryTrip
-    Left = 96
-    Top = 200
+    Left = 216
+    Top = 24
   end
   object fdpdtsqlTrip: TFDUpdateSQL
     Connection = confd
-    Left = 96
-    Top = 320
+    Left = 216
+    Top = 144
   end
   object fdgxwtcrsrUser: TFDGUIxWaitCursor
     Provider = 'Forms'
-    Left = 512
-    Top = 144
+    Left = 24
+    Top = 136
   end
 end
