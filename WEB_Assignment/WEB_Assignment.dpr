@@ -4,7 +4,7 @@ uses
   Forms,
   ServerModule in 'ServerModule.pas' {UniServerModule: TUniGUIServerModule},
   MainModule in 'MainModule.pas' {UniMainModule: TUniGUIMainModule},
-  Main in 'Main.pas' {MainForm: TUniForm},
+  FTripUser in 'FTripUser.pas' {frmTripUser: TUniForm},
   FormLogin in 'FormLogin.pas' {LoginForm: TUniLoginForm},
   FRegistration in 'FRegistration.pas' {frmRegistration: TUniForm},
   FAdmin in 'FAdmin.pas' {frmAdmin: TUniForm},

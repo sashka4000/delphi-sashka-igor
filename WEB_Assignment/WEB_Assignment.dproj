@@ -99,8 +99,8 @@
             <FormType>dfm</FormType>
             <DesignClass>TUniGUIMainModule</DesignClass>
         </DCCReference>
-        <DCCReference Include="Main.pas">
-            <Form>MainForm</Form>
+        <DCCReference Include="FTripUser.pas">
+            <Form>frmTripUser</Form>
             <FormType>dfm</FormType>
             <DesignClass>TUniForm</DesignClass>
         </DCCReference>

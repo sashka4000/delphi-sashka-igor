@@ -3,8 +3,8 @@ object UniMainModule: TUniMainModule
   OnCreate = UniGUIMainModuleCreate
   OnDestroy = UniGUIMainModuleDestroy
   MonitoredKeys.Keys = <>
-  Height = 231
-  Width = 316
+  Height = 204
+  Width = 197
   object confd: TFDConnection
     Params.Strings = (
       'Database=C:\DB\TEKONDB.FDB'
@@ -30,36 +30,15 @@ object UniMainModule: TUniMainModule
     Options.AutoStop = False
     Options.EnableNested = False
     Connection = confd
-    Left = 88
+    Left = 120
     Top = 24
   end
   object fdtrnsctnWrite: TFDTransaction
     Options.DisconnectAction = xdRollback
     Options.EnableNested = False
     Connection = confd
-    Left = 136
-    Top = 24
-  end
-  object fdqryTrip: TFDQuery
-    Connection = confd
-    Transaction = fdtrnsctnRead
-    UpdateTransaction = fdtrnsctnRead
-    UpdateOptions.AssignedValues = [uvGeneratorName]
-    UpdateOptions.GeneratorName = 'GEN_USERS_ID'
-    SQL.Strings = (
-      'select * from trip')
-    Left = 216
-    Top = 88
-  end
-  object dsTrip: TDataSource
-    DataSet = fdqryTrip
-    Left = 216
-    Top = 24
-  end
-  object fdpdtsqlTrip: TFDUpdateSQL
-    Connection = confd
-    Left = 216
-    Top = 144
+    Left = 120
+    Top = 96
   end
   object fdgxwtcrsrUser: TFDGUIxWaitCursor
     Provider = 'Forms'

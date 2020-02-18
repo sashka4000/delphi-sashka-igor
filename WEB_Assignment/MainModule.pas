@@ -18,9 +18,6 @@ type
     fdphysfbdrvrlnkOne: TFDPhysFBDriverLink;
     fdtrnsctnRead: TFDTransaction;
     fdtrnsctnWrite: TFDTransaction;
-    fdqryTrip: TFDQuery;
-    dsTrip: TDataSource;
-    fdpdtsqlTrip: TFDUpdateSQL;
     fdgxwtcrsrUser: TFDGUIxWaitCursor;
     procedure UniGUIMainModuleCreate(Sender: TObject);
     procedure UniGUIMainModuleDestroy(Sender: TObject);

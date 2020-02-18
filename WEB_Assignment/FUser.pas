@@ -26,7 +26,7 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication, FChange, Main;
+  MainModule, uniGUIApplication, FChange, FTripUser;
 
 function frmUser: TfrmUser;
 begin
@@ -35,7 +35,7 @@ end;
 
 procedure TfrmUser.btn1Click(Sender: TObject);
 begin
-  MainForm.Show(nil);
+ frmTripUser.ShowModal(nil) ;
 end;
 
 procedure TfrmUser.btnChangeClick(Sender: TObject);
