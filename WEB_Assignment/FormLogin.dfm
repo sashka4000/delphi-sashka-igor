@@ -52,6 +52,7 @@ object LoginForm: TLoginForm
     EmptyText = #1055#1072#1088#1086#1083#1100
     ClearButton = True
     FieldLabelFont.Height = -13
+    OnKeyPress = undtPasswordKeyPress
   end
   object btnCancel: TUniButton
     Left = 32

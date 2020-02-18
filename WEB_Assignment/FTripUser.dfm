@@ -25,7 +25,7 @@ object frmTripUser: TfrmTripUser
       item
         FieldName = 'NAME'
         Title.Alignment = taCenter
-        Title.Caption = #1060#1048#1054
+        Title.Caption = #1054#1090#1074#1077#1090#1089#1090#1074#1077#1085#1085#1086#1077' '#1083#1080#1094#1086
         Width = 300
         ReadOnly = True
       end
@@ -74,7 +74,6 @@ object frmTripUser: TfrmTripUser
     Width = 209
     Height = 25
     Hint = ''
-    DateTime = 43879.000000000000000000
     DateFormat = 'dd/MM/yyyy'
     TimeFormat = 'HH:mm:ss'
     TabOrder = 3
@@ -87,7 +86,6 @@ object frmTripUser: TfrmTripUser
     Width = 209
     Height = 25
     Hint = ''
-    DateTime = 43865.000000000000000000
     DateFormat = 'dd/MM/yyyy'
     TimeFormat = 'HH:mm:ss'
     TabOrder = 4
@@ -112,12 +110,13 @@ object frmTripUser: TfrmTripUser
   object fdqryTrip: TFDQuery
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead
-    UpdateTransaction = UniMainModule.fdtrnsctnWrite
     FetchOptions.AssignedValues = [evItems]
     FetchOptions.Items = [fiBlobs, fiDetails]
     UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName]
+    UpdateOptions.EnableDelete = False
+    UpdateOptions.EnableInsert = False
+    UpdateOptions.EnableUpdate = False
     UpdateOptions.GeneratorName = 'GEN_USERS_ID'
-    UpdateObject = fdpdtsqlTrip
     SQL.Strings = (
       'SELECT  users.name, trip.tripdate,  trip.triptype, trip.comment'
       'FROM users'

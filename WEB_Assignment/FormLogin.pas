@@ -21,6 +21,8 @@ type
     fdqryCheckLogin: TFDQuery;
     procedure btnOkClick(Sender: TObject);
     procedure UniLoginFormShow(Sender: TObject);
+    procedure undtPasswordKeyPress(Sender: TObject; var Key: Char);
+
   private
     { Private declarations }
   public
@@ -83,6 +85,14 @@ begin
 
 
   end;
+end;
+
+
+
+procedure TLoginForm.undtPasswordKeyPress(Sender: TObject; var Key: Char);
+begin
+  if Key = #13 then
+    btnOkClick(nil);
 end;
 
 procedure TLoginForm.UniLoginFormShow(Sender: TObject);
