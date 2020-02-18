@@ -10,11 +10,11 @@ uses
   FireDAC.Phys.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, uniButton,
   uniDateTimePicker, uniDBNavigator, Data.DB, FireDAC.Comp.DataSet,
-  FireDAC.Comp.Client, DateUtils;
+  FireDAC.Comp.Client, DateUtils, FireDAC.Stan.StorageBin, uniMultiItem,
+  uniComboBox, uniDBComboBox, uniDBLookupComboBox, uniPanel;
 
 type
   TfrmTripUser = class(TUniForm)
-    fdpdtsqlTrip: TFDUpdateSQL;
     fdqryTrip: TFDQuery;
     dsTrip: TDataSource;
     undbgrdTrip: TUniDBGrid;
@@ -23,8 +23,21 @@ type
     undtmpckrBegin: TUniDateTimePicker;
     undtmpckrEnd: TUniDateTimePicker;
     btnRefresh: TUniButton;
+    fdmtblTripType: TFDMemTable;
+    intgrfldTripTypeID: TIntegerField;
+    strngfldTripTypeTripType: TStringField;
+    dsTripType: TDataSource;
+    unhdnpnl1: TUniHiddenPanel;
+    undblkpcmbx1: TUniDBLookupComboBox;
+    strngfldTripNAME: TStringField;
+    dtfldTripTRIPDATE: TDateField;
+    smlntfldTripTRIPTYPE: TSmallintField;
+    strngfldTripCOMMENT: TStringField;
+    strngfldTripTT: TStringField;
     procedure UniFormShow(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
+    procedure undbgrdTripColumnFilter(Sender: TUniDBGrid;
+      const Column: TUniDBGridColumn; const Value: Variant);
   private
     { Private declarations }
   public
@@ -51,6 +64,22 @@ begin
   fdqryTrip.ParamByName('d1').Value := undtmpckrBegin.DateTime;
   fdqryTrip.ParamByName('d2').Value := undtmpckrEnd.DateTime;
   fdqryTrip.Open;
+end;
+
+procedure TfrmTripUser.undbgrdTripColumnFilter(Sender: TUniDBGrid;
+  const Column: TUniDBGridColumn; const Value: Variant);
+var
+ S : String;
+begin
+ S := Value;
+ if S = ''
+ then
+   fdqryTrip.Filtered := False
+ else
+ begin
+   fdqryTrip.Filter := 'TRIPTYPE = ' + S;
+   fdqryTrip.Filtered := True;
+ end;
 end;
 
 procedure TfrmTripUser.UniFormShow(Sender: TObject);

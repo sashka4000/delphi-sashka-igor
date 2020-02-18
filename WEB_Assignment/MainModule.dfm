@@ -26,7 +26,6 @@ object UniMainModule: TUniMainModule
   end
   object fdtrnsctnRead: TFDTransaction
     Options.ReadOnly = True
-    Options.AutoStart = False
     Options.AutoStop = False
     Options.EnableNested = False
     Connection = confd

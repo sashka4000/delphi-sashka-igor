@@ -64,7 +64,7 @@ object frmChange: TfrmChange
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnWrite
     SQL.Strings = (
-      'update users set password = :p where id = :id')
+      'update users u set u."PASSWORD" = :p where id = :id')
     Left = 144
     Top = 32
     ParamData = <
