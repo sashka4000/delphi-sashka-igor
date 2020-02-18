@@ -50,6 +50,7 @@ begin
   fdqryTrip.Open();
   fdqryTrip.ParamByName('d1').Value := undtmpckrBegin.DateTime;
   fdqryTrip.ParamByName('d2').Value := undtmpckrEnd.DateTime;
+   fdqryTrip.ParamByName('id').Value := UniMainModule.UserID;
   fdqryTrip.Refresh;
 end;
 
@@ -57,6 +58,7 @@ procedure TfrmTripUser.UniFormShow(Sender: TObject);
 begin
   fdqryTrip.ParamByName('d1').Value := undtmpckrBegin.DateTime;
   fdqryTrip.ParamByName('d2').Value := undtmpckrEnd.DateTime;
+  fdqryTrip.ParamByName('id').Value := UniMainModule.UserID;
 end;
 
 initialization
