@@ -6,7 +6,6 @@ object frmTripUser: TfrmTripUser
   Caption = ''
   OnShow = UniFormShow
   BorderStyle = bsNone
-  WindowState = wsMaximized
   OldCreateOrder = False
   BorderIcons = []
   MonitoredKeys.Keys = <>
@@ -82,7 +81,7 @@ object frmTripUser: TfrmTripUser
     DateTime = 43879.000000000000000000
     DateFormat = 'dd/MM/yyyy'
     TimeFormat = 'HH:mm:ss'
-    TabOrder = 4
+    TabOrder = 3
     FieldLabel = #1053#1072#1095#1072#1083#1100#1085#1072#1103' '#1076#1072#1090#1072
     EmptyText = #1053#1072#1095#1072#1083#1100#1085#1072#1103' '#1076#1072#1090#1072
   end
@@ -106,19 +105,19 @@ object frmTripUser: TfrmTripUser
     Height = 25
     Hint = ''
     Caption = #1054#1073#1085#1086#1074#1080#1090#1100
-    TabOrder = 5
+    TabOrder = 4
     OnClick = btnRefreshClick
   end
   object unhdnpnl1: TUniHiddenPanel
-    Left = 584
-    Top = 352
+    Left = 312
+    Top = 304
     Width = 305
     Height = 113
     Hint = ''
     Visible = True
     object undblkpcmbx1: TUniDBLookupComboBox
-      Left = 56
-      Top = 24
+      Left = 24
+      Top = 16
       Width = 145
       Hint = ''
       ListField = 'TripType'
@@ -209,6 +208,17 @@ object frmTripUser: TfrmTripUser
   end
   object fdmtblTripType: TFDMemTable
     Active = True
+    FieldDefs = <
+      item
+        Name = 'ID'
+        DataType = ftInteger
+      end
+      item
+        Name = 'TripType'
+        DataType = ftString
+        Size = 20
+      end>
+    IndexDefs = <>
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
     ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode]
@@ -217,10 +227,11 @@ object frmTripUser: TfrmTripUser
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
     Left = 528
     Top = 560
     Content = {
-      414442530F005C3D67010000FF00010001FF02FF0304001C000000660064006D
+      414442530F005D1967010000FF00010001FF02FF0304001C000000660064006D
       00740062006C005400720069007000540079007000650005000A000000540061
       0062006C006500060000000000070000080032000000090000FF0AFF0B040004
       00000049004400050004000000490044000C00010000000E000D000F00011000
@@ -263,7 +274,7 @@ object frmTripUser: TfrmTripUser
   end
   object dsTripType: TDataSource
     DataSet = fdmtblTripType
-    Left = 608
+    Left = 456
     Top = 560
   end
 end
