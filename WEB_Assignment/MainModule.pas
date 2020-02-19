@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
   FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait,
   FireDAC.Phys.SQLiteVDataSet, FireDAC.DApt, FireDAC.Stan.StorageJSON,
-  FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase, FireDAC.Comp.UI;
+  FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase, FireDAC.Comp.UI, FireDAC.Stan.StorageBin;
 
 type
   TUniMainModule = class(TUniGUIMainModule)
@@ -19,6 +19,10 @@ type
     fdtrnsctnRead: TFDTransaction;
     fdtrnsctnWrite: TFDTransaction;
     fdgxwtcrsrUser: TFDGUIxWaitCursor;
+    fdmtblTripType: TFDMemTable;
+    intgrfldTripTypeID: TIntegerField;
+    strngfldTripTypeTripType: TStringField;
+    dsTripType: TDataSource;
     procedure UniGUIMainModuleCreate(Sender: TObject);
     procedure UniGUIMainModuleDestroy(Sender: TObject);
   private

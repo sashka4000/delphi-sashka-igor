@@ -3,8 +3,8 @@ object UniMainModule: TUniMainModule
   OnCreate = UniGUIMainModuleCreate
   OnDestroy = UniGUIMainModuleDestroy
   MonitoredKeys.Keys = <>
-  Height = 204
-  Width = 197
+  Height = 418
+  Width = 688
   object confd: TFDConnection
     Params.Strings = (
       'Database=C:\DB\TEKONDB.FDB'
@@ -43,5 +43,31 @@ object UniMainModule: TUniMainModule
     Provider = 'Forms'
     Left = 24
     Top = 136
+  end
+  object fdmtblTripType: TFDMemTable
+    FieldDefs = <>
+    IndexDefs = <>
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode]
+    ResourceOptions.Persistent = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    StoreDefs = True
+    Left = 252
+    Top = 26
+    object intgrfldTripTypeID: TIntegerField
+      FieldName = 'ID'
+    end
+    object strngfldTripTypeTripType: TStringField
+      FieldName = 'TripType'
+    end
+  end
+  object dsTripType: TDataSource
+    DataSet = fdmtblTripType
+    Left = 324
+    Top = 26
   end
 end

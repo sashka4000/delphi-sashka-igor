@@ -26,7 +26,7 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication, Main, FRegistration;
+  MainModule, uniGUIApplication, Main, FRegistration, FTripAdmin;
 
 function frmAdmin: TfrmAdmin;
 begin
@@ -41,7 +41,7 @@ end;
 
 procedure TfrmAdmin.btn2Click(Sender: TObject);
 begin
-  MainForm.Show(nil);
+  frmTripAdmin.ShowModal(nil);
 end;
 
 end.

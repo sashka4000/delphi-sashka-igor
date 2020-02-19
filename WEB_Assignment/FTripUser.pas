@@ -23,10 +23,6 @@ type
     undtmpckrBegin: TUniDateTimePicker;
     undtmpckrEnd: TUniDateTimePicker;
     btnRefresh: TUniButton;
-    fdmtblTripType: TFDMemTable;
-    intgrfldTripTypeID: TIntegerField;
-    strngfldTripTypeTripType: TStringField;
-    dsTripType: TDataSource;
     unhdnpnl1: TUniHiddenPanel;
     undblkpcmbx1: TUniDBLookupComboBox;
     strngfldTripNAME: TStringField;

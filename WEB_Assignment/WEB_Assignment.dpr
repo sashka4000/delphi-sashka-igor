@@ -9,7 +9,8 @@ uses
   FAdmin in 'FAdmin.pas' {frmAdmin: TUniForm},
   FUser in 'FUser.pas' {frmUser: TUniForm},
   FChange in 'FChange.pas' {frmChange: TUniForm},
-  FTripUser in 'FTripUser.pas' {frmTripUser: TUniForm};
+  FTripUser in 'FTripUser.pas' {frmTripUser: TUniForm},
+  FTripAdmin in 'FTripAdmin.pas' {frmTripAdmin: TUniForm};
 
 {$R *.res}
 
