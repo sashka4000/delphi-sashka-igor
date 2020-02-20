@@ -58,6 +58,7 @@ begin
   confd.Connected := true;
   // стартуем Read транзакцию. Она так и будет все время запущена
   self.fdtrnsctnRead.StartTransaction;
+// Код заполнения таблицы  fdmtblTripType
 end;
 
 procedure TUniMainModule.UniGUIMainModuleDestroy(Sender: TObject);

@@ -38,6 +38,16 @@ type
     cbbAd: TUniDBLookupComboBox;
     fdqryUsersID: TLargeintField;
     fdqryUsersNAME: TStringField;
+    cbbUSER: TUniDBLookupComboBox;
+    dsAdmin: TDataSource;
+    fdqryAdmin: TFDQuery;
+    lrgntfld1: TLargeintField;
+    strngfld1: TStringField;
+    dsUser: TDataSource;
+    fdqryUser: TFDQuery;
+    lrgntfld2: TLargeintField;
+    strngfld2: TStringField;
+    cbbAdmin: TUniDBLookupComboBox;
     procedure UniFormShow(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
     procedure undbgrdTripColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn; const Value: Variant);
@@ -45,6 +55,9 @@ type
     { Private declarations }
   public
     { Public declarations }
+    FilterTT: string;
+    FilterUSERNAME: string;
+    FilterADMINNAME: string;
   end;
 
 function frmTripAdmin: TfrmTripAdmin;
@@ -72,19 +85,69 @@ end;
 procedure TfrmTripAdmin.undbgrdTripColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn; const Value: Variant);
 var
   S: string;
+  tmp: string;
 begin
   S := Value;
-  if S = '' then
-    fdqryTripAd.Filtered := False
-  else
+
+  if Column.FieldName = 'TT' then
   begin
-    fdqryTripAd.Filter := 'TRIPTYPE = ' + S;
-    fdqryTripAd.Filtered := True;
+    if S = '' then
+      FilterTT := ''
+    else
+    begin
+      FilterTT := '(TRIPTYPE = ' + S + ')';
+    end;
   end;
+
+  if Column.FieldName = 'USERNAME' then
+  begin
+    if S = '' then
+      FilterUSERNAME := ''
+    else
+    begin
+      FilterUSERNAME := '(USER_ID = ' + S + ')';
+    end;
+  end;
+
+  //  ADMIN COLUMN
+  if Column.FieldName = 'ADMINNAME' then
+  begin
+    if S = '' then
+      FilterADMINNAME := ''
+    else
+    begin
+      FilterADMINNAME := '(ADMIN_ID = ' + S + ')';
+    end;
+  end;
+  fdqryTripAd.Filter := '';
+
+  if FilterTT <> '' then
+    fdqryTripAd.Filter := FilterTT;
+
+  if FilterUSERNAME <> '' then
+    if fdqryTripAd.Filter <> '' then
+      fdqryTripAd.Filter := fdqryTripAd.Filter + ' AND ' + FilterUSERNAME
+    else
+      fdqryTripAd.Filter := FilterUSERNAME;
+
+  //  ADMIN
+  if FilterADMINNAME <> '' then
+    if fdqryTripAd.Filter <> '' then
+      fdqryTripAd.Filter := fdqryTripAd.Filter + ' AND ' + FilterADMINNAME
+    else
+      fdqryTripAd.Filter := FilterADMINNAME;
+
+  if (FilterTT <> '') or (FilterUSERNAME <> '') or (FilterADMINNAME <> '') then
+    fdqryTripAd.Filtered := True;
 end;
 
 procedure TfrmTripAdmin.UniFormShow(Sender: TObject);
 begin
+  FilterTT := '';
+  FilterUSERNAME := '';
+  FilterADMINNAME := '';
+  fdqryTripAd.Filter := '';
+  fdqryTripAd.Filtered := False;
   undtmpckrBegin.DateTime := date - 14;
   undtmpckrEnd.DateTime := Date;
   btnRefreshClick(nil);

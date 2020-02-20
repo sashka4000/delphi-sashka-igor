@@ -30,12 +30,16 @@ object frmTripAdmin: TfrmTripAdmin
       end
       item
         FieldName = 'USERNAME'
+        Filtering.Enabled = True
+        Filtering.Editor = cbbUSER
         Title.Alignment = taCenter
         Title.Caption = #1048#1084#1103' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1103#13#10
         Width = 220
       end
       item
         FieldName = 'ADMINNAME'
+        Filtering.Enabled = True
+        Filtering.Editor = cbbAdmin
         Title.Alignment = taCenter
         Title.Caption = #1054#1090#1074#1077#1090#1089#1090#1074#1077#1085#1085#1086#1077' '#1083#1080#1094#1086
         Width = 250
@@ -120,7 +124,7 @@ object frmTripAdmin: TfrmTripAdmin
     Left = 680
     Top = 160
     Width = 273
-    Height = 97
+    Height = 177
     Hint = ''
     Visible = True
     object cbbAd: TUniDBLookupComboBox
@@ -128,11 +132,35 @@ object frmTripAdmin: TfrmTripAdmin
       Top = 16
       Width = 145
       Hint = ''
+      ListField = 'TripType'
       ListSource = UniMainModule.dsTripType
+      KeyField = 'ID'
       ListFieldIndex = 0
-      DataField = 'ID'
-      DataSource = UniMainModule.dsTripType
       TabOrder = 1
+      Color = clWindow
+    end
+    object cbbUSER: TUniDBLookupComboBox
+      Left = 56
+      Top = 44
+      Width = 145
+      Hint = ''
+      ListField = 'NAME'
+      ListSource = dsUser
+      KeyField = 'ID'
+      ListFieldIndex = 0
+      TabOrder = 2
+      Color = clWindow
+    end
+    object cbbAdmin: TUniDBLookupComboBox
+      Left = 56
+      Top = 72
+      Width = 145
+      Hint = ''
+      ListField = 'NAME'
+      ListSource = dsAdmin
+      KeyField = 'ID'
+      ListFieldIndex = 0
+      TabOrder = 3
       Color = clWindow
     end
   end
@@ -196,6 +224,7 @@ object frmTripAdmin: TfrmTripAdmin
       Size = 255
     end
     object strngfldTripAdUSERNAME: TStringField
+      DisplayWidth = 50
       FieldKind = fkLookup
       FieldName = 'USERNAME'
       LookupDataSet = fdqryUsers
@@ -205,6 +234,7 @@ object frmTripAdmin: TfrmTripAdmin
       Lookup = True
     end
     object strngfldTripAdADMINNAME: TStringField
+      DisplayWidth = 50
       FieldKind = fkLookup
       FieldName = 'ADMINNAME'
       LookupDataSet = fdqryUsers
@@ -275,6 +305,70 @@ object frmTripAdmin: TfrmTripAdmin
       Required = True
     end
     object fdqryUsersNAME: TStringField
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+      Size = 255
+    end
+  end
+  object dsAdmin: TDataSource
+    DataSet = fdqryAdmin
+    Left = 272
+    Top = 32
+  end
+  object fdqryAdmin: TFDQuery
+    Active = True
+    Connection = UniMainModule.confd
+    Transaction = UniMainModule.fdtrnsctnRead
+    FetchOptions.AssignedValues = [evItems]
+    FetchOptions.Items = [fiBlobs, fiDetails]
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName]
+    UpdateOptions.EnableDelete = False
+    UpdateOptions.EnableInsert = False
+    UpdateOptions.EnableUpdate = False
+    UpdateOptions.GeneratorName = 'GEN_USERS_ID'
+    SQL.Strings = (
+      'SELECT ID, NAME FROM USERS WHERE SUPERUSER = 1')
+    Left = 208
+    Top = 32
+    object lrgntfld1: TLargeintField
+      FieldName = 'ID'
+      Origin = 'ID'
+      Required = True
+    end
+    object strngfld1: TStringField
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+      Size = 255
+    end
+  end
+  object dsUser: TDataSource
+    DataSet = fdqryUser
+    Left = 392
+    Top = 32
+  end
+  object fdqryUser: TFDQuery
+    Active = True
+    Connection = UniMainModule.confd
+    Transaction = UniMainModule.fdtrnsctnRead
+    FetchOptions.AssignedValues = [evItems]
+    FetchOptions.Items = [fiBlobs, fiDetails]
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName]
+    UpdateOptions.EnableDelete = False
+    UpdateOptions.EnableInsert = False
+    UpdateOptions.EnableUpdate = False
+    UpdateOptions.GeneratorName = 'GEN_USERS_ID'
+    SQL.Strings = (
+      'SELECT ID, NAME FROM USERS WHERE SUPERUSER = 0')
+    Left = 336
+    Top = 32
+    object lrgntfld2: TLargeintField
+      FieldName = 'ID'
+      Origin = 'ID'
+      Required = True
+    end
+    object strngfld2: TStringField
       FieldName = 'NAME'
       Origin = 'NAME'
       Required = True
