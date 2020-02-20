@@ -231,6 +231,7 @@ object frmTripAdmin: TfrmTripAdmin
       LookupKeyFields = 'ID'
       LookupResultField = 'NAME'
       KeyFields = 'USER_ID'
+      Size = 50
       Lookup = True
     end
     object strngfldTripAdADMINNAME: TStringField
@@ -241,6 +242,7 @@ object frmTripAdmin: TfrmTripAdmin
       LookupKeyFields = 'ID'
       LookupResultField = 'NAME'
       KeyFields = 'ADMIN_ID'
+      Size = 50
       Lookup = True
     end
     object strngfldTripAdTT: TStringField
