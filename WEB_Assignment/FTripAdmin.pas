@@ -48,9 +48,11 @@ type
     lrgntfld2: TLargeintField;
     strngfld2: TStringField;
     cbbAdmin: TUniDBLookupComboBox;
+    btnRecord: TUniButton;
     procedure UniFormShow(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
     procedure undbgrdTripColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn; const Value: Variant);
+    procedure btnRecordClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -67,7 +69,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uniGUIVars, MainModule, uniGUIApplication;
+  uniGUIVars, MainModule, uniGUIApplication, FRecord;
 
 function frmTripAdmin: TfrmTripAdmin;
 begin
@@ -85,7 +87,6 @@ end;
 procedure TfrmTripAdmin.undbgrdTripColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn; const Value: Variant);
 var
   S: string;
-  tmp: string;
 begin
   S := Value;
 
@@ -143,6 +144,8 @@ end;
 
 procedure TfrmTripAdmin.UniFormShow(Sender: TObject);
 begin
+  fdqryAdmin.Active := True;
+  fdqryUser.Active := True;
   FilterTT := '';
   FilterUSERNAME := '';
   FilterADMINNAME := '';
@@ -151,6 +154,13 @@ begin
   undtmpckrBegin.DateTime := date - 14;
   undtmpckrEnd.DateTime := Date;
   btnRefreshClick(nil);
+end;
+
+procedure TfrmTripAdmin.btnRecordClick(Sender: TObject);
+begin
+
+  frmRecord.ShowModal;
+
 end;
 
 initialization

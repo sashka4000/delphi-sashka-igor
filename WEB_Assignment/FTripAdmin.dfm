@@ -164,6 +164,16 @@ object frmTripAdmin: TfrmTripAdmin
       Color = clWindow
     end
   end
+  object btnRecord: TUniButton
+    Left = 904
+    Top = 608
+    Width = 121
+    Height = 25
+    Hint = ''
+    Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1079#1072#1087#1080#1089#1100
+    TabOrder = 7
+    OnClick = btnRecordClick
+  end
   object dsTripAd: TDataSource
     DataSet = fdqryTripAd
     Left = 744
@@ -319,7 +329,6 @@ object frmTripAdmin: TfrmTripAdmin
     Top = 32
   end
   object fdqryAdmin: TFDQuery
-    Active = True
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead
     FetchOptions.AssignedValues = [evItems]
@@ -351,7 +360,6 @@ object frmTripAdmin: TfrmTripAdmin
     Top = 32
   end
   object fdqryUser: TFDQuery
-    Active = True
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead
     FetchOptions.AssignedValues = [evItems]
