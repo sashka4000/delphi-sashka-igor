@@ -49,6 +49,7 @@ type
     strngfld2: TStringField;
     cbbAdmin: TUniDBLookupComboBox;
     btnRecord: TUniButton;
+    dsUsersAll: TDataSource;
     procedure UniFormShow(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
     procedure undbgrdTripColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn; const Value: Variant);

@@ -6,16 +6,19 @@ uses
   Windows, Messages, SysUtils, Variants, Classes, Graphics,
   Controls, Forms, uniGUITypes, uniGUIAbstractClasses,
   uniGUIClasses, uniGUIForm, uniButton, uniCalendar, uniGUIBaseClasses, uniMultiItem, uniListBox,
-  uniDBListBox, uniDBLookupListBox;
+  uniDBListBox, uniDBLookupListBox, uniCalendarPanel, uniEdit, uniDateTimePicker;
 
 type
   TfrmRecord = class(TUniForm)
     lstTrip: TUniDBLookupListBox;
-    unclndrdlgTrip: TUniCalendarDialog;
     lstUser: TUniDBLookupListBox;
     btnOk: TUniButton;
     btnCancel: TUniButton;
-    procedure UniFormShow(Sender: TObject);
+    undtDay: TUniEdit;
+    undtComment: TUniEdit;
+    undtmpckrBegin: TUniDateTimePicker;
+    undtmpckrEnd: TUniDateTimePicker;
+    procedure lstTripClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,17 +32,18 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication;
+  MainModule, uniGUIApplication, FTripAdmin;
 
 function frmRecord: TfrmRecord;
 begin
   Result := TfrmRecord(UniMainModule.GetFormInstance(TfrmRecord));
 end;
 
-procedure TfrmRecord.UniFormShow(Sender: TObject);
+
+
+procedure TfrmRecord.lstTripClick(Sender: TObject);
 begin
-frmRecord.Caption := 'Добавить запись';
-frmRecord.Position := poMainFormCenter;
+  ShowMessage (lstTrip.KeyValue);
 end;
 
 end.

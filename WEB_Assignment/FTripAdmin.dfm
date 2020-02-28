@@ -298,6 +298,7 @@ object frmTripAdmin: TfrmTripAdmin
     Top = 16
   end
   object fdqryUsers: TFDQuery
+    Active = True
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead
     FetchOptions.AssignedValues = [evItems]
@@ -309,7 +310,7 @@ object frmTripAdmin: TfrmTripAdmin
     UpdateOptions.GeneratorName = 'GEN_USERS_ID'
     SQL.Strings = (
       'SELECT ID, NAME FROM USERS')
-    Left = 88
+    Left = 32
     Top = 24
     object fdqryUsersID: TLargeintField
       FieldName = 'ID'
@@ -384,5 +385,10 @@ object frmTripAdmin: TfrmTripAdmin
       Required = True
       Size = 255
     end
+  end
+  object dsUsersAll: TDataSource
+    DataSet = fdqryUsers
+    Left = 88
+    Top = 24
   end
 end
