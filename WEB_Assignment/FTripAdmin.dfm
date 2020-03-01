@@ -298,7 +298,6 @@ object frmTripAdmin: TfrmTripAdmin
     Top = 16
   end
   object fdqryUsers: TFDQuery
-    Active = True
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead
     FetchOptions.AssignedValues = [evItems]

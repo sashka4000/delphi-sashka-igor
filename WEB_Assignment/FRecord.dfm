@@ -31,7 +31,7 @@ object frmRecord: TfrmRecord
     Height = 185
     Hint = ''
     ListField = 'NAME'
-    ListSource = frmTripAdmin.dsUsersAll
+    ListSource = dsUsersAll
     KeyField = 'ID'
     ListFieldIndex = 0
     TabOrder = 2
@@ -172,5 +172,36 @@ object frmRecord: TfrmRecord
         ParamType = ptInput
         Size = 255
       end>
+  end
+  object fdqryUsers: TFDQuery
+    Connection = UniMainModule.confd
+    Transaction = UniMainModule.fdtrnsctnRead
+    FetchOptions.AssignedValues = [evItems]
+    FetchOptions.Items = [fiBlobs, fiDetails]
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName]
+    UpdateOptions.EnableDelete = False
+    UpdateOptions.EnableInsert = False
+    UpdateOptions.EnableUpdate = False
+    UpdateOptions.GeneratorName = 'GEN_USERS_ID'
+    SQL.Strings = (
+      'SELECT ID, NAME FROM USERS')
+    Left = 80
+    Top = 296
+    object fdqryUsersID: TLargeintField
+      FieldName = 'ID'
+      Origin = 'ID'
+      Required = True
+    end
+    object fdqryUsersNAME: TStringField
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+      Size = 255
+    end
+  end
+  object dsUsersAll: TDataSource
+    DataSet = fdqryUsers
+    Left = 136
+    Top = 296
   end
 end

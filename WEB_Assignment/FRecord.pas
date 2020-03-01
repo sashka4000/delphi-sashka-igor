@@ -27,6 +27,10 @@ type
     unlbl4: TUniLabel;
     unlbl5: TUniLabel;
     fdqryInsert: TFDQuery;
+    fdqryUsers: TFDQuery;
+    fdqryUsersID: TLargeintField;
+    fdqryUsersNAME: TStringField;
+    dsUsersAll: TDataSource;
     procedure lstTripClick(Sender: TObject);
     procedure UniFormShow(Sender: TObject);
     procedure btnOkClick(Sender: TObject);
@@ -44,7 +48,7 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication, FTripAdmin;
+  MainModule, uniGUIApplication;
 
 function frmRecord: TfrmRecord;
 begin
@@ -87,6 +91,7 @@ end;
 
 procedure TfrmRecord.UniFormShow(Sender: TObject);
 begin
+  fdqryUsers.Active := True;
   undtmpckrBegin.DateTime := Date;
   undtDay.Text := '3';
 end;
