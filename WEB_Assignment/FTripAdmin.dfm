@@ -83,7 +83,7 @@ object frmTripAdmin: TfrmTripAdmin
     Height = 25
     Hint = ''
     Caption = #1054#1073#1085#1086#1074#1080#1090#1100
-    TabOrder = 5
+    TabOrder = 4
     OnClick = btnRefreshClick
   end
   object undtmpckrEnd: TUniDateTimePicker
@@ -108,7 +108,7 @@ object frmTripAdmin: TfrmTripAdmin
     DateTime = 43879.000000000000000000
     DateFormat = 'dd/MM/yyyy'
     TimeFormat = 'HH:mm:ss'
-    TabOrder = 4
+    TabOrder = 3
     FieldLabel = #1053#1072#1095#1072#1083#1100#1085#1072#1103' '#1076#1072#1090#1072
     EmptyText = #1053#1072#1095#1072#1083#1100#1085#1072#1103' '#1076#1072#1090#1072
   end
@@ -118,6 +118,8 @@ object frmTripAdmin: TfrmTripAdmin
     Width = 1032
     Height = 25
     Hint = ''
+    DataSource = dsTripAd
+    VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbPost, nbCancel, nbRefresh]
     TabOrder = 1
   end
   object unhdnpnlAd: TUniHiddenPanel
