@@ -23,6 +23,10 @@ type
     intgrfldTripTypeID: TIntegerField;
     strngfldTripTypeTripType: TStringField;
     dsTripType: TDataSource;
+    fdqryUsers: TFDQuery;
+    lrgntfldUsersID: TLargeintField;
+    strngfldUsersNAME: TStringField;
+    dsUsersAll: TDataSource;
     procedure UniGUIMainModuleCreate(Sender: TObject);
     procedure UniGUIMainModuleDestroy(Sender: TObject);
   private

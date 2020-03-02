@@ -70,4 +70,35 @@ object UniMainModule: TUniMainModule
     Left = 324
     Top = 26
   end
+  object fdqryUsers: TFDQuery
+    Connection = confd
+    Transaction = fdtrnsctnRead
+    FetchOptions.AssignedValues = [evItems]
+    FetchOptions.Items = [fiBlobs, fiDetails]
+    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName]
+    UpdateOptions.EnableDelete = False
+    UpdateOptions.EnableInsert = False
+    UpdateOptions.EnableUpdate = False
+    UpdateOptions.GeneratorName = 'GEN_USERS_ID'
+    SQL.Strings = (
+      'SELECT ID, NAME FROM USERS')
+    Left = 272
+    Top = 136
+    object lrgntfldUsersID: TLargeintField
+      FieldName = 'ID'
+      Origin = 'ID'
+      Required = True
+    end
+    object strngfldUsersNAME: TStringField
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+      Size = 255
+    end
+  end
+  object dsUsersAll: TDataSource
+    DataSet = fdqryUsers
+    Left = 344
+    Top = 136
+  end
 end

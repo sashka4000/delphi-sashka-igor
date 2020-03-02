@@ -237,7 +237,7 @@ object frmTripAdmin: TfrmTripAdmin
       DisplayWidth = 50
       FieldKind = fkLookup
       FieldName = 'USERNAME'
-      LookupDataSet = fdqryUsers
+      LookupDataSet = UniMainModule.fdqryUsers
       LookupKeyFields = 'ID'
       LookupResultField = 'NAME'
       KeyFields = 'USER_ID'
@@ -248,7 +248,7 @@ object frmTripAdmin: TfrmTripAdmin
       DisplayWidth = 50
       FieldKind = fkLookup
       FieldName = 'ADMINNAME'
-      LookupDataSet = fdqryUsers
+      LookupDataSet = UniMainModule.fdqryUsers
       LookupKeyFields = 'ID'
       LookupResultField = 'NAME'
       KeyFields = 'ADMIN_ID'
@@ -296,32 +296,6 @@ object frmTripAdmin: TfrmTripAdmin
         'D_ADMIN_ID')
     Left = 888
     Top = 16
-  end
-  object fdqryUsers: TFDQuery
-    Connection = UniMainModule.confd
-    Transaction = UniMainModule.fdtrnsctnRead
-    FetchOptions.AssignedValues = [evItems]
-    FetchOptions.Items = [fiBlobs, fiDetails]
-    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName]
-    UpdateOptions.EnableDelete = False
-    UpdateOptions.EnableInsert = False
-    UpdateOptions.EnableUpdate = False
-    UpdateOptions.GeneratorName = 'GEN_USERS_ID'
-    SQL.Strings = (
-      'SELECT ID, NAME FROM USERS')
-    Left = 32
-    Top = 24
-    object fdqryUsersID: TLargeintField
-      FieldName = 'ID'
-      Origin = 'ID'
-      Required = True
-    end
-    object fdqryUsersNAME: TStringField
-      FieldName = 'NAME'
-      Origin = 'NAME'
-      Required = True
-      Size = 255
-    end
   end
   object dsAdmin: TDataSource
     DataSet = fdqryAdmin
@@ -384,10 +358,5 @@ object frmTripAdmin: TfrmTripAdmin
       Required = True
       Size = 255
     end
-  end
-  object dsUsersAll: TDataSource
-    DataSet = fdqryUsers
-    Left = 88
-    Top = 24
   end
 end

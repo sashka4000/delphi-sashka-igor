@@ -22,7 +22,6 @@ object frmRecord: TfrmRecord
     KeyField = 'ID'
     ListFieldIndex = 0
     TabOrder = 3
-    OnClick = lstTripClick
   end
   object lstUser: TUniDBLookupListBox
     Left = 8
@@ -31,7 +30,7 @@ object frmRecord: TfrmRecord
     Height = 185
     Hint = ''
     ListField = 'NAME'
-    ListSource = dsUsersAll
+    ListSource = UniMainModule.dsUsersAll
     KeyField = 'ID'
     ListFieldIndex = 0
     TabOrder = 2
@@ -43,8 +42,7 @@ object frmRecord: TfrmRecord
     Height = 25
     Hint = ''
     Caption = #1055#1086#1090#1074#1077#1088#1076#1080#1090#1100
-    ModalResult = 1
-    TabOrder = 10
+    TabOrder = 8
     OnClick = btnOkClick
   end
   object btnCancel: TUniButton
@@ -55,19 +53,8 @@ object frmRecord: TfrmRecord
     Hint = ''
     Caption = #1054#1090#1084#1077#1085#1072
     ModalResult = 2
-    TabOrder = 11
+    TabOrder = 9
     OnClick = btnCancelClick
-  end
-  object undtDay: TUniEdit
-    Left = 384
-    Top = 184
-    Width = 172
-    Hint = ''
-    Enabled = False
-    Text = ''
-    TabOrder = 7
-    EmptyText = #1050#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1076#1085#1077#1081
-    ClearButton = True
   end
   object undtComment: TUniEdit
     Left = 8
@@ -75,7 +62,7 @@ object frmRecord: TfrmRecord
     Width = 548
     Hint = ''
     Text = ''
-    TabOrder = 9
+    TabOrder = 7
     EmptyText = #1050#1086#1084#1084#1077#1085#1090#1072#1088#1080#1080
     ClearButton = True
   end
@@ -96,7 +83,7 @@ object frmRecord: TfrmRecord
     Height = 13
     Hint = ''
     Caption = #1050#1086#1084#1084#1077#1085#1090#1072#1088#1080#1081' '
-    TabOrder = 8
+    TabOrder = 6
   end
   object unlbl2: TUniLabel
     Left = 8
@@ -124,16 +111,6 @@ object frmRecord: TfrmRecord
     Hint = ''
     Caption = #1044#1072#1090#1072
     TabOrder = 4
-  end
-  object unlbl5: TUniLabel
-    Left = 384
-    Top = 165
-    Width = 58
-    Height = 13
-    Hint = ''
-    Enabled = False
-    Caption = #1063#1080#1089#1083#1086' '#1076#1085#1077#1081
-    TabOrder = 6
   end
   object fdqryInsert: TFDQuery
     Connection = UniMainModule.confd
@@ -173,35 +150,24 @@ object frmRecord: TfrmRecord
         Size = 255
       end>
   end
-  object fdqryUsers: TFDQuery
+  object fdqryRepeat: TFDQuery
     Connection = UniMainModule.confd
-    Transaction = UniMainModule.fdtrnsctnRead
-    FetchOptions.AssignedValues = [evItems]
-    FetchOptions.Items = [fiBlobs, fiDetails]
-    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName]
-    UpdateOptions.EnableDelete = False
-    UpdateOptions.EnableInsert = False
-    UpdateOptions.EnableUpdate = False
-    UpdateOptions.GeneratorName = 'GEN_USERS_ID'
     SQL.Strings = (
-      'SELECT ID, NAME FROM USERS')
-    Left = 80
+      
+        'SELECT USER_ID FROM TRIP WHERE USER_ID =:USER and TRIPDATE =:dat' +
+        'e')
+    Left = 96
     Top = 296
-    object fdqryUsersID: TLargeintField
-      FieldName = 'ID'
-      Origin = 'ID'
-      Required = True
-    end
-    object fdqryUsersNAME: TStringField
-      FieldName = 'NAME'
-      Origin = 'NAME'
-      Required = True
-      Size = 255
-    end
-  end
-  object dsUsersAll: TDataSource
-    DataSet = fdqryUsers
-    Left = 136
-    Top = 296
+    ParamData = <
+      item
+        Name = 'USER'
+        DataType = ftLargeint
+        ParamType = ptInput
+      end
+      item
+        Name = 'DATE'
+        DataType = ftDate
+        ParamType = ptInput
+      end>
   end
 end

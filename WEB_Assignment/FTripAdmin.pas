@@ -24,7 +24,6 @@ type
     fdqryTripAd: TFDQuery;
     fdpdtsqlAd: TFDUpdateSQL;
     undbnvgtrAd: TUniDBNavigator;
-    fdqryUsers: TFDQuery;
     lrgntfldTripAdID: TLargeintField;
     lrgntfldTripAdUSER_ID: TLargeintField;
     lrgntfldTripAdADMIN_ID: TLargeintField;
@@ -36,8 +35,6 @@ type
     strngfldTripAdTT: TStringField;
     unhdnpnlAd: TUniHiddenPanel;
     cbbAd: TUniDBLookupComboBox;
-    fdqryUsersID: TLargeintField;
-    fdqryUsersNAME: TStringField;
     cbbUSER: TUniDBLookupComboBox;
     dsAdmin: TDataSource;
     fdqryAdmin: TFDQuery;
@@ -49,7 +46,6 @@ type
     strngfld2: TStringField;
     cbbAdmin: TUniDBLookupComboBox;
     btnRecord: TUniButton;
-    dsUsersAll: TDataSource;
     procedure UniFormShow(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
     procedure undbgrdTripColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn; const Value: Variant);
@@ -160,7 +156,10 @@ end;
 procedure TfrmTripAdmin.btnRecordClick(Sender: TObject);
 begin
 
-  frmRecord.ShowModal;
+ if  frmRecord.ShowModal = mrOk then
+ begin
+   btnRefreshClick(nil);
+ end;
 
 end;
 
