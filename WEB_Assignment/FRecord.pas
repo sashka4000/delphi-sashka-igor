@@ -83,11 +83,11 @@ begin
 
     if fdqryInsert.Active then
       fdqryInsert.Close;
-    fdqryInsert.ParamByName('AID').AsString := 'Некто';
-    fdqryInsert.ParamByName('UID').AsString := lstUser.KeyField;
-    fdqryInsert.ParamByName('TD').AsDateTime := undtmpckrBegin.DateTime;
-    fdqryInsert.ParamByName('TP').AsString   := lstTrip.Caption;
-    fdqryInsert.ParamByName('CMT').AsString  := undtmpckrBegin.Text;
+    fdqryInsert.ParamByName('AID').AsInteger := UniMainModule.UserID;  // Это Идентификатор Пользователя в системе
+    fdqryInsert.ParamByName('UID').AsInteger := lstUser.KeyValue;       // Это ID выбранный человек из списка  lstUser.KeyField - это название поля
+    fdqryInsert.ParamByName('TD').AsDateTime := undtmpckrBegin.DateTime;  // Дата
+    fdqryInsert.ParamByName('TP').AsInteger   := lstTrip.KeyValue;      //  Это ID больничного
+    fdqryInsert.ParamByName('CMT').AsString  := undtComment.Text;
     fdqryInsert.ExecSQL;
     fdqryInsert.Close;
 

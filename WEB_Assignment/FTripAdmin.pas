@@ -40,10 +40,6 @@ type
     fdqryAdmin: TFDQuery;
     lrgntfld1: TLargeintField;
     strngfld1: TStringField;
-    dsUser: TDataSource;
-    fdqryUser: TFDQuery;
-    lrgntfld2: TLargeintField;
-    strngfld2: TStringField;
     cbbAdmin: TUniDBLookupComboBox;
     btnRecord: TUniButton;
     procedure UniFormShow(Sender: TObject);
@@ -52,6 +48,7 @@ type
     procedure btnRecordClick(Sender: TObject);
   private
     { Private declarations }
+      procedure ShowCallBack(Sender: TComponent; AResult:Integer);
   public
     { Public declarations }
     FilterTT: string;
@@ -79,6 +76,12 @@ begin
   fdqryTripAd.ParamByName('d1').Value := undtmpckrBegin.DateTime;
   fdqryTripAd.ParamByName('d2').Value := undtmpckrEnd.DateTime;
   fdqryTripAd.Open;
+end;
+
+procedure TfrmTripAdmin.ShowCallBack(Sender: TComponent; AResult: Integer);
+begin
+ if AResult = mrOk then
+  btnRefreshClick (nil);
 end;
 
 procedure TfrmTripAdmin.undbgrdTripColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn; const Value: Variant);
@@ -142,7 +145,6 @@ end;
 procedure TfrmTripAdmin.UniFormShow(Sender: TObject);
 begin
   fdqryAdmin.Active := True;
-  fdqryUser.Active := True;
   FilterTT := '';
   FilterUSERNAME := '';
   FilterADMINNAME := '';
@@ -155,12 +157,9 @@ end;
 
 procedure TfrmTripAdmin.btnRecordClick(Sender: TObject);
 begin
-
- if  frmRecord.ShowModal = mrOk then
- begin
-   btnRefreshClick(nil);
- end;
-
+ frmRecord.ShowModal (ShowCallBack);
+ // Чтобы обработать результат нажатия ввели свою процедуру
+ // тут не как в VCL
 end;
 
 initialization

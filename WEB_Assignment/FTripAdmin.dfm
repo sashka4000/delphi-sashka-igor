@@ -19,7 +19,7 @@ object frmTripAdmin: TfrmTripAdmin
     Hint = ''
     DataSource = dsTripAd
     LoadMask.Message = 'Loading data...'
-    TabOrder = 0
+    TabOrder = 2
     OnColumnFilter = undbgrdTripColumnFilter
     Columns = <
       item
@@ -74,7 +74,7 @@ object frmTripAdmin: TfrmTripAdmin
     Caption = #1058#1072#1073#1083#1080#1094#1072' '#1082#1086#1084#1072#1085#1076#1080#1088#1086#1074#1086#1082
     ParentFont = False
     Font.Height = -21
-    TabOrder = 1
+    TabOrder = 0
   end
   object btnRefresh: TUniButton
     Left = 950
@@ -83,7 +83,7 @@ object frmTripAdmin: TfrmTripAdmin
     Height = 25
     Hint = ''
     Caption = #1054#1073#1085#1086#1074#1080#1090#1100
-    TabOrder = 2
+    TabOrder = 5
     OnClick = btnRefreshClick
   end
   object undtmpckrEnd: TUniDateTimePicker
@@ -95,7 +95,7 @@ object frmTripAdmin: TfrmTripAdmin
     DateTime = 43879.000000000000000000
     DateFormat = 'dd/MM/yyyy'
     TimeFormat = 'HH:mm:ss'
-    TabOrder = 3
+    TabOrder = 6
     FieldLabel = #1050#1086#1085#1077#1095#1085#1072#1103' '#1076#1072#1090#1072
     EmptyText = #1050#1086#1085#1077#1095#1085#1072#1103' '#1076#1072#1090#1072
   end
@@ -118,7 +118,7 @@ object frmTripAdmin: TfrmTripAdmin
     Width = 1032
     Height = 25
     Hint = ''
-    TabOrder = 5
+    TabOrder = 1
   end
   object unhdnpnlAd: TUniHiddenPanel
     Left = 680
@@ -145,7 +145,7 @@ object frmTripAdmin: TfrmTripAdmin
       Width = 145
       Hint = ''
       ListField = 'NAME'
-      ListSource = dsUser
+      ListSource = UniMainModule.dsUsersAll
       KeyField = 'ID'
       ListFieldIndex = 0
       TabOrder = 2
@@ -322,37 +322,6 @@ object frmTripAdmin: TfrmTripAdmin
       Required = True
     end
     object strngfld1: TStringField
-      FieldName = 'NAME'
-      Origin = 'NAME'
-      Required = True
-      Size = 255
-    end
-  end
-  object dsUser: TDataSource
-    DataSet = fdqryUser
-    Left = 392
-    Top = 32
-  end
-  object fdqryUser: TFDQuery
-    Connection = UniMainModule.confd
-    Transaction = UniMainModule.fdtrnsctnRead
-    FetchOptions.AssignedValues = [evItems]
-    FetchOptions.Items = [fiBlobs, fiDetails]
-    UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName]
-    UpdateOptions.EnableDelete = False
-    UpdateOptions.EnableInsert = False
-    UpdateOptions.EnableUpdate = False
-    UpdateOptions.GeneratorName = 'GEN_USERS_ID'
-    SQL.Strings = (
-      'SELECT ID, NAME FROM USERS WHERE SUPERUSER = 0')
-    Left = 336
-    Top = 32
-    object lrgntfld2: TLargeintField
-      FieldName = 'ID'
-      Origin = 'ID'
-      Required = True
-    end
-    object strngfld2: TStringField
       FieldName = 'NAME'
       Origin = 'NAME'
       Required = True
