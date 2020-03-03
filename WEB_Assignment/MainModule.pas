@@ -58,22 +58,23 @@ begin
   UserID := 0;
   SuperUser := 0;
   UserPassword := '';
+
+  fdmtblTripType.Active := True;
+  fdmtblTripType.Insert;
+  fdmtblTripType.Fields[0].AsInteger := 0;
+  fdmtblTripType.Fields[1].AsString := 'Командировка';
+  fdmtblTripType.Post;
+  fdmtblTripType.Insert;
+  fdmtblTripType.Fields[0].AsInteger := 1;
+  fdmtblTripType.Fields[1].AsString := 'Больничный';
+  fdmtblTripType.Post;
+
   // Подключаемся к БД
   self.fdtrnsctnRead.Options.AutoStart := False;
   confd.Connected := true;
   // стартуем Read транзакцию. Она так и будет все время запущена
   self.fdtrnsctnRead.StartTransaction;
 // Код заполнения таблицы  fdmtblTripType
-
-fdmtblTripType.Active := True;
-fdmtblTripType.Insert;
-fdmtblTripType.Fields[0].AsInteger := 0;
-fdmtblTripType.Fields[1].AsString := 'Командировка';
-fdmtblTripType.Post;
-fdmtblTripType.Insert;
-fdmtblTripType.Fields[0].AsInteger := 1;
-fdmtblTripType.Fields[1].AsString := 'Больничный';
-fdmtblTripType.Post;
 end;
 
 procedure TUniMainModule.UniGUIMainModuleDestroy(Sender: TObject);
