@@ -182,12 +182,15 @@ object frmTripAdmin: TfrmTripAdmin
     Top = 16
   end
   object fdqryTripAd: TFDQuery
+    Active = True
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead
     UpdateTransaction = UniMainModule.fdtrnsctnWrite
     FetchOptions.AssignedValues = [evItems]
     UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName]
+    UpdateOptions.EnableInsert = False
     UpdateOptions.GeneratorName = 'GEN_USERS_ID'
+    UpdateObject = fdpdtsqlAd
     SQL.Strings = (
       'SELECT * FROM trip where TRIPDATE BETWEEN :d1 and :d2')
     Left = 808

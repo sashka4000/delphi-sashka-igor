@@ -59,6 +59,7 @@ begin
   SuperUser := 0;
   UserPassword := '';
   // Подключаемся к БД
+  self.fdtrnsctnRead.Options.AutoStart := False;
   confd.Connected := true;
   // стартуем Read транзакцию. Она так и будет все время запущена
   self.fdtrnsctnRead.StartTransaction;
