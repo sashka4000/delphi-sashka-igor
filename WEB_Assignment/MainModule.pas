@@ -10,7 +10,8 @@ uses
   FireDAC.Stan.Pool, FireDAC.Stan.Async, FireDAC.Phys, FireDAC.Phys.SQLite,
   FireDAC.Phys.SQLiteDef, FireDAC.Stan.ExprFuncs, FireDAC.VCLUI.Wait,
   FireDAC.Phys.SQLiteVDataSet, FireDAC.DApt, FireDAC.Stan.StorageJSON,
-  FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase, FireDAC.Comp.UI, FireDAC.Stan.StorageBin;
+  FireDAC.Phys.FB, FireDAC.Phys.FBDef, FireDAC.Phys.IBBase, FireDAC.Comp.UI,
+  FireDAC.Stan.StorageBin;
 
 type
   TUniMainModule = class(TUniGUIMainModule)
@@ -69,11 +70,13 @@ begin
   fdmtblTripType.Fields[1].AsString := 'Больничный';
   fdmtblTripType.Post;
 
+
+
   // Подключаемся к БД
-  self.fdtrnsctnRead.Options.AutoStart := False;
   confd.Connected := true;
   // стартуем Read транзакцию. Она так и будет все время запущена
-  self.fdtrnsctnRead.StartTransaction;
+  if not self.fdtrnsctnRead.Active then
+    self.fdtrnsctnRead.StartTransaction;
 // Код заполнения таблицы  fdmtblTripType
 end;
 
