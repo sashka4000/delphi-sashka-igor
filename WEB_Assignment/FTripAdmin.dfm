@@ -119,7 +119,7 @@ object frmTripAdmin: TfrmTripAdmin
     Height = 25
     Hint = ''
     DataSource = dsTripAd
-    VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbPost, nbCancel, nbRefresh]
+    VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbDelete, nbEdit, nbPost, nbCancel, nbRefresh]
     TabOrder = 1
   end
   object unhdnpnlAd: TUniHiddenPanel
@@ -186,7 +186,6 @@ object frmTripAdmin: TfrmTripAdmin
     Transaction = UniMainModule.fdtrnsctnRead
     UpdateTransaction = UniMainModule.fdtrnsctnWrite
     FetchOptions.AssignedValues = [evItems]
-    FetchOptions.Items = [fiBlobs, fiDetails]
     UpdateOptions.AssignedValues = [uvEDelete, uvEInsert, uvEUpdate, uvGeneratorName]
     UpdateOptions.GeneratorName = 'GEN_USERS_ID'
     SQL.Strings = (
@@ -269,33 +268,23 @@ object frmTripAdmin: TfrmTripAdmin
   end
   object fdpdtsqlAd: TFDUpdateSQL
     Connection = UniMainModule.confd
-    InsertSQL.Strings = (
-      'INSERT INTO TRIP'
-      '(TRIPDATE, TRIPTYPE, "COMMENT")'
-      'VALUES (:NEW_TRIPDATE, :NEW_TRIPTYPE, :NEW_COMMENT)'
-      'RETURNING TRIPDATE, TRIPTYPE, "COMMENT"')
     ModifySQL.Strings = (
       'UPDATE TRIP'
       
-        'SET TRIPDATE = :NEW_TRIPDATE, TRIPTYPE = :NEW_TRIPTYPE, "COMMENT' +
-        '" = :NEW_COMMENT'
-      
-        'WHERE ID = :OLD_ID AND USER_ID = :OLD_USER_ID AND ADMIN_ID = :OL' +
-        'D_ADMIN_ID'
-      'RETURNING TRIPDATE, TRIPTYPE, "COMMENT"')
+        'SET USER_ID = :NEW_USER_ID, ADMIN_ID = :NEW_ADMIN_ID, TRIPDATE =' +
+        ' :NEW_TRIPDATE, '
+      '  TRIPTYPE = :NEW_TRIPTYPE, "COMMENT" = :NEW_COMMENT'
+      'WHERE ID = :OLD_ID'
+      'RETURNING USER_ID, ADMIN_ID, TRIPDATE, TRIPTYPE, "COMMENT"')
     DeleteSQL.Strings = (
       'DELETE FROM TRIP'
-      
-        'WHERE ID = :OLD_ID AND USER_ID = :OLD_USER_ID AND ADMIN_ID = :OL' +
-        'D_ADMIN_ID')
+      'WHERE ID = :OLD_ID')
     FetchRowSQL.Strings = (
       
         'SELECT ID, USER_ID, ADMIN_ID, TRIPDATE, TRIPTYPE, "COMMENT" AS "' +
         'COMMENT"'
       'FROM TRIP'
-      
-        'WHERE ID = :OLD_ID AND USER_ID = :OLD_USER_ID AND ADMIN_ID = :OL' +
-        'D_ADMIN_ID')
+      'WHERE ID = :OLD_ID')
     Left = 888
     Top = 16
   end

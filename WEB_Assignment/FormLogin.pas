@@ -22,6 +22,7 @@ type
     procedure btnOkClick(Sender: TObject);
     procedure UniLoginFormShow(Sender: TObject);
     procedure undtPasswordKeyPress(Sender: TObject; var Key: Char);
+    procedure undtLoginKeyPress(Sender: TObject; var Key: Char);
 
   private
     { Private declarations }
@@ -88,6 +89,12 @@ begin
 end;
 
 
+
+procedure TLoginForm.undtLoginKeyPress(Sender: TObject; var Key: Char);
+begin
+   if Key = #13 then
+   undtPassword.SetFocus;
+end;
 
 procedure TLoginForm.undtPasswordKeyPress(Sender: TObject; var Key: Char);
 begin
