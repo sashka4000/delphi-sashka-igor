@@ -1,8 +1,8 @@
 object frmAdmin: TfrmAdmin
   Left = 0
   Top = 0
-  ClientHeight = 65
-  ClientWidth = 220
+  ClientHeight = 100
+  ClientWidth = 310
   Caption = 'frmAdmin'
   BorderStyle = bsNone
   Position = poDesktopCenter
@@ -11,8 +11,8 @@ object frmAdmin: TfrmAdmin
   PixelsPerInch = 96
   TextHeight = 13
   object btn1: TUniButton
-    Left = 10
-    Top = 16
+    Left = 35
+    Top = 35
     Width = 95
     Height = 25
     Hint = ''
@@ -21,8 +21,8 @@ object frmAdmin: TfrmAdmin
     OnClick = btn1Click
   end
   object btn2: TUniButton
-    Left = 115
-    Top = 16
+    Left = 180
+    Top = 35
     Width = 95
     Height = 25
     Hint = ''

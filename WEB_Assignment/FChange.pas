@@ -33,7 +33,7 @@ implementation
 {$R *.dfm}
 
 uses
-  MainModule, uniGUIApplication, FormLogin;
+  MainModule, uniGUIApplication, FormLogin, FUser;
 
 function frmChange: TfrmChange;
 begin
@@ -43,7 +43,7 @@ end;
 procedure TfrmChange.btnCancelClick(Sender: TObject);
 begin
   frmChange.Close;
-  LoginForm.Show(nil);
+  frmUser.Show(nil);
 end;
 
 procedure TfrmChange.btnOkClick(Sender: TObject);

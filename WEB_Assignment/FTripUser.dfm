@@ -12,10 +12,10 @@ object frmTripUser: TfrmTripUser
   PixelsPerInch = 96
   TextHeight = 13
   object undbgrdTrip: TUniDBGrid
-    Left = 2
-    Top = 88
+    Left = 5
+    Top = 100
     Width = 1030
-    Height = 425
+    Height = 450
     Hint = ''
     DataSource = dsTrip
     LoadMask.Message = 'Loading data...'
@@ -42,28 +42,28 @@ object frmTripUser: TfrmTripUser
         Filtering.Editor = undblkpcmbx1
         Title.Alignment = taCenter
         Title.Caption = #1058#1080#1087
-        Width = 120
+        Width = 135
       end
       item
         FieldName = 'COMMENT'
         Title.Alignment = taCenter
         Title.Caption = #1050#1086#1084#1084#1077#1085#1090#1072#1088#1080#1080
-        Width = 400
+        Width = 393
         ReadOnly = True
       end>
   end
   object undbnvgtrTrip: TUniDBNavigator
-    Left = 0
-    Top = 65
-    Width = 1033
+    Left = 5
+    Top = 73
+    Width = 1030
     Height = 25
     Hint = ''
     VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbRefresh]
     TabOrder = 1
   end
   object lbTripTab: TUniLabel
-    Left = 408
-    Top = 16
+    Left = 20
+    Top = 20
     Width = 225
     Height = 25
     Hint = ''
@@ -73,8 +73,8 @@ object frmTripUser: TfrmTripUser
     TabOrder = 0
   end
   object undtmpckrBegin: TUniDateTimePicker
-    Left = 8
-    Top = 544
+    Left = 10
+    Top = 580
     Width = 209
     Height = 25
     Hint = ''
@@ -86,8 +86,8 @@ object frmTripUser: TfrmTripUser
     EmptyText = #1053#1072#1095#1072#1083#1100#1085#1072#1103' '#1076#1072#1090#1072
   end
   object undtmpckrEnd: TUniDateTimePicker
-    Left = 8
-    Top = 584
+    Left = 10
+    Top = 620
     Width = 209
     Height = 25
     Hint = ''
@@ -99,9 +99,9 @@ object frmTripUser: TfrmTripUser
     EmptyText = #1050#1086#1085#1077#1095#1085#1072#1103' '#1076#1072#1090#1072
   end
   object btnRefresh: TUniButton
-    Left = 942
-    Top = 544
-    Width = 75
+    Left = 912
+    Top = 580
+    Width = 120
     Height = 25
     Hint = ''
     Caption = #1054#1073#1085#1086#1074#1080#1090#1100
@@ -127,6 +127,16 @@ object frmTripUser: TfrmTripUser
       TabOrder = 1
       Color = clWindow
     end
+  end
+  object btnBack: TUniButton
+    Left = 912
+    Top = 620
+    Width = 120
+    Height = 25
+    Hint = ''
+    Caption = #1042#1077#1088#1085#1091#1090#1100#1089#1103
+    TabOrder = 7
+    OnClick = btnBackClick
   end
   object fdqryTrip: TFDQuery
     Connection = UniMainModule.confd
@@ -181,7 +191,6 @@ object frmTripUser: TfrmTripUser
       FieldName = 'TRIPTYPE'
       Origin = 'TRIPTYPE'
       ProviderFlags = []
-      ReadOnly = True
     end
     object strngfldTripCOMMENT: TStringField
       AutoGenerateValue = arDefault

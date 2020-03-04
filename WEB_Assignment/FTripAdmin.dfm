@@ -12,10 +12,10 @@ object frmTripAdmin: TfrmTripAdmin
   PixelsPerInch = 96
   TextHeight = 13
   object undbgrdTrip: TUniDBGrid
-    Left = 2
-    Top = 113
+    Left = 5
+    Top = 100
     Width = 1030
-    Height = 425
+    Height = 450
     Hint = ''
     DataSource = dsTripAd
     LoadMask.Message = 'Loading data...'
@@ -27,6 +27,7 @@ object frmTripAdmin: TfrmTripAdmin
         Title.Alignment = taCenter
         Title.Caption = 'ID'
         Width = 50
+        ReadOnly = True
       end
       item
         FieldName = 'USERNAME'
@@ -35,6 +36,7 @@ object frmTripAdmin: TfrmTripAdmin
         Title.Alignment = taCenter
         Title.Caption = #1048#1084#1103' '#1087#1086#1083#1100#1079#1086#1074#1072#1090#1077#1083#1103#13#10
         Width = 220
+        ReadOnly = True
       end
       item
         FieldName = 'ADMINNAME'
@@ -43,6 +45,7 @@ object frmTripAdmin: TfrmTripAdmin
         Title.Alignment = taCenter
         Title.Caption = #1054#1090#1074#1077#1090#1089#1090#1074#1077#1085#1085#1086#1077' '#1083#1080#1094#1086
         Width = 250
+        ReadOnly = True
       end
       item
         FieldName = 'TRIPDATE'
@@ -56,7 +59,7 @@ object frmTripAdmin: TfrmTripAdmin
         Filtering.Editor = cbbAd
         Title.Alignment = taCenter
         Title.Caption = ' '#1058#1080#1087
-        Width = 120
+        Width = 137
       end
       item
         FieldName = 'COMMENT'
@@ -66,8 +69,8 @@ object frmTripAdmin: TfrmTripAdmin
       end>
   end
   object lbTripTab: TUniLabel
-    Left = 408
-    Top = 16
+    Left = 20
+    Top = 20
     Width = 225
     Height = 25
     Hint = ''
@@ -77,9 +80,9 @@ object frmTripAdmin: TfrmTripAdmin
     TabOrder = 0
   end
   object btnRefresh: TUniButton
-    Left = 950
-    Top = 568
-    Width = 75
+    Left = 900
+    Top = 580
+    Width = 120
     Height = 25
     Hint = ''
     Caption = #1054#1073#1085#1086#1074#1080#1090#1100
@@ -87,8 +90,8 @@ object frmTripAdmin: TfrmTripAdmin
     OnClick = btnRefreshClick
   end
   object undtmpckrEnd: TUniDateTimePicker
-    Left = 8
-    Top = 608
+    Left = 10
+    Top = 620
     Width = 209
     Height = 25
     Hint = ''
@@ -100,8 +103,8 @@ object frmTripAdmin: TfrmTripAdmin
     EmptyText = #1050#1086#1085#1077#1095#1085#1072#1103' '#1076#1072#1090#1072
   end
   object undtmpckrBegin: TUniDateTimePicker
-    Left = 8
-    Top = 560
+    Left = 10
+    Top = 580
     Width = 209
     Height = 25
     Hint = ''
@@ -113,9 +116,9 @@ object frmTripAdmin: TfrmTripAdmin
     EmptyText = #1053#1072#1095#1072#1083#1100#1085#1072#1103' '#1076#1072#1090#1072
   end
   object undbnvgtrAd: TUniDBNavigator
-    Left = 0
-    Top = 88
-    Width = 1032
+    Left = 5
+    Top = 73
+    Width = 1030
     Height = 25
     Hint = ''
     DataSource = dsTripAd
@@ -167,14 +170,24 @@ object frmTripAdmin: TfrmTripAdmin
     end
   end
   object btnRecord: TUniButton
-    Left = 904
-    Top = 608
-    Width = 121
+    Left = 900
+    Top = 620
+    Width = 120
     Height = 25
     Hint = ''
     Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1079#1072#1087#1080#1089#1100
     TabOrder = 7
     OnClick = btnRecordClick
+  end
+  object btnBack: TUniButton
+    Left = 900
+    Top = 660
+    Width = 120
+    Height = 25
+    Hint = ''
+    Caption = #1042#1077#1088#1085#1091#1090#1100#1089#1103
+    TabOrder = 8
+    OnClick = btnBackClick
   end
   object dsTripAd: TDataSource
     DataSet = fdqryTripAd
@@ -210,16 +223,19 @@ object frmTripAdmin: TfrmTripAdmin
     object lrgntfldTripAdID: TLargeintField
       FieldName = 'ID'
       Origin = 'ID'
+      ReadOnly = True
       Required = True
     end
     object lrgntfldTripAdUSER_ID: TLargeintField
       FieldName = 'USER_ID'
       Origin = 'USER_ID'
+      ReadOnly = True
       Required = True
     end
     object lrgntfldTripAdADMIN_ID: TLargeintField
       FieldName = 'ADMIN_ID'
       Origin = 'ADMIN_ID'
+      ReadOnly = True
       Required = True
     end
     object dtfldTripAdTRIPDATE: TDateField
@@ -245,6 +261,7 @@ object frmTripAdmin: TfrmTripAdmin
       LookupKeyFields = 'ID'
       LookupResultField = 'NAME'
       KeyFields = 'USER_ID'
+      ReadOnly = True
       Size = 50
       Lookup = True
     end
@@ -256,6 +273,7 @@ object frmTripAdmin: TfrmTripAdmin
       LookupKeyFields = 'ID'
       LookupResultField = 'NAME'
       KeyFields = 'ADMIN_ID'
+      ReadOnly = True
       Size = 50
       Lookup = True
     end

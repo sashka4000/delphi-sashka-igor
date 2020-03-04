@@ -14,6 +14,7 @@ object UniMainModule: TUniMainModule
       'Protocol=TCPIP'
       'Server=127.0.0.1'
       'DriverID=FB')
+    ConnectedStoredUsage = [auDesignTime]
     Connected = True
     LoginPrompt = False
     Left = 16
@@ -29,6 +30,7 @@ object UniMainModule: TUniMainModule
     Options.AutoStop = False
     Options.EnableNested = False
     Connection = confd
+    AfterStartTransaction = fdtrnsctnReadAfterStartTransaction
     Left = 120
     Top = 24
   end
@@ -69,7 +71,7 @@ object UniMainModule: TUniMainModule
     Left = 252
     Top = 26
     Content = {
-      414442530F00DB281B010000FF00010001FF02FF0304001C000000660064006D
+      414442530F009A2A1B010000FF00010001FF02FF0304001C000000660064006D
       00740062006C005400720069007000540079007000650005000A000000540061
       0062006C006500060000000000070000080032000000090000FF0AFF0B040004
       00000049004400050004000000490044000C00010000000E000D000F00011000

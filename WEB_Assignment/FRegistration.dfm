@@ -1,8 +1,8 @@
 object frmRegistration: TfrmRegistration
   Left = 0
   Top = 0
-  ClientHeight = 425
-  ClientWidth = 898
+  ClientHeight = 700
+  ClientWidth = 1040
   Caption = #1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103
   OnShow = UniFormShow
   BorderStyle = bsNone
@@ -12,10 +12,10 @@ object frmRegistration: TfrmRegistration
   PixelsPerInch = 96
   TextHeight = 13
   object undbgrd1: TUniDBGrid
-    Left = 8
-    Top = 96
-    Width = 881
-    Height = 250
+    Left = 5
+    Top = 100
+    Width = 1030
+    Height = 450
     Hint = ''
     DataSource = dsUsers
     LoadMask.Message = 'Loading data...'
@@ -25,20 +25,20 @@ object frmRegistration: TfrmRegistration
         FieldName = 'ID'
         Title.Alignment = taCenter
         Title.Caption = 'ID'
-        Width = 45
+        Width = 78
         ReadOnly = True
       end
       item
         FieldName = 'NAME'
         Title.Alignment = taCenter
         Title.Caption = #1060#1048#1054
-        Width = 250
+        Width = 329
       end
       item
         FieldName = 'LOGIN'
         Title.Alignment = taCenter
         Title.Caption = #1051#1086#1075#1080#1085
-        Width = 200
+        Width = 225
       end
       item
         FieldName = 'PASSWORD'
@@ -50,18 +50,18 @@ object frmRegistration: TfrmRegistration
         FieldName = 'SUPERUSER'
         Title.Alignment = taCenter
         Title.Caption = #1057#1090#1072#1090#1091#1089
-        Width = 50
+        Width = 64
       end
       item
         FieldName = 'BLOCKED'
         Title.Alignment = taCenter
         Title.Caption = #1041#1083#1086#1082#1080#1088#1086#1074#1082#1072
-        Width = 75
+        Width = 112
       end>
   end
   object lbNameTab: TUniLabel
-    Left = 280
-    Top = 16
+    Left = 10
+    Top = 20
     Width = 234
     Height = 25
     Hint = ''
@@ -71,9 +71,9 @@ object frmRegistration: TfrmRegistration
     TabOrder = 0
   end
   object btnExit: TUniButton
-    Left = 8
-    Top = 352
-    Width = 75
+    Left = 900
+    Top = 580
+    Width = 120
     Height = 25
     Hint = ''
     Caption = #1042#1077#1088#1085#1091#1090#1100#1089#1103
@@ -81,9 +81,9 @@ object frmRegistration: TfrmRegistration
     OnClick = btnExitClick
   end
   object undbnvgtrTb1: TUniDBNavigator
-    Left = 8
-    Top = 65
-    Width = 882
+    Left = 5
+    Top = 73
+    Width = 1030
     Height = 25
     Hint = ''
     DataSource = dsUsers
@@ -150,8 +150,8 @@ object frmRegistration: TfrmRegistration
     UpdateOptions.AutoIncFields = 'ID'
     SQL.Strings = (
       'select Login from users where Login=:login')
-    Left = 56
-    Top = 16
+    Left = 520
+    Top = 24
     ParamData = <
       item
         Name = 'LOGIN'

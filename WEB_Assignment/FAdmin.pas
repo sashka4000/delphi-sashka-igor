@@ -41,7 +41,8 @@ end;
 
 procedure TfrmAdmin.btn2Click(Sender: TObject);
 begin
-  frmTripAdmin.ShowModal(nil);
+  frmAdmin.Close;
+  frmTripAdmin.Show(nil);
 end;
 
 end.

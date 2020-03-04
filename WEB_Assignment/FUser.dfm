@@ -1,8 +1,8 @@
 object frmUser: TfrmUser
   Left = 0
   Top = 0
-  ClientHeight = 65
-  ClientWidth = 220
+  ClientHeight = 100
+  ClientWidth = 310
   Caption = 'frmUser'
   BorderStyle = bsNone
   OldCreateOrder = False
@@ -10,8 +10,8 @@ object frmUser: TfrmUser
   PixelsPerInch = 96
   TextHeight = 13
   object btn1: TUniButton
-    Left = 10
-    Top = 15
+    Left = 35
+    Top = 35
     Width = 95
     Height = 25
     Hint = ''
@@ -21,8 +21,8 @@ object frmUser: TfrmUser
     OnClick = btn1Click
   end
   object btnChange: TUniButton
-    Left = 115
-    Top = 15
+    Left = 180
+    Top = 35
     Width = 95
     Height = 25
     Hint = ''

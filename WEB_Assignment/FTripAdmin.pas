@@ -42,13 +42,15 @@ type
     strngfld1: TStringField;
     cbbAdmin: TUniDBLookupComboBox;
     btnRecord: TUniButton;
+    btnBack: TUniButton;
     procedure UniFormShow(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
     procedure undbgrdTripColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn; const Value: Variant);
     procedure btnRecordClick(Sender: TObject);
+    procedure btnBackClick(Sender: TObject);
   private
     { Private declarations }
-      procedure ShowCallBack(Sender: TComponent; AResult:Integer);
+    procedure ShowCallBack(Sender: TComponent; AResult: Integer);
   public
     { Public declarations }
     FilterTT: string;
@@ -63,7 +65,7 @@ implementation
 {$R *.dfm}
 
 uses
-  uniGUIVars, MainModule, uniGUIApplication, FRecord;
+  uniGUIVars, MainModule, uniGUIApplication, FRecord, FAdmin;
 
 function frmTripAdmin: TfrmTripAdmin;
 begin
@@ -80,8 +82,8 @@ end;
 
 procedure TfrmTripAdmin.ShowCallBack(Sender: TComponent; AResult: Integer);
 begin
- if AResult = mrOk then
-  btnRefreshClick (nil);
+  if AResult = mrOk then
+    btnRefreshClick(nil);
 end;
 
 procedure TfrmTripAdmin.undbgrdTripColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn; const Value: Variant);
@@ -155,9 +157,15 @@ begin
   btnRefreshClick(nil);
 end;
 
+procedure TfrmTripAdmin.btnBackClick(Sender: TObject);
+begin
+  frmTripAdmin.Hide;
+  frmAdmin.Show(nil);
+end;
+
 procedure TfrmTripAdmin.btnRecordClick(Sender: TObject);
 begin
- frmRecord.ShowModal (ShowCallBack);
+  frmRecord.ShowModal(ShowCallBack);
  // Чтобы обработать результат нажатия ввели свою процедуру
  // тут не как в VCL
 end;

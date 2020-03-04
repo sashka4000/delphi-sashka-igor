@@ -2,6 +2,7 @@ object UniServerModule: TUniServerModule
   OldCreateOrder = False
   TempFolder = 'temp\'
   Title = 'New Application'
+  BGColor = clWhite
   SuppressErrors = []
   Bindings = <>
   SSL.SSLOptions.RootCertFile = 'root.pem'

@@ -30,6 +30,7 @@ type
     dsUsersAll: TDataSource;
     procedure UniGUIMainModuleCreate(Sender: TObject);
     procedure UniGUIMainModuleDestroy(Sender: TObject);
+    procedure fdtrnsctnReadAfterStartTransaction(Sender: TObject);
   private
     { Private declarations }
   public
@@ -54,6 +55,11 @@ begin
   Result := TUniMainModule(UniApplication.UniMainModule);
 end;
 
+procedure TUniMainModule.fdtrnsctnReadAfterStartTransaction(Sender: TObject);
+begin
+  beep;
+end;
+
 procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);
 begin
   UserID := 0;
@@ -73,10 +79,10 @@ begin
 
 
   // Подключаемся к БД
+  fdtrnsctnRead.Options.AutoStart := False;
   confd.Connected := true;
   // стартуем Read транзакцию. Она так и будет все время запущена
-  if not self.fdtrnsctnRead.Active then
-    self.fdtrnsctnRead.StartTransaction;
+  fdtrnsctnRead.StartTransaction;
 // Код заполнения таблицы  fdmtblTripType
 end;
 

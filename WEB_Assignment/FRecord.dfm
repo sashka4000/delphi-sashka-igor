@@ -1,11 +1,11 @@
 object frmRecord: TfrmRecord
   Left = 0
   Top = 0
-  ClientHeight = 361
-  ClientWidth = 573
+  ClientHeight = 389
+  ClientWidth = 579
   Caption = #1044#1086#1073#1072#1074#1080#1090#1100' '#1079#1072#1087#1080#1089#1100
   OnShow = UniFormShow
-  BorderStyle = bsSingle
+  BorderStyle = bsNone
   OldCreateOrder = False
   BorderIcons = [biSystemMenu]
   MonitoredKeys.Keys = <>

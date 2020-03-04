@@ -30,10 +30,11 @@ type
     smlntfldTripTRIPTYPE: TSmallintField;
     strngfldTripCOMMENT: TStringField;
     strngfldTripTT: TStringField;
+    btnBack: TUniButton;
     procedure UniFormShow(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
-    procedure undbgrdTripColumnFilter(Sender: TUniDBGrid;
-      const Column: TUniDBGridColumn; const Value: Variant);
+    procedure undbgrdTripColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn; const Value: Variant);
+    procedure btnBackClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -47,11 +48,17 @@ implementation
 {$R *.dfm}
 
 uses
-  uniGUIVars, MainModule, uniGUIApplication;
+  uniGUIVars, MainModule, uniGUIApplication, FUser;
 
 function frmTripUser: TfrmTripUser;
 begin
   Result := TfrmTripUser(UniMainModule.GetFormInstance(TfrmTripUser));
+end;
+
+procedure TfrmTripUser.btnBackClick(Sender: TObject);
+begin
+  frmTripUser.Close;
+  frmUser.Show(nil);
 end;
 
 procedure TfrmTripUser.btnRefreshClick(Sender: TObject);
@@ -62,20 +69,18 @@ begin
   fdqryTrip.Open;
 end;
 
-procedure TfrmTripUser.undbgrdTripColumnFilter(Sender: TUniDBGrid;
-  const Column: TUniDBGridColumn; const Value: Variant);
+procedure TfrmTripUser.undbgrdTripColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn; const Value: Variant);
 var
- S : String;
+  S: string;
 begin
- S := Value;
- if S = ''
- then
-   fdqryTrip.Filtered := False
- else
- begin
-   fdqryTrip.Filter := 'TRIPTYPE = ' + S;
-   fdqryTrip.Filtered := True;
- end;
+  S := Value;
+  if S = '' then
+    fdqryTrip.Filtered := False
+  else
+  begin
+    fdqryTrip.Filter := 'TRIPTYPE = ' + S;
+    fdqryTrip.Filtered := True;
+  end;
 end;
 
 procedure TfrmTripUser.UniFormShow(Sender: TObject);
