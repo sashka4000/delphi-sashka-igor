@@ -33,6 +33,8 @@ type
     smlntfldUsersBLOCKED: TSmallintField;
     strngfldUsersStrStatus: TStringField;
     strngfldUsersStrBlock: TStringField;
+    cbbFSt: TUniDBLookupComboBox;
+    cbbFBl: TUniDBLookupComboBox;
     procedure btnExitClick(Sender: TObject);
     procedure fdqryUsersBeforePost(DataSet: TDataSet);
     procedure UniFormShow(Sender: TObject);
