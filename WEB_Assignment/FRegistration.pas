@@ -44,6 +44,8 @@ type
     { Private declarations }
   public
     { Public declarations }
+    FilterStrStatus : string;
+    FilterStrBlock : string;
   end;
 
 function frmRegistration: TfrmRegistration;
@@ -81,11 +83,40 @@ begin
       fdqryCheckLogin.Close;
   end;
 end;
-
-procedure TfrmRegistration.undbgrd1ColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn;
-  const Value: Variant);
+procedure TfrmRegistration.undbgrd1ColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn; const Value: Variant);
+var
+  S: string;
 begin
- ;
+  if Column.FieldName = 'StrStatus' then
+  begin
+    if S = '' then
+      FilterStrStatus := ''
+    else
+    begin
+      FilterStrStatus := '(SUPERUSER = ' + S + ')';
+    end;
+  end;
+
+  if Column.FieldName = 'StrBlock' then
+  begin
+    if S = '' then
+      FilterStrBlock := ''
+    else
+    begin
+      FilterStrBlock := '(BLOCKED = ' + S + ')';
+    end;
+  end;
+
+  fdqryUsers.Filter := '';
+ if FilterStrStatus <> '' then
+ fdqryUsers.Filter := FilterStrStatus;
+
+ if FilterStrBlock <> '' then
+   if fdqryUsers.Filter <> '' then
+   fdqryUsers.Filter := fdqryUsers.Filter + ' AND ' + FilterStrBlock
+   else
+   fdqryUsers.Filter := FilterStrBlock;
+
 end;
 
 procedure TfrmRegistration.UniFormShow(Sender: TObject);

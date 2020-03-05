@@ -185,6 +185,7 @@ object frmRegistration: TfrmRegistration
     Top = 16
   end
   object fdqryUsers: TFDQuery
+    Active = True
     BeforePost = fdqryUsersBeforePost
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead
