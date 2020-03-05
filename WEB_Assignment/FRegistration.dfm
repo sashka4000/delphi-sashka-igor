@@ -54,14 +54,14 @@ object frmRegistration: TfrmRegistration
         Title.Alignment = taCenter
         Title.Caption = #1057#1090#1072#1090#1091#1089
         Width = 124
-        Editor = cbbStatus
       end
       item
         FieldName = 'StrBlock'
+        Filtering.Enabled = True
+        Filtering.Editor = cbbBlock
         Title.Alignment = taCenter
         Title.Caption = #1041#1083#1086#1082#1080#1088#1086#1074#1082#1072
         Width = 112
-        Editor = cbbBlock
       end>
   end
   object lbNameTab: TUniLabel
@@ -82,7 +82,7 @@ object frmRegistration: TfrmRegistration
     Height = 25
     Hint = ''
     Caption = #1042#1077#1088#1085#1091#1090#1100#1089#1103
-    TabOrder = 3
+    TabOrder = 4
     OnClick = btnExitClick
   end
   object undbnvgtrTb1: TUniDBNavigator
@@ -118,7 +118,9 @@ object frmRegistration: TfrmRegistration
       Top = 80
       Width = 145
       Hint = ''
+      ListField = 'VString'
       ListSource = UniMainModule.dsBlock
+      KeyField = 'Value'
       ListFieldIndex = 0
       TabOrder = 2
       Color = clWindow
@@ -159,7 +161,6 @@ object frmRegistration: TfrmRegistration
     Top = 16
   end
   object fdqryUsers: TFDQuery
-    Active = True
     BeforePost = fdqryUsersBeforePost
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead
