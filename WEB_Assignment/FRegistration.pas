@@ -9,7 +9,8 @@ uses
   uniDBGrid, uniCheckBox, uniPanel, uniDBNavigator, FireDAC.Stan.Param,
   FireDAC.Phys.Intf, FireDAC.Stan.Option, FireDAC.Stan.Error, FireDAC.DatS,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.StorageBin, uniMultiItem, uniComboBox,
+  uniDBComboBox, uniDBLookupComboBox;
 
 type
   TfrmRegistration = class(TUniForm)
@@ -21,9 +22,22 @@ type
     fdpdtsqlUsers: TFDUpdateSQL;
     fdqryUsers: TFDQuery;
     fdqryCheckLogin: TFDQuery;
+    unhdnpnlSuperUser: TUniHiddenPanel;
+    cbbStatus: TUniDBLookupComboBox;
+    cbbBlock: TUniDBLookupComboBox;
+    lrgntfldUsersID: TLargeintField;
+    strngfldUsersNAME: TStringField;
+    strngfldUsersLOGIN: TStringField;
+    strngfldUsersPASSWORD: TStringField;
+    smlntfldUsersSUPERUSER: TSmallintField;
+    smlntfldUsersBLOCKED: TSmallintField;
+    strngfldUsersStrStatus: TStringField;
+    strngfldUsersStrBlock: TStringField;
     procedure btnExitClick(Sender: TObject);
     procedure fdqryUsersBeforePost(DataSet: TDataSet);
     procedure UniFormShow(Sender: TObject);
+    procedure undbgrd1ColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn;
+      const Value: Variant);
   private
     { Private declarations }
   public
@@ -64,6 +78,12 @@ begin
     else
       fdqryCheckLogin.Close;
   end;
+end;
+
+procedure TfrmRegistration.undbgrd1ColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn;
+  const Value: Variant);
+begin
+ ;
 end;
 
 procedure TfrmRegistration.UniFormShow(Sender: TObject);

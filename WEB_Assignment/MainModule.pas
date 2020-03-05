@@ -28,6 +28,12 @@ type
     lrgntfldUsersID: TLargeintField;
     strngfldUsersNAME: TStringField;
     dsUsersAll: TDataSource;
+    fdmtblStatus: TFDMemTable;
+    fdmtblBlock: TFDMemTable;
+    dsStatus: TDataSource;
+    dsBlock: TDataSource;
+    intgrfldStatusValue: TIntegerField;
+    strngfldStatusVString: TStringField;
     procedure UniGUIMainModuleCreate(Sender: TObject);
     procedure UniGUIMainModuleDestroy(Sender: TObject);
   private
@@ -60,7 +66,7 @@ begin
   UserID := 0;
   SuperUser := 0;
   UserPassword := '';
-
+ // Заполняем таблицу Комондировка-Больничный
   fdmtblTripType.Active := True;
   fdmtblTripType.Insert;
   fdmtblTripType.Fields[0].AsInteger := 0;
@@ -70,9 +76,32 @@ begin
   fdmtblTripType.Fields[0].AsInteger := 1;
   fdmtblTripType.Fields[1].AsString := 'Больничный';
   fdmtblTripType.Post;
+ //**************************************************
 
+ //Заполняем таблицу Статус
+ //Заполняем таблицу Статус
+  fdmtblStatus.Active := True;
+  fdmtblStatus.Insert;
+  fdmtblStatus.Fields[0].AsInteger := 0;
+  fdmtblStatus.Fields[1].AsString := 'User';
+  fdmtblStatus.Post;
+  fdmtblStatus.Insert;
+  fdmtblStatus.Fields[0].AsInteger := 1;
+  fdmtblStatus.Fields[1].AsString := 'Admin';
+  fdmtblStatus.Post;
+  //****************************************************
 
-
+ //Заполняем таблицу Блокировка
+  fdmtblBlock.Active := True;
+  fdmtblBlock.Insert;
+  fdmtblBlock.Fields[0].AsInteger := 0;
+  fdmtblBlock.Fields[1].AsString := 'Нет';
+  fdmtblBlock.Post;
+  fdmtblBlock.Insert;
+  fdmtblBlock.Fields[0].AsInteger := 1;
+  fdmtblBlock.Fields[1].AsString := 'Да';
+  fdmtblBlock.Post;
+ //****************************************************
   // Подключаемся к БД
   fdtrnsctnRead.Options.AutoStart := False;
   confd.Connected := true;
@@ -86,7 +115,14 @@ begin
   self.fdtrnsctnRead.Commit;
   self.confd.Connected := false;
 end;
+{
+   fdmtblTripType.Active := True;
+  fdmtblTripType.Insert;
+  fdmtblTripType.Fields[0].AsInteger := 0;
+  fdmtblTripType.Fields[1].AsString := 'Командировка';
+  fdmtblTripType.Post;
 
+ }
 initialization
   RegisterMainModuleClass(TUniMainModule);
 
