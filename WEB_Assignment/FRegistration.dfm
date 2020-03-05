@@ -33,31 +33,33 @@ object frmRegistration: TfrmRegistration
         FieldName = 'NAME'
         Title.Alignment = taCenter
         Title.Caption = #1060#1048#1054
-        Width = 329
+        Width = 341
       end
       item
         FieldName = 'LOGIN'
         Title.Alignment = taCenter
         Title.Caption = #1051#1086#1075#1080#1085
-        Width = 225
+        Width = 242
       end
       item
         FieldName = 'PASSWORD'
         Title.Alignment = taCenter
         Title.Caption = #1055#1072#1088#1086#1083#1100#13#10
-        Width = 115
+        Width = 139
       end
       item
         FieldName = 'StrStatus'
         Filtering.Enabled = True
-        Filtering.Editor = cbbStatus
+        Filtering.Editor = cbbFSt
         Title.Alignment = taCenter
         Title.Caption = #1057#1090#1072#1090#1091#1089
-        Width = 124
+        Width = 117
         Editor = cbbStatus
       end
       item
         FieldName = 'StrBlock'
+        Filtering.Enabled = True
+        Filtering.Editor = cbbFBl
         Title.Alignment = taCenter
         Title.Caption = #1041#1083#1086#1082#1080#1088#1086#1074#1082#1072
         Width = 112
@@ -95,15 +97,15 @@ object frmRegistration: TfrmRegistration
     TabOrder = 1
   end
   object unhdnpnlSuperUser: TUniHiddenPanel
-    Left = 664
-    Top = 152
-    Width = 305
+    Left = 576
+    Top = 160
+    Width = 409
     Height = 177
     Hint = ''
     Visible = True
     object cbbStatus: TUniDBLookupComboBox
-      Left = 96
-      Top = 40
+      Left = 16
+      Top = 3
       Width = 145
       Hint = ''
       ListField = 'VString'
@@ -114,13 +116,39 @@ object frmRegistration: TfrmRegistration
       Color = clWindow
     end
     object cbbBlock: TUniDBLookupComboBox
-      Left = 96
-      Top = 80
+      Left = 16
+      Top = 48
       Width = 145
       Hint = ''
+      ListField = 'VString'
       ListSource = UniMainModule.dsBlock
+      KeyField = 'Value'
       ListFieldIndex = 0
       TabOrder = 2
+      Color = clWindow
+    end
+    object cbbFSt: TUniDBLookupComboBox
+      Left = 176
+      Top = 3
+      Width = 145
+      Hint = ''
+      ListField = 'VString'
+      ListSource = UniMainModule.dsStatus
+      KeyField = 'Value'
+      ListFieldIndex = 0
+      TabOrder = 3
+      Color = clWindow
+    end
+    object cbbFBl: TUniDBLookupComboBox
+      Left = 176
+      Top = 48
+      Width = 145
+      Hint = ''
+      ListField = 'VString'
+      ListSource = UniMainModule.dsBlock
+      KeyField = 'Value'
+      ListFieldIndex = 0
+      TabOrder = 4
       Color = clWindow
     end
   end
@@ -159,7 +187,6 @@ object frmRegistration: TfrmRegistration
     Top = 16
   end
   object fdqryUsers: TFDQuery
-    Active = True
     BeforePost = fdqryUsersBeforePost
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead
@@ -201,11 +228,13 @@ object frmRegistration: TfrmRegistration
     end
     object smlntfldUsersSUPERUSER: TSmallintField
       FieldName = 'SUPERUSER'
+      KeyFields = 'StrStatus'
       Origin = 'SUPERUSER'
       Required = True
     end
     object smlntfldUsersBLOCKED: TSmallintField
       FieldName = 'BLOCKED'
+      KeyFields = 'StrBlock'
       Origin = 'BLOCKED'
       Required = True
     end
