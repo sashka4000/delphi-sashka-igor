@@ -85,6 +85,7 @@ procedure TfrmRegistration.undbgrd1ColumnFilter(Sender: TUniDBGrid; const Column
 var
   S: string;
 begin
+S := Value;
   if Column.FieldName = 'StrStatus' then
   begin
     if S = '' then
@@ -114,12 +115,19 @@ begin
    fdqryUsers.Filter := fdqryUsers.Filter + ' AND ' + FilterStrBlock
    else
    fdqryUsers.Filter := FilterStrBlock;
+ if (FilterStrStatus <> '') or (FilterStrBlock <> '') then
+  fdqryUsers.Filtered := True;
 
 end;
 
 procedure TfrmRegistration.UniFormShow(Sender: TObject);
 begin
   fdqryUsers.Active := True;
+
+  FilterStrStatus := '';
+  FilterStrBlock := '';
+  fdqryUsers.Filter := '';
+  fdqryUsers.Filtered := False;
 end;
 
 end.

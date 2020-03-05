@@ -12,8 +12,8 @@ object frmTripAdmin: TfrmTripAdmin
   PixelsPerInch = 96
   TextHeight = 13
   object undbgrdTrip: TUniDBGrid
-    Left = 5
-    Top = 100
+    Left = 2
+    Top = 104
     Width = 1030
     Height = 450
     Hint = ''
