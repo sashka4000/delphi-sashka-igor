@@ -2,7 +2,7 @@ object frmAdmin: TfrmAdmin
   Left = 0
   Top = 0
   ClientHeight = 100
-  ClientWidth = 310
+  ClientWidth = 455
   Caption = 'frmAdmin'
   BorderStyle = bsNone
   Position = poDesktopCenter
@@ -30,5 +30,15 @@ object frmAdmin: TfrmAdmin
     ModalResult = 1
     TabOrder = 1
     OnClick = btn2Click
+  end
+  object unbtn1: TUniButton
+    Left = 331
+    Top = 35
+    Width = 95
+    Height = 25
+    Hint = ''
+    Caption = #1057#1090#1072#1090#1080#1089#1090#1080#1082#1072
+    TabOrder = 2
+    OnClick = unbtn1Click
   end
 end

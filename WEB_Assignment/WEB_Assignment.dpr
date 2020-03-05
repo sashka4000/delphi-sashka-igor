@@ -11,7 +11,9 @@ uses
   FChange in 'FChange.pas' {frmChange: TUniForm},
   FTripUser in 'FTripUser.pas' {frmTripUser: TUniForm},
   FTripAdmin in 'FTripAdmin.pas' {frmTripAdmin: TUniForm},
-  FRecord in 'FRecord.pas' {frmRecord: TUniForm};
+  FRecord in 'FRecord.pas' {frmRecord: TUniForm},
+  FAdminStat in 'FAdminStat.pas' {frmAdminStat: TUniForm},
+  FTestFreeForm in 'FTestFreeForm.pas' {UniForm2: TUniForm};
 
 {$R *.res}
 
