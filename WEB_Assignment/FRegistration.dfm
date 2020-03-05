@@ -50,7 +50,7 @@ object frmRegistration: TfrmRegistration
       item
         FieldName = 'StrStatus'
         Filtering.Enabled = True
-        Filtering.Editor = cbbFSt
+        Filtering.Editor = cbbStatus
         Title.Alignment = taCenter
         Title.Caption = #1057#1090#1072#1090#1091#1089
         Width = 124
@@ -125,30 +125,6 @@ object frmRegistration: TfrmRegistration
       TabOrder = 2
       Color = clWindow
     end
-    object cbbFSt: TUniDBLookupComboBox
-      Left = 176
-      Top = 3
-      Width = 145
-      Hint = ''
-      ListField = 'VString'
-      ListSource = UniMainModule.dsStatus
-      KeyField = 'Value'
-      ListFieldIndex = 0
-      TabOrder = 3
-      Color = clWindow
-    end
-    object cbbFBl: TUniDBLookupComboBox
-      Left = 176
-      Top = 48
-      Width = 145
-      Hint = ''
-      ListField = 'VString'
-      ListSource = UniMainModule.dsBlock
-      KeyField = 'Value'
-      ListFieldIndex = 0
-      TabOrder = 4
-      Color = clWindow
-    end
   end
   object dsUsers: TDataSource
     DataSet = fdqryUsers
@@ -185,7 +161,6 @@ object frmRegistration: TfrmRegistration
     Top = 16
   end
   object fdqryUsers: TFDQuery
-    Active = True
     BeforePost = fdqryUsersBeforePost
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead
