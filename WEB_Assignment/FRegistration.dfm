@@ -20,6 +20,7 @@ object frmRegistration: TfrmRegistration
     DataSource = dsUsers
     LoadMask.Message = 'Loading data...'
     TabOrder = 2
+    OnColumnFilter = undbgrd1ColumnFilter
     Columns = <
       item
         FieldName = 'ID'
@@ -44,19 +45,23 @@ object frmRegistration: TfrmRegistration
         FieldName = 'PASSWORD'
         Title.Alignment = taCenter
         Title.Caption = #1055#1072#1088#1086#1083#1100#13#10
-        Width = 200
+        Width = 115
       end
       item
-        FieldName = 'SUPERUSER'
+        FieldName = 'StrStatus'
+        Filtering.Enabled = True
+        Filtering.Editor = cbbStatus
         Title.Alignment = taCenter
         Title.Caption = #1057#1090#1072#1090#1091#1089
-        Width = 64
+        Width = 124
+        Editor = cbbStatus
       end
       item
-        FieldName = 'BLOCKED'
+        FieldName = 'StrBlock'
         Title.Alignment = taCenter
         Title.Caption = #1041#1083#1086#1082#1080#1088#1086#1074#1082#1072
         Width = 112
+        Editor = cbbBlock
       end>
   end
   object lbNameTab: TUniLabel
@@ -88,6 +93,36 @@ object frmRegistration: TfrmRegistration
     Hint = ''
     DataSource = dsUsers
     TabOrder = 1
+  end
+  object unhdnpnlSuperUser: TUniHiddenPanel
+    Left = 664
+    Top = 152
+    Width = 305
+    Height = 177
+    Hint = ''
+    Visible = True
+    object cbbStatus: TUniDBLookupComboBox
+      Left = 96
+      Top = 40
+      Width = 145
+      Hint = ''
+      ListField = 'VString'
+      ListSource = UniMainModule.dsStatus
+      KeyField = 'Value'
+      ListFieldIndex = 0
+      TabOrder = 1
+      Color = clWindow
+    end
+    object cbbBlock: TUniDBLookupComboBox
+      Left = 96
+      Top = 80
+      Width = 145
+      Hint = ''
+      ListSource = UniMainModule.dsBlock
+      ListFieldIndex = 0
+      TabOrder = 2
+      Color = clWindow
+    end
   end
   object dsUsers: TDataSource
     DataSet = fdqryUsers
@@ -124,6 +159,7 @@ object frmRegistration: TfrmRegistration
     Top = 16
   end
   object fdqryUsers: TFDQuery
+    Active = True
     BeforePost = fdqryUsersBeforePost
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead
@@ -139,6 +175,58 @@ object frmRegistration: TfrmRegistration
       'select * from users')
     Left = 680
     Top = 16
+    object lrgntfldUsersID: TLargeintField
+      AutoGenerateValue = arAutoInc
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+    end
+    object strngfldUsersNAME: TStringField
+      FieldName = 'NAME'
+      Origin = 'NAME'
+      Required = True
+      Size = 255
+    end
+    object strngfldUsersLOGIN: TStringField
+      FieldName = 'LOGIN'
+      Origin = 'LOGIN'
+      Required = True
+      Size = 255
+    end
+    object strngfldUsersPASSWORD: TStringField
+      FieldName = 'PASSWORD'
+      Origin = '"PASSWORD"'
+      Required = True
+      Size = 255
+    end
+    object smlntfldUsersSUPERUSER: TSmallintField
+      FieldName = 'SUPERUSER'
+      Origin = 'SUPERUSER'
+      Required = True
+    end
+    object smlntfldUsersBLOCKED: TSmallintField
+      FieldName = 'BLOCKED'
+      Origin = 'BLOCKED'
+      Required = True
+    end
+    object strngfldUsersStrStatus: TStringField
+      FieldKind = fkLookup
+      FieldName = 'StrStatus'
+      LookupDataSet = UniMainModule.fdmtblStatus
+      LookupKeyFields = 'Value'
+      LookupResultField = 'VString'
+      KeyFields = 'SUPERUSER'
+      Lookup = True
+    end
+    object strngfldUsersStrBlock: TStringField
+      FieldKind = fkLookup
+      FieldName = 'StrBlock'
+      LookupDataSet = UniMainModule.fdmtblBlock
+      LookupKeyFields = 'Value'
+      LookupResultField = 'VString'
+      KeyFields = 'BLOCKED'
+      Lookup = True
+    end
   end
   object fdqryCheckLogin: TFDQuery
     BeforePost = fdqryUsersBeforePost

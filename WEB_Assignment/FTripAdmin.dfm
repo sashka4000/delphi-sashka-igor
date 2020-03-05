@@ -51,7 +51,7 @@ object frmTripAdmin: TfrmTripAdmin
         FieldName = 'TRIPDATE'
         Title.Alignment = taCenter
         Title.Caption = #1044#1072#1090#1072#13#10
-        Width = 100
+        Width = 106
         Editor = undtmpckrSelectDate
       end
       item
@@ -66,7 +66,7 @@ object frmTripAdmin: TfrmTripAdmin
         FieldName = 'COMMENT'
         Title.Alignment = taCenter
         Title.Caption = #1050#1086#1084#1084#1077#1085#1090#1072#1088#1080#1080
-        Width = 250
+        Width = 255
       end>
   end
   object lbTripTab: TUniLabel
@@ -170,8 +170,8 @@ object frmTripAdmin: TfrmTripAdmin
       Color = clWindow
     end
     object undtmpckrSelectDate: TUniDateTimePicker
-      Left = 80
-      Top = 120
+      Left = 64
+      Top = 100
       Width = 120
       Hint = ''
       DateTime = 43895.000000000000000000
@@ -206,7 +206,6 @@ object frmTripAdmin: TfrmTripAdmin
     Top = 16
   end
   object fdqryTripAd: TFDQuery
-    Active = True
     Connection = UniMainModule.confd
     Transaction = UniMainModule.fdtrnsctnRead
     UpdateTransaction = UniMainModule.fdtrnsctnWrite
