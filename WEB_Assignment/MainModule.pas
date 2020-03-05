@@ -30,7 +30,6 @@ type
     dsUsersAll: TDataSource;
     procedure UniGUIMainModuleCreate(Sender: TObject);
     procedure UniGUIMainModuleDestroy(Sender: TObject);
-    procedure fdtrnsctnReadAfterStartTransaction(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,10 +54,6 @@ begin
   Result := TUniMainModule(UniApplication.UniMainModule);
 end;
 
-procedure TUniMainModule.fdtrnsctnReadAfterStartTransaction(Sender: TObject);
-begin
-  beep;
-end;
 
 procedure TUniMainModule.UniGUIMainModuleCreate(Sender: TObject);
 begin

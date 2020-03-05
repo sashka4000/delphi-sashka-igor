@@ -43,6 +43,7 @@ type
     cbbAdmin: TUniDBLookupComboBox;
     btnRecord: TUniButton;
     btnBack: TUniButton;
+    undtmpckrSelectDate: TUniDateTimePicker;
     procedure UniFormShow(Sender: TObject);
     procedure btnRefreshClick(Sender: TObject);
     procedure undbgrdTripColumnFilter(Sender: TUniDBGrid; const Column: TUniDBGridColumn; const Value: Variant);

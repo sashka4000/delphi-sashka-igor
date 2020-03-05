@@ -52,6 +52,7 @@ object frmTripAdmin: TfrmTripAdmin
         Title.Alignment = taCenter
         Title.Caption = #1044#1072#1090#1072#13#10
         Width = 100
+        Editor = undtmpckrSelectDate
       end
       item
         FieldName = 'TT'
@@ -167,6 +168,16 @@ object frmTripAdmin: TfrmTripAdmin
       ListFieldIndex = 0
       TabOrder = 3
       Color = clWindow
+    end
+    object undtmpckrSelectDate: TUniDateTimePicker
+      Left = 80
+      Top = 120
+      Width = 120
+      Hint = ''
+      DateTime = 43895.000000000000000000
+      DateFormat = 'dd/MM/yyyy'
+      TimeFormat = 'HH:mm:ss'
+      TabOrder = 4
     end
   end
   object btnRecord: TUniButton
