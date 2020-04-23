@@ -25,7 +25,6 @@ type
     unchrtTest: TUniChart;
     fdstnstrgjsnlnkClient: TFDStanStorageJSONLink;
     fdmtblList: TFDMemTable;
-    fdmtblReadOnly: TFDMemTable;
     fdmtblClient: TFDMemTable;
     dsClient: TDataSource;
     dsList: TDataSource;
@@ -34,6 +33,7 @@ type
     unlnsrsTest: TUniLineSeries;
     fdqryList: TFDQuery;
     undbnvgtrClient: TUniDBNavigator;
+    fdmtblReadOnly: TFDMemTable;
     procedure unmntmModeClick(Sender: TObject);
     procedure UniFormCreate(Sender: TObject);
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);

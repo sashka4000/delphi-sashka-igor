@@ -148,17 +148,6 @@ object frmMain: TfrmMain
     Left = 760
     Top = 344
   end
-  object fdmtblReadOnly: TFDMemTable
-    FetchOptions.AssignedValues = [evMode]
-    FetchOptions.Mode = fmAll
-    ResourceOptions.AssignedValues = [rvSilentMode]
-    ResourceOptions.SilentMode = True
-    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
-    UpdateOptions.CheckRequired = False
-    UpdateOptions.AutoCommitUpdates = True
-    Left = 760
-    Top = 296
-  end
   object fdmtblClient: TFDMemTable
     Active = True
     FieldDefs = <
@@ -224,5 +213,16 @@ object frmMain: TfrmMain
     MasterSource = dsList
     Left = 712
     Top = 344
+  end
+  object fdmtblReadOnly: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 752
+    Top = 304
   end
 end
