@@ -1,0 +1,34 @@
+WEB_AccessEquipment.exe: 00002A80: 09:04:46 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 00002A80: 09:04:46 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 00002A80: 09:04:46 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 00002A80: 09:04:46 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 00002A80: 09:04:46 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_AccessEquipment.exe: 00002A80: 09:05:48 [TUniServerModule]:Shutting Down Server.
+WEB_AccessEquipment.exe: 00002A80: 09:05:48 [TUniServerModule]:Stopping HTTP Server.
+WEB_AccessEquipment.exe: 00002A80: 09:05:48 [TUniServerModule]:HTTP Server Stopped.
+WEB_AccessEquipment.exe: 00002A80: 09:05:48 [TUniGUISessionManager]:Terminating Session manager.
+WEB_AccessEquipment.exe: 00002A80: 09:05:48 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_AccessEquipment.exe: 00002A80: 09:05:48 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_AccessEquipment.exe: 00002A80: 09:05:48 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_AccessEquipment.exe: 00002A80: 09:05:48 [TUniGUISessionManager]:Session manager terminated.
+WEB_AccessEquipment.exe: 00002A80: 09:05:48 [TUniServerModule]:Server Shutdown Completed.
+WEB_AccessEquipment.exe: 00002A80: 09:05:48 []:<-------------------------------------------------------------->
+WEB_AccessEquipment.exe: 00002A80: 09:05:48 [Terminated]:Exit Code: 0
+WEB_AccessEquipment.exe: 00000510: 10:17:14 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 00000510: 10:17:14 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 00000510: 10:17:14 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 00000510: 10:17:14 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 00000510: 10:17:14 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_AccessEquipment.exe: 000033DC: 10:17:49 [Файл - client.FDS, не найден-127.0.0.1]:Exception : Файл - client.FDS, не найден : Addr: $008F62C3
+WEB_AccessEquipment.exe: 0000328C: 10:18:22 [127.0.0.1]:EDatabaseError : fdmtblReadOnly: Cannot perform this operation on an empty dataset : Addr: $0065734A
+WEB_AccessEquipment.exe: 00000510: 10:18:32 [TUniServerModule]:Shutting Down Server.
+WEB_AccessEquipment.exe: 00000510: 10:18:32 [TUniServerModule]:Stopping HTTP Server.
+WEB_AccessEquipment.exe: 00000510: 10:18:33 [TUniServerModule]:HTTP Server Stopped.
+WEB_AccessEquipment.exe: 00000510: 10:18:33 [TUniGUISessionManager]:Terminating Session manager.
+WEB_AccessEquipment.exe: 00000510: 10:18:33 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_AccessEquipment.exe: 00000510: 10:18:33 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_AccessEquipment.exe: 00000510: 10:18:33 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_AccessEquipment.exe: 00000510: 10:18:33 [TUniGUISessionManager]:Session manager terminated.
+WEB_AccessEquipment.exe: 00000510: 10:18:33 [TUniServerModule]:Server Shutdown Completed.
+WEB_AccessEquipment.exe: 00000510: 10:18:33 []:<-------------------------------------------------------------->
+WEB_AccessEquipment.exe: 00000510: 10:18:33 [Terminated]:Exit Code: 0

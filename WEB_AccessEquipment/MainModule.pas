@@ -9,11 +9,6 @@ uses
 
 type
   TUniMainModule = class(TUniGUIMainModule)
-    fdmtblClient: TFDMemTable;
-    fdmtblReadOnly: TFDMemTable;
-    fdmtblList: TFDMemTable;
-    dsClient: TDataSource;
-    dsList: TDataSource;
   private
     { Private declarations }
   public
