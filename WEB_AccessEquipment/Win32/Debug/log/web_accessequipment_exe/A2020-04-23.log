@@ -178,3 +178,175 @@ WEB_AccessEquipment.exe: 00000EF4: 15:48:15 [TUniGUISessionManager]:Session mana
 WEB_AccessEquipment.exe: 00000EF4: 15:48:15 [TUniServerModule]:Server Shutdown Completed.
 WEB_AccessEquipment.exe: 00000EF4: 15:48:15 []:<-------------------------------------------------------------->
 WEB_AccessEquipment.exe: 00000EF4: 15:48:15 [Terminated]:Exit Code: 0
+WEB_AccessEquipment.exe: 0000035C: 15:52:32 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 0000035C: 15:52:32 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 0000035C: 15:52:32 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 0000035C: 15:52:32 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 0000035C: 15:52:32 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_AccessEquipment.exe: 000030DC: 15:53:19 [Файл - client.FDS, не найден-127.0.0.1]:Exception : Файл - client.FDS, не найден : Addr: $008FE32B
+WEB_AccessEquipment.exe: 0000035C: 15:53:47 [TUniServerModule]:Shutting Down Server.
+WEB_AccessEquipment.exe: 0000035C: 15:53:47 [TUniServerModule]:Stopping HTTP Server.
+WEB_AccessEquipment.exe: 0000035C: 15:53:48 [TUniServerModule]:HTTP Server Stopped.
+WEB_AccessEquipment.exe: 0000035C: 15:53:48 [TUniGUISessionManager]:Terminating Session manager.
+WEB_AccessEquipment.exe: 0000035C: 15:53:48 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_AccessEquipment.exe: 0000035C: 15:53:48 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_AccessEquipment.exe: 0000035C: 15:53:48 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_AccessEquipment.exe: 0000035C: 15:53:48 [TUniGUISessionManager]:Session manager terminated.
+WEB_AccessEquipment.exe: 0000035C: 15:53:48 [TUniServerModule]:Server Shutdown Completed.
+WEB_AccessEquipment.exe: 0000035C: 15:53:48 []:<-------------------------------------------------------------->
+WEB_AccessEquipment.exe: 0000035C: 15:53:48 [Terminated]:Exit Code: 0
+WEB_AccessEquipment.exe: 00000B18: 15:58:45 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 00000B18: 15:58:45 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 00000B18: 15:58:45 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 00000B18: 15:58:45 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 00000B18: 15:58:45 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_AccessEquipment.exe: 00001068: 15:58:53 [Файл - client.FDS, не найден-127.0.0.1]:Exception : Файл - client.FDS, не найден : Addr: $008FE32B
+WEB_AccessEquipment.exe: 00003008: 15:58:57 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. (Session not found: I2PcKkW5Vl105EE3B98 ) : Addr: $007C5ED3
+WEB_AccessEquipment.exe: 00002050: 15:59:21 [127.0.0.1]:EDatabaseError : fdmtblClient: Field '' not found : Addr: $006573EE
+WEB_AccessEquipment.exe: 000017F0: 15:59:52 [127.0.0.1]:EDatabaseError : fdmtblClient: Field '' not found : Addr: $006573EE
+WEB_AccessEquipment.exe: 00000B18: 16:00:00 [TUniServerModule]:Shutting Down Server.
+WEB_AccessEquipment.exe: 00000B18: 16:00:00 [TUniServerModule]:Stopping HTTP Server.
+WEB_AccessEquipment.exe: 00000B18: 16:00:01 [TUniServerModule]:HTTP Server Stopped.
+WEB_AccessEquipment.exe: 00000B18: 16:00:01 [TUniGUISessionManager]:Terminating Session manager.
+WEB_AccessEquipment.exe: 00000B18: 16:00:01 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_AccessEquipment.exe: 00000B18: 16:00:01 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_AccessEquipment.exe: 00000B18: 16:00:01 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_AccessEquipment.exe: 00000B18: 16:00:01 [TUniGUISessionManager]:Session manager terminated.
+WEB_AccessEquipment.exe: 00000B18: 16:00:01 [TUniServerModule]:Server Shutdown Completed.
+WEB_AccessEquipment.exe: 00000B18: 16:00:01 []:<-------------------------------------------------------------->
+WEB_AccessEquipment.exe: 00000B18: 16:00:01 [Terminated]:Exit Code: 0
+WEB_AccessEquipment.exe: 0000088C: 16:04:14 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 0000088C: 16:04:14 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 0000088C: 16:04:14 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 0000088C: 16:04:14 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 0000088C: 16:04:14 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_AccessEquipment.exe: 000033D8: 16:04:20 [Файл - client.FDS, не найден-127.0.0.1]:Exception : Файл - client.FDS, не найден : Addr: $008FE32B
+WEB_AccessEquipment.exe: 000007FC: 16:05:20 [127.0.0.1]:EDatabaseError : fdmtblClient: Field '' not found : Addr: $006573EE
+WEB_AccessEquipment.exe: 0000088C: 16:06:02 [TUniServerModule]:Shutting Down Server.
+WEB_AccessEquipment.exe: 0000088C: 16:06:02 [TUniServerModule]:Stopping HTTP Server.
+WEB_AccessEquipment.exe: 0000088C: 16:06:06 [TUniServerModule]:HTTP Server Stopped.
+WEB_AccessEquipment.exe: 0000088C: 16:06:06 [TUniGUISessionManager]:Terminating Session manager.
+WEB_AccessEquipment.exe: 0000088C: 16:06:06 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_AccessEquipment.exe: 0000088C: 16:06:06 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_AccessEquipment.exe: 0000088C: 16:06:06 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_AccessEquipment.exe: 0000088C: 16:06:06 [TUniGUISessionManager]:Session manager terminated.
+WEB_AccessEquipment.exe: 0000088C: 16:06:06 [TUniServerModule]:Server Shutdown Completed.
+WEB_AccessEquipment.exe: 0000088C: 16:06:06 []:<-------------------------------------------------------------->
+WEB_AccessEquipment.exe: 0000088C: 16:06:06 [Terminated]:Exit Code: 0
+WEB_AccessEquipment.exe: 000032FC: 16:14:35 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 000032FC: 16:14:35 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 000032FC: 16:14:35 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 000032FC: 16:14:35 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 000032FC: 16:14:35 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_AccessEquipment.exe: 000032FC: 16:15:09 [TUniServerModule]:Shutting Down Server.
+WEB_AccessEquipment.exe: 000032FC: 16:15:09 [TUniServerModule]:Stopping HTTP Server.
+WEB_AccessEquipment.exe: 000032FC: 16:15:12 [TUniServerModule]:HTTP Server Stopped.
+WEB_AccessEquipment.exe: 000032FC: 16:15:12 [TUniGUISessionManager]:Terminating Session manager.
+WEB_AccessEquipment.exe: 000032FC: 16:15:12 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_AccessEquipment.exe: 000032FC: 16:15:12 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_AccessEquipment.exe: 000032FC: 16:15:12 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_AccessEquipment.exe: 000032FC: 16:15:12 [TUniGUISessionManager]:Session manager terminated.
+WEB_AccessEquipment.exe: 000032FC: 16:15:12 [TUniServerModule]:Server Shutdown Completed.
+WEB_AccessEquipment.exe: 000032FC: 16:15:12 []:<-------------------------------------------------------------->
+WEB_AccessEquipment.exe: 000032FC: 16:15:12 [Terminated]:Exit Code: 0
+WEB_AccessEquipment.exe: 000024B0: 16:17:15 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 000024B0: 16:17:15 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 000024B0: 16:17:15 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 000024B0: 16:17:15 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 000024B0: 16:17:15 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_AccessEquipment.exe: 000024B0: 16:18:07 [TUniServerModule]:Shutting Down Server.
+WEB_AccessEquipment.exe: 000024B0: 16:18:07 [TUniServerModule]:Stopping HTTP Server.
+WEB_AccessEquipment.exe: 000024B0: 16:18:11 [TUniServerModule]:HTTP Server Stopped.
+WEB_AccessEquipment.exe: 000024B0: 16:18:11 [TUniGUISessionManager]:Terminating Session manager.
+WEB_AccessEquipment.exe: 000024B0: 16:18:11 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_AccessEquipment.exe: 000024B0: 16:18:11 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_AccessEquipment.exe: 000024B0: 16:18:11 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_AccessEquipment.exe: 000024B0: 16:18:11 [TUniGUISessionManager]:Session manager terminated.
+WEB_AccessEquipment.exe: 000024B0: 16:18:11 [TUniServerModule]:Server Shutdown Completed.
+WEB_AccessEquipment.exe: 000024B0: 16:18:11 []:<-------------------------------------------------------------->
+WEB_AccessEquipment.exe: 000024B0: 16:18:11 [Terminated]:Exit Code: 0
+WEB_AccessEquipment.exe: 00001AB4: 16:18:26 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 00001AB4: 16:18:26 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 00001AB4: 16:18:26 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 00001AB4: 16:18:26 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 00001AB4: 16:18:26 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_AccessEquipment.exe: 00002690: 16:18:40 [Файл - client.FDS, не найден-127.0.0.1]:Exception : Файл - client.FDS, не найден : Addr: $008FE32B
+WEB_AccessEquipment.exe: 00002DC4: 16:18:41 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. (Session not found: mUWPsrQuzp105EE421D ) : Addr: $007C5ED3
+WEB_AccessEquipment.exe: 00001AB4: 16:19:53 [TUniServerModule]:Shutting Down Server.
+WEB_AccessEquipment.exe: 00001AB4: 16:19:53 [TUniServerModule]:Stopping HTTP Server.
+WEB_AccessEquipment.exe: 00001AB4: 16:19:56 [TUniServerModule]:HTTP Server Stopped.
+WEB_AccessEquipment.exe: 00001AB4: 16:19:56 [TUniGUISessionManager]:Terminating Session manager.
+WEB_AccessEquipment.exe: 00001AB4: 16:19:56 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_AccessEquipment.exe: 00001AB4: 16:19:56 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_AccessEquipment.exe: 00001AB4: 16:19:56 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_AccessEquipment.exe: 00001AB4: 16:19:56 [TUniGUISessionManager]:Session manager terminated.
+WEB_AccessEquipment.exe: 00001AB4: 16:19:56 [TUniServerModule]:Server Shutdown Completed.
+WEB_AccessEquipment.exe: 00001AB4: 16:19:56 []:<-------------------------------------------------------------->
+WEB_AccessEquipment.exe: 00001AB4: 16:19:56 [Terminated]:Exit Code: 0
+WEB_AccessEquipment.exe: 00001794: 16:20:17 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 00001794: 16:20:17 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 00001794: 16:20:17 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 00001794: 16:20:17 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 00001794: 16:20:17 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_AccessEquipment.exe: 00001314: 16:20:30 [Файл - client.FDS, не найден-127.0.0.1]:Exception : Файл - client.FDS, не найден : Addr: $008FE32B
+WEB_AccessEquipment.exe: 00002F60: 16:20:31 [127.0.0.1]:EUniSessionException : Invalid session or session Timeout. (Session not found: 1wSldcrZdO105EE4275 ) : Addr: $007C5ED3
+WEB_AccessEquipment.exe: 00001794: 16:21:30 [TUniServerModule]:Shutting Down Server.
+WEB_AccessEquipment.exe: 00001794: 16:21:30 [TUniServerModule]:Stopping HTTP Server.
+WEB_AccessEquipment.exe: 00001794: 16:21:30 [TUniServerModule]:HTTP Server Stopped.
+WEB_AccessEquipment.exe: 00001794: 16:21:30 [TUniGUISessionManager]:Terminating Session manager.
+WEB_AccessEquipment.exe: 00001794: 16:21:30 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_AccessEquipment.exe: 00001794: 16:21:30 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_AccessEquipment.exe: 00001794: 16:21:30 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_AccessEquipment.exe: 00001794: 16:21:30 [TUniGUISessionManager]:Session manager terminated.
+WEB_AccessEquipment.exe: 00001794: 16:21:30 [TUniServerModule]:Server Shutdown Completed.
+WEB_AccessEquipment.exe: 00001794: 16:21:30 []:<-------------------------------------------------------------->
+WEB_AccessEquipment.exe: 00001794: 16:21:30 [Terminated]:Exit Code: 0
+WEB_AccessEquipment.exe: 00003158: 16:21:43 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 00003158: 16:21:43 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 00003158: 16:21:43 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 00003158: 16:21:44 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 00003158: 16:21:44 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_AccessEquipment.exe: 00003158: 16:22:25 [TUniServerModule]:Shutting Down Server.
+WEB_AccessEquipment.exe: 00003158: 16:22:25 [TUniServerModule]:Stopping HTTP Server.
+WEB_AccessEquipment.exe: 00003158: 16:22:29 [TUniServerModule]:HTTP Server Stopped.
+WEB_AccessEquipment.exe: 00003158: 16:22:29 [TUniGUISessionManager]:Terminating Session manager.
+WEB_AccessEquipment.exe: 00003158: 16:22:29 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_AccessEquipment.exe: 00003158: 16:22:29 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_AccessEquipment.exe: 00003158: 16:22:29 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_AccessEquipment.exe: 00003158: 16:22:29 [TUniGUISessionManager]:Session manager terminated.
+WEB_AccessEquipment.exe: 00003158: 16:22:29 [TUniServerModule]:Server Shutdown Completed.
+WEB_AccessEquipment.exe: 00003158: 16:22:29 []:<-------------------------------------------------------------->
+WEB_AccessEquipment.exe: 00003158: 16:22:29 [Terminated]:Exit Code: 0
+WEB_AccessEquipment.exe: 00001248: 16:23:51 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 00001248: 16:23:51 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 00001248: 16:23:51 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 00001248: 16:23:52 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 00001248: 16:23:52 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_AccessEquipment.exe: 000014E4: 16:26:33 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 000014E4: 16:26:33 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 000014E4: 16:26:33 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 000014E4: 16:26:33 [TUniServerModule]:Global Cache Folder Erased. <23> Files deleted.
+WEB_AccessEquipment.exe: 000014E4: 16:26:33 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 000014E4: 16:26:33 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_AccessEquipment.exe: 000014E4: 16:29:55 [TUniServerModule]:Shutting Down Server.
+WEB_AccessEquipment.exe: 000014E4: 16:29:55 [TUniServerModule]:Stopping HTTP Server.
+WEB_AccessEquipment.exe: 000014E4: 16:30:02 [TUniServerModule]:HTTP Server Stopped.
+WEB_AccessEquipment.exe: 000014E4: 16:30:02 [TUniGUISessionManager]:Terminating Session manager.
+WEB_AccessEquipment.exe: 000014E4: 16:30:02 [TUniGUISessionManager]:Stopping Cache Eraser...
+WEB_AccessEquipment.exe: 000014E4: 16:30:02 [TUniGUISessionManager]:Cache Eraser Stopped.
+WEB_AccessEquipment.exe: 000014E4: 16:30:02 [TUniGUISessionManager]:Destroying Worker Threads.
+WEB_AccessEquipment.exe: 000014E4: 16:30:02 [TUniGUISessionManager]:Session manager terminated.
+WEB_AccessEquipment.exe: 000014E4: 16:30:02 [TUniServerModule]:Server Shutdown Completed.
+WEB_AccessEquipment.exe: 000014E4: 16:30:02 []:<-------------------------------------------------------------->
+WEB_AccessEquipment.exe: 000014E4: 16:30:02 [Terminated]:Exit Code: 0
+WEB_AccessEquipment.exe: 00000430: 16:34:07 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 00000430: 16:34:07 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 00000430: 16:34:07 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 00000430: 16:34:07 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 00000430: 16:34:07 [TUniServerModule]:HTTP Server Started on Port: 8077
+WEB_AccessEquipment.exe: 00001C34: 16:38:50 []:>--------------------------------------------------------------<
+WEB_AccessEquipment.exe: 00001C34: 16:38:50 [TUniServerModule]:Server First Init.
+WEB_AccessEquipment.exe: 00001C34: 16:38:50 [TUniServerModule]:Debug Mode = ON
+WEB_AccessEquipment.exe: 00001C34: 16:38:50 [TUniServerModule]:Global Cache Folder Erased. <24> Files deleted.
+WEB_AccessEquipment.exe: 00001C34: 16:38:50 [TUniServerModule]:Starting HTTP Server on Port: 8077...
+WEB_AccessEquipment.exe: 00001C34: 16:38:50 [TUniServerModule]:HTTP Server Started on Port: 8077
