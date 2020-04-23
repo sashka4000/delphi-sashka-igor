@@ -19,7 +19,6 @@ type
     unmntmOption: TUniMenuItem;
     unmntmMode: TUniMenuItem;
     unmntmHelp: TUniMenuItem;
-    unmdbnvgtrClient: TUnimDBNavigator;
     unmList: TUniMemo;
     unmLog: TUniMemo;
     btnLogClear: TUniButton;
@@ -34,6 +33,7 @@ type
     fdpdtsqlClient: TFDUpdateSQL;
     unlnsrsTest: TUniLineSeries;
     fdqryList: TFDQuery;
+    undbnvgtrClient: TUniDBNavigator;
     procedure unmntmModeClick(Sender: TObject);
     procedure UniFormCreate(Sender: TObject);
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);
@@ -92,7 +92,7 @@ begin
       Exit;
     if fdmtblReadOnly.Exists then
       fdmtblReadOnly.Delete;
-    unmdbnvgtrClient.Enabled := False;
+    undbnvgtrClient.Enabled := False;
 //   Отключение редактирования таблицы
     with undbgrdClient do
       Options := Options - [dgEditing];
@@ -117,15 +117,16 @@ begin
     with undbgrdClient do
       Options := Options + [dgEditing];
 //**************************************
-    unmdbnvgtrClient.Enabled := True;
+    undbnvgtrClient.Enabled := True;
   end;
 end;
 //**************************************************************************************************
 
 //********************* Создание формы *************************************************************
+
 procedure TfrmMain.UniFormCreate(Sender: TObject);
 begin
-   unmLog.Clear;
+  unmLog.Clear;
   FCS := TCriticalSection.Create;   // создание критической секции
   if FileExists('client.FDS') then
     fdmtblClient.LoadFromFile('client', sfJSON) // client.FDS
@@ -158,9 +159,10 @@ end;
 //**************************************************************************************************
 
 //***************************** Двойной клик по таблице ********************************************
+
 procedure TfrmMain.undbgrdClientDblClick(Sender: TObject);
 var
-  I,j: Integer;
+  I, j: Integer;
 begin
 
 //  lblTwo.Visible := True;
@@ -237,7 +239,7 @@ begin
         frmMain.fdmtblReadOnly.Post;
         if (idcmpclntOne.ReplyStatus.ReplyStatusType = rsEcho) and (idcmpclntOne.ReplyStatus.FromIpAddress = idcmpclntOne.Host) then
         begin
-           frmMain.fdmtblList.FieldByName('TimeCount').AsInteger := echoTime;
+          frmMain.fdmtblList.FieldByName('TimeCount').AsInteger := echoTime;
         end
         else
         begin
@@ -252,9 +254,21 @@ begin
 // *********** Ограничение fdmtblList
           if frmMain.fdmtblList.RecordCount > MaxElement then
             for j := 0 to (MaxElement div 10) - 1 do
-              frmMain.fdmtblList.DeleteIndexes(0);
+            begin
+              frmMain.fdmtblList.FindFirst;
+              frmMain.fdmtblList.Delete;
+            end;
+
 // ************************
 //          MyList.add(MyRecord);
+          with frmMain.fdmtblList do
+          begin
+            Append;
+            Fields[0].AsString := IP;
+            Fields[1].AsDateTime := LastTime;
+            Fields[2].AsInteger := echoTime;
+            Post;
+          end;
         finally
           FCS.Leave;
         end;

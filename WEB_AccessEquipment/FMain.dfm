@@ -48,22 +48,13 @@ object frmMain: TfrmMain
         Width = 434
       end>
   end
-  object unmdbnvgtrClient: TUnimDBNavigator
-    Left = 0
-    Top = 8
-    Width = 976
-    Height = 23
-    Hint = ''
-    VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbInsert, nbDelete, nbPost, nbCancel]
-    TabOrder = 1
-  end
   object unmList: TUniMemo
     Left = 0
     Top = 424
     Width = 489
     Height = 169
     Hint = ''
-    TabOrder = 2
+    TabOrder = 1
   end
   object unmLog: TUniMemo
     Left = 0
@@ -71,7 +62,7 @@ object frmMain: TfrmMain
     Width = 337
     Height = 142
     Hint = ''
-    TabOrder = 3
+    TabOrder = 2
   end
   object btnLogClear: TUniButton
     Left = 368
@@ -80,7 +71,7 @@ object frmMain: TfrmMain
     Height = 25
     Hint = ''
     Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1051#1086#1075
-    TabOrder = 4
+    TabOrder = 3
   end
   object unchrtTest: TUniChart
     Left = 552
@@ -96,6 +87,15 @@ object frmMain: TfrmMain
       YValues.ValueSource = 'TimeCount'
       XLabelsSource = 'TimeQuestion'
     end
+  end
+  object undbnvgtrClient: TUniDBNavigator
+    Left = 0
+    Top = 14
+    Width = 976
+    Height = 25
+    Hint = ''
+    DataSource = dsClient
+    TabOrder = 5
   end
   object unmnmnMain: TUniMainMenu
     Left = 8
@@ -116,7 +116,6 @@ object frmMain: TfrmMain
     Top = 280
   end
   object fdmtblList: TFDMemTable
-    Active = True
     FieldDefs = <
       item
         Name = 'IpAddr'
@@ -155,7 +154,6 @@ object frmMain: TfrmMain
     Top = 296
   end
   object fdmtblClient: TFDMemTable
-    Active = True
     FieldDefs = <
       item
         Name = 'ID'
