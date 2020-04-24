@@ -1,6 +1,6 @@
 object UniMainModule: TUniMainModule
   OldCreateOrder = False
   MonitoredKeys.Keys = <>
-  Height = 148
-  Width = 363
+  Height = 93
+  Width = 183
 end

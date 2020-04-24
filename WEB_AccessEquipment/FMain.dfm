@@ -225,4 +225,9 @@ object frmMain: TfrmMain
     Left = 752
     Top = 304
   end
+  object unthrdtmrClient: TUniThreadTimer
+    OnTimer = unthrdtmrClientTimer
+    Left = 99
+    Top = 340
+  end
 end

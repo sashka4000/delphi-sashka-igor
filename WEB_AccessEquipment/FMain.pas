@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.StorageJSON, syncobjs , IdBaseComponent, IdComponent, IdRawBase,
   IdRawClient, IdIcmpClient, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.Async, FireDAC.DApt;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.Async, FireDAC.DApt, uniThreadTimer;
 
 type
   TfrmMain = class(TUniForm)
@@ -34,36 +34,24 @@ type
     fdqryList: TFDQuery;
     undbnvgtrClient: TUniDBNavigator;
     fdmtblReadOnly: TFDMemTable;
+    unthrdtmrClient: TUniThreadTimer;
     procedure unmntmModeClick(Sender: TObject);
     procedure UniFormCreate(Sender: TObject);
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);
     procedure undbgrdClientDblClick(Sender: TObject);
+    procedure unthrdtmrClientTimer(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-  end;
-
-{class TThread}
-
-{ TMyThread }
-type
-  TMyThread = class(TThread)
-  private
-    { Private declarations }
-  protected
-    procedure Execute; override;
-  public
-    idcmpclntOne: TIdIcmpClient;
     procedure StatisticsLog;
     procedure ErrorIPLog;
   end;
+
+
 const
   MaxElement = 200;
 
-var
-FCS: TCriticalSection;
-MyThread: TMyThread;
 function frmMain: TfrmMain;
 
 implementation
@@ -88,8 +76,8 @@ begin
     unmntmMode.Caption := 'Перейти в режим настройки';
 //    lblTwo.Visible := False;
 //    mmoList.Visible := False;
-    if MyThread <> nil then
-      Exit;
+//    if MyThread <> nil then
+//      Exit;
     if fdmtblReadOnly.Exists then
       fdmtblReadOnly.Delete;
     undbnvgtrClient.Enabled := False;
@@ -97,20 +85,17 @@ begin
     with undbgrdClient do
       Options := Options - [dgEditing];
 //*********************************************
+
     fdmtblReadOnly.CopyDataSet(fdmtblClient, [coStructure, coRestart, coAppend]);
-    MyThread := TMyThread.Create(True);
-    MYthread.Start;
+//    MyThread := TMyThread.Create(True);
+//    MYthread.Start;
 
   end
   else
   begin
 //   CodeSite.Send(csmYellow,'Переход в режим настройки');
     unmntmMode.Caption := 'Перейти в рабочий режим';
-    if MyThread = nil then
-      Exit;
-    MyThread.Terminate;
-    MyThread.WaitFor;
-    FreeAndNil(MyThread);
+
 
     undbgrdClient.Enabled := True;
 //   Включение редактирования таблицы
@@ -120,6 +105,9 @@ begin
     undbnvgtrClient.Enabled := True;
   end;
 end;
+
+
+
 //**************************************************************************************************
 
 //********************* Создание формы *************************************************************
@@ -127,7 +115,7 @@ end;
 procedure TfrmMain.UniFormCreate(Sender: TObject);
 begin
   unmLog.Clear;
-  FCS := TCriticalSection.Create;   // создание критической секции
+  unthrdtmrClient.Enabled := True;
   if FileExists('client.FDS') then
     fdmtblClient.LoadFromFile('client', sfJSON) // client.FDS
   else
@@ -135,7 +123,8 @@ begin
 
     raise exception.Create('Файл - client.FDS, не найден');
   end;
-//  MyList := TMyList.Create;
+
+
   unmntmModeClick(Self);
 
 end;
@@ -146,15 +135,15 @@ end;
 procedure TfrmMain.UniFormClose(Sender: TObject; var Action: TCloseAction);
 begin
   fdmtblClient.SaveToFile('client.FDS', sfJSON);
-  if MyThread <> nil then
-  begin
-    MyThread.Terminate;
-    MyThread.WaitFor;
-    FreeAndNil(MyThread);
-  end;
+//  if MyThread <> nil then
+//  begin
+//    MyThread.Terminate;
+//    MyThread.WaitFor;
+//    FreeAndNil(MyThread);
+//  end;
 
 //  CodeSite.Send(csmIndigo,'Закрытие приложения');
-  FCS.Free;     // уничтожение критической секции
+    // уничтожение критической секции
 end;
 //**************************************************************************************************
 
@@ -172,8 +161,7 @@ begin
 //  CodeSite.Send('Выбор строки в рабочем режиме');   // сообщение о выборе строки
 //  CodeSite.Send('IP адрес ', fdmtblClient.FieldByName('IPAddress').AsString);   // IP адрес
 //  CodeSite.Send('Число элементов в MyList ',MyList.count );
-  // старт критической секции
-  FCS.Enter;
+
   // установить CodeSite
   try
 
@@ -188,108 +176,108 @@ begin
       end;
 }
   finally
-  // закрытие критической секции
-    FCS.Leave;
+
 
   end;
 //   CodeSite.Send('Число отрисованных точек на графике ', J);
 end;
 //**************************************************************************************************
-{ TMyThread }
 
-procedure TMyThread.Execute;
+procedure TfrmMain.unthrdtmrClientTimer(Sender: TObject);
 var
   i, j: Integer;
+  FS: TUniGUISession;
+  idcmpclntOne: TIdIcmpClient;
   IP: string;
   Interval: Integer;
   LastTime: TDateTime;
   echoTime: Integer;
 begin
+  FS := (Self.UniApplication as TUniGUIApplication).UniSession;
+               // Это экземпляр uniSession, который является владельцем этого модуля UniMainModule.
+//**************************************************************************************************
   idcmpclntOne := TIdIcmpClient.Create(nil);
-  while (not Terminated) do
+  fdmtblReadOnly.First;      // ставим курсор в начало таблицы
+  for i := 0 to fdmtblReadOnly.RecordCount - 1 do
   begin
-    frmMain.fdmtblReadOnly.First;
-    for i := 0 to frmMain.fdmtblReadOnly.RecordCount - 1 do
+    IP := fdmtblReadOnly.FieldByName('IPAddress').AsString;
+    Interval := fdmtblReadOnly.FieldByName('TimeQuery').AsInteger;
+    LastTime := fdmtblReadOnly.FieldByName('LastTime').AsDateTime; // время последней проверки
+    if SecondsBetween(Now, LastTime) < Interval then
     begin
-      if Terminated then
-        break;
-      IP := frmMain.fdmtblReadOnly.FieldByName('IPAddress').AsString;
-      Interval := frmMain.fdmtblReadOnly.FieldByName('TimeQuery').AsInteger;
-      LastTime := frmMain.fdmtblReadOnly.FieldByName('LastTime').AsDateTime; // время последней проверки
-      if SecondsBetween(Now, LastTime) < Interval then
-      begin
-        frmMain.fdmtblReadOnly.Next;
-        Continue;
-      end
-      else
-      begin
-        try
-          idcmpclntOne.Host := IP;
-          idcmpclntOne.ReceiveTimeout := 1000;
-          idcmpclntOne.Ping();
-        except
-          on E: Exception do
-          begin
-            Synchronize(ErrorIPLog);    // обработка ошибки IP
-          end;
+      fdmtblReadOnly.Next;
+      Continue;
+    end
+    else
+    begin
+      try
+        idcmpclntOne.Host := IP;
+        idcmpclntOne.ReceiveTimeout := 1000;
+        idcmpclntOne.Ping();
+      except
+        on E: Exception do
+        begin
+          ErrorIPLog;    // обработка ошибки IP
         end;
-        echoTime := idcmpclntOne.ReplyStatus.MsRoundTripTime;
-        frmMain.fdmtblReadOnly.Edit;
-        frmMain.fdmtblReadOnly.FieldByName('LastTime').AsDateTime := Now;
-        frmMain.fdmtblReadOnly.Post;
+      end;
+      echoTime := idcmpclntOne.ReplyStatus.MsRoundTripTime;
+      fdmtblReadOnly.Edit;
+      fdmtblReadOnly.FieldByName('LastTime').AsDateTime := Now;
+      fdmtblReadOnly.Post;
+      try
         if (idcmpclntOne.ReplyStatus.ReplyStatusType = rsEcho) and (idcmpclntOne.ReplyStatus.FromIpAddress = idcmpclntOne.Host) then
         begin
-          frmMain.fdmtblList.FieldByName('TimeCount').AsInteger := echoTime;
+          FS.LockSession;   // убедитесь, что сессия не занята
+          fdmtblList.Edit;
+          fdmtblList.FieldByName('TimeCount').AsInteger := echoTime;
+          fdmtblList.Post;
         end
         else
         begin
-          frmMain.fdmtblList.FieldByName('TimeCount').AsInteger := -1;
-          Synchronize(StatisticsLog);
+          fdmtblList.Edit;
+          fdmtblList.FieldByName('TimeCount').AsInteger := -1;
+          fdmtblList.Post;
+          StatisticsLog;
         end;
-        frmMain.fdmtblList.FieldByName('IpAddr').AsString := IP;
-        frmMain.fdmtblList.FieldByName('TimeQuestion').AsDateTime := Now;
-        //
-        FCS.Enter;
-        try
-// *********** Ограничение fdmtblList
-          if frmMain.fdmtblList.RecordCount > MaxElement then
-            for j := 0 to (MaxElement div 10) - 1 do
-            begin
-              frmMain.fdmtblList.FindFirst;
-              frmMain.fdmtblList.Delete;
-            end;
-
-// ************************
-//          MyList.add(MyRecord);
-          with frmMain.fdmtblList do
-          begin
-            Append;
-            Fields[0].AsString := IP;
-            Fields[1].AsDateTime := LastTime;
-            Fields[2].AsInteger := echoTime;
-            Post;
-          end;
-        finally
-          FCS.Leave;
-        end;
-//        CodeSite.Send(csmGreen,'IP адрес: ' + IP + ' result: ' + IntToStr(echoTime));
+        fdmtblList.Edit;
+        fdmtblList.FieldByName('IpAddr').AsString := IP;
+        fdmtblList.FieldByName('TimeQuestion').AsDateTime := Now;
+        fdmtblList.Post;
+      finally
+        FS.ReleaseSession;
       end;
-      frmMain.fdmtblReadOnly.Next;
+// *********** Ограничение MyList
+      if fdmtblList.RecordCount > MaxElement then
+      begin
+        fdmtblList.First;
+        for j := 0 to (MaxElement div 10) - 1 do
+        begin
+          fdmtblList.Edit;
+          fdmtblList.Delete;
+        end;
+      end;
+// ************************
+//**************************************************************************************************
+
+
     end;
+    fdmtblReadOnly.Next;
   end;
   idcmpclntOne.Free;
 end;
 
-procedure TMyThread.StatisticsLog;
+procedure TfrmMain.StatisticsLog;
 begin
-  frmMain.unmLog.Lines.Add('Узел ' + frmMain.fdmtblReadOnly.FieldByName('IPAddress').AsString + ' недоступен');
+  unmLog.Lines.Add('Узел ' + frmMain.fdmtblReadOnly.FieldByName('IPAddress').AsString + ' недоступен');
 end;
 
-procedure TMyThread.ErrorIPLog;
+procedure TfrmMain.ErrorIPLog;
 begin
-  frmMain.unmLog.Lines.Add('IP ' + frmMain.fdmtblReadOnly.FieldByName('IPAddress').AsString + ' некорректный');
+  unmLog.Lines.Add('IP ' + frmMain.fdmtblReadOnly.FieldByName('IPAddress').AsString + ' некорректный');
 end;
 
+
+//**************************************************************************************************
 initialization
   RegisterAppFormClass(TfrmMain);
 end.
