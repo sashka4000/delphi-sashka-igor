@@ -200,22 +200,7 @@ object frmMain: TfrmMain
     Left = 816
     Top = 344
   end
-  object fdqryLogClient: TFDQuery
-    MasterSource = dsClient
-    Left = 744
-    Top = 200
-  end
-  object fdpdtsqlClient: TFDUpdateSQL
-    Left = 824
-    Top = 200
-  end
-  object fdqryList: TFDQuery
-    MasterSource = dsList
-    Left = 712
-    Top = 344
-  end
   object unthrdtmrClient: TUniThreadTimer
-    OnTimer = unthrdtmrClientTimer
     Left = 99
     Top = 340
   end

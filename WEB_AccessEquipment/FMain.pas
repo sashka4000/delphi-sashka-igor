@@ -28,10 +28,7 @@ type
     fdmtblClient: TFDMemTable;
     dsClient: TDataSource;
     dsList: TDataSource;
-    fdqryLogClient: TFDQuery;
-    fdpdtsqlClient: TFDUpdateSQL;
     unlnsrsTest: TUniLineSeries;
-    fdqryList: TFDQuery;
     undbnvgtrClient: TUniDBNavigator;
     unthrdtmrClient: TUniThreadTimer;
     fdmtblReadOnly: TFDMemTable;
