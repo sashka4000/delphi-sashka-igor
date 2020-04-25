@@ -71,17 +71,18 @@ begin
   begin
 //  CodeSite.Send(csmOrange,'Переход в рабочий режим');
     unmntmMode.Caption := 'Перейти в режим настройки';
+
 //    lblTwo.Visible := False;
-    unmList.Visible := False;
+//    unmList.Visible := False;
     if fdmtblReadOnly.Exists then
       fdmtblReadOnly.Delete;
-    undbnvgtrClient.Enabled := False;
+    undbnvgtrClient.Visible := False;
 //   Отключение редактирования таблицы
     with undbgrdClient do
       Options := Options - [dgEditing];
 //*********************************************
       fdmtblReadOnly.CopyDataSet(fdmtblClient, [coStructure, coRestart, coAppend]);
-
+      unthrdtmrClient.Enabled := True;
 
 
   end
@@ -89,12 +90,13 @@ begin
   begin
 //   CodeSite.Send(csmYellow,'Переход в режим настройки');
     unmntmMode.Caption := 'Перейти в рабочий режим';
+    unthrdtmrClient.Enabled := False;
     undbgrdClient.Enabled := True;
 //   Включение редактирования таблицы
     with undbgrdClient do
       Options := Options + [dgEditing];
 //**************************************
-    undbnvgtrClient.Enabled := True;
+    undbnvgtrClient.Visible := True;
   end;
 end;
 
@@ -107,7 +109,7 @@ end;
 procedure TfrmMain.UniFormCreate(Sender: TObject);
 begin
   unmLog.Clear;
-  unthrdtmrClient.Enabled := True;
+//  unthrdtmrClient.Enabled := True;
   if FileExists('client.FDS') then
     fdmtblClient.LoadFromFile('client', sfJSON) // client.FDS
   else
@@ -145,16 +147,18 @@ begin
   // установить CodeSite
   try
 
-{    J := 0;
-    for I := 0 to MyList.Count - 1 do
+    J := 0;
+    for I := 0 to fdmtblList.RecordCount - 1 do
 
-      if fdmtblClient.FieldByName('IPAddress').AsString = MyList.Items[I].IpAddr then
+      if fdmtblClient.FieldByName('IPAddress').AsString = fdmtblList.FieldByName('IPAddr').AsString then
       begin
-        fstlnsrsSeriesTest.AddXY(MyList.Items[I].TimeQuestion, MyList.Items[I].TimeCount);
-        mmoList.Lines.add('IP= ' + MyList.Items[I].IpAddr + '  ' + 'Число мс в  ответе= ' + MyList.Items[I].TimeCount.ToString + '  ' + 'Время запроса= ' + fdmtblClient.FieldByName('TimeQuery').AsInteger.ToString);
+   //     fstlnsrsSeriesTest.AddXY(MyList.Items[I].TimeQuestion, MyList.Items[I].TimeCount);
+        unmList.Lines.add('IP= ' + fdmtblList.FieldByName('IPAddr').AsString + '  ' + 'Число мс в  ответе= ' +
+         fdmtblList.FieldByName('TimeCount').AsInteger.ToString + '  ' + 'Время запроса= ' +
+         fdmtblClient.FieldByName('TimeQuery').AsInteger.ToString);
         Inc(J);
       end;
-}
+
   finally
 
 
@@ -174,8 +178,6 @@ var
   echoTime: Integer;
 begin
   FS := (Self.UniApplication as TUniGUIApplication).UniSession;
-               // Это экземпляр uniSession, который является владельцем этого модуля UniMainModule.
-//**************************************************************************************************
   idcmpclntOne := TIdIcmpClient.Create(nil);
   fdmtblReadOnly.First;      // ставим курсор в начало таблицы
   for i := 0 to fdmtblReadOnly.RecordCount - 1 do
@@ -208,18 +210,15 @@ begin
         if (idcmpclntOne.ReplyStatus.ReplyStatusType = rsEcho) and (idcmpclntOne.ReplyStatus.FromIpAddress = idcmpclntOne.Host) then
         begin
           FS.LockSession;   // убедитесь, что сессия не занята
-          fdmtblList.Edit;
+          fdmtblList.Insert;
           fdmtblList.FieldByName('TimeCount').AsInteger := echoTime;
-          fdmtblList.Post;
         end
         else
         begin
-          fdmtblList.Edit;
+          fdmtblList.Insert;
           fdmtblList.FieldByName('TimeCount').AsInteger := -1;
-          fdmtblList.Post;
           StatisticsLog;
         end;
-        fdmtblList.Edit;
         fdmtblList.FieldByName('IpAddr').AsString := IP;
         fdmtblList.FieldByName('TimeQuestion').AsDateTime := Now;
         fdmtblList.Post;
@@ -248,12 +247,12 @@ end;
 
 procedure TfrmMain.StatisticsLog;
 begin
-  unmLog.Lines.Add('Узел ' + frmMain.fdmtblReadOnly.FieldByName('IPAddress').AsString + ' недоступен');
+  unmLog.Lines.Add('Узел ' +fdmtblReadOnly.FieldByName('IPAddress').AsString + ' недоступен');
 end;
 
 procedure TfrmMain.ErrorIPLog;
 begin
-  unmLog.Lines.Add('IP ' + frmMain.fdmtblReadOnly.FieldByName('IPAddress').AsString + ' некорректный');
+  unmLog.Lines.Add('IP ' + fdmtblReadOnly.FieldByName('IPAddress').AsString + ' некорректный');
 end;
 
 
