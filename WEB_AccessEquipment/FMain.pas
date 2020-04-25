@@ -33,8 +33,8 @@ type
     unlnsrsTest: TUniLineSeries;
     fdqryList: TFDQuery;
     undbnvgtrClient: TUniDBNavigator;
-    fdmtblReadOnly: TFDMemTable;
     unthrdtmrClient: TUniThreadTimer;
+    fdmtblReadOnly: TFDMemTable;
     procedure unmntmModeClick(Sender: TObject);
     procedure UniFormCreate(Sender: TObject);
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);
@@ -75,9 +75,7 @@ begin
 //  CodeSite.Send(csmOrange,'Переход в рабочий режим');
     unmntmMode.Caption := 'Перейти в режим настройки';
 //    lblTwo.Visible := False;
-//    mmoList.Visible := False;
-//    if MyThread <> nil then
-//      Exit;
+    unmList.Visible := False;
     if fdmtblReadOnly.Exists then
       fdmtblReadOnly.Delete;
     undbnvgtrClient.Enabled := False;
@@ -85,18 +83,15 @@ begin
     with undbgrdClient do
       Options := Options - [dgEditing];
 //*********************************************
+      fdmtblReadOnly.CopyDataSet(fdmtblClient, [coStructure, coRestart, coAppend]);
 
-    fdmtblReadOnly.CopyDataSet(fdmtblClient, [coStructure, coRestart, coAppend]);
-//    MyThread := TMyThread.Create(True);
-//    MYthread.Start;
+
 
   end
   else
   begin
 //   CodeSite.Send(csmYellow,'Переход в режим настройки');
     unmntmMode.Caption := 'Перейти в рабочий режим';
-
-
     undbgrdClient.Enabled := True;
 //   Включение редактирования таблицы
     with undbgrdClient do
@@ -120,13 +115,9 @@ begin
     fdmtblClient.LoadFromFile('client', sfJSON) // client.FDS
   else
   begin
-
     raise exception.Create('Файл - client.FDS, не найден');
   end;
-
-
   unmntmModeClick(Self);
-
 end;
 
 //**************************************************************************************************
@@ -135,15 +126,7 @@ end;
 procedure TfrmMain.UniFormClose(Sender: TObject; var Action: TCloseAction);
 begin
   fdmtblClient.SaveToFile('client.FDS', sfJSON);
-//  if MyThread <> nil then
-//  begin
-//    MyThread.Terminate;
-//    MyThread.WaitFor;
-//    FreeAndNil(MyThread);
-//  end;
-
 //  CodeSite.Send(csmIndigo,'Закрытие приложения');
-    // уничтожение критической секции
 end;
 //**************************************************************************************************
 

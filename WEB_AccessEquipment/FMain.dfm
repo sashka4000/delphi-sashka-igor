@@ -214,6 +214,11 @@ object frmMain: TfrmMain
     Left = 712
     Top = 344
   end
+  object unthrdtmrClient: TUniThreadTimer
+    OnTimer = unthrdtmrClientTimer
+    Left = 99
+    Top = 340
+  end
   object fdmtblReadOnly: TFDMemTable
     FetchOptions.AssignedValues = [evMode]
     FetchOptions.Mode = fmAll
@@ -223,11 +228,6 @@ object frmMain: TfrmMain
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     Left = 752
-    Top = 304
-  end
-  object unthrdtmrClient: TUniThreadTimer
-    OnTimer = unthrdtmrClientTimer
-    Left = 99
-    Top = 340
+    Top = 296
   end
 end
