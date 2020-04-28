@@ -10,7 +10,7 @@ uses
   FireDAC.Stan.StorageJSON, syncobjs , IdBaseComponent, IdComponent, IdRawBase,
   IdRawClient, IdIcmpClient, FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB,
-  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.Async, FireDAC.DApt, uniThreadTimer;
+  FireDAC.Comp.DataSet, FireDAC.Comp.Client, FireDAC.Stan.Async, FireDAC.DApt, uniThreadTimer, CodeSiteLogging;
 
 type
   TfrmMain = class(TUniForm)
@@ -69,26 +69,23 @@ begin
 
   if unmntmMode.Caption = 'Перейти в рабочий режим' then
   begin
-//  CodeSite.Send(csmOrange,'Переход в рабочий режим');
+  CodeSite.Send(csmOrange,'Переход в рабочий режим');
     unmntmMode.Caption := 'Перейти в режим настройки';
 
-//    lblTwo.Visible := False;
-//    unmList.Visible := False;
+    unmList.Visible := False;
     if fdmtblReadOnly.Exists then
       fdmtblReadOnly.Delete;
-    undbnvgtrClient.Visible := False;
+    undbnvgtrClient.DataSource := nil;
 //   Отключение редактирования таблицы
     with undbgrdClient do
       Options := Options - [dgEditing];
 //*********************************************
       fdmtblReadOnly.CopyDataSet(fdmtblClient, [coStructure, coRestart, coAppend]);
       unthrdtmrClient.Enabled := True;
-
-
   end
   else
   begin
-//   CodeSite.Send(csmYellow,'Переход в режим настройки');
+   CodeSite.Send(csmYellow,'Переход в режим настройки');
     unmntmMode.Caption := 'Перейти в рабочий режим';
     unthrdtmrClient.Enabled := False;
     undbgrdClient.Enabled := True;
@@ -96,7 +93,7 @@ begin
     with undbgrdClient do
       Options := Options + [dgEditing];
 //**************************************
-    undbnvgtrClient.Visible := True;
+  undbnvgtrClient.DataSource := dsClient;
   end;
 end;
 
@@ -125,7 +122,7 @@ end;
 procedure TfrmMain.UniFormClose(Sender: TObject; var Action: TCloseAction);
 begin
   fdmtblClient.SaveToFile('client.FDS', sfJSON);
-//  CodeSite.Send(csmIndigo,'Закрытие приложения');
+  CodeSite.Send(csmIndigo,'Закрытие приложения');
 end;
 //**************************************************************************************************
 
@@ -135,14 +132,12 @@ procedure TfrmMain.undbgrdClientDblClick(Sender: TObject);
 var
   I, j: Integer;
 begin
-
-//  lblTwo.Visible := True;
   unmList.Visible := True;
   unmList.Clear;
   unlnsrsTest.Clear;
-//  CodeSite.Send('Выбор строки в рабочем режиме');   // сообщение о выборе строки
-//  CodeSite.Send('IP адрес ', fdmtblClient.FieldByName('IPAddress').AsString);   // IP адрес
-//  CodeSite.Send('Число элементов в MyList ',MyList.count );
+  CodeSite.Send('Выбор строки в рабочем режиме');   // сообщение о выборе строки
+  CodeSite.Send('IP адрес ', fdmtblClient.FieldByName('IPAddress').AsString);   // IP адрес
+  CodeSite.Send('Число элементов в fdmtbList ', fdmtblList.RecordCount );
 
   // установить CodeSite
   try
@@ -152,7 +147,7 @@ begin
 
       if fdmtblClient.FieldByName('IPAddress').AsString = fdmtblList.FieldByName('IPAddr').AsString then
       begin
-   //     fstlnsrsSeriesTest.AddXY(MyList.Items[I].TimeQuestion, MyList.Items[I].TimeCount);
+// Как запустить построение графика
         unmList.Lines.add('IP= ' + fdmtblList.FieldByName('IPAddr').AsString + '  ' + 'Число мс в  ответе= ' +
          fdmtblList.FieldByName('TimeCount').AsInteger.ToString + '  ' + 'Время запроса= ' +
          fdmtblClient.FieldByName('TimeQuery').AsInteger.ToString);
@@ -163,7 +158,7 @@ begin
 
 
   end;
-//   CodeSite.Send('Число отрисованных точек на графике ', J);
+   CodeSite.Send('Число отрисованных точек на графике ', J);
 end;
 //**************************************************************************************************
 
@@ -225,7 +220,7 @@ begin
       finally
         FS.ReleaseSession;
       end;
-// *********** Ограничение MyList
+// *********** Ограничение fdmtblList
       if fdmtblList.RecordCount > MaxElement then
       begin
         fdmtblList.First;

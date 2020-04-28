@@ -87,7 +87,6 @@ object frmMain: TfrmMain
     LayoutConfig.BodyPadding = '10'
     object unlnsrsTest: TUniLineSeries
       Title = #1043#1088#1072#1092#1080#1082' '#1086#1090#1074#1077#1090#1072' '#1074' '#1084#1089
-      SeriesLabel.Enabled = True
       DataSource = dsList
       YValues.ValueSource = 'TimeCount'
       XLabelsSource = 'TimeQuestion'
@@ -99,7 +98,6 @@ object frmMain: TfrmMain
     Width = 976
     Height = 25
     Hint = ''
-    DataSource = dsClient
     TabOrder = 5
   end
   object unmnmnMain: TUniMainMenu
