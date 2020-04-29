@@ -37,6 +37,7 @@ type
     procedure UniFormClose(Sender: TObject; var Action: TCloseAction);
     procedure undbgrdClientDblClick(Sender: TObject);
     procedure unthrdtmrClientTimer(Sender: TObject);
+    procedure btnLogClearClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -171,12 +172,14 @@ var
   Interval: Integer;
   LastTime: TDateTime;
   echoTime: Integer;
+  ErrorIP : Boolean;
 begin
   FS := (Self.UniApplication as TUniGUIApplication).UniSession;
   idcmpclntOne := TIdIcmpClient.Create(nil);
   fdmtblReadOnly.First;      // ставим курсор в начало таблицы
   for i := 0 to fdmtblReadOnly.RecordCount - 1 do
   begin
+    ErrorIP := False;
     IP := fdmtblReadOnly.FieldByName('IPAddress').AsString;
     Interval := fdmtblReadOnly.FieldByName('TimeQuery').AsInteger;
     LastTime := fdmtblReadOnly.FieldByName('LastTime').AsDateTime; // врем€ последней проверки
@@ -194,9 +197,18 @@ begin
       except
         on E: Exception do
         begin
+          ErrorIP := True;
+          FS.LockSession;
           ErrorIPLog;    // обработка ошибки IP
+          FS.ReleaseSession;
         end;
       end;
+      if ErrorIP then
+      begin
+      fdmtblReadOnly.Next;
+      Continue ;
+      end;
+
       echoTime := idcmpclntOne.ReplyStatus.MsRoundTripTime;
       fdmtblReadOnly.Edit;
       fdmtblReadOnly.FieldByName('LastTime').AsDateTime := Now;
@@ -237,12 +249,18 @@ begin
     end;
     fdmtblReadOnly.Next;
   end;
+
   idcmpclntOne.Free;
 end;
 
 procedure TfrmMain.StatisticsLog;
 begin
   unmLog.Lines.Add('”зел ' +fdmtblReadOnly.FieldByName('IPAddress').AsString + ' недоступен');
+end;
+
+procedure TfrmMain.btnLogClearClick(Sender: TObject);
+begin
+unmLog.Clear;
 end;
 
 procedure TfrmMain.ErrorIPLog;

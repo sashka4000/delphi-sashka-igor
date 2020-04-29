@@ -77,6 +77,7 @@ object frmMain: TfrmMain
     Hint = ''
     Caption = #1054#1095#1080#1089#1090#1080#1090#1100' '#1051#1086#1075
     TabOrder = 3
+    OnClick = btnLogClearClick
   end
   object unchrtTest: TUniChart
     Left = 552
