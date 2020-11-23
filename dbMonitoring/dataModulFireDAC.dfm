@@ -41,7 +41,7 @@ object DM_fireDAC: TDM_fireDAC
     UpdateOptions.EnableUpdate = False
     UpdateOptions.FetchGeneratorsPoint = gpNone
     SQL.Strings = (
-      'select * from ids')
+      'select * from IDS')
     Left = 20
     Top = 179
   end

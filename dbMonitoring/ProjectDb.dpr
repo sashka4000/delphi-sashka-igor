@@ -10,7 +10,7 @@ uses
 begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
-  Application.CreateForm(TFdb, Fdb);
   Application.CreateForm(TDM_fireDAC, DM_fireDAC);
+  Application.CreateForm(TFdb, Fdb);
   Application.Run;
 end.
