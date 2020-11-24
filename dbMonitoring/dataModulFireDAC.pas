@@ -27,7 +27,7 @@ var
 implementation
 
 uses
-  dbMonitoring;
+  dbMonitoring, Fmodal;
 
 {%CLASSGROUP 'Vcl.Controls.TControl'}
 

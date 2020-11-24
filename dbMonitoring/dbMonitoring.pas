@@ -19,8 +19,11 @@ type
     chk_bd: TCheckBox;
     btn_db_find: TButton;
     lbledt_db: TLabeledEdit;
+    btnVer: TButton;
     procedure FormCreate(Sender: TObject);
     procedure btn_db_findClick(Sender: TObject);
+    procedure chk_bdClick(Sender: TObject);
+    procedure btnVerClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -29,16 +32,25 @@ type
 
 const
   IP = '93.188.47.31';
+// IP =   '89.23.32.63' ;
 
 var
   Fdb: TFdb;
+  pIP: string;
 
 implementation
 
 uses
-  dataModulFireDAC;
+  dataModulFireDAC, Fmodal;
 
 {$R *.dfm}
+
+procedure TFdb.btnVerClick(Sender: TObject);
+var
+i: Integer;
+begin
+ FMod.ShowModal;
+end;
 
 procedure TFdb.btn_db_findClick(Sender: TObject);
 var
@@ -63,20 +75,31 @@ begin
     MessageBox(Handle, PChar('Данный GUID не найден'), PChar('Внимание'), MB_ICONINFORMATION + MB_OK);
 
 end;
+procedure TFdb.chk_bdClick(Sender: TObject);
+var
+  pIP: string;
+begin
+if chk_bd.Checked then
+   dbgrd_IDS.DataSource := ds_db;
+  if chk_bd.Checked then
+    pIP := IP;
+  DM_fireDAC.fdqryLog_db.SQL.Text := 'select *  from IDS where ip <>  :p1 and  last_access  > :p2 order by SCADAVERSION';
+  DM_fireDAC.fdqryLog_db.ParamByName('p1').AsString := pIP;
+  DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - 60;
+  DM_fireDAC.fdqryLog_db.Active := True;
+end;
 
 procedure TFdb.FormCreate(Sender: TObject);
-var
-  p1: string;
-  p2: string;
+//var
+//  pIP: string;
 begin
-  p1 := '';
+  pIP := '';
   dbgrd_IDS.DataSource := ds_db;
-  p2 := DateToStr(Now -60);
-  if chk_bd.Checked then      p1 := IP;
-
-
+  if chk_bd.Checked then
+    pIP := IP;
   DM_fireDAC.fdqryLog_db.SQL.Text := 'select *  from IDS where ip <>  :p1 and  last_access  > :p2 order by SCADAVERSION';
-
+  DM_fireDAC.fdqryLog_db.ParamByName('p1').AsString := pIP;
+  DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - 60;
   DM_fireDAC.fdqryLog_db.Active := True;
 
 end;

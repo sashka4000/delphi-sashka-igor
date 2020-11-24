@@ -2,8 +2,8 @@ object Fdb: TFdb
   Left = 0
   Top = 0
   Caption = 'Fdb'
-  ClientHeight = 716
-  ClientWidth = 1146
+  ClientHeight = 661
+  ClientWidth = 874
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,14 +18,14 @@ object Fdb: TFdb
   object pnlTop: TPanel
     Left = 0
     Top = 0
-    Width = 1146
+    Width = 874
     Height = 25
     Align = alTop
     TabOrder = 0
     object lblNameGrid: TLabel
       Left = 1
       Top = 1
-      Width = 333
+      Width = 872
       Height = 16
       Align = alTop
       Alignment = taCenter
@@ -36,19 +36,20 @@ object Fdb: TFdb
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ExplicitWidth = 333
     end
   end
   object pnlDown: TPanel
     Left = 0
-    Top = 586
-    Width = 1146
-    Height = 130
+    Top = 544
+    Width = 874
+    Height = 117
     Align = alBottom
     TabOrder = 1
     object dbnvgr_db: TDBNavigator
       Left = 1
       Top = 1
-      Width = 1144
+      Width = 872
       Height = 18
       DataSource = ds_db
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
@@ -68,9 +69,10 @@ object Fdb: TFdb
       Font.Style = []
       ParentFont = False
       TabOrder = 1
+      OnClick = chk_bdClick
     end
     object btn_db_find: TButton
-      Left = 291
+      Left = 295
       Top = 65
       Width = 75
       Height = 25
@@ -79,7 +81,7 @@ object Fdb: TFdb
       OnClick = btn_db_findClick
     end
     object lbledt_db: TLabeledEdit
-      Left = 22
+      Left = 25
       Top = 68
       Width = 261
       Height = 21
@@ -94,21 +96,31 @@ object Fdb: TFdb
       EditLabel.ParentFont = False
       TabOrder = 3
     end
+    object btnVer: TButton
+      Left = 706
+      Top = 65
+      Width = 142
+      Height = 25
+      Caption = #1042#1077#1088#1089#1080#1080' SCADA '
+      TabOrder = 4
+      OnClick = btnVerClick
+    end
   end
   object pnlMiddle: TPanel
     Left = 0
     Top = 25
-    Width = 1146
-    Height = 561
+    Width = 874
+    Height = 519
     Align = alClient
     AutoSize = True
     TabOrder = 2
     object dbgrd_IDS: TDBGrid
       Left = 1
       Top = 1
-      Width = 1144
-      Height = 559
+      Width = 872
+      Height = 517
       Align = alClient
+      DataSource = ds_db
       ReadOnly = True
       TabOrder = 0
       TitleFont.Charset = DEFAULT_CHARSET
