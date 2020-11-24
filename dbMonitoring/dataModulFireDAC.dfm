@@ -45,4 +45,12 @@ object DM_fireDAC: TDM_fireDAC
     Left = 20
     Top = 179
   end
+  object fdqryLog_mod: TFDQuery
+    Active = True
+    Connection = con_db
+    SQL.Strings = (
+      'select  * from IDS')
+    Left = 175
+    Top = 8
+  end
 end

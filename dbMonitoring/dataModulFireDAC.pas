@@ -15,6 +15,7 @@ type
     fdphysfbdrvrlnk_db: TFDPhysFBDriverLink;
     fdtrnsctnOne_db: TFDTransaction;
     fdqryLog_db: TFDQuery;
+    fdqryLog_mod: TFDQuery;
   private
     { Private declarations }
   public
