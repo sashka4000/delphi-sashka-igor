@@ -6,13 +6,12 @@ object DM_fireDAC: TDM_fireDAC
     Params.Strings = (
       'User_Name=sysdba'
       'Password=masterkey'
-      'Database=D:\DB\SCADALOGGER.GDB'
+      'Database=C:\DB\SCADALOGGER.GDB'
       'Protocol=TCPIP'
       'Server=localhost'
       'CharacterSet=UTF8'
       'DriverID=FB')
     TxOptions.ReadOnly = True
-    Connected = True
     LoginPrompt = False
     Transaction = fdtrnsctnOne_db
     Left = 107
@@ -56,30 +55,18 @@ object DM_fireDAC: TDM_fireDAC
   object fdqryLog_mod: TFDQuery
     Connection = con_db
     SQL.Strings = (
-<<<<<<< HEAD
-      
-        'select COUNT(*), SCADAVERSION  from IDS where ip <>:p1 and  last' +
-        '_access  > :p2 group by SCADAVERSION order by 1 ')
-    Left = 79
-    Top = 179
-=======
       'select COUNT(*), SCADAVERSION  from IDS'
       'where ip <>  :p1 and  last_access  > :p2'
       ' group by SCADAVERSION'
       ' order by 2')
     Left = 185
     Top = 39
->>>>>>> 287f1d8f5ef2c4d220e2444650667727f57db863
     ParamData = <
       item
         Name = 'P1'
         DataType = ftWideString
         ParamType = ptInput
         Size = 15
-<<<<<<< HEAD
-        Value = Null
-=======
->>>>>>> 287f1d8f5ef2c4d220e2444650667727f57db863
       end
       item
         Name = 'P2'

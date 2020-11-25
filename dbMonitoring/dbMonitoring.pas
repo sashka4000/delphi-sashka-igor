@@ -45,11 +45,8 @@ uses
 {$R *.dfm}
 
 procedure TFdb.btnVerClick(Sender: TObject);
-<<<<<<< HEAD
-=======
 var
  pIP : string;
->>>>>>> 287f1d8f5ef2c4d220e2444650667727f57db863
 begin
   if chk_bd.Checked
    then pIP := ''
@@ -67,7 +64,6 @@ var
   DS : TDataSource;
   B : TBookmark;
 begin
-  ds_db.Enabled := False;
   flag := True;
   DS := dbgrd_IDS.DataSource;
   B := DS.DataSet.GetBookmark; // запомнили позицию
@@ -77,7 +73,6 @@ begin
   begin
     if DS.DataSet.FieldByName('GUID').AsString = lbledt_db.Text then
     begin
-      ds_db.Enabled := True;
       SetFocus;
       flag := False;
       Break;
@@ -89,19 +84,12 @@ begin
   end;
   if flag then
   begin
-<<<<<<< HEAD
-    ds_db.Enabled := True;
-     dbgrd_IDS.DataSource.DataSet.First;
-    MessageBox(Handle, PChar('Данный GUID не найден'), PChar('Внимание'), MB_ICONINFORMATION + MB_OK);
-  end;
-=======
      MessageBox(Handle, PChar('Данный GUID не найден'), PChar('Внимание'), MB_ICONINFORMATION + MB_OK);
      DS.DataSet.GotoBookmark(B);
   end;
 
   // восстанавливаем DataSource
   dbgrd_IDS.DataSource := DS;
->>>>>>> 287f1d8f5ef2c4d220e2444650667727f57db863
 
 end;
 procedure TFdb.chk_bdClick(Sender: TObject);

@@ -30,7 +30,7 @@ implementation
 uses
   dbMonitoring, Fmodal;
 
-{%CLASSGROUP 'Vcl.Controls.TControl'}
+
 
 {$R *.dfm}
 
