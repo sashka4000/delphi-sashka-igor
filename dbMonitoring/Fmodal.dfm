@@ -26,8 +26,6 @@ object FMod: TFMod
     Align = alTop
     Color = 16645347
     TabOrder = 0
-    ExplicitTop = -1
-    ExplicitWidth = 783
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -42,6 +40,7 @@ object FMod: TFMod
       XValues.Order = loAscending
       YValues.Name = 'Bar'
       YValues.Order = loNone
+      YValues.ValueSource = 'COUNT'
     end
   end
   object ds_mod: TDataSource

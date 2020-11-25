@@ -46,8 +46,6 @@ uses
 {$R *.dfm}
 
 procedure TFdb.btnVerClick(Sender: TObject);
-var
-i: Integer;
 begin
  FMod.ShowModal;
 end;
@@ -56,12 +54,14 @@ procedure TFdb.btn_db_findClick(Sender: TObject);
 var
   flag: Boolean;
 begin
+  ds_db.Enabled := False;
   flag := True;
   dbgrd_IDS.DataSource.DataSet.First;
   while (not (dbgrd_IDS.DataSource.DataSet.Eof)) do
   begin
     if dbgrd_IDS.DataSource.DataSet.FieldByName('GUID').AsString = lbledt_db.Text then
     begin
+      ds_db.Enabled := True;
       SetFocus;
       flag := False;
       Break;
@@ -72,7 +72,11 @@ begin
     end;
   end;
   if flag then
+  begin
+    ds_db.Enabled := True;
+     dbgrd_IDS.DataSource.DataSet.First;
     MessageBox(Handle, PChar('Данный GUID не найден'), PChar('Внимание'), MB_ICONINFORMATION + MB_OK);
+  end;
 
 end;
 procedure TFdb.chk_bdClick(Sender: TObject);

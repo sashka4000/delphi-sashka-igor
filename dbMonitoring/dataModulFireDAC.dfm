@@ -49,8 +49,23 @@ object DM_fireDAC: TDM_fireDAC
     Active = True
     Connection = con_db
     SQL.Strings = (
-      'select  * from IDS')
-    Left = 175
-    Top = 8
+      
+        'select COUNT(*), SCADAVERSION  from IDS where ip <>:p1 and  last' +
+        '_access  > :p2 group by SCADAVERSION order by 1 ')
+    Left = 79
+    Top = 179
+    ParamData = <
+      item
+        Name = 'P1'
+        DataType = ftWideString
+        ParamType = ptInput
+        Size = 15
+        Value = Null
+      end
+      item
+        Name = 'P2'
+        DataType = ftTimeStamp
+        ParamType = ptInput
+      end>
   end
 end
