@@ -12,7 +12,6 @@ object FMod: TFMod
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
-  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object dbcht_db: TDBChart
@@ -22,12 +21,11 @@ object FMod: TFMod
     Height = 465
     Title.Text.Strings = (
       #1057#1074#1086#1076#1085#1099#1081' '#1086#1090#1095#1077#1090' '#1087#1086' '#1074#1077#1088#1089#1080#1103#1084' SCADA')
+    Legend.Visible = False
     View3D = False
     Align = alTop
     Color = 16645347
     TabOrder = 0
-    ExplicitTop = -1
-    ExplicitWidth = 783
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -40,13 +38,10 @@ object FMod: TFMod
       XLabelsSource = 'SCADAVERSION'
       XValues.Name = 'X'
       XValues.Order = loAscending
+      XValues.ValueSource = 'COUNT'
       YValues.Name = 'Bar'
       YValues.Order = loNone
+      YValues.ValueSource = 'COUNT'
     end
-  end
-  object ds_mod: TDataSource
-    DataSet = DM_fireDAC.fdqryLog_mod
-    Left = 34
-    Top = 14
   end
 end

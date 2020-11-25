@@ -45,7 +45,7 @@ object Fdb: TFdb
     Width = 874
     Height = 117
     Align = alBottom
-    TabOrder = 1
+    TabOrder = 2
     object dbnvgr_db: TDBNavigator
       Left = 1
       Top = 1
@@ -94,7 +94,7 @@ object Fdb: TFdb
       EditLabel.Font.Name = 'Tahoma'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
-      TabOrder = 3
+      TabOrder = 4
     end
     object btnVer: TButton
       Left = 706
@@ -102,7 +102,7 @@ object Fdb: TFdb
       Width = 142
       Height = 25
       Caption = #1042#1077#1088#1089#1080#1080' SCADA '
-      TabOrder = 4
+      TabOrder = 3
       OnClick = btnVerClick
     end
   end
@@ -113,7 +113,7 @@ object Fdb: TFdb
     Height = 519
     Align = alClient
     AutoSize = True
-    TabOrder = 2
+    TabOrder = 1
     object dbgrd_IDS: TDBGrid
       Left = 1
       Top = 1

@@ -13,8 +13,6 @@ type
   TFMod = class(TForm)
     dbcht_db: TDBChart;
     brsrsSeries_db: TBarSeries;
-    ds_mod: TDataSource;
-    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -32,15 +30,5 @@ uses
 {$R *.dfm}
 
 //   Dbchart, dataSource, Query
-
-procedure TFMod.FormShow(Sender: TObject);
-begin
-pIP := dbMonitoring.pIP;
-
-DM_fireDAC.fdqryLog_mod.SQL.Text :=  'select COUNT(*), SCADAVERSION  from IDS where ip <>:p1 and  last_access  > :p2 group by SCADAVERSION order by 1 ';
-DM_fireDAC.fdqryLog_mod.ParamByName('p1').AsString := pIP;
-DM_fireDAC.fdqryLog_mod.ParamByName('p2').AsDateTime := Now - 60;
-DM_fireDAC.fdqryLog_mod.Active := True;
-end;
 
 end.

@@ -31,12 +31,11 @@ type
   end;
 
 const
-  IP = '93.188.47.31';
+  TEKON_IP = '93.188.47.31';
 // IP =   '89.23.32.63' ;
 
 var
   Fdb: TFdb;
-  pIP: string;
 
 implementation
 
@@ -47,20 +46,32 @@ uses
 
 procedure TFdb.btnVerClick(Sender: TObject);
 var
-i: Integer;
+ pIP : string;
 begin
+  if chk_bd.Checked
+   then pIP := ''
+   else pIP := TEKON_IP;
+  DM_fireDAC.fdqryLog_mod.Active := False;
+ DM_fireDAC.fdqryLog_mod.Params[0].AsString := pIP;
+ DM_fireDAC.fdqryLog_mod.Params[1].AsDateTime := NOW - 60;
+  DM_fireDAC.fdqryLog_mod.Active := True;
  FMod.ShowModal;
 end;
 
 procedure TFdb.btn_db_findClick(Sender: TObject);
 var
   flag: Boolean;
+  DS : TDataSource;
+  B : TBookmark;
 begin
   flag := True;
-  dbgrd_IDS.DataSource.DataSet.First;
-  while (not (dbgrd_IDS.DataSource.DataSet.Eof)) do
+  DS := dbgrd_IDS.DataSource;
+  B := DS.DataSet.GetBookmark; // запомнили позицию
+  dbgrd_IDS.DataSource := nil; // отключился чтобы не пестрил
+  DS.DataSet.First;
+  while (not (DS.DataSet.Eof)) do
   begin
-    if dbgrd_IDS.DataSource.DataSet.FieldByName('GUID').AsString = lbledt_db.Text then
+    if DS.DataSet.FieldByName('GUID').AsString = lbledt_db.Text then
     begin
       SetFocus;
       flag := False;
@@ -68,40 +79,35 @@ begin
     end
     else
     begin
-      dbgrd_IDS.DataSource.DataSet.Next;
+      DS.DataSet.Next;
     end;
   end;
   if flag then
-    MessageBox(Handle, PChar('Данный GUID не найден'), PChar('Внимание'), MB_ICONINFORMATION + MB_OK);
+  begin
+     MessageBox(Handle, PChar('Данный GUID не найден'), PChar('Внимание'), MB_ICONINFORMATION + MB_OK);
+     DS.DataSet.GotoBookmark(B);
+  end;
+
+  // восстанавливаем DataSource
+  dbgrd_IDS.DataSource := DS;
 
 end;
 procedure TFdb.chk_bdClick(Sender: TObject);
 var
   pIP: string;
 begin
-if chk_bd.Checked then
-   dbgrd_IDS.DataSource := ds_db;
-  if chk_bd.Checked then
-    pIP := IP;
-  DM_fireDAC.fdqryLog_db.SQL.Text := 'select *  from IDS where ip <>  :p1 and  last_access  > :p2 order by SCADAVERSION';
+  if chk_bd.Checked
+   then pIP := ''
+   else pIP := TEKON_IP;
+  DM_fireDAC.fdqryLog_db.Active := False;
   DM_fireDAC.fdqryLog_db.ParamByName('p1').AsString := pIP;
   DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - 60;
   DM_fireDAC.fdqryLog_db.Active := True;
 end;
 
 procedure TFdb.FormCreate(Sender: TObject);
-//var
-//  pIP: string;
 begin
-  pIP := '';
-  dbgrd_IDS.DataSource := ds_db;
-  if chk_bd.Checked then
-    pIP := IP;
-  DM_fireDAC.fdqryLog_db.SQL.Text := 'select *  from IDS where ip <>  :p1 and  last_access  > :p2 order by SCADAVERSION';
-  DM_fireDAC.fdqryLog_db.ParamByName('p1').AsString := pIP;
-  DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - 60;
-  DM_fireDAC.fdqryLog_db.Active := True;
-
+  chk_bdClick(nil);
 end;
 
 end.
