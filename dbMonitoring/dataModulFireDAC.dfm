@@ -12,6 +12,7 @@ object DM_fireDAC: TDM_fireDAC
       'CharacterSet=UTF8'
       'DriverID=FB')
     TxOptions.ReadOnly = True
+    Connected = True
     LoginPrompt = False
     Transaction = fdtrnsctnOne_db
     Left = 107
