@@ -46,6 +46,19 @@ object Fdb: TFdb
     Height = 117
     Align = alBottom
     TabOrder = 2
+    object lblCountClient: TLabel
+      Left = 376
+      Top = 32
+      Width = 4
+      Height = 16
+      Alignment = taCenter
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
     object dbnvgr_db: TDBNavigator
       Left = 1
       Top = 1

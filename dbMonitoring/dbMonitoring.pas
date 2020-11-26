@@ -20,6 +20,7 @@ type
     btn_db_find: TButton;
     lbledt_db: TLabeledEdit;
     btnVer: TButton;
+    lblCountClient: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btn_db_findClick(Sender: TObject);
     procedure chk_bdClick(Sender: TObject);
@@ -32,10 +33,11 @@ type
 
 const
   TEKON_IP = '93.188.47.31';
-// IP =   '89.23.32.63' ;
 
+//   192.168.254.1
 var
   Fdb: TFdb;
+  countClient: Integer;
 
 implementation
 
@@ -94,24 +96,43 @@ begin
 end;
 procedure TFdb.chk_bdClick(Sender: TObject);
 var
+  DS: TDataSource;
+  B: TBookmark;
   pIP: string;
 begin
-  if chk_bd.Checked
-   then pIP := ''
-   else pIP := TEKON_IP;
+  DS := dbgrd_IDS.DataSource;
+  B := DS.DataSet.GetBookmark; // запомнили позицию
+  dbgrd_IDS.DataSource := nil; // отключился чтобы не пестрил
+  if chk_bd.Checked then
+    pIP := ''
+  else
+    pIP := TEKON_IP;
   DM_fireDAC.fdqryLog_db.Active := False;
   DM_fireDAC.fdqryLog_db.ParamByName('p1').AsString := pIP;
   DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - 60;
   DM_fireDAC.fdqryLog_db.Active := True;
+  DS.DataSet.First;
+  countClient := 0;
+  while (not (DS.DataSet.Eof)) do
+  begin
+    countClient := countClient + 1;
+    DS.DataSet.Next;
+  end;
+
+   // восстанавливаем DataSource
+  dbgrd_IDS.DataSource := DS;
+
+//********* Глюк прокрутки
   dbgrd_IDS.DataSource.DataSet.Next;
   dbgrd_IDS.DataSource.DataSet.First;
-
+//****************************************
+  lblCountClient.Caption := '';
+  lblCountClient.Caption := 'Число активных клиентов - ' + IntToStr(countClient);
 end;
 
 procedure TFdb.FormCreate(Sender: TObject);
 begin
   chk_bdClick(nil);
 end;
-
 end.
 
