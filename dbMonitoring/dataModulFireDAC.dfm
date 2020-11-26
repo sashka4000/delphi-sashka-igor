@@ -76,7 +76,9 @@ object DM_fireDAC: TDM_fireDAC
       end>
   end
   object fdqry_countClient: TFDQuery
+    Active = True
     Connection = con_db
+    Transaction = fdtrnsctnOne_db
     SQL.Strings = (
       'select COUNT(*) as userCount from IDS'
       'where ip <>  :p1 and  last_access  > :p2')

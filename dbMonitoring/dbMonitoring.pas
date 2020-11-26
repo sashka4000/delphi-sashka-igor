@@ -5,7 +5,9 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB,
-  Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask;
+  Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, FireDAC.Stan.Intf,
+  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
+  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFdb = class(TForm)
@@ -97,30 +99,31 @@ end;
 procedure TFdb.chk_bdClick(Sender: TObject);
 var
   DS: TDataSource;
-  B: TBookmark;
+//  B: TBookmark;
   pIP: string;
 begin
   DS := dbgrd_IDS.DataSource;
-  B := DS.DataSet.GetBookmark; // запомнили позицию
-  dbgrd_IDS.DataSource := nil; // отключился чтобы не пестрил
+//  B := DS.DataSet.GetBookmark; // запомнили позицию
+//  dbgrd_IDS.DataSource := nil; // отключился чтобы не пестрил
   if chk_bd.Checked then
     pIP := ''
   else
     pIP := TEKON_IP;
+
   DM_fireDAC.fdqryLog_db.Active := False;
   DM_fireDAC.fdqryLog_db.ParamByName('p1').AsString := pIP;
   DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - 60;
   DM_fireDAC.fdqryLog_db.Active := True;
-//  DS.DataSet.First;
-  countClient := 0;
+  DS.DataSet.First;
+//  countClient := 0;
 // ******************************
-   DM_fireDAC.fdqry_countClient.Active := False;
+  DM_fireDAC.fdqry_countClient.Active := False;
+  DM_fireDAC.fdqry_countClient.Open();
   DM_fireDAC.fdqry_countClient.ParamByName('p1').AsString := pIP;
   DM_fireDAC.fdqry_countClient.ParamByName('p2').AsDateTime := Now - 60;
-  countClient := DM_fireDAC.fdqry_countClient.FieldValues['userCount'];
-   DM_fireDAC.fdqry_countClient.Active := True;
 
-
+  countClient := DM_fireDAC.fdqry_countClient.FieldValues['USERCOUNT'];
+    DM_fireDAC.fdqry_countClient.Active := True;
 
 // ************************
 //  while (not (DS.DataSet.Eof)) do
@@ -130,7 +133,7 @@ begin
 //  end;
 
    // восстанавливаем DataSource
-  dbgrd_IDS.DataSource := DS;
+//  dbgrd_IDS.DataSource := DS;
 
 //********* Глюк прокрутки
   dbgrd_IDS.DataSource.DataSet.Next;
