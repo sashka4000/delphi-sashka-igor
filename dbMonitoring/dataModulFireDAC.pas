@@ -16,6 +16,7 @@ type
     fdtrnsctnOne_db: TFDTransaction;
     fdqryLog_db: TFDQuery;
     fdqryLog_mod: TFDQuery;
+    fdqry_countClient: TFDQuery;
   private
     { Private declarations }
   public

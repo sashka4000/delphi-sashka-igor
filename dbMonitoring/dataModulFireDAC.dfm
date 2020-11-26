@@ -75,4 +75,25 @@ object DM_fireDAC: TDM_fireDAC
         ParamType = ptInput
       end>
   end
+  object fdqry_countClient: TFDQuery
+    Connection = con_db
+    SQL.Strings = (
+      'select COUNT(*) as userCount from IDS'
+      'where ip <>  :p1 and  last_access  > :p2')
+    Left = 184
+    Top = 168
+    ParamData = <
+      item
+        Name = 'P1'
+        DataType = ftWideString
+        ParamType = ptInput
+        Size = 15
+        Value = Null
+      end
+      item
+        Name = 'P2'
+        DataType = ftTimeStamp
+        ParamType = ptInput
+      end>
+  end
 end

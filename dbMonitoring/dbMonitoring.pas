@@ -111,13 +111,23 @@ begin
   DM_fireDAC.fdqryLog_db.ParamByName('p1').AsString := pIP;
   DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - 60;
   DM_fireDAC.fdqryLog_db.Active := True;
-  DS.DataSet.First;
+//  DS.DataSet.First;
   countClient := 0;
-  while (not (DS.DataSet.Eof)) do
-  begin
-    countClient := countClient + 1;
-    DS.DataSet.Next;
-  end;
+// ******************************
+   DM_fireDAC.fdqry_countClient.Active := False;
+  DM_fireDAC.fdqry_countClient.ParamByName('p1').AsString := pIP;
+  DM_fireDAC.fdqry_countClient.ParamByName('p2').AsDateTime := Now - 60;
+  countClient := DM_fireDAC.fdqry_countClient.FieldValues['userCount'];
+   DM_fireDAC.fdqry_countClient.Active := True;
+
+
+
+// ************************
+//  while (not (DS.DataSet.Eof)) do
+//  begin
+//    countClient := countClient + 1;
+//    DS.DataSet.Next;
+//  end;
 
    // восстанавливаем DataSource
   dbgrd_IDS.DataSource := DS;
