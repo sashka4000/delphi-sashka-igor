@@ -103,6 +103,9 @@ begin
   DM_fireDAC.fdqryLog_db.ParamByName('p1').AsString := pIP;
   DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - 60;
   DM_fireDAC.fdqryLog_db.Active := True;
+  dbgrd_IDS.DataSource.DataSet.Next;
+  dbgrd_IDS.DataSource.DataSet.First;
+
 end;
 
 procedure TFdb.FormCreate(Sender: TObject);

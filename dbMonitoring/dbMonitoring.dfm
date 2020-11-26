@@ -25,7 +25,7 @@ object Fdb: TFdb
     object lblNameGrid: TLabel
       Left = 1
       Top = 1
-      Width = 333
+      Width = 872
       Height = 16
       Align = alTop
       Alignment = taCenter
@@ -36,6 +36,7 @@ object Fdb: TFdb
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ExplicitWidth = 333
     end
   end
   object pnlDown: TPanel
