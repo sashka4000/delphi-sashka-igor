@@ -118,12 +118,11 @@ begin
 //  countClient := 0;
 // ******************************
   DM_fireDAC.fdqry_countClient.Active := False;
-  DM_fireDAC.fdqry_countClient.Open();
   DM_fireDAC.fdqry_countClient.ParamByName('p1').AsString := pIP;
   DM_fireDAC.fdqry_countClient.ParamByName('p2').AsDateTime := Now - 60;
-
+  DM_fireDAC.fdqry_countClient.Active := True;
   countClient := DM_fireDAC.fdqry_countClient.FieldValues['USERCOUNT'];
-    DM_fireDAC.fdqry_countClient.Active := True;
+
 
 // ************************
 //  while (not (DS.DataSet.Eof)) do

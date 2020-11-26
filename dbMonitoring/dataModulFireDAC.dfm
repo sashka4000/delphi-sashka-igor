@@ -76,7 +76,6 @@ object DM_fireDAC: TDM_fireDAC
       end>
   end
   object fdqry_countClient: TFDQuery
-    Active = True
     Connection = con_db
     Transaction = fdtrnsctnOne_db
     SQL.Strings = (
