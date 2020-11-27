@@ -1,7 +1,7 @@
 object DM_fireDAC: TDM_fireDAC
   OldCreateOrder = False
-  Height = 230
-  Width = 273
+  Height = 414
+  Width = 635
   object con_db: TFDConnection
     Params.Strings = (
       'User_Name=sysdba'
@@ -12,11 +12,10 @@ object DM_fireDAC: TDM_fireDAC
       'CharacterSet=UTF8'
       'DriverID=FB')
     TxOptions.ReadOnly = True
-    Connected = True
     LoginPrompt = False
     Transaction = fdtrnsctnOne_db
-    Left = 107
-    Top = 11
+    Left = 12
+    Top = 65
   end
   object fdphysfbdrvrlnk_db: TFDPhysFBDriverLink
     VendorLib = 'C:\Program Files (x86)\Firebird\Firebird_2_5\bin\fbclient.dll'
@@ -27,8 +26,8 @@ object DM_fireDAC: TDM_fireDAC
     Options.ReadOnly = True
     Options.EnableNested = False
     Connection = con_db
-    Left = 52
-    Top = 104
+    Left = 8
+    Top = 123
   end
   object fdqryLog_db: TFDQuery
     Connection = con_db
@@ -41,8 +40,8 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'select *  from IDS where ip <>  :p1 and'
       '  last_access  > :p2 order by SCADAVERSION')
-    Left = 184
-    Top = 97
+    Left = 376
+    Top = 15
     ParamData = <
       item
         Name = 'P1'
@@ -60,8 +59,8 @@ object DM_fireDAC: TDM_fireDAC
       'where ip <>  :p1 and  last_access  > :p2'
       ' group by SCADAVERSION'
       ' order by 2')
-    Left = 185
-    Top = 39
+    Left = 319
+    Top = 10
     ParamData = <
       item
         Name = 'P1'
@@ -81,8 +80,8 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'select COUNT(*) as userCount from IDS'
       'where ip <>  :p1 and  last_access  > :p2')
-    Left = 184
-    Top = 168
+    Left = 436
+    Top = 15
     ParamData = <
       item
         Name = 'P1'

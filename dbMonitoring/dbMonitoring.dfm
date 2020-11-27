@@ -141,6 +141,7 @@ object Fdb: TFdb
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      OnDblClick = dbgrd_IDSDblClick
     end
   end
   object ds_db: TDataSource

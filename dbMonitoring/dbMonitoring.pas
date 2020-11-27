@@ -27,6 +27,7 @@ type
     procedure btn_db_findClick(Sender: TObject);
     procedure chk_bdClick(Sender: TObject);
     procedure btnVerClick(Sender: TObject);
+    procedure dbgrd_IDSDblClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,7 +45,7 @@ var
 implementation
 
 uses
-  dataModulFireDAC, Fmodal;
+  dataModulFireDAC, Fmodal, FParam;
 
 {$R *.dfm}
 
@@ -140,6 +141,11 @@ begin
 //****************************************
   lblCountClient.Caption := '';
   lblCountClient.Caption := 'Число активных клиентов - ' + IntToStr(countClient);
+end;
+
+procedure TFdb.dbgrd_IDSDblClick(Sender: TObject);
+begin
+frmParm.ShowModal;
 end;
 
 procedure TFdb.FormCreate(Sender: TObject);
