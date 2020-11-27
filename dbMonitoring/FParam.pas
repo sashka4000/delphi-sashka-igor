@@ -24,6 +24,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    SelectedClientID : Integer;
   end;
 
 var

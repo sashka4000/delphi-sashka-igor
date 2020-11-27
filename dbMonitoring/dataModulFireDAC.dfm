@@ -6,7 +6,7 @@ object DM_fireDAC: TDM_fireDAC
     Params.Strings = (
       'User_Name=sysdba'
       'Password=masterkey'
-      'Database=C:\DB\SCADALOGGER.GDB'
+      'Database=D:\DB\SCADALOGGER.GDB'
       'Protocol=TCPIP'
       'Server=localhost'
       'CharacterSet=UTF8'

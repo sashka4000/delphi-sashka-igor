@@ -28,10 +28,6 @@ object frmParm: TfrmParm
     Height = 385
     Align = alClient
     TabOrder = 1
-    ExplicitLeft = 749
-    ExplicitTop = 228
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object dbchtParm: TDBChart
       Left = 1
       Top = 1
@@ -41,10 +37,6 @@ object frmParm: TfrmParm
         #1043#1088#1072#1092#1080#1082' '#1087#1072#1088#1072#1084#1077#1090#1088#1072)
       Align = alClient
       TabOrder = 0
-      ExplicitLeft = 30
-      ExplicitTop = 28
-      ExplicitWidth = 400
-      ExplicitHeight = 250
       DefaultCanvas = 'TGDIPlusCanvas'
       ColorPaletteIndex = 13
       object lnsrsChLine: TLineSeries
@@ -64,14 +56,14 @@ object frmParm: TfrmParm
     Width = 984
     Height = 147
     Align = alBottom
-    TabOrder = 2
+    TabOrder = 3
     object dtpBegin: TDateTimePicker
       Left = 19
       Top = 40
       Width = 200
       Height = 25
-      Date = 44162.000000000000000000
-      Time = 0.799752048609661900
+      Date = 44162.799752048610000000
+      Time = 44162.799752048610000000
       TabOrder = 0
     end
     object dtpEnd: TDateTimePicker
@@ -79,8 +71,8 @@ object frmParm: TfrmParm
       Top = 40
       Width = 200
       Height = 25
-      Date = 44162.000000000000000000
-      Time = 0.799752048609661900
+      Date = 44162.799752048610000000
+      Time = 44162.799752048610000000
       TabOrder = 1
     end
     object btnRefresh: TButton
@@ -98,7 +90,7 @@ object frmParm: TfrmParm
     Width = 351
     Height = 385
     Align = alRight
-    TabOrder = 3
+    TabOrder = 2
     object dbgrdPar: TDBGrid
       Left = 1
       Top = 1

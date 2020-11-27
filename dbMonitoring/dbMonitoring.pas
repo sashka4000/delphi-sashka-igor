@@ -145,7 +145,9 @@ end;
 
 procedure TFdb.dbgrd_IDSDblClick(Sender: TObject);
 begin
-frmParm.ShowModal;
+ frmParm.SelectedClientID := dbgrd_IDS.DataSource.DataSet.Fields[0].AsInteger;
+ ShowMessage('Я выбрал ID: ' + frmParm.SelectedClientID.ToString);
+ frmParm.ShowModal;
 end;
 
 procedure TFdb.FormCreate(Sender: TObject);
