@@ -46,10 +46,13 @@ object DM_fireDAC: TDM_fireDAC
     ParamData = <
       item
         Name = 'P1'
+        DataType = ftWideString
         ParamType = ptInput
+        Size = 15
       end
       item
         Name = 'P2'
+        DataType = ftTimeStamp
         ParamType = ptInput
       end>
   end
@@ -101,7 +104,7 @@ object DM_fireDAC: TDM_fireDAC
     Connection = con_db
     Transaction = fdtrnsctnOne_db
     SQL.Strings = (
-      'SELECT PARAM, PARAM_TYPE FROM EVENTS JOIN IDS ON CL_ID = IDS.ID'
+      'SELECT DISTINCT PARAM FROM EVENTS JOIN IDS ON CL_ID = IDS.ID'
       ' WHERE IDS.ID = :P')
     Left = 340
     Top = 33
@@ -114,11 +117,12 @@ object DM_fireDAC: TDM_fireDAC
       end>
   end
   object fdqry_Chart_Par: TFDQuery
-    Active = True
     Connection = con_db
     Transaction = fdtrnsctnOne_db
     SQL.Strings = (
-      'SELECT PARAM "'#1055#1040#1056#1040#1052#1045#1058#1056'" , REC_TIME "'#1042#1056#1045#1052#1071'"'
+      
+        'SELECT PARAM "'#1055#1040#1056#1040#1052#1045#1058#1056'" , VALUE_INT "'#1047#1053#1040#1063#1045#1053#1048#1045'" , REC_TIME "'#1042#1056#1045#1052#1071 +
+        '"'
       'FROM EVENTS'
       'WHERE PARAM =:P AND REC_TIME BETWEEN :TBEGIN AND :TEND')
     Left = 394
