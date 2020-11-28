@@ -17,6 +17,8 @@ type
     fdqryLog_db: TFDQuery;
     fdqryLog_mod: TFDQuery;
     fdqry_countClient: TFDQuery;
+    fdqryParam: TFDQuery;
+    fdqry_Chart_Par: TFDQuery;
   private
     { Private declarations }
   public

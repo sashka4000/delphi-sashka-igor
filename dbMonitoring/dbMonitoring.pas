@@ -146,7 +146,7 @@ end;
 procedure TFdb.dbgrd_IDSDblClick(Sender: TObject);
 begin
  frmParm.SelectedClientID := dbgrd_IDS.DataSource.DataSet.Fields[0].AsInteger;
- ShowMessage('Я выбрал ID: ' + frmParm.SelectedClientID.ToString);
+// ShowMessage('Я выбрал ID: ' + frmParm.SelectedClientID.ToString);
  frmParm.ShowModal;
 end;
 

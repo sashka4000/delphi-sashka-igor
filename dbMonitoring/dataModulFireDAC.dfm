@@ -1,17 +1,18 @@
 object DM_fireDAC: TDM_fireDAC
   OldCreateOrder = False
   Height = 414
-  Width = 635
+  Width = 509
   object con_db: TFDConnection
     Params.Strings = (
       'User_Name=sysdba'
       'Password=masterkey'
-      'Database=D:\DB\SCADALOGGER.GDB'
+      'Database=C:\DB\SCADALOGGER.GDB'
       'Protocol=TCPIP'
       'Server=localhost'
       'CharacterSet=UTF8'
       'DriverID=FB')
     TxOptions.ReadOnly = True
+    Connected = True
     LoginPrompt = False
     Transaction = fdtrnsctnOne_db
     Left = 12
@@ -40,8 +41,8 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'select *  from IDS where ip <>  :p1 and'
       '  last_access  > :p2 order by SCADAVERSION')
-    Left = 376
-    Top = 15
+    Left = 214
+    Top = 32
     ParamData = <
       item
         Name = 'P1'
@@ -59,8 +60,8 @@ object DM_fireDAC: TDM_fireDAC
       'where ip <>  :p1 and  last_access  > :p2'
       ' group by SCADAVERSION'
       ' order by 2')
-    Left = 319
-    Top = 10
+    Left = 161
+    Top = 17
     ParamData = <
       item
         Name = 'P1'
@@ -80,7 +81,7 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'select COUNT(*) as userCount from IDS'
       'where ip <>  :p1 and  last_access  > :p2')
-    Left = 436
+    Left = 273
     Top = 15
     ParamData = <
       item
@@ -92,6 +93,51 @@ object DM_fireDAC: TDM_fireDAC
       end
       item
         Name = 'P2'
+        DataType = ftTimeStamp
+        ParamType = ptInput
+      end>
+  end
+  object fdqryParam: TFDQuery
+    Connection = con_db
+    Transaction = fdtrnsctnOne_db
+    SQL.Strings = (
+      'SELECT PARAM, PARAM_TYPE FROM EVENTS JOIN IDS ON CL_ID = IDS.ID'
+      ' WHERE IDS.ID = :P')
+    Left = 340
+    Top = 33
+    ParamData = <
+      item
+        Name = 'P'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end>
+  end
+  object fdqry_Chart_Par: TFDQuery
+    Active = True
+    Connection = con_db
+    Transaction = fdtrnsctnOne_db
+    SQL.Strings = (
+      'SELECT PARAM "'#1055#1040#1056#1040#1052#1045#1058#1056'" , REC_TIME "'#1042#1056#1045#1052#1071'"'
+      'FROM EVENTS'
+      'WHERE PARAM =:P AND REC_TIME BETWEEN :TBEGIN AND :TEND')
+    Left = 394
+    Top = 8
+    ParamData = <
+      item
+        Name = 'P'
+        DataType = ftWideString
+        ParamType = ptInput
+        Size = 32
+        Value = Null
+      end
+      item
+        Name = 'TBEGIN'
+        DataType = ftTimeStamp
+        ParamType = ptInput
+      end
+      item
+        Name = 'TEND'
         DataType = ftTimeStamp
         ParamType = ptInput
       end>
