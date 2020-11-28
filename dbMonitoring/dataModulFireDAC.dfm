@@ -6,7 +6,7 @@ object DM_fireDAC: TDM_fireDAC
     Params.Strings = (
       'User_Name=sysdba'
       'Password=masterkey'
-      'Database=C:\DB\SCADALOGGER.GDB'
+      'Database=D:\DB\SCADALOGGER.GDB'
       'Protocol=TCPIP'
       'Server=localhost'
       'CharacterSet=UTF8'
@@ -16,19 +16,19 @@ object DM_fireDAC: TDM_fireDAC
     LoginPrompt = False
     Transaction = fdtrnsctnOne_db
     Left = 12
-    Top = 65
+    Top = 66
   end
   object fdphysfbdrvrlnk_db: TFDPhysFBDriverLink
     VendorLib = 'C:\Program Files (x86)\Firebird\Firebird_2_5\bin\fbclient.dll'
-    Left = 21
-    Top = 16
+    Left = 92
+    Top = 76
   end
   object fdtrnsctnOne_db: TFDTransaction
     Options.ReadOnly = True
     Options.EnableNested = False
     Connection = con_db
     Left = 8
-    Top = 123
+    Top = 124
   end
   object fdqryLog_db: TFDQuery
     Connection = con_db
@@ -41,8 +41,8 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'select *  from IDS where ip <>  :p1 and'
       '  last_access  > :p2 order by SCADAVERSION')
-    Left = 214
-    Top = 32
+    Left = 170
+    Top = 34
     ParamData = <
       item
         Name = 'P1'
@@ -55,16 +55,51 @@ object DM_fireDAC: TDM_fireDAC
         DataType = ftTimeStamp
         ParamType = ptInput
       end>
+    object intgrfldLog_dbID: TIntegerField
+      FieldName = 'ID'
+      Origin = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
+      Required = True
+    end
+    object wdstrngfldLog_dbGUID: TWideStringField
+      FieldName = 'GUID'
+      Origin = 'GUID'
+      Required = True
+      Size = 45
+    end
+    object sqltmstmpfldLog_dbREG_DATE: TSQLTimeStampField
+      FieldName = 'REG_DATE'
+      Origin = 'REG_DATE'
+      Required = True
+    end
+    object wdstrngfldLog_dbIP: TWideStringField
+      FieldName = 'IP'
+      Origin = 'IP'
+      Required = True
+      Size = 15
+    end
+    object sqltmstmpfldLog_dbLAST_ACCESS: TSQLTimeStampField
+      FieldName = 'LAST_ACCESS'
+      Origin = 'LAST_ACCESS'
+      Required = True
+    end
+    object wdstrngfldLog_dbSCADAVERSION: TWideStringField
+      FieldName = 'SCADAVERSION'
+      Origin = 'SCADAVERSION'
+      Required = True
+      Size = 64
+    end
   end
   object fdqryLog_mod: TFDQuery
+    Active = True
     Connection = con_db
     SQL.Strings = (
       'select COUNT(*), SCADAVERSION  from IDS'
       'where ip <>  :p1 and  last_access  > :p2'
       ' group by SCADAVERSION'
       ' order by 2')
-    Left = 161
-    Top = 17
+    Left = 89
+    Top = 24
     ParamData = <
       item
         Name = 'P1'
@@ -77,6 +112,19 @@ object DM_fireDAC: TDM_fireDAC
         DataType = ftTimeStamp
         ParamType = ptInput
       end>
+    object intgrfldLog_modCOUNT: TIntegerField
+      AutoGenerateValue = arDefault
+      FieldName = 'COUNT'
+      Origin = '"COUNT"'
+      ProviderFlags = []
+      ReadOnly = True
+    end
+    object wdstrngfldLog_modSCADAVERSION: TWideStringField
+      FieldName = 'SCADAVERSION'
+      Origin = 'SCADAVERSION'
+      Required = True
+      Size = 64
+    end
   end
   object fdqry_countClient: TFDQuery
     Connection = con_db
@@ -106,8 +154,8 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'SELECT DISTINCT PARAM FROM EVENTS JOIN IDS ON CL_ID = IDS.ID'
       ' WHERE IDS.ID = :P')
-    Left = 340
-    Top = 33
+    Left = 411
+    Top = 79
     ParamData = <
       item
         Name = 'P'
@@ -125,8 +173,8 @@ object DM_fireDAC: TDM_fireDAC
         '"'
       'FROM EVENTS'
       'WHERE PARAM =:P AND REC_TIME BETWEEN :TBEGIN AND :TEND')
-    Left = 394
-    Top = 8
+    Left = 314
+    Top = 94
     ParamData = <
       item
         Name = 'P'

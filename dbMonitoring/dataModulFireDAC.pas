@@ -19,6 +19,14 @@ type
     fdqry_countClient: TFDQuery;
     fdqryParam: TFDQuery;
     fdqry_Chart_Par: TFDQuery;
+    intgrfldLog_modCOUNT: TIntegerField;
+    wdstrngfldLog_modSCADAVERSION: TWideStringField;
+    intgrfldLog_dbID: TIntegerField;
+    wdstrngfldLog_dbGUID: TWideStringField;
+    sqltmstmpfldLog_dbREG_DATE: TSQLTimeStampField;
+    wdstrngfldLog_dbIP: TWideStringField;
+    sqltmstmpfldLog_dbLAST_ACCESS: TSQLTimeStampField;
+    wdstrngfldLog_dbSCADAVERSION: TWideStringField;
   private
     { Private declarations }
   public

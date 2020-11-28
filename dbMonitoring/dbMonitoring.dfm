@@ -3,7 +3,7 @@ object Fdb: TFdb
   Top = 0
   Caption = 'Fdb'
   ClientHeight = 661
-  ClientWidth = 874
+  ClientWidth = 980
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,14 +18,15 @@ object Fdb: TFdb
   object pnlTop: TPanel
     Left = 0
     Top = 0
-    Width = 874
+    Width = 980
     Height = 25
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 874
     object lblNameGrid: TLabel
       Left = 1
       Top = 1
-      Width = 872
+      Width = 978
       Height = 16
       Align = alTop
       Alignment = taCenter
@@ -42,10 +43,11 @@ object Fdb: TFdb
   object pnlDown: TPanel
     Left = 0
     Top = 544
-    Width = 874
+    Width = 980
     Height = 117
     Align = alBottom
     TabOrder = 2
+    ExplicitWidth = 874
     object lblCountClient: TLabel
       Left = 376
       Top = 32
@@ -62,12 +64,13 @@ object Fdb: TFdb
     object dbnvgr_db: TDBNavigator
       Left = 1
       Top = 1
-      Width = 872
+      Width = 978
       Height = 18
       DataSource = ds_db
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
       Align = alTop
       TabOrder = 0
+      ExplicitWidth = 872
     end
     object chk_bd: TCheckBox
       Left = 22
@@ -122,15 +125,16 @@ object Fdb: TFdb
   object pnlMiddle: TPanel
     Left = 0
     Top = 25
-    Width = 874
+    Width = 980
     Height = 519
     Align = alClient
     AutoSize = True
     TabOrder = 1
+    ExplicitWidth = 874
     object dbgrd_IDS: TDBGrid
       Left = 1
       Top = 1
-      Width = 872
+      Width = 978
       Height = 517
       Align = alClient
       DataSource = ds_db
@@ -142,11 +146,44 @@ object Fdb: TFdb
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
       OnDblClick = dbgrd_IDSDblClick
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'ID'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'GUID'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'REG_DATE'
+          Width = 150
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'IP'
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'LAST_ACCESS'
+          Width = 150
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'SCADAVERSION'
+          Visible = True
+        end>
     end
   end
   object ds_db: TDataSource
     DataSet = DM_fireDAC.fdqryLog_db
-    Left = 16
-    Top = 65534
+    Left = 77
+    Top = 117
   end
 end

@@ -35,6 +35,9 @@ type
 
 var
   frmParm: TfrmParm;
+  // Почему переменные глобальные, а не объявлены внутри класса формы?
+  // Они нужны в других модулях?
+  // зачем вообще они объявлены ?
   tBegin, tEnd : TDateTime;
 implementation
 
@@ -48,9 +51,16 @@ var
   SelectedParametr: string;
 begin
   SelectedParametr := dbgrdPar.DataSource.DataSet.Fields[0].AsString;
+  // Запрос должен вывести график изменения параметра на указанном интервале
+  // для выбранного нами ранее пользователя
+  // вопрос 1. строится ли запрос по выбранному пользователю SelectedClientID?
+  // или как ?
+  // вопрос 2. при указаннии интервала 01.11.2020 по 01.11.2020 - построится ли что-то?
+  // должно ли построиться по логике ? ожидания пользователя когда он хочет увидеть
+  // изменения параметра за 1 ноября ?
   DM_fireDAC.fdqry_Chart_Par.Active := False;
   DM_fireDAC.fdqry_Chart_Par.ParamByName('p').AsString := SelectedParametr;
-  DM_fireDAC.fdqry_Chart_Par.ParamByName('tbegin').AsDateTime := tBegin;
+  DM_fireDAC.fdqry_Chart_Par.ParamByName('tbegin').AsDateTime := tBegin;  // = dtpBegin.DateTime
   DM_fireDAC.fdqry_Chart_Par.ParamByName('tend').AsDateTime := tEnd;
   DM_fireDAC.fdqry_Chart_Par.Active := True;
 end;
@@ -58,7 +68,6 @@ end;
 procedure TfrmParm.dtpBeginChange(Sender: TObject);
 begin
   tBegin := dtpBegin.DateTime;
-
 end;
 
 procedure TfrmParm.dtpEndChange(Sender: TObject);

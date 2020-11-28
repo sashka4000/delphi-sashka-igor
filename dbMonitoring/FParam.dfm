@@ -2,8 +2,8 @@ object frmParm: TfrmParm
   Left = 0
   Top = 0
   Caption = #1055#1072#1088#1072#1084#1077#1090#1088#1099' '#1082#1083#1080#1077#1085#1090#1072
-  ClientHeight = 561
-  ClientWidth = 984
+  ClientHeight = 535
+  ClientWidth = 1011
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -18,29 +18,31 @@ object frmParm: TfrmParm
   object pnlTop: TPanel
     Left = 0
     Top = 0
-    Width = 984
+    Width = 1011
     Height = 29
     Align = alTop
     TabOrder = 0
+    ExplicitWidth = 984
   end
   object pnlLeft: TPanel
     Left = 0
     Top = 29
-    Width = 772
-    Height = 442
+    Width = 799
+    Height = 416
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 633
-    ExplicitHeight = 385
+    ExplicitWidth = 772
+    ExplicitHeight = 442
     object dbchtParm: TDBChart
       Left = 1
       Top = 1
-      Width = 770
-      Height = 440
+      Width = 797
+      Height = 414
       Cursor = crArrow
       Title.Text.Strings = (
         #1043#1088#1072#1092#1080#1082' '#1087#1072#1088#1072#1084#1077#1090#1088#1072)
-      BottomAxis.Increment = 1.000000000000000000
+      BottomAxis.DateTimeFormat = 'dd.mm hh:mm'
+      BottomAxis.LabelsAngle = 90
       BottomAxis.LabelsSeparation = 0
       BottomAxis.LabelStyle = talValue
       BottomAxis.Title.Caption = #1044#1072#1090#1072
@@ -54,19 +56,19 @@ object frmParm: TfrmParm
       View3D = False
       Align = alClient
       TabOrder = 0
-      ExplicitLeft = -6
-      ExplicitTop = 6
+      ExplicitWidth = 770
+      ExplicitHeight = 440
       DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15
-        21
+        24
         15
-        21)
+        24)
       ColorPaletteIndex = 13
       object lnsrsChLine: TLineSeries
         Legend.Picture.Data = {
           07544269746D6170161D0000424D161D00000000000036000000280000002B00
-          0000380000000100180000000000E01C0000C40E0000C40E0000000000000000
+          0000380000000100180000000000E01C00000000000000000000000000000000
           00004B7BB54B7AB44C7CB85087C0528AC45287C35085C05288C5548CC84F83BF
           4B7BB64F81BC4A7BB74A7AB74875B25185C24976B34A77B54A79B64B7BB94D7E
           BD4A78B74D7DBD4F85C34F84C24E80BC4E82BF4F83C04D7DBA4B7BB85085C14B
@@ -320,18 +322,20 @@ object frmParm: TfrmParm
   end
   object pnlFooter: TPanel
     Left = 0
-    Top = 471
-    Width = 984
+    Top = 445
+    Width = 1011
     Height = 90
     Align = alBottom
     TabOrder = 3
+    ExplicitTop = 471
+    ExplicitWidth = 984
     object dtpBegin: TDateTimePicker
       Left = 19
       Top = 40
       Width = 200
       Height = 25
-      Date = 44162.000000000000000000
-      Time = 0.799752048609661900
+      Date = 44162.799752048610000000
+      Time = 44162.799752048610000000
       TabOrder = 0
       OnChange = dtpBeginChange
     end
@@ -340,8 +344,8 @@ object frmParm: TfrmParm
       Top = 40
       Width = 200
       Height = 25
-      Date = 44162.000000000000000000
-      Time = 0.799752048609661900
+      Date = 44162.799752048610000000
+      Time = 44162.799752048610000000
       TabOrder = 1
       OnChange = dtpEndChange
     end
@@ -356,14 +360,14 @@ object frmParm: TfrmParm
     end
   end
   object pnlRight: TPanel
-    Left = 772
+    Left = 799
     Top = 29
     Width = 212
-    Height = 442
+    Height = 416
     Align = alRight
     TabOrder = 2
-    ExplicitLeft = 771
-    ExplicitHeight = 385
+    ExplicitLeft = 772
+    ExplicitHeight = 442
     object dbgrdPar: TDBGrid
       Left = 1
       Top = 1
