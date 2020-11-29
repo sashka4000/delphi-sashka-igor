@@ -68,6 +68,7 @@ begin
   DM_fireDAC.fdqry_Chart_Par.ParamByName('tbegin').AsDateTime := dtpBegin.DateTime;  // = dtpBegin.DateTime
   DM_fireDAC.fdqry_Chart_Par.ParamByName('tend').AsDateTime := dtpEnd.DateTime;
   DM_fireDAC.fdqry_Chart_Par.Active := True;
+  dbchtParm.UndoZoom;
 end;
 
 //procedure TfrmParm.dtpBeginChange(Sender: TObject);
@@ -93,7 +94,8 @@ begin
   dtpBegin.MinDate := 0;
   dtpEnd.MaxDate := Now;
   dtpEnd.MinDate := 0;
-    DM_fireDAC.fdqry_Chart_Par.Active := False;
+   DM_fireDAC.fdqry_Chart_Par.Active := False;
+  dbchtParm.UndoZoom;
 end;
 
 procedure TfrmParm.FormShow(Sender: TObject);
