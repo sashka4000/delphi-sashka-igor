@@ -339,7 +339,7 @@ object frmParm: TfrmParm
     object lbl_reg_date: TLabel
       Left = 156
       Top = 17
-      Width = 12
+      Width = 3
       Height = 13
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clRed
@@ -351,7 +351,7 @@ object frmParm: TfrmParm
     object lbl_last_date: TLabel
       Left = 465
       Top = 18
-      Width = 15
+      Width = 3
       Height = 13
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clRed
@@ -366,7 +366,7 @@ object frmParm: TfrmParm
       Width = 200
       Height = 25
       Date = 44162.000000000000000000
-      Time = 0.999988425923220300
+      Time = 44162.000000000000000000
       TabOrder = 0
     end
     object dtpEnd: TDateTimePicker
@@ -375,7 +375,7 @@ object frmParm: TfrmParm
       Width = 200
       Height = 25
       Date = 44162.000000000000000000
-      Time = 44162.000000000000000000
+      Time = 0.999988425923220300
       TabOrder = 1
     end
     object btnRefresh: TButton
