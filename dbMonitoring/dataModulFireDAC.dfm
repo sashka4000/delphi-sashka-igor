@@ -6,7 +6,7 @@ object DM_fireDAC: TDM_fireDAC
     Params.Strings = (
       'User_Name=sysdba'
       'Password=masterkey'
-      'Database=D:\DB\SCADALOGGER.GDB'
+      'Database=C:\DB\SCADALOGGER.GDB'
       'Protocol=TCPIP'
       'Server=localhost'
       'CharacterSet=UTF8'
@@ -91,7 +91,6 @@ object DM_fireDAC: TDM_fireDAC
     end
   end
   object fdqryLog_mod: TFDQuery
-    Active = True
     Connection = con_db
     SQL.Strings = (
       'select COUNT(*), SCADAVERSION  from IDS'
@@ -170,9 +169,11 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       
         'SELECT PARAM "'#1055#1040#1056#1040#1052#1045#1058#1056'" , VALUE_INT "'#1047#1053#1040#1063#1045#1053#1048#1045'" , REC_TIME "'#1042#1056#1045#1052#1071 +
-        '"'
+        '" , CL_ID "'#1055#1054#1051#1068#1047#1054#1042#1040#1058#1045#1051#1068'"'
       'FROM EVENTS'
-      'WHERE PARAM =:P AND REC_TIME BETWEEN :TBEGIN AND :TEND')
+      
+        'WHERE PARAM =:P AND REC_TIME BETWEEN :TBEGIN AND :TEND AND CL_ID' +
+        ' = :P1')
     Left = 314
     Top = 94
     ParamData = <
@@ -191,6 +192,11 @@ object DM_fireDAC: TDM_fireDAC
       item
         Name = 'TEND'
         DataType = ftTimeStamp
+        ParamType = ptInput
+      end
+      item
+        Name = 'P1'
+        DataType = ftInteger
         ParamType = ptInput
       end>
   end

@@ -5,9 +5,10 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Data.DB,
-  Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask, FireDAC.Stan.Intf,
-  FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
-  FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask,
+  FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
+  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
+  FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
 
 type
   TFdb = class(TForm)
@@ -51,23 +52,24 @@ uses
 
 procedure TFdb.btnVerClick(Sender: TObject);
 var
- pIP : string;
+  pIP: string;
 begin
-  if chk_bd.Checked
-   then pIP := ''
-   else pIP := TEKON_IP;
+  if chk_bd.Checked then
+    pIP := ''
+  else
+    pIP := TEKON_IP;
   DM_fireDAC.fdqryLog_mod.Active := False;
- DM_fireDAC.fdqryLog_mod.Params[0].AsString := pIP;
- DM_fireDAC.fdqryLog_mod.Params[1].AsDateTime := NOW - 60;
+  DM_fireDAC.fdqryLog_mod.Params[0].AsString := pIP;
+  DM_fireDAC.fdqryLog_mod.Params[1].AsDateTime := NOW - 60;
   DM_fireDAC.fdqryLog_mod.Active := True;
- FMod.ShowModal;
+  FMod.ShowModal;
 end;
 
 procedure TFdb.btn_db_findClick(Sender: TObject);
 var
   flag: Boolean;
-  DS : TDataSource;
-  B : TBookmark;
+  DS: TDataSource;
+  B: TBookmark;
 begin
   flag := True;
   DS := dbgrd_IDS.DataSource;
@@ -89,14 +91,15 @@ begin
   end;
   if flag then
   begin
-     MessageBox(Handle, PChar('Данный GUID не найден'), PChar('Внимание'), MB_ICONINFORMATION + MB_OK);
-     DS.DataSet.GotoBookmark(B);
+    MessageBox(Handle, PChar('Данный GUID не найден'), PChar('Внимание'), MB_ICONINFORMATION + MB_OK);
+    DS.DataSet.GotoBookmark(B);
   end;
 
   // восстанавливаем DataSource
   dbgrd_IDS.DataSource := DS;
 
 end;
+
 procedure TFdb.chk_bdClick(Sender: TObject);
 var
   DS: TDataSource;
@@ -131,10 +134,8 @@ begin
 //    countClient := countClient + 1;
 //    DS.DataSet.Next;
 //  end;
-
    // восстанавливаем DataSource
 //  dbgrd_IDS.DataSource := DS;
-
 //********* Глюк прокрутки
   dbgrd_IDS.DataSource.DataSet.Next;
   dbgrd_IDS.DataSource.DataSet.First;
@@ -145,14 +146,17 @@ end;
 
 procedure TFdb.dbgrd_IDSDblClick(Sender: TObject);
 begin
- frmParm.SelectedClientID := dbgrd_IDS.DataSource.DataSet.Fields[0].AsInteger;
+  frmParm.SelectedClientID := dbgrd_IDS.DataSource.DataSet.Fields[0].AsInteger;
+  frmParm.SelectedClientRegDate := dbgrd_IDS.DataSource.DataSet.Fields[2].AsDateTime;
+  frmParm.SelectedClientLastAccess := dbgrd_IDS.DataSource.DataSet.Fields[4].AsDateTime;
 // ShowMessage('Я выбрал ID: ' + frmParm.SelectedClientID.ToString);
- frmParm.ShowModal;
+  frmParm.ShowModal;
 end;
 
 procedure TFdb.FormCreate(Sender: TObject);
 begin
   chk_bdClick(nil);
 end;
+
 end.
 

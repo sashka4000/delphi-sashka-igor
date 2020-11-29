@@ -11,7 +11,7 @@ object frmParm: TfrmParm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnCreate = FormCreate
+  OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -22,7 +22,6 @@ object frmParm: TfrmParm
     Height = 29
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 984
   end
   object pnlLeft: TPanel
     Left = 0
@@ -31,8 +30,6 @@ object frmParm: TfrmParm
     Height = 416
     Align = alClient
     TabOrder = 1
-    ExplicitWidth = 772
-    ExplicitHeight = 442
     object dbchtParm: TDBChart
       Left = 1
       Top = 1
@@ -56,8 +53,6 @@ object frmParm: TfrmParm
       View3D = False
       Align = alClient
       TabOrder = 0
-      ExplicitWidth = 770
-      ExplicitHeight = 440
       DefaultCanvas = 'TGDIPlusCanvas'
       PrintMargins = (
         15
@@ -327,27 +322,61 @@ object frmParm: TfrmParm
     Height = 90
     Align = alBottom
     TabOrder = 3
-    ExplicitTop = 471
-    ExplicitWidth = 984
+    object lbl_reg_text: TLabel
+      Left = 6
+      Top = 16
+      Width = 148
+      Height = 13
+      Caption = #1044#1072#1090#1072' '#1088#1077#1075#1080#1089#1090#1088#1072#1094#1080#1080' '#1082#1083#1080#1077#1085#1090#1072' - '
+    end
+    object lbl_last_text: TLabel
+      Left = 306
+      Top = 17
+      Width = 155
+      Height = 13
+      Caption = #1044#1072#1090#1072' '#1087#1086#1089#1083#1077#1076#1085#1077#1081' '#1072#1082#1090#1080#1074#1085#1086#1089#1090#1080' - '
+    end
+    object lbl_reg_date: TLabel
+      Left = 156
+      Top = 17
+      Width = 12
+      Height = 13
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
+    object lbl_last_date: TLabel
+      Left = 465
+      Top = 18
+      Width = 15
+      Height = 13
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clRed
+      Font.Height = -11
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+    end
     object dtpBegin: TDateTimePicker
       Left = 19
-      Top = 40
+      Top = 39
       Width = 200
       Height = 25
-      Date = 44162.799752048610000000
-      Time = 44162.799752048610000000
+      Date = 44162.000000000000000000
+      Time = 0.999988425923220300
       TabOrder = 0
-      OnChange = dtpBeginChange
     end
     object dtpEnd: TDateTimePicker
-      Left = 257
+      Left = 321
       Top = 40
       Width = 200
       Height = 25
-      Date = 44162.799752048610000000
-      Time = 44162.799752048610000000
+      Date = 44162.000000000000000000
+      Time = 44162.000000000000000000
       TabOrder = 1
-      OnChange = dtpEndChange
     end
     object btnRefresh: TButton
       Left = 742
@@ -366,8 +395,6 @@ object frmParm: TfrmParm
     Height = 416
     Align = alRight
     TabOrder = 2
-    ExplicitLeft = 772
-    ExplicitHeight = 442
     object dbgrdPar: TDBGrid
       Left = 1
       Top = 1

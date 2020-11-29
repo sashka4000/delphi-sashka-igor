@@ -22,7 +22,6 @@ object Fdb: TFdb
     Height = 25
     Align = alTop
     TabOrder = 0
-    ExplicitWidth = 874
     object lblNameGrid: TLabel
       Left = 1
       Top = 1
@@ -47,7 +46,6 @@ object Fdb: TFdb
     Height = 117
     Align = alBottom
     TabOrder = 2
-    ExplicitWidth = 874
     object lblCountClient: TLabel
       Left = 376
       Top = 32
@@ -70,7 +68,6 @@ object Fdb: TFdb
       VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
       Align = alTop
       TabOrder = 0
-      ExplicitWidth = 872
     end
     object chk_bd: TCheckBox
       Left = 22
@@ -130,7 +127,6 @@ object Fdb: TFdb
     Align = alClient
     AutoSize = True
     TabOrder = 1
-    ExplicitWidth = 874
     object dbgrd_IDS: TDBGrid
       Left = 1
       Top = 1
