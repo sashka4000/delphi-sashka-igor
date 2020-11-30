@@ -49,8 +49,11 @@ uses
 procedure TfrmParm.btnRefreshClick(Sender: TObject);
 var
   SelectedParametr: string;
+  SelectedParamType : Integer;
 begin
   SelectedParametr := dbgrdPar.DataSource.DataSet.Fields[0].AsString;
+  SelectedParamType :=  dbgrdPar.DataSource.DataSet.Fields[1].AsInteger;
+
   DM_fireDAC.fdqry_Chart_Par.Active := False;
   DM_fireDAC.fdqry_Chart_Par.ParamByName('p').AsString := SelectedParametr;
   DM_fireDAC.fdqry_Chart_Par.ParamByName('p1').AsInteger := SelectedClientID;

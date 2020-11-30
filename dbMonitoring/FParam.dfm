@@ -374,8 +374,8 @@ object frmParm: TfrmParm
       Top = 40
       Width = 200
       Height = 25
-      Date = 44162.000000000000000000
-      Time = 0.999988425923220300
+      Date = 44162.999988425920000000
+      Time = 44162.999988425920000000
       TabOrder = 1
     end
     object btnRefresh: TButton
@@ -408,11 +408,23 @@ object frmParm: TfrmParm
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = 'PARAM'
+          Width = 100
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'PARAM_TYPE'
+          Visible = True
+        end>
     end
   end
   object ds_Par: TDataSource
     DataSet = DM_fireDAC.fdqryParam
-    Left = 811
-    Top = 33
+    Left = 810
+    Top = 32
   end
 end

@@ -6,7 +6,7 @@ object DM_fireDAC: TDM_fireDAC
     Params.Strings = (
       'User_Name=sysdba'
       'Password=masterkey'
-      'Database=C:\DB\SCADALOGGER.GDB'
+      'Database=D:\DB\SCADALOGGER.GDB'
       'Protocol=TCPIP'
       'Server=localhost'
       'CharacterSet=UTF8'
@@ -15,7 +15,7 @@ object DM_fireDAC: TDM_fireDAC
     Connected = True
     LoginPrompt = False
     Transaction = fdtrnsctnOne_db
-    Left = 12
+    Left = 11
     Top = 66
   end
   object fdphysfbdrvrlnk_db: TFDPhysFBDriverLink
@@ -148,10 +148,13 @@ object DM_fireDAC: TDM_fireDAC
       end>
   end
   object fdqryParam: TFDQuery
+    Active = True
     Connection = con_db
     Transaction = fdtrnsctnOne_db
     SQL.Strings = (
-      'SELECT DISTINCT PARAM FROM EVENTS JOIN IDS ON CL_ID = IDS.ID'
+      
+        'SELECT DISTINCT PARAM, PARAM_TYPE FROM EVENTS JOIN IDS ON CL_ID ' +
+        '= IDS.ID'
       ' WHERE IDS.ID = :P')
     Left = 411
     Top = 79
@@ -160,7 +163,7 @@ object DM_fireDAC: TDM_fireDAC
         Name = 'P'
         DataType = ftInteger
         ParamType = ptInput
-        Value = Null
+        Value = 18
       end>
   end
   object fdqry_Chart_Par: TFDQuery
