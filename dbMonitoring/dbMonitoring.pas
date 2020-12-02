@@ -8,7 +8,7 @@ uses
   Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
-  FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client;
+  FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons;
 
 type
   TFdb = class(TForm)
@@ -24,15 +24,22 @@ type
     lbledt_db: TLabeledEdit;
     btnVer: TButton;
     lblCountClient: TLabel;
+    edtDate: TEdit;
+    btnRefresh: TBitBtn;
+    lblCountData: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btn_db_findClick(Sender: TObject);
     procedure chk_bdClick(Sender: TObject);
     procedure btnVerClick(Sender: TObject);
     procedure dbgrd_IDSDblClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure btnRefreshClick(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    var
+    selectDay : Integer;
   end;
 
 const
@@ -49,6 +56,18 @@ uses
   dataModulFireDAC, Fmodal, FParam;
 
 {$R *.dfm}
+
+procedure TFdb.FormCreate(Sender: TObject);
+begin
+  chk_bdClick(nil);
+end;
+
+procedure TFdb.btnRefreshClick(Sender: TObject);
+begin
+   selectDay := StrToIntDef(edtDate.Text,0);
+  if selectDay = 0  then  selectDay := 60;
+
+end;
 
 procedure TFdb.btnVerClick(Sender: TObject);
 var
@@ -116,14 +135,14 @@ begin
 
   DM_fireDAC.fdqryLog_db.Active := False;
   DM_fireDAC.fdqryLog_db.ParamByName('p1').AsString := pIP;
-  DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - 60;
+  DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - selectDay;
   DM_fireDAC.fdqryLog_db.Active := True;
   DS.DataSet.First;
 //  countClient := 0;
 // ******************************
   DM_fireDAC.fdqry_countClient.Active := False;
   DM_fireDAC.fdqry_countClient.ParamByName('p1').AsString := pIP;
-  DM_fireDAC.fdqry_countClient.ParamByName('p2').AsDateTime := Now - 60;
+  DM_fireDAC.fdqry_countClient.ParamByName('p2').AsDateTime := Now - selectDay;
   DM_fireDAC.fdqry_countClient.Active := True;
   countClient := DM_fireDAC.fdqry_countClient.FieldValues['USERCOUNT'];
 
@@ -153,9 +172,11 @@ begin
   frmParm.ShowModal;
 end;
 
-procedure TFdb.FormCreate(Sender: TObject);
+
+
+procedure TFdb.FormShow(Sender: TObject);
 begin
-  chk_bdClick(nil);
+  edtDate.SetFocus;
 end;
 
 end.

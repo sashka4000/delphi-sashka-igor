@@ -1,34 +1,33 @@
 object DM_fireDAC: TDM_fireDAC
   OldCreateOrder = False
-  Height = 414
-  Width = 509
+  Height = 226
+  Width = 349
   object con_db: TFDConnection
     Params.Strings = (
       'User_Name=sysdba'
       'Password=masterkey'
-      'Database=D:\DB\SCADALOGGER.GDB'
+      'Database=C:\DB\SCADALOGGER.GDB'
       'Protocol=TCPIP'
       'Server=localhost'
       'CharacterSet=UTF8'
       'DriverID=FB')
     TxOptions.ReadOnly = True
-    Connected = True
     LoginPrompt = False
     Transaction = fdtrnsctnOne_db
-    Left = 11
-    Top = 66
+    Left = 38
+    Top = 15
   end
   object fdphysfbdrvrlnk_db: TFDPhysFBDriverLink
     VendorLib = 'C:\Program Files (x86)\Firebird\Firebird_2_5\bin\fbclient.dll'
-    Left = 92
-    Top = 76
+    Left = 94
+    Top = 16
   end
   object fdtrnsctnOne_db: TFDTransaction
     Options.ReadOnly = True
     Options.EnableNested = False
     Connection = con_db
-    Left = 8
-    Top = 124
+    Left = 30
+    Top = 77
   end
   object fdqryLog_db: TFDQuery
     Connection = con_db
@@ -41,8 +40,8 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'select *  from IDS where ip <>  :p1 and'
       '  last_access  > :p2 order by SCADAVERSION')
-    Left = 170
-    Top = 34
+    Left = 270
+    Top = 14
     ParamData = <
       item
         Name = 'P1'
@@ -97,8 +96,8 @@ object DM_fireDAC: TDM_fireDAC
       'where ip <>  :p1 and  last_access  > :p2'
       ' group by SCADAVERSION'
       ' order by 2')
-    Left = 89
-    Top = 24
+    Left = 197
+    Top = 13
     ParamData = <
       item
         Name = 'P1'
@@ -131,8 +130,8 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'select COUNT(*) as userCount from IDS'
       'where ip <>  :p1 and  last_access  > :p2')
-    Left = 273
-    Top = 15
+    Left = 266
+    Top = 65
     ParamData = <
       item
         Name = 'P1'
@@ -148,22 +147,19 @@ object DM_fireDAC: TDM_fireDAC
       end>
   end
   object fdqryParam: TFDQuery
-    Active = True
     Connection = con_db
     Transaction = fdtrnsctnOne_db
     SQL.Strings = (
-      
-        'SELECT DISTINCT PARAM, PARAM_TYPE FROM EVENTS JOIN IDS ON CL_ID ' +
-        '= IDS.ID'
+      'SELECT DISTINCT PARAM FROM EVENTS JOIN IDS ON CL_ID = IDS.ID'
       ' WHERE IDS.ID = :P')
-    Left = 411
-    Top = 79
+    Left = 192
+    Top = 70
     ParamData = <
       item
         Name = 'P'
         DataType = ftInteger
         ParamType = ptInput
-        Value = 18
+        Value = Null
       end>
   end
   object fdqry_Chart_Par: TFDQuery
@@ -177,8 +173,8 @@ object DM_fireDAC: TDM_fireDAC
       
         'WHERE PARAM =:P AND REC_TIME BETWEEN :TBEGIN AND :TEND AND CL_ID' +
         ' = :P1')
-    Left = 314
-    Top = 94
+    Left = 195
+    Top = 128
     ParamData = <
       item
         Name = 'P'

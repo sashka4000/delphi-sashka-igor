@@ -13,6 +13,7 @@ object Fdb: TFdb
   OldCreateOrder = False
   Position = poScreenCenter
   OnCreate = FormCreate
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object pnlTop: TPanel
@@ -47,9 +48,9 @@ object Fdb: TFdb
     Align = alBottom
     TabOrder = 2
     object lblCountClient: TLabel
-      Left = 376
-      Top = 32
-      Width = 4
+      Left = 307
+      Top = 27
+      Width = 68
       Height = 16
       Alignment = taCenter
       Font.Charset = DEFAULT_CHARSET
@@ -58,6 +59,22 @@ object Fdb: TFdb
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+    end
+    object lblCountData: TLabel
+      Left = 565
+      Top = 26
+      Width = 143
+      Height = 37
+      Alignment = taCenter
+      AutoSize = False
+      Caption = ' '#1059#1082#1072#1078#1080#1090#1077' '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1076#1085#1077#1081' '#1076#1083#1103' '#1087#1086#1082#1072#1079#1072
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Tahoma'
+      Font.Style = []
+      ParentFont = False
+      WordWrap = True
     end
     object dbnvgr_db: TDBNavigator
       Left = 1
@@ -110,13 +127,30 @@ object Fdb: TFdb
       TabOrder = 4
     end
     object btnVer: TButton
-      Left = 706
-      Top = 65
-      Width = 142
+      Left = 840
+      Top = 68
+      Width = 110
       Height = 25
       Caption = #1042#1077#1088#1089#1080#1080' SCADA '
       TabOrder = 3
       OnClick = btnVerClick
+    end
+    object edtDate: TEdit
+      Left = 594
+      Top = 69
+      Width = 90
+      Height = 21
+      Alignment = taRightJustify
+      TabOrder = 5
+    end
+    object btnRefresh: TBitBtn
+      Left = 709
+      Top = 68
+      Width = 110
+      Height = 25
+      Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+      TabOrder = 6
+      OnClick = btnRefreshClick
     end
   end
   object pnlMiddle: TPanel

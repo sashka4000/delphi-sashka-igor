@@ -374,8 +374,8 @@ object frmParm: TfrmParm
       Top = 40
       Width = 200
       Height = 25
-      Date = 44162.999988425920000000
-      Time = 44162.999988425920000000
+      Date = 44162.000000000000000000
+      Time = 0.999988425923220300
       TabOrder = 1
     end
     object btnRefresh: TButton
@@ -408,23 +408,28 @@ object frmParm: TfrmParm
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
-      Columns = <
-        item
-          Expanded = False
-          FieldName = 'PARAM'
-          Width = 100
-          Visible = True
-        end
-        item
-          Expanded = False
-          FieldName = 'PARAM_TYPE'
-          Visible = True
-        end>
+    end
+    object dbgrdVer: TDBGrid
+      Left = 1
+      Top = 211
+      Width = 210
+      Height = 204
+      Align = alClient
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
     end
   end
   object ds_Par: TDataSource
     DataSet = DM_fireDAC.fdqryParam
-    Left = 810
-    Top = 32
+    Left = 811
+    Top = 33
+  end
+  object ds_Ver: TDataSource
+    Left = 826
+    Top = 257
   end
 end
