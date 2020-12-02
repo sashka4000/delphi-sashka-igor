@@ -50,7 +50,7 @@ object Fdb: TFdb
     object lblCountClient: TLabel
       Left = 307
       Top = 27
-      Width = 68
+      Width = 4
       Height = 16
       Alignment = taCenter
       Font.Charset = DEFAULT_CHARSET
@@ -196,6 +196,7 @@ object Fdb: TFdb
         item
           Expanded = False
           FieldName = 'IP'
+          Width = 64
           Visible = True
         end
         item
@@ -207,6 +208,7 @@ object Fdb: TFdb
         item
           Expanded = False
           FieldName = 'SCADAVERSION'
+          Width = 64
           Visible = True
         end>
     end

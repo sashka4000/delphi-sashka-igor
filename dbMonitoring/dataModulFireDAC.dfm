@@ -12,6 +12,7 @@ object DM_fireDAC: TDM_fireDAC
       'CharacterSet=UTF8'
       'DriverID=FB')
     TxOptions.ReadOnly = True
+    Connected = True
     LoginPrompt = False
     Transaction = fdtrnsctnOne_db
     Left = 38
@@ -40,7 +41,7 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'select *  from IDS where ip <>  :p1 and'
       '  last_access  > :p2 order by SCADAVERSION')
-    Left = 270
+    Left = 198
     Top = 14
     ParamData = <
       item
@@ -97,7 +98,7 @@ object DM_fireDAC: TDM_fireDAC
       ' group by SCADAVERSION'
       ' order by 2')
     Left = 197
-    Top = 13
+    Top = 69
     ParamData = <
       item
         Name = 'P1'
@@ -130,8 +131,8 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'select COUNT(*) as userCount from IDS'
       'where ip <>  :p1 and  last_access  > :p2')
-    Left = 266
-    Top = 65
+    Left = 282
+    Top = 17
     ParamData = <
       item
         Name = 'P1'
@@ -152,8 +153,8 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'SELECT DISTINCT PARAM FROM EVENTS JOIN IDS ON CL_ID = IDS.ID'
       ' WHERE IDS.ID = :P')
-    Left = 192
-    Top = 70
+    Left = 264
+    Top = 126
     ParamData = <
       item
         Name = 'P'

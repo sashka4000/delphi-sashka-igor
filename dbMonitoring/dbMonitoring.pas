@@ -39,7 +39,8 @@ type
   public
     { Public declarations }
     var
-    selectDay : Integer;
+      selectDay: Integer;
+      flagStartDefalt: Boolean;
   end;
 
 const
@@ -61,11 +62,33 @@ procedure TFdb.FormCreate(Sender: TObject);
 begin
   chk_bdClick(nil);
 end;
-
 procedure TFdb.btnRefreshClick(Sender: TObject);
+var
+  pIP: string;
 begin
-   selectDay := StrToIntDef(edtDate.Text,0);
-  if selectDay = 0  then  selectDay := 60;
+  selectDay := StrToIntDef(edtDate.Text, 0);
+  if selectDay = 0 then
+    selectDay := 60;
+
+  if chk_bd.Checked then
+    pIP := ''
+  else
+    pIP := TEKON_IP;
+
+  DM_fireDAC.fdqryLog_db.Active := False;
+  DM_fireDAC.fdqryLog_db.ParamByName('p1').AsString := pIP;
+  DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - selectDay;
+  DM_fireDAC.fdqryLog_db.Active := True;
+//  countClient := 0;
+// ******************************
+  DM_fireDAC.fdqry_countClient.Active := False;
+  DM_fireDAC.fdqry_countClient.ParamByName('p1').AsString := pIP;
+  DM_fireDAC.fdqry_countClient.ParamByName('p2').AsDateTime := Now - selectDay;
+  DM_fireDAC.fdqry_countClient.Active := True;
+  countClient := DM_fireDAC.fdqry_countClient.FieldValues['USERCOUNT'];
+
+  lblCountClient.Caption := '';
+  lblCountClient.Caption := 'Число активных клиентов - ' + IntToStr(countClient);
 
 end;
 
@@ -79,7 +102,7 @@ begin
     pIP := TEKON_IP;
   DM_fireDAC.fdqryLog_mod.Active := False;
   DM_fireDAC.fdqryLog_mod.Params[0].AsString := pIP;
-  DM_fireDAC.fdqryLog_mod.Params[1].AsDateTime := NOW - 60;
+  DM_fireDAC.fdqryLog_mod.Params[1].AsDateTime := NOW - selectDay;
   DM_fireDAC.fdqryLog_mod.Active := True;
   FMod.ShowModal;
 end;
@@ -121,11 +144,17 @@ end;
 
 procedure TFdb.chk_bdClick(Sender: TObject);
 var
-  DS: TDataSource;
+//  DS: TDataSource;
 //  B: TBookmark;
   pIP: string;
 begin
-  DS := dbgrd_IDS.DataSource;
+if not flagStartDefalt then
+begin
+flagStartDefalt := True;
+selectDay := 60;
+end;
+
+//  DS := dbgrd_IDS.DataSource;
 //  B := DS.DataSet.GetBookmark; // запомнили позицию
 //  dbgrd_IDS.DataSource := nil; // отключился чтобы не пестрил
   if chk_bd.Checked then
@@ -137,7 +166,7 @@ begin
   DM_fireDAC.fdqryLog_db.ParamByName('p1').AsString := pIP;
   DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - selectDay;
   DM_fireDAC.fdqryLog_db.Active := True;
-  DS.DataSet.First;
+//  DS.DataSet.First;
 //  countClient := 0;
 // ******************************
   DM_fireDAC.fdqry_countClient.Active := False;
