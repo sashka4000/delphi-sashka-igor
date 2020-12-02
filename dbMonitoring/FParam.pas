@@ -54,6 +54,7 @@ var
 begin
   SelectedParametr := dbgrdPar.DataSource.DataSet.Fields[0].AsString;
   DM_fireDAC.fdqry_Chart_Par.Active := False;
+  DM_fireDAC.fdqry_ver.Active := False;
   DM_fireDAC.fdqry_Chart_Par.ParamByName('p').AsString := SelectedParametr;
   DM_fireDAC.fdqry_Chart_Par.ParamByName('p1').AsInteger := SelectedClientID;
   if dtpBegin.DateTime > dtpEnd.DateTime then
@@ -65,21 +66,27 @@ begin
     dtpEnd.MaxDate := DateOf(SelectedClientLastAccess);
     dtpEnd.MinDate := DateOf(SelectedClientRegDate);
     raise  Exception.Create('Нарушен временной интервал');
-//    Exception.Create(MessageBox(Handle, PChar('Нарушен временной интервал'), PChar('Ошибка'), MB_ICONERROR + MB_OK))
+
   end else
   begin
   if DateOf(dtpBegin.DateTime) = DateOf(dtpEnd.DateTime) then
   begin
     DM_fireDAC.fdqry_Chart_Par.ParamByName('tbegin').AsDateTime := dtpBegin.DateTime;
     DM_fireDAC.fdqry_Chart_Par.ParamByName('tend').AsDateTime := IncDay(dtpBegin.DateTime);
+      DM_fireDAC.fdqry_ver.ParamByName('tbegin').AsDateTime := dtpBegin.DateTime;
+    DM_fireDAC.fdqry_ver.ParamByName('tend').AsDateTime := IncDay(dtpBegin.DateTime);
+
   end
   else
   begin
     DM_fireDAC.fdqry_Chart_Par.ParamByName('tbegin').AsDateTime := dtpBegin.DateTime;
     DM_fireDAC.fdqry_Chart_Par.ParamByName('tend').AsDateTime := dtpEnd.DateTime;
+        DM_fireDAC.fdqry_ver.ParamByName('tbegin').AsDateTime := dtpBegin.DateTime;
+    DM_fireDAC.fdqry_ver.ParamByName('tend').AsDateTime := dtpEnd.DateTime;
   end;
 
   DM_fireDAC.fdqry_Chart_Par.Active := True;
+   DM_fireDAC.fdqry_ver.Active := True;
   dbchtParm.UndoZoom;
   end;
 end;
@@ -91,7 +98,8 @@ begin
   dtpBegin.MinDate := 0;
   dtpEnd.MaxDate := Now;
   dtpEnd.MinDate := 0;
-   DM_fireDAC.fdqry_Chart_Par.Active := False;
+  DM_fireDAC.fdqry_Chart_Par.Active := False;
+  DM_fireDAC.fdqry_ver.Active := False;
   dbchtParm.UndoZoom;
 end;
 

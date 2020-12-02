@@ -11,6 +11,7 @@ object frmParm: TfrmParm
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poScreenCenter
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
@@ -415,12 +416,28 @@ object frmParm: TfrmParm
       Width = 210
       Height = 204
       Align = alClient
+      DataSource = ds_Ver
       TabOrder = 1
       TitleFont.Charset = DEFAULT_CHARSET
       TitleFont.Color = clWindowText
       TitleFont.Height = -11
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
+      Columns = <
+        item
+          Expanded = False
+          FieldName = #1042#1056#1045#1052#1071
+          Title.Caption = #1042#1088#1077#1084#1103
+          Width = 130
+          Visible = True
+        end
+        item
+          Expanded = False
+          FieldName = 'VERSION'
+          Title.Caption = #1042#1077#1088#1089#1080#1103
+          Width = 60
+          Visible = True
+        end>
     end
   end
   object ds_Par: TDataSource
@@ -429,6 +446,7 @@ object frmParm: TfrmParm
     Top = 33
   end
   object ds_Ver: TDataSource
+    DataSet = DM_fireDAC.fdqry_ver
     Left = 826
     Top = 257
   end

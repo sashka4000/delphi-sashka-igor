@@ -1,7 +1,7 @@
 object DM_fireDAC: TDM_fireDAC
   OldCreateOrder = False
-  Height = 226
-  Width = 349
+  Height = 222
+  Width = 399
   object con_db: TFDConnection
     Params.Strings = (
       'User_Name=sysdba'
@@ -27,8 +27,8 @@ object DM_fireDAC: TDM_fireDAC
     Options.ReadOnly = True
     Options.EnableNested = False
     Connection = con_db
-    Left = 30
-    Top = 77
+    Left = 49
+    Top = 80
   end
   object fdqryLog_db: TFDQuery
     Connection = con_db
@@ -41,8 +41,8 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'select *  from IDS where ip <>  :p1 and'
       '  last_access  > :p2 order by SCADAVERSION')
-    Left = 198
-    Top = 14
+    Left = 197
+    Top = 15
     ParamData = <
       item
         Name = 'P1'
@@ -97,8 +97,8 @@ object DM_fireDAC: TDM_fireDAC
       'where ip <>  :p1 and  last_access  > :p2'
       ' group by SCADAVERSION'
       ' order by 2')
-    Left = 197
-    Top = 69
+    Left = 192
+    Top = 73
     ParamData = <
       item
         Name = 'P1'
@@ -131,8 +131,8 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'select COUNT(*) as userCount from IDS'
       'where ip <>  :p1 and  last_access  > :p2')
-    Left = 282
-    Top = 17
+    Left = 277
+    Top = 16
     ParamData = <
       item
         Name = 'P1'
@@ -153,8 +153,8 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'SELECT DISTINCT PARAM FROM EVENTS JOIN IDS ON CL_ID = IDS.ID'
       ' WHERE IDS.ID = :P')
-    Left = 264
-    Top = 126
+    Left = 265
+    Top = 133
     ParamData = <
       item
         Name = 'P'
@@ -174,8 +174,8 @@ object DM_fireDAC: TDM_fireDAC
       
         'WHERE PARAM =:P AND REC_TIME BETWEEN :TBEGIN AND :TEND AND CL_ID' +
         ' = :P1')
-    Left = 195
-    Top = 128
+    Left = 188
+    Top = 137
     ParamData = <
       item
         Name = 'P'
@@ -197,6 +197,29 @@ object DM_fireDAC: TDM_fireDAC
       item
         Name = 'P1'
         DataType = ftInteger
+        ParamType = ptInput
+      end>
+  end
+  object fdqry_ver: TFDQuery
+    Connection = con_db
+    Transaction = fdtrnsctnOne_db
+    SQL.Strings = (
+      'SELECT  DISTINCT REC_TIME "'#1042#1056#1045#1052#1071'", VALUE_STR "VERSION"  '
+      'FROM EVENTS '
+      'WHERE  REC_TIME BETWEEN :TBEGIN AND :TEND AND VALUE_STR  <> '#39#39
+      'ORDER BY REC_TIME')
+    Left = 335
+    Top = 135
+    ParamData = <
+      item
+        Name = 'TBEGIN'
+        DataType = ftTimeStamp
+        ParamType = ptInput
+        Value = Null
+      end
+      item
+        Name = 'TEND'
+        DataType = ftTimeStamp
         ParamType = ptInput
       end>
   end

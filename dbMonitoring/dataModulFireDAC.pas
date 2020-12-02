@@ -27,6 +27,7 @@ type
     wdstrngfldLog_dbIP: TWideStringField;
     sqltmstmpfldLog_dbLAST_ACCESS: TSQLTimeStampField;
     wdstrngfldLog_dbSCADAVERSION: TWideStringField;
+    fdqry_ver: TFDQuery;
   private
     { Private declarations }
   public
