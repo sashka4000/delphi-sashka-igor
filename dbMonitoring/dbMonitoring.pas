@@ -54,12 +54,25 @@ var
 implementation
 
 uses
-  dataModulFireDAC, Fmodal, FParam;
+  dataModulFireDAC, Fmodal, FParam, Settings, FInfo;
 
 {$R *.dfm}
 
 procedure TFdb.FormCreate(Sender: TObject);
+var
+  frmInfo: TfrmInfo;
 begin
+  IniOptions.LoadFromFile(ChangeFileExt(Application.ExeName,'.ini'));
+  DM_fireDAC.con_db.Connected := False;
+  DM_fireDAC.fdphysfbdrvrlnk_db.VendorLib := IniOptions.DBConnectionVendorLib;
+  DM_fireDAC.con_db.Params.Database := IniOptions.DBConnectionDBPath;
+  DM_fireDAC.con_db.Params.Values ['Server'] := IniOptions.DBConnectionDBIP;
+  frmInfo :=  TfrmInfo.Create(nil);
+  frmInfo.lblDBInfo.Caption := IniOptions.DBConnectionDBIP + ' : ' + IniOptions.DBConnectionDBPath;
+  frmInfo.Show;
+  Application.ProcessMessages;
+   DM_fireDAC.con_db.Connected := True;
+  frmInfo.Release;
   chk_bdClick(nil);
 end;
 procedure TFdb.btnRefreshClick(Sender: TObject);

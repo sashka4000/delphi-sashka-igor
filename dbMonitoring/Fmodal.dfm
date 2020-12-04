@@ -18,16 +18,15 @@ object FMod: TFMod
     Left = 0
     Top = 0
     Width = 784
-    Height = 465
-    Foot.Text.Strings = (
-      #1055#1088#1080#1084#1077#1088' '#1075#1088#1072#1092#1080#1082#1072' ')
+    Height = 561
     Title.Text.Strings = (
       #1057#1074#1086#1076#1085#1099#1081' '#1086#1090#1095#1077#1090' '#1087#1086' '#1074#1077#1088#1089#1080#1103#1084' SCADA')
     Legend.Visible = False
-    Align = alTop
+    Align = alClient
     BevelWidth = 2
     Color = 16645347
     TabOrder = 0
+    ExplicitHeight = 465
     DefaultCanvas = 'TGDIPlusCanvas'
     PrintMargins = (
       15
@@ -45,5 +44,11 @@ object FMod: TFMod
       YValues.Order = loNone
       YValues.ValueSource = 'COUNT'
     end
+  end
+  object tmrRefresh: TTimer
+    Interval = 60000
+    OnTimer = tmrRefreshTimer
+    Left = 14
+    Top = 339
   end
 end

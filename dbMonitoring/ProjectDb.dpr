@@ -5,7 +5,9 @@ uses
   dbMonitoring in 'dbMonitoring.pas' {Fdb},
   dataModulFireDAC in 'dataModulFireDAC.pas' {DM_fireDAC: TDataModule},
   Fmodal in 'Fmodal.pas' {FMod},
-  FParam in 'FParam.pas' {frmParm};
+  FParam in 'FParam.pas' {frmParm},
+  settings in 'settings.pas',
+  FInfo in 'FInfo.pas' {frmInfo};
 
 {$R *.res}
 

@@ -124,7 +124,7 @@ object Fdb: TFdb
       EditLabel.Font.Name = 'Tahoma'
       EditLabel.Font.Style = []
       EditLabel.ParentFont = False
-      TabOrder = 4
+      TabOrder = 3
     end
     object btnVer: TButton
       Left = 840
@@ -132,7 +132,7 @@ object Fdb: TFdb
       Width = 110
       Height = 25
       Caption = #1042#1077#1088#1089#1080#1080' SCADA '
-      TabOrder = 3
+      TabOrder = 5
       OnClick = btnVerClick
     end
     object edtDate: TEdit
@@ -141,7 +141,7 @@ object Fdb: TFdb
       Width = 90
       Height = 21
       Alignment = taRightJustify
-      TabOrder = 5
+      TabOrder = 6
     end
     object btnRefresh: TBitBtn
       Left = 709
@@ -149,7 +149,7 @@ object Fdb: TFdb
       Width = 110
       Height = 25
       Caption = #1054#1073#1085#1086#1074#1080#1090#1100
-      TabOrder = 6
+      TabOrder = 4
       OnClick = btnRefreshClick
     end
   end
@@ -208,7 +208,7 @@ object Fdb: TFdb
         item
           Expanded = False
           FieldName = 'SCADAVERSION'
-          Width = 64
+          Width = 112
           Visible = True
         end>
     end

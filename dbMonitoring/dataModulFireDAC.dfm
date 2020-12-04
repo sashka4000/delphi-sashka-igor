@@ -12,7 +12,6 @@ object DM_fireDAC: TDM_fireDAC
       'CharacterSet=UTF8'
       'DriverID=FB')
     TxOptions.ReadOnly = True
-    Connected = True
     LoginPrompt = False
     Transaction = fdtrnsctnOne_db
     Left = 38
@@ -20,15 +19,15 @@ object DM_fireDAC: TDM_fireDAC
   end
   object fdphysfbdrvrlnk_db: TFDPhysFBDriverLink
     VendorLib = 'C:\Program Files (x86)\Firebird\Firebird_2_5\bin\fbclient.dll'
-    Left = 94
-    Top = 16
+    Left = 36
+    Top = 145
   end
   object fdtrnsctnOne_db: TFDTransaction
     Options.ReadOnly = True
     Options.EnableNested = False
     Connection = con_db
-    Left = 49
-    Top = 80
+    Left = 38
+    Top = 75
   end
   object fdqryLog_db: TFDQuery
     Connection = con_db
