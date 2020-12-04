@@ -26,7 +26,7 @@ object Fdb: TFdb
     object lblNameGrid: TLabel
       Left = 1
       Top = 1
-      Width = 978
+      Width = 331
       Height = 16
       Align = alTop
       Alignment = taCenter
@@ -37,12 +37,11 @@ object Fdb: TFdb
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitWidth = 331
     end
     object lblDate: TLabel
       Left = 657
       Top = 4
-      Width = 6
+      Width = 3
       Height = 13
     end
   end
@@ -202,7 +201,6 @@ object Fdb: TFdb
         item
           Expanded = False
           FieldName = 'IP'
-          Width = 64
           Visible = True
         end
         item

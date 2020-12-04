@@ -81,10 +81,10 @@ procedure TFdb.btnRefreshClick(Sender: TObject);
 var
   pIP: string;
 begin
-  selectDay := StrToIntDef(edtDate.Text, 0);
-   lblDate.Caption := IntToStr(selectDay);
-  if selectDay = 0 then
-    selectDay := 60;
+  selectDay := StrToIntDef(edtDate.Text, 60);
+  if selectDay < 1 then
+    selectDay := 1;
+  lblDate.Caption := IntToStr(selectDay);
 
   if chk_bd.Checked then
     pIP := ''
