@@ -73,6 +73,7 @@ begin
   Application.ProcessMessages;
    DM_fireDAC.con_db.Connected := True;
   frmInfo.Release;
+  edtDate.Text := IniOptions.GlobalStartInterval.ToString;
   chk_bdClick(nil);
 end;
 procedure TFdb.btnRefreshClick(Sender: TObject);
