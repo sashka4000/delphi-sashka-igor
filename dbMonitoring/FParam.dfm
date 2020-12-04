@@ -51,6 +51,7 @@ object frmParm: TfrmParm
       LeftAxis.Title.Caption = #1047#1085#1072#1095#1077#1085#1080#1103
       Legend.Title.Text.Strings = (
         #1057#1074#1086#1081#1089#1090#1074#1086' '#1087#1072#1088#1072#1084#1077#1090#1088#1086#1074)
+      Legend.TopPos = 0
       View3D = False
       Align = alClient
       TabOrder = 0
@@ -375,8 +376,8 @@ object frmParm: TfrmParm
       Top = 40
       Width = 200
       Height = 25
-      Date = 44162.000000000000000000
-      Time = 0.999988425923220300
+      Date = 44162.999988425920000000
+      Time = 44162.999988425920000000
       TabOrder = 1
     end
     object btnRefresh: TButton

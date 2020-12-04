@@ -65,29 +65,33 @@ begin
     dtpBegin.MinDate := DateOf(SelectedClientRegDate);
     dtpEnd.MaxDate := DateOf(SelectedClientLastAccess);
     dtpEnd.MinDate := DateOf(SelectedClientRegDate);
-    raise  Exception.Create('Нарушен временной интервал');
-
-  end else
-  begin
-  if DateOf(dtpBegin.DateTime) = DateOf(dtpEnd.DateTime) then
-  begin
-    DM_fireDAC.fdqry_Chart_Par.ParamByName('tbegin').AsDateTime := dtpBegin.DateTime;
-    DM_fireDAC.fdqry_Chart_Par.ParamByName('tend').AsDateTime := IncDay(dtpBegin.DateTime);
-      DM_fireDAC.fdqry_ver.ParamByName('tbegin').AsDateTime := dtpBegin.DateTime;
-    DM_fireDAC.fdqry_ver.ParamByName('tend').AsDateTime := IncDay(dtpBegin.DateTime);
+    raise Exception.Create('Нарушен временной интервал');
 
   end
   else
   begin
-    DM_fireDAC.fdqry_Chart_Par.ParamByName('tbegin').AsDateTime := dtpBegin.DateTime;
-    DM_fireDAC.fdqry_Chart_Par.ParamByName('tend').AsDateTime := dtpEnd.DateTime;
-        DM_fireDAC.fdqry_ver.ParamByName('tbegin').AsDateTime := dtpBegin.DateTime;
-    DM_fireDAC.fdqry_ver.ParamByName('tend').AsDateTime := dtpEnd.DateTime;
-  end;
+    if DateOf(dtpBegin.DateTime) = DateOf(dtpEnd.DateTime) then
+    begin
+      DM_fireDAC.fdqry_Chart_Par.ParamByName('tbegin').AsDateTime := dtpBegin.DateTime;
+      DM_fireDAC.fdqry_Chart_Par.ParamByName('tend').AsDateTime := IncDay(dtpBegin.DateTime);
+//      DM_fireDAC.fdqry_ver.ParamByName('p').AsInteger := SelectedClientID;
+      DM_fireDAC.fdqry_ver.ParamByName('tbegin').AsDateTime := dtpBegin.DateTime;
+      DM_fireDAC.fdqry_ver.ParamByName('tend').AsDateTime := IncDay(dtpBegin.DateTime);
 
-  DM_fireDAC.fdqry_Chart_Par.Active := True;
-   DM_fireDAC.fdqry_ver.Active := True;
-  dbchtParm.UndoZoom;
+    end
+    else
+    begin
+      DM_fireDAC.fdqry_Chart_Par.ParamByName('tbegin').AsDateTime := dtpBegin.DateTime;
+      DM_fireDAC.fdqry_Chart_Par.ParamByName('tend').AsDateTime := dtpEnd.DateTime;
+//      DM_fireDAC.fdqry_ver.ParamByName('p').AsInteger := SelectedClientID;
+      DM_fireDAC.fdqry_ver.ParamByName('tbegin').AsDateTime := dtpBegin.DateTime;
+      DM_fireDAC.fdqry_ver.ParamByName('tend').AsDateTime := dtpEnd.DateTime;
+    end;
+
+    DM_fireDAC.fdqry_ver.ParamByName('p').AsInteger := SelectedClientID;
+    DM_fireDAC.fdqry_Chart_Par.Active := True;
+    DM_fireDAC.fdqry_ver.Active := True;
+    dbchtParm.UndoZoom;
   end;
 end;
 

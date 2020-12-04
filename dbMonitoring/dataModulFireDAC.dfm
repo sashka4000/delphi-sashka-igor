@@ -19,15 +19,15 @@ object DM_fireDAC: TDM_fireDAC
   end
   object fdphysfbdrvrlnk_db: TFDPhysFBDriverLink
     VendorLib = 'C:\Program Files (x86)\Firebird\Firebird_2_5\bin\fbclient.dll'
-    Left = 36
-    Top = 145
+    Left = 94
+    Top = 16
   end
   object fdtrnsctnOne_db: TFDTransaction
     Options.ReadOnly = True
     Options.EnableNested = False
     Connection = con_db
-    Left = 38
-    Top = 75
+    Left = 49
+    Top = 80
   end
   object fdqryLog_db: TFDQuery
     Connection = con_db
@@ -205,11 +205,19 @@ object DM_fireDAC: TDM_fireDAC
     SQL.Strings = (
       'SELECT  DISTINCT REC_TIME "'#1042#1056#1045#1052#1071'", VALUE_STR "VERSION"  '
       'FROM EVENTS '
-      'WHERE  REC_TIME BETWEEN :TBEGIN AND :TEND AND VALUE_STR  <> '#39#39
+      
+        'WHERE  CL_ID = :P AND PARAM = '#39'version'#39' and  REC_TIME BETWEEN :T' +
+        'BEGIN AND :TEND AND VALUE_STR  <> '#39#39
       'ORDER BY REC_TIME')
     Left = 335
     Top = 135
     ParamData = <
+      item
+        Name = 'P'
+        DataType = ftInteger
+        ParamType = ptInput
+        Value = Null
+      end
       item
         Name = 'TBEGIN'
         DataType = ftTimeStamp
