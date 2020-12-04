@@ -27,6 +27,7 @@ type
     edtDate: TEdit;
     btnRefresh: TBitBtn;
     lblCountData: TLabel;
+    lblDate: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure btn_db_findClick(Sender: TObject);
     procedure chk_bdClick(Sender: TObject);
@@ -81,6 +82,7 @@ var
   pIP: string;
 begin
   selectDay := StrToIntDef(edtDate.Text, 0);
+   lblDate.Caption := IntToStr(selectDay);
   if selectDay = 0 then
     selectDay := 60;
 
@@ -162,11 +164,12 @@ var
 //  B: TBookmark;
   pIP: string;
 begin
-if not flagStartDefalt then
-begin
-flagStartDefalt := True;
-selectDay := 60;
-end;
+  if not flagStartDefalt then
+  begin
+    flagStartDefalt := True;
+    selectDay := 60;
+    lblDate.Caption := IntToStr(60);
+  end;
 
 //  DS := dbgrd_IDS.DataSource;
 //  B := DS.DataSet.GetBookmark; // запомнили позицию

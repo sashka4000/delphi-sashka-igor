@@ -30,14 +30,20 @@ object Fdb: TFdb
       Height = 16
       Align = alTop
       Alignment = taCenter
-      Caption = #1050#1083#1080#1077#1085#1090#1089#1082#1080#1077' '#1087#1086#1076#1082#1083#1102#1095#1077#1085#1080#1103' '#1072#1082#1090#1080#1074#1085#1099#1077' '#1087#1086#1089#1083#1077#1076#1085#1080#1077' 60 '#1089#1091#1090#1086#1082'.'
+      Caption = #1040#1082#1090#1080#1074#1085#1099#1077' '#1082#1083#1080#1077#1085#1089#1082#1080#1077' '#1087#1086#1076#1082#1083#1102#1095#1077#1085#1080#1103' , '#1082#1086#1083#1080#1095#1077#1089#1090#1074#1086' '#1089#1091#1090#1086#1082' - '
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
-      ExplicitWidth = 333
+      ExplicitWidth = 331
+    end
+    object lblDate: TLabel
+      Left = 657
+      Top = 4
+      Width = 6
+      Height = 13
     end
   end
   object pnlDown: TPanel
