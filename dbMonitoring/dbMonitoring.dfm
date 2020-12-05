@@ -2,7 +2,7 @@ object Fdb: TFdb
   Left = 0
   Top = 0
   Caption = 'Fdb'
-  ClientHeight = 661
+  ClientHeight = 662
   ClientWidth = 980
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -26,7 +26,7 @@ object Fdb: TFdb
     object lblNameGrid: TLabel
       Left = 1
       Top = 1
-      Width = 331
+      Width = 978
       Height = 16
       Align = alTop
       Alignment = taCenter
@@ -37,6 +37,7 @@ object Fdb: TFdb
       Font.Name = 'Tahoma'
       Font.Style = []
       ParentFont = False
+      ExplicitWidth = 331
     end
     object lblDate: TLabel
       Left = 657
@@ -47,11 +48,12 @@ object Fdb: TFdb
   end
   object pnlDown: TPanel
     Left = 0
-    Top = 544
+    Top = 514
     Width = 980
-    Height = 117
+    Height = 129
     Align = alBottom
     TabOrder = 2
+    ExplicitTop = 498
     object lblCountClient: TLabel
       Left = 307
       Top = 27
@@ -162,15 +164,16 @@ object Fdb: TFdb
     Left = 0
     Top = 25
     Width = 980
-    Height = 519
+    Height = 489
     Align = alClient
     AutoSize = True
     TabOrder = 1
+    ExplicitHeight = 519
     object dbgrd_IDS: TDBGrid
       Left = 1
       Top = 1
       Width = 978
-      Height = 517
+      Height = 487
       Align = alClient
       DataSource = ds_db
       ReadOnly = True
@@ -201,6 +204,7 @@ object Fdb: TFdb
         item
           Expanded = False
           FieldName = 'IP'
+          Width = 64
           Visible = True
         end
         item
@@ -216,6 +220,17 @@ object Fdb: TFdb
           Visible = True
         end>
     end
+  end
+  object stat1: TStatusBar
+    Left = 0
+    Top = 643
+    Width = 980
+    Height = 19
+    Panels = <>
+    SimplePanel = True
+    ExplicitLeft = 270
+    ExplicitTop = 635
+    ExplicitWidth = 0
   end
   object ds_db: TDataSource
     DataSet = DM_fireDAC.fdqryLog_db

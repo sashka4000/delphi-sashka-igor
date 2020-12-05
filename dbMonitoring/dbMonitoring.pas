@@ -8,7 +8,7 @@ uses
   Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.StdCtrls, Vcl.DBCtrls, Vcl.Mask,
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
   FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, FireDAC.Stan.Async,
-  FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons;
+  FireDAC.DApt, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.Buttons, Vcl.ComCtrls;
 
 type
   TFdb = class(TForm)
@@ -28,6 +28,7 @@ type
     btnRefresh: TBitBtn;
     lblCountData: TLabel;
     lblDate: TLabel;
+    stat1: TStatusBar;
     procedure FormCreate(Sender: TObject);
     procedure btn_db_findClick(Sender: TObject);
     procedure chk_bdClick(Sender: TObject);
@@ -47,7 +48,6 @@ type
 const
   TEKON_IP = '93.188.47.31';
 
-//   192.168.254.1
 var
   Fdb: TFdb;
   countClient: Integer;
@@ -55,7 +55,7 @@ var
 implementation
 
 uses
-  dataModulFireDAC, Fmodal, FParam, Settings, FInfo;
+  dataModulFireDAC, Fmodal, FParam, Settings, FInfo, IniFiles;
 
 {$R *.dfm}
 
@@ -63,48 +63,31 @@ procedure TFdb.FormCreate(Sender: TObject);
 var
   frmInfo: TfrmInfo;
 begin
-  IniOptions.LoadFromFile(ChangeFileExt(Application.ExeName,'.ini'));
+  IniOptions.LoadFromFile(ChangeFileExt(Application.ExeName, '.ini'));
   DM_fireDAC.con_db.Connected := False;
   DM_fireDAC.fdphysfbdrvrlnk_db.VendorLib := IniOptions.DBConnectionVendorLib;
   DM_fireDAC.con_db.Params.Database := IniOptions.DBConnectionDBPath;
-  DM_fireDAC.con_db.Params.Values ['Server'] := IniOptions.DBConnectionDBIP;
-  frmInfo :=  TfrmInfo.Create(nil);
+  DM_fireDAC.con_db.Params.Values['Server'] := IniOptions.DBConnectionDBIP;
+
+  frmInfo := TfrmInfo.Create(nil);
   frmInfo.lblDBInfo.Caption := IniOptions.DBConnectionDBIP + ' : ' + IniOptions.DBConnectionDBPath;
   frmInfo.Show;
   Application.ProcessMessages;
-   DM_fireDAC.con_db.Connected := True;
+
+  DM_fireDAC.con_db.Connected := True;
+
   frmInfo.Release;
+
   edtDate.Text := IniOptions.GlobalStartInterval.ToString;
   chk_bdClick(nil);
 end;
+
 procedure TFdb.btnRefreshClick(Sender: TObject);
 var
   pIP: string;
 begin
-  selectDay := StrToIntDef(edtDate.Text, 60);
-  if selectDay < 1 then
-    selectDay := 1;
-  lblDate.Caption := IntToStr(selectDay);
-
-  if chk_bd.Checked then
-    pIP := ''
-  else
-    pIP := TEKON_IP;
-
-  DM_fireDAC.fdqryLog_db.Active := False;
-  DM_fireDAC.fdqryLog_db.ParamByName('p1').AsString := pIP;
-  DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - selectDay;
-  DM_fireDAC.fdqryLog_db.Active := True;
-//  countClient := 0;
-// ******************************
-  DM_fireDAC.fdqry_countClient.Active := False;
-  DM_fireDAC.fdqry_countClient.ParamByName('p1').AsString := pIP;
-  DM_fireDAC.fdqry_countClient.ParamByName('p2').AsDateTime := Now - selectDay;
-  DM_fireDAC.fdqry_countClient.Active := True;
-  countClient := DM_fireDAC.fdqry_countClient.FieldValues['USERCOUNT'];
-
-  lblCountClient.Caption := '';
-  lblCountClient.Caption := 'Число активных клиентов - ' + IntToStr(countClient);
+  chk_bdClick(nil);
+  edtDate.SetFocus;
 
 end;
 
@@ -160,20 +143,16 @@ end;
 
 procedure TFdb.chk_bdClick(Sender: TObject);
 var
-//  DS: TDataSource;
-//  B: TBookmark;
   pIP: string;
 begin
-  if not flagStartDefalt then
-  begin
-    flagStartDefalt := True;
-    selectDay := 60;
-    lblDate.Caption := IntToStr(60);
+  selectDay := StrToIntDef(edtDate.Text, 60);
+  if (selectDay < 1) or ((StrToIntDef(edtDate.Text, 0)) = 0) then begin
+    selectDay := 1;
+    edtDate.Text := '1';
   end;
 
-//  DS := dbgrd_IDS.DataSource;
-//  B := DS.DataSet.GetBookmark; // запомнили позицию
-//  dbgrd_IDS.DataSource := nil; // отключился чтобы не пестрил
+  lblDate.Caption := IntToStr(selectDay);
+
   if chk_bd.Checked then
     pIP := ''
   else
@@ -183,24 +162,12 @@ begin
   DM_fireDAC.fdqryLog_db.ParamByName('p1').AsString := pIP;
   DM_fireDAC.fdqryLog_db.ParamByName('p2').AsDateTime := Now - selectDay;
   DM_fireDAC.fdqryLog_db.Active := True;
-//  DS.DataSet.First;
-//  countClient := 0;
-// ******************************
   DM_fireDAC.fdqry_countClient.Active := False;
   DM_fireDAC.fdqry_countClient.ParamByName('p1').AsString := pIP;
   DM_fireDAC.fdqry_countClient.ParamByName('p2').AsDateTime := Now - selectDay;
   DM_fireDAC.fdqry_countClient.Active := True;
   countClient := DM_fireDAC.fdqry_countClient.FieldValues['USERCOUNT'];
 
-
-// ************************
-//  while (not (DS.DataSet.Eof)) do
-//  begin
-//    countClient := countClient + 1;
-//    DS.DataSet.Next;
-//  end;
-   // восстанавливаем DataSource
-//  dbgrd_IDS.DataSource := DS;
 //********* Глюк прокрутки
   dbgrd_IDS.DataSource.DataSet.Next;
   dbgrd_IDS.DataSource.DataSet.First;
@@ -221,8 +188,12 @@ end;
 
 
 procedure TFdb.FormShow(Sender: TObject);
+var
+ ini : TIniFile;
+ tmp : String;
 begin
   edtDate.SetFocus;
+
 end;
 
 end.
