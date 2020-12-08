@@ -1,0 +1,161 @@
+object frmMain: TfrmMain
+  Left = 0
+  Top = 0
+  Caption = 'frmMain'
+  ClientHeight = 559
+  ClientWidth = 761
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object spl1: TSplitter
+    Left = 0
+    Top = 325
+    Width = 761
+    Height = 3
+    Cursor = crVSplit
+    Align = alBottom
+    ExplicitTop = 0
+    ExplicitWidth = 249
+  end
+  object pnl1: TPanel
+    Left = 0
+    Top = 328
+    Width = 761
+    Height = 231
+    Align = alBottom
+    TabOrder = 1
+    ExplicitWidth = 971
+    DesignSize = (
+      761
+      231)
+    object mmo1: TMemo
+      Left = 11
+      Top = 37
+      Width = 649
+      Height = 173
+      Anchors = [akLeft, akTop, akRight, akBottom]
+      Lines.Strings = (
+        ' 0=1.jpg'
+        ' 1=2.jpg; S:test.wav; N:'#1042#1082#1083#1102#1095#1077#1085#1080#1077'; A:0'
+        ' 2=3.jpg; N:'#1040#1074#1072#1088#1080#1103)
+      TabOrder = 1
+    end
+    object btnDoValues: TButton
+      Left = 666
+      Top = 36
+      Width = 75
+      Height = 25
+      Anchors = [akTop, akRight]
+      Caption = #1042' '#1090#1072#1073#1083#1080#1094#1091
+      TabOrder = 0
+    end
+  end
+  object pnl2: TPanel
+    Left = 0
+    Top = 0
+    Width = 761
+    Height = 325
+    Align = alClient
+    TabOrder = 0
+    ExplicitWidth = 635
+    ExplicitHeight = 159
+    DesignSize = (
+      761
+      325)
+    object dbgrd1: TDBGrid
+      Left = 11
+      Top = 46
+      Width = 649
+      Height = 251
+      Anchors = [akLeft, akTop, akRight, akBottom]
+      DataSource = ds1
+      TabOrder = 1
+      TitleFont.Charset = DEFAULT_CHARSET
+      TitleFont.Color = clWindowText
+      TitleFont.Height = -11
+      TitleFont.Name = 'Tahoma'
+      TitleFont.Style = []
+    end
+    object dbnvgr1: TDBNavigator
+      Left = 11
+      Top = 15
+      Width = 650
+      Height = 25
+      TabOrder = 0
+    end
+    object btnDoText: TButton
+      Left = 666
+      Top = 272
+      Width = 75
+      Height = 25
+      Anchors = [akRight, akBottom]
+      Caption = #1042' '#1058#1077#1082#1089#1090
+      TabOrder = 2
+    end
+  end
+  object fdmtbl1: TFDMemTable
+    Active = True
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvPersistent, rvSilentMode]
+    ResourceOptions.Persistent = True
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
+    UpdateOptions.CheckRequired = False
+    UpdateOptions.AutoCommitUpdates = True
+    Left = 677
+    Top = 44
+    Content = {
+      414442530F002A275F010000FF00010001FF02FF0304000E000000660064006D
+      00740062006C00310005000A0000005400610062006C00650006000000000007
+      0000080032000000090000FF0AFF0B04000C000000560061006C007500650031
+      0005000C000000560061006C007500650031000C00010000000E000D000F0014
+      00000010000111000112000113000114000115000116000C000000560061006C
+      00750065003100170014000000FEFF0B04000C000000560061006C0075006500
+      320005000C000000560061006C007500650032000C00020000000E000D000F00
+      1400000010000111000112000113000114000115000116000C00000056006100
+      6C00750065003200170014000000FEFEFF18FEFF19FEFF1AFF1B1C0000000000
+      FF1D0000010000003101000100000032FEFEFF1B1C0001000000FF1D00000100
+      00003201000100000033FEFEFEFEFEFF1EFEFF1F200002000000FF21FEFEFE0E
+      004D0061006E0061006700650072001E00550070006400610074006500730052
+      00650067006900730074007200790012005400610062006C0065004C00690073
+      0074000A005400610062006C00650008004E0061006D006500140053006F0075
+      007200630065004E0061006D0065000A0054006100620049004400240045006E
+      0066006F0072006300650043006F006E00730074007200610069006E00740073
+      001E004D0069006E0069006D0075006D00430061007000610063006900740079
+      00180043006800650063006B004E006F0074004E0075006C006C00140043006F
+      006C0075006D006E004C006900730074000C0043006F006C0075006D006E0010
+      0053006F0075007200630065004900440018006400740041006E007300690053
+      007400720069006E006700100044006100740061005400790070006500080053
+      0069007A0065001400530065006100720063006800610062006C006500120041
+      006C006C006F0077004E0075006C006C000800420061007300650014004F0041
+      006C006C006F0077004E0075006C006C0012004F0049006E0055007000640061
+      007400650010004F0049006E00570068006500720065001A004F007200690067
+      0069006E0043006F006C004E0061006D006500140053006F0075007200630065
+      00530069007A0065001C0043006F006E00730074007200610069006E0074004C
+      00690073007400100056006900650077004C006900730074000E0052006F0077
+      004C00690073007400060052006F0077000A0052006F0077004900440010004F
+      0072006900670069006E0061006C001800520065006C006100740069006F006E
+      004C006900730074001C0055007000640061007400650073004A006F00750072
+      006E0061006C001200530061007600650050006F0069006E0074000E00430068
+      0061006E00670065007300}
+    object strngfldfdmtbl1Value1: TStringField
+      FieldName = 'Value1'
+    end
+    object strngfldfdmtbl1Value2: TStringField
+      FieldName = 'Value2'
+    end
+  end
+  object ds1: TDataSource
+    DataSet = fdmtbl1
+    Left = 679
+    Top = 96
+  end
+end
