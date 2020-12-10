@@ -30,15 +30,15 @@ type
     fdmtbl1Commanf: TIntegerField;
     procedure FormCreate(Sender: TObject);
     procedure btnDoValuesClick(Sender: TObject);
+    procedure btnDoTextClick(Sender: TObject);
   private
     { Private declarations }
-    function GetImageFolder: String;
-    function GetWavFolder: String;
+    function GetImageFolder: string;
+    function GetWavFolder: string;
     procedure DBGrid1EditButtonClick(Sender: TObject);
   public
     { Public declarations }
   end;
-
 
 var
   frmMain: TfrmMain;
@@ -46,72 +46,79 @@ var
 implementation
 
 {$R *.dfm}
-  uses
+uses
   IdGlobal;
 
 
 { TfrmMain }
 
+procedure TfrmMain.btnDoTextClick(Sender: TObject);
+var
+  arr: array[0..3] of string;
+  tmp : string;
+  i, j: Integer;
+begin
+  arr[0] := 'S';
+  arr[1] := 'N';
+  arr[2] := 'A';
+  arr[3] := 'C';
+  mmo1.Lines.Clear;                     //  очистка окна memo
+  fdmtbl1.Open;
+  fdmtbl1.First;
+  for i := 0 to fdmtbl1.RecordCount - 1 do
+  begin
+    tmp := '';
+    tmp := dbgrd1.Fields[0].AsString + '=' + dbgrd1.Fields[1].AsString;
+    for j := 0 to 3 do
+    begin
+    if dbgrd1.Fields[j + 2].AsString <> '' then tmp := tmp + '; ' + arr[j] + ':' + dbgrd1.Fields[j + 2].AsString;
+    end;
+  mmo1.Lines.Add(tmp);
+  fdmtbl1.Next;
 
+  end;
+  fdmtbl1.EmptyDataSet;
+  fdmtbl1.Close;
+
+//  fdmtbl1.EmptyDataSet;                 //  очистка fdmemtable
+end;
 
 procedure TfrmMain.btnDoValuesClick(Sender: TObject);
 var
   tmp, tmp1, tmp2: string;
   i, j: Integer;
+  arr: array[0..3] of string;
 begin
+  arr[0] := 'S';
+  arr[1] := 'N';
+  arr[2] := 'A';
+  arr[3] := 'C';
   tmp := '';
+  fdmtbl1.Open;    // открытие БД
   for i := 0 to mmo1.Lines.Count - 1 do
   begin
-
-
     dbgrd1.DataSource.DataSet.Edit;
     tmp1 := mmo1.Lines.Strings[i];
     tmp := Fetch(tmp1, '=');
     dbgrd1.Fields[0].AsString := tmp;
     tmp := Fetch(tmp1, ';');
     dbgrd1.Fields[1].AsString := tmp;
-
-    tmp2 :=tmp1;
-    tmp := Fetch(tmp2, ':');
-    if tmp = ' S' then
+    for j := 0 to 3 do
     begin
-      tmp := Fetch(tmp2, ';');
-      tmp1 :=tmp2;
-      dbgrd1.Fields[2].AsString := tmp;
+      tmp2 := tmp1;
+      tmp := Trim(Fetch(tmp2, ':'));
+      if tmp = arr[j] then
+      begin
+        tmp := Fetch(tmp2, ';');
+        tmp1 := tmp2;
+        dbgrd1.Fields[j + 2].AsString := tmp;
+      end;
+
     end;
 
-    tmp2 := tmp1;
-    tmp := Fetch(tmp2, ':');
-    if tmp = ' N' then
-    begin
-      tmp := Fetch(tmp2, ';');
-      tmp1 :=tmp2;
-      dbgrd1.Fields[3].AsString := tmp;
-    end;
-
-    tmp2 := tmp1;
-    tmp := Fetch(tmp2, ':');
-    if tmp = ' A' then
-    begin
-      tmp := Fetch(tmp2, ';');
-      tmp1 :=tmp2;
-      dbgrd1.Fields[4].AsString := tmp;
-    end;
-
-    tmp2 := tmp1;
-    tmp := Fetch(tmp2, ':');
-    if tmp = ' C' then
-    begin
-      tmp := Fetch(tmp2, ';');
-      dbgrd1.Fields[5].AsString := tmp;
-
-    end;
     dbgrd1.DataSource.DataSet.Append;
-//    fdmtbl1.Append;
-//    fdmtbl1.Fields[0].AsString := tmp;
-//    fdmtbl1.Post;
   end;
-
+   mmo1.Lines.Clear;
 end;
 
 procedure TfrmMain.DBGrid1EditButtonClick(Sender: TObject);

@@ -86,7 +86,7 @@ object frmMain: TfrmMain
           FieldName = 'Value'
           Title.Alignment = taCenter
           Title.Caption = #1047#1085#1072#1095#1077#1085#1080#1077
-          Width = 90
+          Width = 80
           Visible = True
         end
         item
@@ -95,7 +95,7 @@ object frmMain: TfrmMain
           FieldName = 'ImageFile'
           Title.Alignment = taCenter
           Title.Caption = #1048#1084#1103' '#1092#1072#1081#1083#1072' '#1080#1079#1086#1073#1088#1072#1078#1077#1085#1080#1103
-          Width = 140
+          Width = 130
           Visible = True
         end
         item
@@ -104,7 +104,7 @@ object frmMain: TfrmMain
           FieldName = 'SoundFile'
           Title.Alignment = taCenter
           Title.Caption = #1048#1084#1103' '#1079#1074#1091#1082#1086#1074#1086#1075#1086' '#1092#1072#1081#1083#1072
-          Width = 140
+          Width = 130
           Visible = True
         end
         item
@@ -120,10 +120,10 @@ object frmMain: TfrmMain
           FieldName = 'Alert'
           PickList.Strings = (
             ''
-            'A:0')
+            '0')
           Title.Alignment = taCenter
           Title.Caption = #1040#1074#1072#1088#1080#1103
-          Width = 60
+          Width = 50
           Visible = True
         end
         item
@@ -151,6 +151,7 @@ object frmMain: TfrmMain
       Anchors = [akRight, akBottom]
       Caption = #1042' '#1058#1077#1082#1089#1090
       TabOrder = 2
+      OnClick = btnDoTextClick
     end
   end
   object fdmtbl1: TFDMemTable
@@ -199,7 +200,7 @@ object frmMain: TfrmMain
     Left = 715
     Top = 23
     Content = {
-      414442530F00D631D3020000FF00010001FF02FF0304000E000000660064006D
+      414442530F00C322D3020000FF00010001FF02FF0304000E000000660064006D
       00740062006C00310005000A0000005400610062006C00650006000000000007
       0000080032000000090000FF0AFF0B04000A000000560061006C007500650005
       000A000000560061006C00750065000C00010000000E000D000F001400000010
