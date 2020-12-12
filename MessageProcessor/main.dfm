@@ -200,7 +200,7 @@ object frmMain: TfrmMain
     Left = 715
     Top = 23
     Content = {
-      414442530F00C322D3020000FF00010001FF02FF0304000E000000660064006D
+      414442530F00741ED3020000FF00010001FF02FF0304000E000000660064006D
       00740062006C00310005000A0000005400610062006C00650006000000000007
       0000080032000000090000FF0AFF0B04000A000000560061006C007500650005
       000A000000560061006C00750065000C00010000000E000D000F001400000010
@@ -267,5 +267,16 @@ object frmMain: TfrmMain
     DataSet = fdmtbl1
     Left = 716
     Top = 75
+  end
+  object dlgOpenSound: TOpenDialog
+    Filter = 
+      'All (*.wav;*.mp3;*.aac;*.wma;*.flac)|*.wav;*.mp3;*.aac;*.wma;*.f' +
+      'lac'
+    Left = 695
+    Top = 143
+  end
+  object dlgOpenPicImage: TOpenPictureDialog
+    Left = 698
+    Top = 215
   end
 end

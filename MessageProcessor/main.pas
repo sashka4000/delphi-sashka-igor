@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Intf, FireDAC.Stan.Option, FireDAC.Stan.Param,
   FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, Vcl.StdCtrls, Vcl.DBCtrls,
-  Vcl.Grids, Vcl.DBGrids, FireDAC.Stan.StorageBin;
+ Vcl.Grids, Vcl.DBGrids, FireDAC.Stan.StorageBin, Vcl.ExtDlgs, JPEG, PNGImage;
 
 type
   TfrmMain = class(TForm)
@@ -28,6 +28,8 @@ type
     fdmtbl1AlertName: TStringField;
     fdmtbl1Alert: TStringField;
     fdmtbl1Commanf: TIntegerField;
+    dlgOpenSound: TOpenDialog;
+    dlgOpenPicImage: TOpenPictureDialog;
     procedure FormCreate(Sender: TObject);
     procedure btnDoValuesClick(Sender: TObject);
     procedure btnDoTextClick(Sender: TObject);
@@ -97,11 +99,14 @@ begin
   fdmtbl1.Open;    // открытие БД
   for i := 0 to mmo1.Lines.Count - 1 do
   begin
+  if Trim(mmo1.Lines.Strings[i]).Length =  0  then Continue
+    else
+     begin
     dbgrd1.DataSource.DataSet.Edit;
     tmp1 := mmo1.Lines.Strings[i];
-    tmp := Fetch(tmp1, '=');
+    tmp := Trim(Fetch(tmp1, '='));
     dbgrd1.Fields[0].AsString := tmp;
-    tmp := Fetch(tmp1, ';');
+    tmp := Trim(Fetch(tmp1, ';'));
     dbgrd1.Fields[1].AsString := tmp;
     for j := 0 to 3 do
     begin
@@ -113,24 +118,44 @@ begin
         tmp1 := tmp2;
         dbgrd1.Fields[j + 2].AsString := tmp;
       end;
-
     end;
-
     dbgrd1.DataSource.DataSet.Append;
   end;
-   mmo1.Lines.Clear;
+  end;
+//   mmo1.Lines.Clear;
 end;
+
 
 procedure TfrmMain.DBGrid1EditButtonClick(Sender: TObject);
 begin
- ShowMessage(DBGrd1.SelectedField.FieldName);
+// ShowMessage(DBGrd1.SelectedField.FieldName);
+
+  if dbgrd1.SelectedField.FieldName = 'ImageFile' then
+  begin
+    dlgOpenPicImage.InitialDir := GetImageFolder;
+    if dlgOpenPicImage.Execute then
+    begin
+        // ShowMessage(dlgOpenGrid.FileName);
+      dbgrd1.DataSource.DataSet.Edit;
+      dbgrd1.SelectedField.AsString := LowerCase(ExtractRelativePath(GetImageFolder, dlgOpenPicImage.Filename));
+      dbgrd1.DataSource.DataSet.Post;
+    end;
+  end
+  else if dbgrd1.SelectedField.FieldName = 'SoundFile' then
+  begin
+        dlgOpenSound.InitialDir := GetWavFolder;
+   if dlgOpenSound.Execute then
+  begin
+    dbgrd1.DataSource.DataSet.Edit;
+    dbgrd1.SelectedField.AsString := LowerCase(ExtractRelativePath(GetWavFolder, dlgOpenSound.Filename));
+    dbgrd1.DataSource.DataSet.Post;
+  end;
+  end;
+
 end;
 
 procedure TfrmMain.FormCreate(Sender: TObject);
 begin
-
-
-
   dbgrd1.OnEditButtonClick:= DBGrid1EditButtonClick;
 end;
 
