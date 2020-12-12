@@ -57,32 +57,39 @@ uses
 procedure TfrmMain.btnDoTextClick(Sender: TObject);
 var
   arr: array[0..3] of string;
-  tmp : string;
+  tmp: string;
   i, j: Integer;
 begin
   arr[0] := 'S';
   arr[1] := 'N';
   arr[2] := 'A';
   arr[3] := 'C';
-  mmo1.Lines.Clear;                     //  очистка окна memo
-  fdmtbl1.Open;
-  fdmtbl1.First;
-  for i := 0 to fdmtbl1.RecordCount - 1 do
+  if fdmtbl1.RecordCount > 0 then
   begin
-    tmp := '';
-    tmp := dbgrd1.Fields[0].AsString + '=' + dbgrd1.Fields[1].AsString;
-    for j := 0 to 3 do
+    mmo1.Lines.Clear;                         //  очистка окна memo
+    fdmtbl1.Open;
+    fdmtbl1.First;
+    for i := 0 to fdmtbl1.RecordCount - 1 do
     begin
-    if dbgrd1.Fields[j + 2].AsString <> '' then tmp := tmp + '; ' + arr[j] + ':' + dbgrd1.Fields[j + 2].AsString;
+      tmp := '';
+      tmp := dbgrd1.Fields[0].AsString + '=' + dbgrd1.Fields[1].AsString;
+      for j := 0 to 3 do
+      begin
+        if dbgrd1.Fields[j + 2].AsString <> '' then
+          tmp := tmp + '; ' + arr[j] + ':' + dbgrd1.Fields[j + 2].AsString;
+      end;
+      mmo1.Lines.Add(tmp);
+      fdmtbl1.Next;
+
     end;
-  mmo1.Lines.Add(tmp);
-  fdmtbl1.Next;
-
+    fdmtbl1.EmptyDataSet;
+    fdmtbl1.Close;
+  end
+  else
+  begin
+    MessageBox(Handle, PChar('Пустая таблица'), PChar('Внимание'), MB_ICONINFORMATION + MB_OK);
+    ;
   end;
-  fdmtbl1.EmptyDataSet;
-  fdmtbl1.Close;
-
-//  fdmtbl1.EmptyDataSet;                 //  очистка fdmemtable
 end;
 
 procedure TfrmMain.btnDoValuesClick(Sender: TObject);
@@ -122,7 +129,7 @@ begin
     dbgrd1.DataSource.DataSet.Append;
   end;
   end;
-//   mmo1.Lines.Clear;
+   mmo1.Lines.Clear;
 end;
 
 
