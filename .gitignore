@@ -75,3 +75,5 @@ WEB_AccessEquipment/Win32/Debug/cache/
 WEB_AccessEquipment/Win32/Debug/log/
 */Win32/Debug/cache/
 */Win32/Debug/log/
+bash.exe.stackdump
+*.stackdump
