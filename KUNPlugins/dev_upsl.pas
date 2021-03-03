@@ -18,6 +18,7 @@ type
     seNumber: TSpinEdit;
     lbl1: TLabel;
     chklstType: TCheckListBox;
+    chkNet: TCheckBox;
     procedure cbbUPSLVyzovChange(Sender: TObject);
   private
     { Private declarations }
@@ -73,25 +74,43 @@ begin
 
   // Обработка состояния запроса типа устройства
    TA := TArray<Byte>.Create ($D8,$81,$03,$08,$00,$00,$00);
+
+
+
+//   if FMyForm.chkNet.cbChecked then
+//      TA[4] := 1 shl 7;
+//
+//      SetBit(TA[4],7);
+//
+//   if FMyForm.chkNet.cbChecked then
+//      TA[4] := 1 shl 7;
+
+
    s := 0;
      for i := 0 to 3 do
      begin
        if FMyForm.chklstType.Checked[i] then
           s := s + Trunc(Power(2,i))
      end;
-//     TA[4] :=;
+//     TA[4] := s;
 
   //
     end;
     PCKT_CURRENT :
     begin
+       TA := TArray<Byte>.Create ($D8,$85,$05,$00,upsl_ch,$BB,$0C,$08,$00);
+       // заполняется ТА(3)
+
+
+
        upsl_b := 0;  upsl_ch := 0;
        if FMyForm.cbbUPSLVyzov.ItemIndex > 0  then
        begin
          upsl_b := 4;
          upsl_ch := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
        end;
-       TA := TArray<Byte>.Create ($D8,$85,$05,$F0+upsl_b,upsl_ch,$BB,$0C,$08,$00);
+
+       TA [3] := TA[3] + upsl_b;
     end;
     PCKT_OPER :
     begin

@@ -74,8 +74,8 @@ inherited frmUPSL: TfrmUPSL
     Value = 0
   end
   object chklstType: TCheckListBox
-    Left = 18
-    Top = 136
+    Left = 399
+    Top = 148
     Width = 70
     Height = 105
     AutoComplete = False
@@ -88,5 +88,13 @@ inherited frmUPSL: TfrmUPSL
       'ALERT'
       'VALID')
     TabOrder = 3
+  end
+  object chkNet: TCheckBox
+    Left = 20
+    Top = 148
+    Width = 165
+    Height = 17
+    Caption = #1053#1072#1083#1080#1095#1080#1077' '#1089#1077#1090#1077#1074#1086#1075#1086' '#1087#1080#1090#1072#1085#1080#1103
+    TabOrder = 4
   end
 end
