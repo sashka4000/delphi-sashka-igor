@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.StdCtrls, Vcl.Samples.Spin,
-  ext_global, dev_base_form;
+  ext_global, dev_base_form, Vcl.CheckLst, Math;
 
 type
 
@@ -17,6 +17,7 @@ type
     lbl12: TLabel;
     seNumber: TSpinEdit;
     lbl1: TLabel;
+    chklstType: TCheckListBox;
     procedure cbbUPSLVyzovChange(Sender: TObject);
   private
     { Private declarations }
@@ -46,6 +47,7 @@ var
  bSendAnswer : Boolean;
  upsl_b, upsl_ch : Byte;
  tmp : string;
+ i,s : Integer;
  FMyForm :  TfrmUPSL;
 begin
   inherited;
@@ -67,7 +69,19 @@ begin
   case TR[1] of
     PCKT_TYPE :
     begin
-      TA := TArray<Byte>.Create ($D8,$81,$03,$08,$03,$02,$00);
+//      TA := TArray<Byte>.Create ($D8,$81,$03,$08,TA[4],TA[5],$00);
+
+  // ќбработка состо€ни€ запроса типа устройства
+   TA := TArray<Byte>.Create ($D8,$81,$03,$08,$00,$00,$00);
+   s := 0;
+     for i := 0 to 3 do
+     begin
+       if FMyForm.chklstType.Checked[i] then
+          s := s + Trunc(Power(2,i))
+     end;
+//     TA[4] :=;
+
+  //
     end;
     PCKT_CURRENT :
     begin

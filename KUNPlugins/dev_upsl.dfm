@@ -4,8 +4,8 @@ inherited frmUPSL: TfrmUPSL
   Caption = 'frmUPSL'
   ClientHeight = 407
   ClientWidth = 504
-  ExplicitLeft = 576
-  ExplicitTop = 394
+  ExplicitWidth = 504
+  ExplicitHeight = 407
   PixelsPerInch = 96
   TextHeight = 13
   object lbl17: TLabel
@@ -72,5 +72,21 @@ inherited frmUPSL: TfrmUPSL
     MinValue = 0
     TabOrder = 0
     Value = 0
+  end
+  object chklstType: TCheckListBox
+    Left = 18
+    Top = 136
+    Width = 70
+    Height = 105
+    AutoComplete = False
+    ItemHeight = 13
+    Items.Strings = (
+      'DMA'
+      'STORY'
+      'DATA'
+      'TIME'
+      'ALERT'
+      'VALID')
+    TabOrder = 3
   end
 end
