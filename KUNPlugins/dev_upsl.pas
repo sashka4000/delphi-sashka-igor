@@ -51,10 +51,12 @@ var
   upsl_b, upsl_ch: Byte;
   tmp: string;
   FMyForm: TfrmUPSL;
-  bat : Float32;
+  bat : Double;
   batInt : Integer;
 // ChkData : TChkData;
   i: Integer;
+  FTime : TDateTime;
+  Y,MM,D,H,M,S,MS : Word;
 begin
   inherited;
 
@@ -123,7 +125,15 @@ begin
     PCKT_VERSION:
       begin
         TA := TArray<Byte>.Create($D8, $8D, $02, $01, $23, $00);
-      end
+      end;
+      PCKT_READ_TIME:
+    begin
+     //Чтение времени устройства
+        FTime := (Now  - FCompTime) + FDevTime;
+        DecodeDate(FTime,Y,MM,D);
+        DecodeTime(FTime,H,M,S,MS);
+        TA := TArray<Byte>.Create($D8, $83, $06, $00, $00, $00, $00, $00, $00, $00);
+    end
   else
     Exit;
   end;

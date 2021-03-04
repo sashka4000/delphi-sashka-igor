@@ -30,7 +30,9 @@ type
     FCB : TPGUSensorCallBack;
     FormClass : TFrmBaseClass;
    public
-    MyForm : TfrmBase;
+   MyForm : TfrmBase;
+   FDevTime : TDateTime;
+   FCompTime : TDateTime;
    constructor Create (F : TFrmBaseClass);
    function RegisterCallback (CBF : TPGUSensorCallBack) : HResult; stdcall;
    function CreateDeviceWindow (parentHWND: HWND; var createHWND : HWND) : Hresult; stdcall;
@@ -48,6 +50,8 @@ implementation
 constructor TBaseDevice.Create(F: TFrmBaseClass);
 begin
   FormClass := F;
+  FDevTime := EncodeDate(2001,1,1) + EncodeTime(0,0,0,0);
+  FCompTime := Now;
 end;
 
 function TBaseDevice.CreateDeviceWindow(parentHWND: HWND;
