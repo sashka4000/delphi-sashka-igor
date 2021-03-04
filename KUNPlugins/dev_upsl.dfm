@@ -73,28 +73,48 @@ inherited frmUPSL: TfrmUPSL
     TabOrder = 0
     Value = 0
   end
-  object chklstType: TCheckListBox
-    Left = 399
-    Top = 148
-    Width = 70
-    Height = 105
-    AutoComplete = False
-    ItemHeight = 13
-    Items.Strings = (
-      'DMA'
-      'STORY'
-      'DATA'
-      'TIME'
-      'ALERT'
-      'VALID')
-    TabOrder = 3
-  end
   object chkNet: TCheckBox
     Left = 20
     Top = 148
     Width = 165
     Height = 17
     Caption = #1053#1072#1083#1080#1095#1080#1077' '#1089#1077#1090#1077#1074#1086#1075#1086' '#1087#1080#1090#1072#1085#1080#1103
+    TabOrder = 3
+  end
+  object chkBat: TCheckBox
+    Left = 20
+    Top = 171
+    Width = 165
+    Height = 17
+    Caption = #1048#1089#1087#1088#1072#1074#1085#1086#1089#1090#1100' '#1072#1082#1082#1091#1084#1091#1083#1103#1090#1086#1088#1072
     TabOrder = 4
+  end
+  object chkAmp1: TCheckBox
+    Left = 20
+    Top = 194
+    Width = 165
+    Height = 17
+    Caption = #1045#1089#1090#1100' '#1086#1090#1074#1077#1090' '#1086#1090' '#1091#1089#1080#1083#1080#1090#1077#1083#1103' 1'
+    TabOrder = 5
+  end
+  object chkAmp2: TCheckBox
+    Left = 20
+    Top = 217
+    Width = 165
+    Height = 17
+    Caption = #1045#1089#1090#1100' '#1086#1090#1074#1077#1090' '#1086#1090' '#1091#1089#1080#1083#1080#1090#1077#1083#1103' 2'
+    TabOrder = 6
+  end
+  object lbledtBat: TLabeledEdit
+    Left = 20
+    Top = 240
+    Width = 53
+    Height = 21
+    EditLabel.Width = 153
+    EditLabel.Height = 13
+    EditLabel.Caption = #1053#1072#1087#1088#1103#1078#1077#1085#1080#1077' '#1085#1072' '#1072#1082#1082#1091#1084#1091#1083#1103#1090#1086#1088#1077
+    LabelPosition = lpRight
+    LabelSpacing = 5
+    TabOrder = 7
   end
 end
