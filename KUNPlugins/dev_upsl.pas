@@ -28,8 +28,6 @@ type
     { Public declarations }
   end;
 
-// type TChkData = (chkNet, chkBat, chkAmp1, chkAmp2);
-
   TUPSL = class(TBaseDevice)
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
@@ -51,12 +49,11 @@ var
   upsl_b, upsl_ch: Byte;
   tmp: string;
   FMyForm: TfrmUPSL;
-  bat : Double;
-  batInt : Integer;
-// ChkData : TChkData;
+  bat: Double;
+  batInt: Integer;
   i: Integer;
-  FTime : TDateTime;
-  Y,MM,D,H,M,S,MS : Word;
+  FTime: TDateTime;
+  Y, MM, D, H, M, S, MS: Word;
 begin
   inherited;
 
@@ -97,9 +94,8 @@ begin
           SetBit(TA[3], 4);
       //  заполняется ТА(5)
 
-          bat := StrToFloatDef(FMyForm.lbledtBat.Text,0);
-          TA[5] :=  Round(bat * 1000 / 67);
-
+        bat := StrToFloatDef(FMyForm.lbledtBat.Text, 0);
+        TA[5] := Round(bat * 1000 / 67);
 
         upsl_b := 0;
         upsl_ch := 0;
@@ -126,14 +122,22 @@ begin
       begin
         TA := TArray<Byte>.Create($D8, $8D, $02, $01, $23, $00);
       end;
-      PCKT_READ_TIME:
-    begin
+    PCKT_READ_TIME:
+      begin
      //Чтение времени устройства
-        FTime := (Now  - FCompTime) + FDevTime;
-        DecodeDate(FTime,Y,MM,D);
-        DecodeTime(FTime,H,M,S,MS);
-        TA := TArray<Byte>.Create($D8, $83, $06, $00, $00, $00, $00, $00, $00, $00);
-    end
+        FTime := (Now - FCompTime) + FDevTime;
+        DecodeDate(FTime, Y, MM, D);
+        DecodeTime(FTime, H, M, S, MS);
+        TA := TArray<Byte>.Create($D8, $83, $06, S, M, H, D, MM, Y, $00);
+      end;
+    PCKT_WRITE_TIME:
+      begin
+     //Запись времени устройства
+        FTime := Now;
+        DecodeDate(FTime, Y, MM, D);
+        DecodeTime(FTime, H, M, S, MS);
+        TA := TArray<Byte>.Create($D8, $82, $06, S, M, H, D, MM, Y, $00);
+      end
   else
     Exit;
   end;

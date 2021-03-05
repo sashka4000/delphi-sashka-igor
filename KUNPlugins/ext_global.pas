@@ -4,11 +4,12 @@ interface
 
 const
 
- PCKT_TYPE = $01;
- PCKT_VERSION = $0D;
- PCKT_CURRENT = $05;
- PCKT_OPER = $09;
- PCKT_READ_TIME = $03;
+  PCKT_TYPE = $01;
+  PCKT_WRITE_TIME = $02;
+  PCKT_READ_TIME = $03;
+  PCKT_CURRENT = $05;
+  PCKT_OPER = $09;
+  PCKT_VERSION = $0D;
 
 // рассчитать CRC для полного пакета
 function GET_CRC (TA : TArray<Byte>; Len : Integer) : Byte;
