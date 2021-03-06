@@ -74,13 +74,10 @@ begin
     PCKT_TYPE:
       begin
   // Обработка состояния запроса типа устройства
-        if FTimeStart then
-        begin
-          TA := TArray<Byte>.Create($D8, $81, $03, $08, $03, $00, $00);
-          FTimeStart := False;
-        end
+        if not (FDevTimeSync) then
+          TA := TArray<Byte>.Create($D8, $81, $03, $08, $03, $00, $00)
         else
-          TA := TArray<Byte>.Create($D8, $81, $03, $08, $03, $01, $00)
+          TA[5] := 1;
       end;
     PCKT_CURRENT:
       begin
@@ -138,10 +135,11 @@ begin
     PCKT_WRITE_TIME:
       begin
      //Запись времени устройства
+        FDevTimeSync := True;
         FDevTime := EncodeDateTime(TR[8] + 2000, TR[7], TR[6], TR[5], TR[4], TR[3], 0);
-        FTime := (Now - FCompTime) + FDevTime;
-        DecodeDate(FTime, Y, MM, D);
-        DecodeTime(FTime, H, M, S, MS);
+        FCompTime := Now;
+        DecodeDate(FDevTime, Y, MM, D);
+        DecodeTime(FDevTime, H, M, S, MS);
         TA := TArray<Byte>.Create($D8, $82, $06, S, M, H, D, MM, (Y - 2000), $00);
       end
   else

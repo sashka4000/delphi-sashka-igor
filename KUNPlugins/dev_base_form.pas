@@ -33,7 +33,7 @@ type
    MyForm : TfrmBase;
    FDevTime : TDateTime;
    FCompTime : TDateTime;
-   FTimeStart : Boolean;
+   FDevTimeSync : Boolean;
    constructor Create (F : TFrmBaseClass);
    function RegisterCallback (CBF : TPGUSensorCallBack) : HResult; stdcall;
    function CreateDeviceWindow (parentHWND: HWND; var createHWND : HWND) : Hresult; stdcall;
@@ -53,7 +53,7 @@ begin
   FormClass := F;
   FDevTime := EncodeDate(2001,1,1) + EncodeTime(0,0,0,0);
   FCompTime := Now;
-  FTimeStart := True;
+  FDevTimeSync := False;
 end;
 
 function TBaseDevice.CreateDeviceWindow(parentHWND: HWND;
