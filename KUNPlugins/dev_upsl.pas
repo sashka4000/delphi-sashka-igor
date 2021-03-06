@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.StdCtrls,
-  Vcl.Samples.Spin, ext_global, dev_base_form, Vcl.CheckLst, Vcl.ExtCtrls;
+  Vcl.Samples.Spin, ext_global, dev_base_form, Vcl.CheckLst, Vcl.ExtCtrls, DateUtils;
 
 type
   TfrmUPSL = class(TfrmBase)
@@ -38,7 +38,6 @@ const
 implementation
 
 {$R *.dfm}
-
 
 { TUPSL }
 
@@ -75,7 +74,13 @@ begin
     PCKT_TYPE:
       begin
   // Обработка состояния запроса типа устройства
-        TA := TArray<Byte>.Create($D8, $81, $03, $08, $03, $01, $00);
+        if FTimeStart then
+        begin
+          TA := TArray<Byte>.Create($D8, $81, $03, $08, $03, $00, $00);
+          FTimeStart := False;
+        end
+        else
+          TA := TArray<Byte>.Create($D8, $81, $03, $08, $03, $01, $00)
       end;
     PCKT_CURRENT:
       begin
@@ -128,15 +133,16 @@ begin
         FTime := (Now - FCompTime) + FDevTime;
         DecodeDate(FTime, Y, MM, D);
         DecodeTime(FTime, H, M, S, MS);
-        TA := TArray<Byte>.Create($D8, $83, $06, S, M, H, D, MM, Y, $00);
+        TA := TArray<Byte>.Create($D8, $83, $06, S, M, H, D, MM, (Y - 2000), $00);
       end;
     PCKT_WRITE_TIME:
       begin
      //Запись времени устройства
-        FTime := Now;
+        FDevTime := EncodeDateTime(TR[8] + 2000, TR[7], TR[6], TR[5], TR[4], TR[3], 0);
+        FTime := (Now - FCompTime) + FDevTime;
         DecodeDate(FTime, Y, MM, D);
         DecodeTime(FTime, H, M, S, MS);
-        TA := TArray<Byte>.Create($D8, $82, $06, S, M, H, D, MM, Y, $00);
+        TA := TArray<Byte>.Create($D8, $82, $06, S, M, H, D, MM, (Y - 2000), $00);
       end
   else
     Exit;
