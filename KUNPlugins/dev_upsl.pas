@@ -18,9 +18,10 @@ type
     lbl1: TLabel;
     chkNet: TCheckBox;
     chkBat: TCheckBox;
+    lbledtBat: TLabeledEdit;
     chkAmp1: TCheckBox;
     chkAmp2: TCheckBox;
-    lbledtBat: TLabeledEdit;
+    chkFire: TCheckBox;
     procedure cbbUPSLVyzovChange(Sender: TObject);
   private
     { Private declarations }
@@ -74,9 +75,8 @@ begin
     PCKT_TYPE:
       begin
   // Обработка состояния запроса типа устройства
-        if not (FDevTimeSync) then
-          TA := TArray<Byte>.Create($D8, $81, $03, $08, $03, $00, $00)
-        else
+        TA := TArray<Byte>.Create($D8, $81, $03, $08, $03, $00, $00);
+        if FDevTimeSync then
           TA[5] := 1;
       end;
     PCKT_CURRENT:
@@ -94,6 +94,9 @@ begin
 
         if FMyForm.chkAmp2.Checked then
           SetBit(TA[3], 4);
+
+        if FMyForm.chkFire.Checked then
+          SetBit(TA[3], 3);
       //  заполняется ТА(5)
 
         bat := StrToFloatDef(FMyForm.lbledtBat.Text, 0);
@@ -141,6 +144,36 @@ begin
         DecodeDate(FDevTime, Y, MM, D);
         DecodeTime(FDevTime, H, M, S, MS);
         TA := TArray<Byte>.Create($D8, $82, $06, S, M, H, D, MM, (Y - 2000), $00);
+      end;
+    PCKT_WRITE_DATA:
+      begin
+     //Запись текущих данных устройства
+        case TR[3] of
+          0:
+            begin
+             FMyForm.cbbUPSLVyzov.ItemIndex := 0 ;
+            end;
+          1:
+            begin
+             FMyForm.cbbUPSLVyzov.ItemIndex := 1 ;
+            end;
+          2:
+            begin
+              FMyForm.cbbUPSLVyzov.ItemIndex := 2 ;
+            end;
+          4:
+            begin
+              FMyForm.cbbUPSLVyzov.ItemIndex := 3 ;
+            end;
+          8:
+            begin
+              FMyForm.cbbUPSLVyzov.ItemIndex := 4 ;
+            end
+        else
+          Exit;
+        end;
+
+        TA := TArray<Byte>.Create($D8, $84, $00, $00);
       end
   else
     Exit;
