@@ -36,6 +36,13 @@ inherited frmUPSL: TfrmUPSL
     Height = 13
     Caption = '0 - '#1085#1077' '#1087#1086#1076#1082#1083#1102#1095#1077#1085
   end
+  object lblVer: TLabel
+    Left = 272
+    Top = 217
+    Width = 147
+    Height = 13
+    Caption = #1059#1082#1072#1078#1080#1090#1077' '#1074#1077#1088#1089#1080#1102' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
+  end
   object seUPSL_KUN: TSpinEdit
     Left = 272
     Top = 69
@@ -92,7 +99,7 @@ inherited frmUPSL: TfrmUPSL
   object lbledtBat: TLabeledEdit
     Left = 177
     Top = 214
-    Width = 61
+    Width = 50
     Height = 21
     EditLabel.Width = 153
     EditLabel.Height = 13
@@ -126,5 +133,16 @@ inherited frmUPSL: TfrmUPSL
     Height = 17
     Caption = #1054#1073#1098#1077#1076#1080#1085#1077#1085#1085#1099#1081' '#1087#1088#1080#1079#1085#1072#1082' "'#1087#1086#1078#1072#1088'" '#1086#1090' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072' '#1080' '#1091#1089#1080#1083#1080#1090#1077#1083#1077#1081' 1 '#1080' 2'
     TabOrder = 8
+  end
+  object medtVer: TMaskEdit
+    Left = 428
+    Top = 214
+    Width = 40
+    Height = 21
+    Alignment = taCenter
+    EditMask = '!99\.99;1;_'
+    MaxLength = 5
+    TabOrder = 9
+    Text = '  .  '
   end
 end

@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.StdCtrls,
-  Vcl.Samples.Spin, ext_global, dev_base_form, Vcl.CheckLst, Vcl.ExtCtrls, DateUtils;
+  Vcl.Samples.Spin, ext_global, dev_base_form, Vcl.CheckLst, Vcl.ExtCtrls, DateUtils, Vcl.Mask;
 
 type
   TfrmUPSL = class(TfrmBase)
@@ -22,6 +22,8 @@ type
     chkAmp1: TCheckBox;
     chkAmp2: TCheckBox;
     chkFire: TCheckBox;
+    medtVer: TMaskEdit;
+    lblVer: TLabel;
     procedure cbbUPSLVyzovChange(Sender: TObject);
   private
     { Private declarations }
@@ -39,7 +41,7 @@ const
 implementation
 
 {$R *.dfm}
-
+Uses IdGlobal;
 { TUPSL }
 
 function TUPSL.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
@@ -52,6 +54,7 @@ var
   bat: Double;
   batInt: Integer;
   i: Integer;
+  ver : string;
   FTime: TDateTime;
   Y, MM, D, H, M, S, MS: Word;
 begin
@@ -64,7 +67,6 @@ begin
   // проверяю CRC пакета
   if GET_CRC(TR, PacketSize) <> TR[PacketSize - 1] then
     Exit;
-
   // проверяю адрес устройства в первом байте
   if TR[0] <> $D8 + FMyForm.seNumber.Value then
     Exit;
@@ -78,6 +80,9 @@ begin
         TA := TArray<Byte>.Create($D8, $81, $03, $08, $03, $00, $00);
         if FDevTimeSync then
           TA[5] := 1;
+        if not (FMyForm.chkNet.Checked and FMyForm.chkBat.Checked
+         and FMyForm.chkAmp1.Checked and FMyForm.chkAmp2.Checked and FMyForm.chkFire.Checked) then
+          TA[5] := TA[5] + 2;
       end;
     PCKT_CURRENT:
       begin
@@ -116,6 +121,21 @@ begin
       begin
         upsl_b := 0;
         upsl_ch := 0;
+        if FMyForm.chkNet.Checked then
+          SetBit(TA[3], 7);
+
+        if FMyForm.chkBat.Checked then
+          SetBit(TA[3], 6);
+
+        if FMyForm.chkAmp1.Checked then
+          SetBit(TA[3], 5);
+
+        if FMyForm.chkAmp2.Checked then
+          SetBit(TA[3], 4);
+
+        if FMyForm.chkFire.Checked then
+          SetBit(TA[3], 3);
+
         if FMyForm.cbbUPSLVyzov.ItemIndex > 0 then
         begin
           upsl_b := 4;
@@ -126,6 +146,10 @@ begin
     PCKT_VERSION:
       begin
         TA := TArray<Byte>.Create($D8, $8D, $02, $01, $23, $00);
+        // Чтение версии устройства
+        ver := FMyForm.medtVer.EditText;
+        TA[3] := Fetch(ver,'.').ToInteger;
+        TA[4] := ver.ToInteger;
       end;
     PCKT_READ_TIME:
       begin
