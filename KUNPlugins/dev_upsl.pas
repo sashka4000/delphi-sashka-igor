@@ -71,6 +71,7 @@ begin
   if TR[0] <> $D8 + FMyForm.seNumber.Value then
     Exit;
 
+
   // формирую ответ на запрос
 
   case TR[1] of
@@ -121,6 +122,14 @@ begin
       begin
         upsl_b := 0;
         upsl_ch := 0;
+
+        if FMyForm.cbbUPSLVyzov.ItemIndex > 0 then
+        begin
+          upsl_b := 4;
+          upsl_ch := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
+        end;
+        TA := TArray<Byte>.Create($D8, $89, $02, $00 + upsl_b, upsl_ch, $00);
+
         if FMyForm.chkNet.Checked then
           SetBit(TA[3], 7);
 
@@ -135,17 +144,10 @@ begin
 
         if FMyForm.chkFire.Checked then
           SetBit(TA[3], 3);
-
-        if FMyForm.cbbUPSLVyzov.ItemIndex > 0 then
-        begin
-          upsl_b := 4;
-          upsl_ch := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
-        end;
-        TA := TArray<Byte>.Create($D8, $89, $02, $F0 + upsl_b, upsl_ch, $00);
       end;
     PCKT_VERSION:
       begin
-        TA := TArray<Byte>.Create($D8, $8D, $02, $01, $23, $00);
+        TA := TArray<Byte>.Create($D8, $8D, $02, $00, $00, $00);
         // Чтение версии устройства
         ver := FMyForm.medtVer.EditText;
         TA[3] := Fetch(ver,'.').ToInteger;

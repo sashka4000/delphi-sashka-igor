@@ -39,9 +39,9 @@ inherited frmUPSL: TfrmUPSL
   object lblVer: TLabel
     Left = 272
     Top = 217
-    Width = 147
+    Width = 96
     Height = 13
-    Caption = #1059#1082#1072#1078#1080#1090#1077' '#1074#1077#1088#1089#1080#1102' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
+    Caption = #1042#1077#1088#1089#1080#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
   end
   object seUPSL_KUN: TSpinEdit
     Left = 272
@@ -101,6 +101,7 @@ inherited frmUPSL: TfrmUPSL
     Top = 214
     Width = 50
     Height = 21
+    Alignment = taRightJustify
     EditLabel.Width = 153
     EditLabel.Height = 13
     EditLabel.BiDiMode = bdLeftToRight
@@ -109,6 +110,7 @@ inherited frmUPSL: TfrmUPSL
     LabelPosition = lpLeft
     LabelSpacing = 5
     TabOrder = 5
+    Text = '14'
   end
   object chkAmp1: TCheckBox
     Left = 272
@@ -135,14 +137,14 @@ inherited frmUPSL: TfrmUPSL
     TabOrder = 8
   end
   object medtVer: TMaskEdit
-    Left = 428
-    Top = 214
-    Width = 40
+    Left = 374
+    Top = 215
+    Width = 36
     Height = 21
     Alignment = taCenter
-    EditMask = '!99\.99;1;_'
+    EditMask = '!99\.99;1; '
     MaxLength = 5
     TabOrder = 9
-    Text = '  .  '
+    Text = '01.12'
   end
 end
