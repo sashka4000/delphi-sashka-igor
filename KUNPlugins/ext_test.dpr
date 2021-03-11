@@ -37,19 +37,20 @@ type
 
 
 var
-  Driver : TDriver = nil;
+  Driver: TDriver = nil;
 
-  procedure GetSerialDriver (KUN : IImitator);  stdcall;
-  begin
-      if Driver = nil then
-       Driver := TDriver.Create;
-      KUN.RegisterDriver(Driver);
+procedure GetSerialDriver(KUN: IImitator); stdcall;
+begin
+  if Driver = nil then
+    Driver := TDriver.Create;
+  KUN.RegisterDriver(Driver);
       // Здесь необходимо регистрировать создаваемые устройства
       // Для создания устройства приложение вызовет CreateDevice
-      KUN.RegisterType(gUPSLM, 'УПСЛ');
-      KUN.RegisterType(gKSLOtis, 'КСЛ-OTIS');
+  KUN.RegisterType(gUPSLM, 'УПСЛ');
+  KUN.RegisterType(gKSLOtis, 'КСЛ-OTIS');
+  KUN.RegisterType(gKUP4RS, 'КУП-4RS');
 
-  end;
+end;
 
  exports
    GetSerialDriver;
@@ -69,6 +70,11 @@ begin
   if IsEqualGUID(guidClass, gKSLOtis) then
   begin
      RS := TKSLOtis.Create (TfrmKSL);
+     Result := 0;
+  end;
+    if IsEqualGUID(guidClass, gKUP4RS) then
+  begin
+     RS := TKUP4RS.Create (TfrmKUP4RS);
      Result := 0;
   end;
 end;
