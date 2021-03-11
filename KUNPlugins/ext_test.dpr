@@ -23,7 +23,8 @@ uses
   ext_global in 'ext_global.pas',
   dev_ksl_otis in 'dev_ksl_otis.pas' {frmKSL},
   dev_base_form in 'dev_base_form.pas' {frmBase},
-  dev_kup4rs in 'dev_kup4rs.pas' {frmKUP4RS};
+  dev_kup4rs in 'dev_kup4rs.pas' {frmKUP4RS},
+  dev_mbus in 'dev_mbus.pas' {frmBase1};
 
 {$R *.res}
 {$R style_res.res}
