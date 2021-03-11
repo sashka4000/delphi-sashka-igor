@@ -180,20 +180,10 @@ inherited frmKUP4RS: TfrmKUP4RS
   object chkPowLine: TCheckBox
     Left = 18
     Top = 272
-    Width = 111
+    Width = 199
     Height = 17
     Caption = #1055#1080#1090#1072#1085#1080#1077' '#1086#1090' '#1089#1077#1090#1080
-    Checked = True
-    State = cbChecked
     TabOrder = 2
     OnClick = chkPowLineClick
-  end
-  object chkPowOut: TCheckBox
-    Left = 18
-    Top = 303
-    Width = 207
-    Height = 17
-    Caption = #1055#1080#1090#1072#1085#1080#1077' '#1086#1090' '#1074#1085#1077#1096#1085#1077#1075#1086' '#1080#1089#1090#1086#1095#1085#1080#1082#1072
-    TabOrder = 3
   end
 end

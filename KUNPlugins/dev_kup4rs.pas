@@ -28,7 +28,6 @@ type
     lblVer: TLabel;
     medtVer: TMaskEdit;
     chkPowLine: TCheckBox;
-    chkPowOut: TCheckBox;
     procedure chkPowLineClick(Sender: TObject);
   private
     { Private declarations }
@@ -129,8 +128,11 @@ end;
 
 procedure TfrmKUP4RS.chkPowLineClick(Sender: TObject);
 begin
-  inherited;
-chkPowOut.Checked := True;
+//  inherited;
+ if chkPowLine.Checked then
+    chkPowLine.Caption := 'Питание от внешнего источника'
+    else
+     chkPowLine.Caption := 'Питание от сети'
 end;
 
 end.
