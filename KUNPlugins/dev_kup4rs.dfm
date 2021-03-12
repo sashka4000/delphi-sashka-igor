@@ -85,7 +85,7 @@ inherited frmKUP4RS: TfrmKUP4RS
   object btnIn7: TSpeedButton
     AlignWithMargins = True
     Left = 294
-    Top = 116
+    Top = 115
     Width = 40
     Height = 30
     AllowAllUp = True
