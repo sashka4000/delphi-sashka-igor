@@ -63,7 +63,7 @@ function TKUP4RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer;
   FTime: TDateTime;
   Y, MM, D, H, M, S, MS: Word;
 begin
-  inherited;
+  Result := inherited;
 
   FMyForm := TfrmKUP4RS(MyForm);
   // преобразование указателя к типу массив байт
@@ -87,9 +87,10 @@ begin
 
       end;
 
-          PCKT_WRITE_DATA:
+    PCKT_WRITE_DATA:
       begin
         TA := TArray<Byte>.Create($E0, $84, $06, TR[3], TR[4], $40, $40, $00, $D4, $00);
+
         if FMyForm.chkPowLine.Checked then
           TA[8] := 1;
 

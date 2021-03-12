@@ -94,7 +94,7 @@ inherited frmUPSL: TfrmUPSL
     Width = 165
     Height = 17
     Caption = #1048#1089#1087#1088#1072#1074#1085#1086#1089#1090#1100' '#1072#1082#1082#1091#1084#1091#1083#1103#1090#1086#1088#1072
-    TabOrder = 4
+    TabOrder = 5
   end
   object lbledtBat: TLabeledEdit
     Left = 177
@@ -109,7 +109,7 @@ inherited frmUPSL: TfrmUPSL
     EditLabel.ParentBiDiMode = False
     LabelPosition = lpLeft
     LabelSpacing = 5
-    TabOrder = 5
+    TabOrder = 8
     Text = '14'
   end
   object chkAmp1: TCheckBox
@@ -118,7 +118,7 @@ inherited frmUPSL: TfrmUPSL
     Width = 165
     Height = 17
     Caption = #1045#1089#1090#1100' '#1086#1090#1074#1077#1090' '#1086#1090' '#1091#1089#1080#1083#1080#1090#1077#1083#1103' 1'
-    TabOrder = 6
+    TabOrder = 4
   end
   object chkAmp2: TCheckBox
     Left = 272
@@ -126,7 +126,7 @@ inherited frmUPSL: TfrmUPSL
     Width = 165
     Height = 17
     Caption = #1045#1089#1090#1100' '#1086#1090#1074#1077#1090' '#1086#1090' '#1091#1089#1080#1083#1080#1090#1077#1083#1103' 2'
-    TabOrder = 7
+    TabOrder = 6
   end
   object chkFire: TCheckBox
     Left = 18
@@ -134,7 +134,7 @@ inherited frmUPSL: TfrmUPSL
     Width = 360
     Height = 17
     Caption = #1054#1073#1098#1077#1076#1080#1085#1077#1085#1085#1099#1081' '#1087#1088#1080#1079#1085#1072#1082' "'#1087#1086#1078#1072#1088'" '#1086#1090' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072' '#1080' '#1091#1089#1080#1083#1080#1090#1077#1083#1077#1081' 1 '#1080' 2'
-    TabOrder = 8
+    TabOrder = 7
   end
   object medtVer: TMaskEdit
     Left = 374

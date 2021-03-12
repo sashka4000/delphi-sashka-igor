@@ -58,7 +58,7 @@ var
   FTime: TDateTime;
   Y, MM, D, H, M, S, MS: Word;
 begin
-  inherited;
+  Result := inherited;
 
   FMyForm := TfrmUPSL(MyForm);
   // преобразование указателя к типу массив байт
@@ -87,7 +87,15 @@ begin
       end;
     PCKT_CURRENT:
       begin
-        TA := TArray<Byte>.Create($D8, $85, $05, $00, upsl_ch, $BB, $0C, $08, $00);
+        upsl_b := 0;
+        upsl_ch := 0;
+        if FMyForm.cbbUPSLVyzov.ItemIndex > 0 then
+        begin
+          upsl_b := 4;
+          upsl_ch := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
+        end;
+
+        TA := TArray<Byte>.Create($D8, $85, $05, $00 + upsl_b, upsl_ch, $BB, $0C, $08, $00);
        // заполняется ТА(3)
         if FMyForm.chkNet.Checked then
           SetBit(TA[3], 7);
@@ -103,20 +111,11 @@ begin
 
         if FMyForm.chkFire.Checked then
           SetBit(TA[3], 3);
-      //  заполняется ТА(5)
 
+        //  заполняется ТА(5)
         bat := StrToFloatDef(FMyForm.lbledtBat.Text, 0);
         TA[5] := Round(bat * 1000 / 67);
 
-        upsl_b := 0;
-        upsl_ch := 0;
-        if FMyForm.cbbUPSLVyzov.ItemIndex > 0 then
-        begin
-          upsl_b := 4;
-          upsl_ch := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
-        end;
-
-        TA[3] := TA[3] + upsl_b;
       end;
     PCKT_OPER:
       begin

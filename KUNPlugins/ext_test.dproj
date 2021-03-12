@@ -94,6 +94,12 @@
             <Form>frmBase1</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="Emu.pas"/>
+        <RcItem Include="beril-steu.txt">
+            <ContainerId>ResourceItem</ContainerId>
+            <ResourceType>RCDATA</ResourceType>
+            <ResourceId>mbus1</ResourceId>
+        </RcItem>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

@@ -12,6 +12,8 @@ library ext_test;
 
 
 
+{$R *.dres}
+
 uses
   Windows,
   System.SysUtils,
@@ -24,7 +26,8 @@ uses
   dev_ksl_otis in 'dev_ksl_otis.pas' {frmKSL},
   dev_base_form in 'dev_base_form.pas' {frmBase},
   dev_kup4rs in 'dev_kup4rs.pas' {frmKUP4RS},
-  dev_mbus in 'dev_mbus.pas' {frmBase1};
+  dev_mbus in 'dev_mbus.pas' {frmBase1},
+  Emu in 'Emu.pas';
 
 {$R *.res}
 {$R style_res.res}
@@ -50,7 +53,7 @@ begin
   KUN.RegisterType(gUPSLM, 'ÓÏÑË');
   KUN.RegisterType(gKSLOtis, 'ÊÑË-OTIS');
   KUN.RegisterType(gKUP4RS, 'ÊÓÏ-4RS');
-
+  KUN.RegisterType(gMBUS, 'M-Bus òåïëîñ÷åò÷èê');
 end;
 
  exports
@@ -73,11 +76,17 @@ begin
      RS := TKSLOtis.Create (TfrmKSL);
      Result := 0;
   end;
-    if IsEqualGUID(guidClass, gKUP4RS) then
+  if IsEqualGUID(guidClass, gKUP4RS) then
   begin
      RS := TKUP4RS.Create (TfrmKUP4RS);
      Result := 0;
   end;
+  if IsEqualGUID(guidClass, gMBUS) then
+  begin
+     RS := TMBUS.Create (TfrmMBus);
+     Result := 0;
+  end;
+
 end;
 
 destructor TDriver.Destroy;
