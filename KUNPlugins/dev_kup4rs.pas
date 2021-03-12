@@ -89,23 +89,25 @@ begin
 
     PCKT_WRITE_DATA:
       begin
-        TA := TArray<Byte>.Create($E0, $84, $06, TR[3], TR[4], $40, $40, $00, $D4, $00);
+        TA := TArray<Byte>.Create($E0, $84, $06, TR[3], TR[4], $44, $44, $D4, $01, $00);
 
         if FMyForm.chkPowLine.Checked then
-          TA[8] := 1;
+          TA[7] := TA[7] or $01
+          else
+          TA[7] := TA[7] and $FE;
 
         // Читаем состояние кнопок оптопар
         if FMyForm.btnIn5.Down then
-          TA[5] := $0;
+          TA[5] := TA[5] and $BF;
 
         if FMyForm.btnIn6.Down then
-          TA[5] := $0;
+          TA[5] := TA[5] and $FB;
 
         if FMyForm.btnIn7.Down then
-          TA[6] := $0;
+          TA[6] := TA[6] and $BF;
 
         if FMyForm.btnIn8.Down then
-          TA[6] := $0;
+          TA[6] := TA[6] and $FB;
        // Читаем состояние кнопок реле
         if FMyForm.btnSw1.Down then
           TA[5] := TA[5] + $10;
@@ -120,16 +122,16 @@ begin
           TA[6] := TA[6] + $1;
         // Записываем состояние концентратора
         if FMyForm.btnIn1.Down then
-          TA[7] := TA[7] xor $04;
+          TA[7] := TA[7] and $FB;
 
         if FMyForm.btnIn2.Down then
-          TA[7] := TA[7] xor $10;
+          TA[7] := TA[7] and $EF;
 
         if FMyForm.btnIn3.Down then
-          TA[7] := TA[7] xor $40;
+          TA[7] := TA[7] and $BF;
 
         if FMyForm.btnIn4.Down then
-          TA[7] := TA[7] xor $80;
+          TA[7] := TA[7] and $7F;
 
        // Читаем команды во входном пакете
         for i := 0 to 1 do
@@ -148,6 +150,10 @@ begin
                 TA[5 + i] := TA[5 + i] or $01;
               end;
 
+            $10:
+              begin
+                TA[5 + i] := TA[5 + i] or $10;
+              end;
             $11:
               begin
                 TA[5 + i] := TA[5 + i] or $11;
@@ -161,34 +167,39 @@ begin
                 TA[5 + i] := TA[5 + i] or $11;
               end;
 
+            $20:
+              begin
+                TA[5 + i] := TA[5 + i] and $EF;
+              end;
             $21:
               begin
                 TA[5 + i] := TA[5 + i] or $01 and $EF;
               end;
             $22:
               begin
-                 TA[5 + i] := TA[5 + i] and $EE;
+                TA[5 + i] := TA[5 + i] and $EE;
               end;
             $23:
               begin
                 TA[5 + i] := TA[5 + i] or $01 and $EF;
               end;
 
+            $30:
+              begin
+                TA[5 + i] := TA[5 + i] or $30;
+              end;
             $31:
               begin
-              TA[5 + i] := TA[5 + i] or $11;
+                TA[5 + i] := TA[5 + i] or $11;
               end;
             $32:
               begin
-              TA[5 + i] := TA[5 + i] or $10 and $FE;
+                TA[5 + i] := TA[5 + i] or $10 and $FE;
               end;
             $33:
               begin
-               TA[5 + i] := TA[5 + i] or $11;
+                TA[5 + i] := TA[5 + i] or $11;
               end;
-
-          else
-            Exit;
           end;
         end;
 
