@@ -33,6 +33,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    procedure TimerMessage (var T:TMessage); message WM_USER  + 1;
   end;
 
  TKUP4RS = class (TBaseDevice)
@@ -46,6 +47,16 @@ implementation
 
 {$R *.dfm}
 Uses IdGlobal;
+
+type
+ TWaitTime = class (TThread)
+  FBtn : TSpeedButton;
+  FHWND : HWND;
+  constructor Create (btn : TSpeedButton; w : hwnd);
+  procedure Execute; override;
+ end;
+
+
 { TKUP4RS }
 
 function TKUP4RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer;
@@ -203,6 +214,9 @@ begin
           end;
         end;
 
+        // Пример команды отжатия кнопки реле btnSW1 через 3 секунды
+        //  TWaitTime.Create(FMyForm.btnSW1, FMyForm.Handle);
+
       end;
 
     PCKT_VERSION:
@@ -244,6 +258,30 @@ begin
     chkPowLine.Caption := 'Питание от внешнего источника'
     else
      chkPowLine.Caption := 'Питание от сети'
+end;
+
+{ TWaitTime }
+
+constructor TWaitTime.Create(btn: TSpeedButton; w: hwnd);
+begin
+  FBtn := btn;
+  FHWND := W;
+  inherited Create;
+end;
+
+procedure TWaitTime.Execute;
+begin
+  // освободиться после завершения потока
+  FreeOnTerminate := True;
+  // поспать 3 секунды
+  sleep (3000);
+  // послать сообщение на отжатие кнопки
+  PostMessage(FHWND, WM_USER + 1, Integer(FBTN), 0);
+end;
+
+procedure TfrmKUP4RS.TimerMessage(var T: TMessage);
+begin
+  TSpeedButton(T.WParam).Down := False;
 end;
 
 end.

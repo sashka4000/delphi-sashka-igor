@@ -27,7 +27,9 @@ uses
   dev_base_form in 'dev_base_form.pas' {frmBase},
   dev_kup4rs in 'dev_kup4rs.pas' {frmKUP4RS},
   dev_mbus in 'dev_mbus.pas' {frmBase1},
-  Emu in 'Emu.pas';
+  Emu in 'Emu.pas',
+  dev_modbus in 'dev_modbus.pas' {frmModbus},
+  CRCUnit in 'CRCUnit.pas';
 
 {$R *.res}
 {$R style_res.res}
@@ -52,8 +54,13 @@ begin
       // Для создания устройства приложение вызовет CreateDevice
   KUN.RegisterType(gUPSLM, 'УПСЛ');
   KUN.RegisterType(gKSLOtis, 'КСЛ-OTIS');
-  KUN.RegisterType(gKUP4RS, 'КУП-4RS');
-  KUN.RegisterType(gMBUS, 'M-Bus теплосчетчик');
+  KUN.RegisterType(gMBUS, 'M-Bus');
+  KUN.RegisterType(gModbus, 'Modbus');
+  // Устройства, находящиеся в разработке  будут создаваться
+  // только в режиме DEBUG сборки
+  {$IFDEF DEBUG}
+    KUN.RegisterType(gKUP4RS, 'КУП-4RS');
+  {$ENDIF}
 end;
 
  exports
@@ -86,7 +93,11 @@ begin
      RS := TMBUS.Create (TfrmMBus);
      Result := 0;
   end;
-
+  if IsEqualGUID(guidClass, gModbus) then
+  begin
+     RS := TModbus.Create (TfrmModbus);
+     Result := 0;
+  end;
 end;
 
 destructor TDriver.Destroy;

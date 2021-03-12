@@ -9,19 +9,13 @@ uses
 
 type
   TfrmKSL = class(TfrmBase)
-    chkMass15: TCheckBox;
-    chkData: TCheckBox;
     cbbError: TComboBox;
-    edt1: TEdit;
-    seKCSInterface: TSpinEdit;
     chkNoLift: TCheckBox;
-    seKSLNumber: TSpinEdit;
-    cbbLift: TComboBox;
+    seNumber: TSpinEdit;
     seFloor: TSpinEdit;
-    lbl11: TLabel;
-    lbl10: TLabel;
     lbl8: TLabel;
-    lbl7: TLabel;
+    lbl17: TLabel;
+    lbl1: TLabel;
     procedure chkNoLiftClick(Sender: TObject);
   private
     { Private declarations }
@@ -37,6 +31,7 @@ const
   gKSLOtis : TGUID =  '{61542E8A-1835-4D17-8509-980C5A7E56E4}';  // Глобальный идентификатор, генерируются по Ctrl+Shift+G
 
 implementation
+Uses System.DateUtils;
 
 {$R *.dfm}
 
@@ -45,148 +40,88 @@ implementation
 function TKSLOTis.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer;
   var AnswerSize: Integer): HRESULT;
 var
-FMyForm : TfrmKSL;
+  FMyForm : TfrmKSL;
+  TR, TA: TArray<Byte>;
+  FTime: TDateTime;
+  Y, MM, D, H, M, S, MS: Word;
 begin
-  inherited;
-  {
-  // Внимание! Проверка на то, что устройства нет, делается внизу
-   // перед send
+  Result := inherited;
 
-   if TA[0] = ($D0 + seKSLNumber.Value)  then
-   begin
-     if (IO.InterfaceNumber <> seKCSInterface.Value+1) or
-      (IO.Baud <> 9600) or (IO.Char <> 8) then
-     begin
-       Log ('!!! ОШИБКА Некорректный интерфейс');
-       Sleep(TimeOut);
-       Exit;
-      end;
-     rsType := rsKSL;
-     LastKCSUpdateTime := Now;
-   end;
 
-   if RSType = rsNone then
-     Exit;
+  FMyForm := TfrmKSL(MyForm);
 
-   tmp := '';
+  // преобразование указателя к типу массив байт
+  TR := TArray<Byte>(pd);
 
-   if TA[1] = $01  then
-   begin
-      tmp := ' (тип RS-устройства)';
-      if RSTYpe = rsKSL then
+  // проверяю CRC пакета
+  if GET_CRC(TR, PacketSize) <> TR[PacketSize - 1] then
+    Exit;
+  // проверяю адрес устройства в первом байте
+  if TR[0] <> $D0 + FMyForm.seNumber.Value then
+    Exit;
+
+  case TR[1] of
+    PCKT_TYPE:
       begin
-       if chkData.Checked
-       then
-         TA := TArray<Byte>.Create ($D0,$81,$03,$07,$03,$02,$A0)
-       else
-         TA := TArray<Byte>.Create ($D0,$81,$03,$07,$01,$02,$A0);
+        TA := TArray<Byte>.Create ($D0,$81,$03,$07,$01,$02,$A0);
       end;
-      bSendAnswer := True;
-   end;
-
-   if TA[1] = $0D  then
-   begin
-      tmp := ' (версия прошивки)';
-      if RSType = rsKSL then
+    PCKT_READ_TIME:
+      begin
+     //Чтение времени устройства
+        FTime := (Now - FCompTime) + FDevTime;
+        DecodeDate(FTime, Y, MM, D);
+        DecodeTime(FTime, H, M, S, MS);
+        TA := TArray<Byte>.Create($D8, $83, $06, S, M, H, D, MM, (Y - 2000), $00);
+      end;
+    PCKT_WRITE_TIME:
+      begin
+     //Запись времени устройства
+        FDevTimeSync := True;
+        FDevTime := EncodeDateTime(TR[8] + 2000, TR[7], TR[6], TR[5], TR[4], TR[3], 0);
+        FCompTime := Now;
+        DecodeDate(FDevTime, Y, MM, D);
+        DecodeTime(FDevTime, H, M, S, MS);
+        TA := TArray<Byte>.Create($D8, $82, $06, S, M, H, D, MM, (Y - 2000), $00);
+      end;
+    PCKT_VERSION:
+      begin
         TA := TArray<Byte>.Create ($D0,$8D,$02,$01,$10,$00);
-      bSendAnswer := True;
-   end;
-
-   if (RSType = rsKSL) and (P_Selected >= 0) then
-   begin
-       if chkNoLift.Checked
-        then Q.SulConnected := 0
-        else Q.SulConnected := 1;
-       if chkMass15.Checked
-        then Q.Mass15 := 1
-        else Q.Mass15 := 0;
-       Q.Floor := seFloor.Value;
-       Q.Door1 := 0;
-       Q.Door2 := 0;
-       Q.Door3 := 0;
-       Q.ErrNum := cbbError.ItemIndex;
-   end;
-
-
-   if TA[1] = $05  then
-   begin
-      tmp := ' (текущее состояние)';
-     // Текущее состояние - без ответа
-     if (RSType = rsKSL) and (P_Selected >= 0) then
-     begin
-       Q.DataType := $05;
-       if P[P_Selected].Driver.GetAnswerPacket(Q,@Buff[0],255,Cnt) = 0 then
-       begin
-         TA := TArray<Byte>.Create(Cnt+3);
-         TA[0] := $D0;
-         TA[1] := $85;
-         for I := 0 to Cnt do
-          TA[i + 2] := Buff [i];
-         bSendAnswer := True;
-       end;
-     end;
-   end;
-
-   if TA[1] = $09  then
-   begin
-       tmp := ' (оперативные данные)';
-       if RSType = rsKSL then
-       begin
-         if P_Selected >= 0 then
-         begin
-           Q.DataType := $09;
-           if P[P_Selected].Driver.GetAnswerPacket(Q,@Buff[0],255,Cnt) = 0 then
-           begin
-             TA := TArray<Byte>.Create(Cnt+3);
-             TA[0] := $D0;
-             TA[1] := $89;
-             for I := 0 to Cnt do
-               TA[i + 2] := Buff [i];
-             bSendAnswer := True;
-           end;
-         end else
-         begin
-           bSendAnswer := True;
-           if chkNoLift.Checked
+      end;
+    PCKT_OPER:
+      begin
+         if FMyForm.chkNoLift.Checked
            then
               TA := TArray<Byte>.Create ($D0,$89,$01,$08,$00)
            else
            begin
-             case cbbError.ItemIndex of
-              0: TA := TArray<Byte>.Create ($D0,$89,$05,$08,seFloor.Value,$6F,$2B,$05,$00);   // OTIS
-              1: TA := TArray<Byte>.Create ($D0,$89,$07,$08,seFloor.Value,$6F,$2B,$05,$6D,$B6,$00);
-              2: TA := TArray<Byte>.Create ($D0,$89,$07,$08,seFloor.Value,$6F,$2B,$05,$DC,$2C,$00);
+             case FMyForm.cbbError.ItemIndex of
+              0: TA := TArray<Byte>.Create ($D0,$89,$05,$08,FMyForm.seFloor.Value,$6F,$2B,$05,$00);   // OTIS
+              1: TA := TArray<Byte>.Create ($D0,$89,$07,$08,FMyForm.seFloor.Value,$6F,$2B,$05,$6D,$B6,$00);
+              2: TA := TArray<Byte>.Create ($D0,$89,$07,$08,FMyForm.seFloor.Value,$6F,$2B,$05,$DC,$2C,$00);
              end;
            end;
-         end;
-       end;
+      end;
+     else
+       Exit;
+  end;
 
-   end;
+  // устанавливаю правильный адрес устройства в первый байт
+  TA[0] := $D0 + FMyForm.seNumber.Value;
 
-   // Нет КСЛ
-   if (rsType = rsKSL) and (cbbLift.ItemIndex = 0) then
-   begin
-     sleep (TimeOut);
-     Exit;
-   end;
+  AnswerSize := Length(TA);
 
-   if bSendAnswer then
-   begin
-      if RSType = rsKSL then
-       TA[0] := $D0 + seKSLNumber.Value;
-      CRC (TA);
-      if seRSDelay.Value > 0 then
-       sleep (seRSDelay.Value);
-      TA_HEADER := TArray <Byte>.Create (TA[0],TA[1],TA[2]);
-      AContext.Connection.IOHandler.Write(TA_HEADER);
-      Log ('5000 (1)>> ' + ByteArrayToStr(TA_HEADER) + tmp);
-      if seRSDelay2.Value > 0 then
-       sleep (seRSDelay2.Value);
-      TA_HEADER := Copy(TA,3,Length(TA)-3);
-      Log ('5000 (2)>> ' + ByteArrayToStr(TA_HEADER) + tmp);
-      AContext.Connection.IOHandler.Write(TA_HEADER);
-   end
-  }
+  // проверяю что ответ не превысил размер буфера
+  if AnswerSize > MaxSize then
+  begin
+    Result := 1;
+    Exit;
+  end;
+
+  // подписываю буфер
+  CRC(TA, AnswerSize);
+
+  // записываю буфер ответа во входящий буфер
+  move(TA[0], TR[0], AnswerSize);
 end;
 
 procedure TfrmKSL.chkNoLiftClick(Sender: TObject);

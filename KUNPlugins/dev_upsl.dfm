@@ -101,7 +101,6 @@ inherited frmUPSL: TfrmUPSL
     Top = 214
     Width = 50
     Height = 21
-    Alignment = taRightJustify
     EditLabel.Width = 153
     EditLabel.Height = 13
     EditLabel.BiDiMode = bdLeftToRight

@@ -2,10 +2,23 @@
  {
   "Int": {
    "InterfaceNumber": 1,
+   "Parity": "",
+   "Stop": "",
    "Char": 0,
    "Baud": 9600
   },
   "Active": true,
   "ID": "{24D56126-A92C-417A-AA7A-9BCB8551D775}",
   "DevName": "сояк"
+ },{
+  "Int": {
+   "InterfaceNumber": 1,
+   "Parity": "",
+   "Stop": "",
+   "Char": 0,
+   "Baud": 9600
+  },
+  "Active": true,
+  "ID": "{1ADE3ADA-EA57-4663-9E1D-4DEB1A4CE17D}",
+  "DevName": "Modbus"
  }]

@@ -95,6 +95,11 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="Emu.pas"/>
+        <DCCReference Include="dev_modbus.pas">
+            <Form>frmModbus</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="CRCUnit.pas"/>
         <RcItem Include="beril-steu.txt">
             <ContainerId>ResourceItem</ContainerId>
             <ResourceType>RCDATA</ResourceType>
