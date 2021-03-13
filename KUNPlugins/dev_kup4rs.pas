@@ -3,9 +3,9 @@ unit dev_kup4rs;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, ext_global, dev_base_form, Vcl.StdCtrls, Vcl.Buttons,
-  Vcl.Samples.Spin, Vcl.Mask;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, ext_global,
+  dev_base_form, Vcl.StdCtrls, Vcl.Buttons, Vcl.Samples.Spin, Vcl.Mask;
 
 type
   TfrmKUP4RS = class(TfrmBase)
@@ -33,35 +33,35 @@ type
     { Private declarations }
   public
     { Public declarations }
-    procedure TimerMessage (var T:TMessage); message WM_USER  + 1;
+    procedure TimerMessage(var T: TMessage); message WM_USER + 1;
   end;
 
- TKUP4RS = class (TBaseDevice)
-   function OnDataReceive (pd : PByte; PacketSize : Integer; MaxSize : Integer;  var AnswerSize : Integer) : HRESULT; override; stdcall;
+  TKUP4RS = class(TBaseDevice)
+    function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
 
 const
-  gKUP4RS  : TGUID =  '{FA28155C-2CF0-4A5A-A4F9-723656F33218}';  // Глобальный идентификатор, генерируются по Ctrl+Shift+G
+  gKUP4RS: TGUID = '{FA28155C-2CF0-4A5A-A4F9-723656F33218}';  // Глобальный идентификатор, генерируются по Ctrl+Shift+G
 
 implementation
 
 {$R *.dfm}
-Uses IdGlobal;
+uses
+  IdGlobal;
 
 type
- TWaitTime = class (TThread)
-  FBtn : TSpeedButton;
-  FHWND : HWND;
-  constructor Create (btn : TSpeedButton; w : hwnd);
-  procedure Execute; override;
- end;
+  TWaitTime = class(TThread)
+    FBtn: TSpeedButton;
+    FHWND: HWND;
+    constructor Create(btn: TSpeedButton; w: hwnd);
+    procedure Execute; override;
+  end;
 
 
 { TKUP4RS }
 
-function TKUP4RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer;
-  var AnswerSize: Integer): HRESULT;
-  var
+function TKUP4RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
+var
   TR, TA: TArray<Byte>;
   bSendAnswer: Boolean;
   upsl_b, upsl_ch: Byte;
@@ -70,7 +70,7 @@ function TKUP4RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer;
   bat: Double;
   batInt: Integer;
   i: Integer;
-  ver : string;
+  ver: string;
   FTime: TDateTime;
   Y, MM, D, H, M, S, MS: Word;
 begin
@@ -103,113 +103,120 @@ begin
         TA := TArray<Byte>.Create($E0, $84, $06, TR[3], TR[4], $44, $44, $D4, $01, $00);
 
         if FMyForm.chkPowLine.Checked then
-          TA[7] := TA[7] or $01
-          else
-          TA[7] := TA[7] and $FE;
-
+          SetBit(TA[7], 0);                //     0 -> 1
+//        else
+//          ResetBit(TA[7], 0);
         // Читаем состояние кнопок оптопар
         if FMyForm.btnIn5.Down then
-          TA[5] := TA[5] and $BF;
+          ResetBit(TA[5], 6);              //     6 -> 0
 
         if FMyForm.btnIn6.Down then
-          TA[5] := TA[5] and $FB;
+          ResetBit(TA[5], 3);              //     3 -> 0
 
         if FMyForm.btnIn7.Down then
-          TA[6] := TA[6] and $BF;
+          ResetBit(TA[6], 6);              //     6 -> 0
 
         if FMyForm.btnIn8.Down then
-          TA[6] := TA[6] and $FB;
+          ResetBit(TA[6], 3);              //     3 -> 0
        // Читаем состояние кнопок реле
         if FMyForm.btnSw1.Down then
-          TA[5] := TA[5] + $10;
+          SetBit(TA[5], 4);                //     4 -> 1
 
         if FMyForm.btnSw2.Down then
-          TA[5] := TA[5] + $1;
+          SetBit(TA[5], 0);                //     0 -> 1
 
         if FMyForm.btnSw3.Down then
-          TA[6] := TA[6] + $10;
+          SetBit(TA[6], 4);                //     4 -> 1
 
         if FMyForm.btnSw4.Down then
-          TA[6] := TA[6] + $1;
+          SetBit(TA[6], 0);                //     0 -> 1
         // Записываем состояние концентратора
         if FMyForm.btnIn1.Down then
-          TA[7] := TA[7] and $FB;
+          ResetBit(TA[7], 2);              //     2 -> 0
 
         if FMyForm.btnIn2.Down then
-          TA[7] := TA[7] and $EF;
+          ResetBit(TA[7], 4);              //     4 -> 0
 
         if FMyForm.btnIn3.Down then
-          TA[7] := TA[7] and $BF;
+          ResetBit(TA[7], 6);              //     6 -> 0
 
         if FMyForm.btnIn4.Down then
-          TA[7] := TA[7] and $7F;
-
+          ResetBit(TA[7], 7);              //     7 -> 0
        // Читаем команды во входном пакете
         for i := 0 to 1 do
         begin
           case TR[3 + i] of
             $01:
               begin
-                TA[5 + i] := TA[5 + i] or $01;
+                SetBit(TA[5 + i], 0);
               end;
             $02:
               begin
-                TA[5 + i] := TA[5 + i] and $FE;
+                ResetBit(TA[5 + i], 0);
               end;
             $03:
               begin
-                TA[5 + i] := TA[5 + i] or $01;
+                SetBit(TA[5 + i], 0);
               end;
 
             $10:
               begin
-                TA[5 + i] := TA[5 + i] or $10;
+                SetBit(TA[5 + i], 4);
               end;
             $11:
               begin
-                TA[5 + i] := TA[5 + i] or $11;
+                SetBit(TA[5 + i], 0);
+                SetBit(TA[5 + i], 4);
               end;
             $12:
               begin
-                 TA[5 + i] := TA[5 + i] and $FE or $08;
+                ResetBit(TA[5 + i], 0);
+                SetBit(TA[5 + i], 4);
               end;
             $13:
               begin
-                TA[5 + i] := TA[5 + i] or $11;
+                SetBit(TA[5 + i], 0);
+                SetBit(TA[5 + i], 4);
               end;
 
             $20:
               begin
-                TA[5 + i] := TA[5 + i] and $EF;
+                ResetBit(TA[5 + i], 4);
               end;
             $21:
               begin
-                TA[5 + i] := TA[5 + i] or $01 and $EF;
+                ResetBit(TA[5 + i], 4);
+                SetBit(TA[5 + i], 0);
               end;
             $22:
               begin
-                TA[5 + i] := TA[5 + i] and $EE;
+                ResetBit(TA[5 + i], 4);
+                ResetBit(TA[5 + i], 0);
               end;
             $23:
               begin
-                TA[5 + i] := TA[5 + i] or $01 and $EF;
+                ResetBit(TA[5 + i], 4);
+                SetBit(TA[5 + i], 0);
               end;
 
             $30:
               begin
-                TA[5 + i] := TA[5 + i] or $30;
+                SetBit(TA[5 + i], 4);
               end;
             $31:
               begin
-                TA[5 + i] := TA[5 + i] or $11;
+                SetBit(TA[5 + i], 0);
+                SetBit(TA[5 + i], 4);
               end;
             $32:
               begin
-                TA[5 + i] := TA[5 + i] or $10 and $FE;
+                ResetBit(TA[5 + i], 0);
+                SetBit(TA[5 + i], 4);
               end;
             $33:
               begin
-                TA[5 + i] := TA[5 + i] or $11;
+                SetBit(TA[5 + i], 0);
+                SetBit(TA[5 + i], 4);
               end;
           end;
         end;
@@ -253,7 +260,7 @@ end;
 
 procedure TfrmKUP4RS.chkPowLineClick(Sender: TObject);
 begin
-//  inherited;
+  inherited;
  if chkPowLine.Checked then
     chkPowLine.Caption := 'Питание от внешнего источника'
     else

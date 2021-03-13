@@ -19,6 +19,8 @@ function GET_CRC (TA : TArray<Byte>; Len : Integer) : Byte;
 procedure CRC (TA : TArray<Byte>;Len : Integer);
 // установка бита
 procedure SetBit(var Src: Byte; bit: Integer);
+// сброс бита
+procedure ResetBit(var Src : Byte; bit: Integer);
 
 implementation
 
@@ -38,10 +40,15 @@ begin
  TA[Len-1] := GET_CRC(TA,Len);
 end;
 
+
 procedure SetBit(var Src : Byte; bit: Integer);
 begin
   Src := Src or (1 shl bit);
 end;
 
+procedure ResetBit(var Src : Byte; bit: Integer);
+begin
+  Src := Src and not (1 shl Bit);
+end;
 end.
 
