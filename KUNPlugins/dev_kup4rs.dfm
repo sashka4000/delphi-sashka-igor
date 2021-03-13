@@ -24,8 +24,8 @@ inherited frmKUP4RS: TfrmKUP4RS
   end
   object btnIn1: TSpeedButton
     AlignWithMargins = True
-    Left = 18
-    Top = 115
+    Left = 19
+    Top = 117
     Width = 40
     Height = 30
     AllowAllUp = True
@@ -34,8 +34,8 @@ inherited frmKUP4RS: TfrmKUP4RS
   end
   object btnIn2: TSpeedButton
     AlignWithMargins = True
-    Left = 64
-    Top = 115
+    Left = 65
+    Top = 117
     Width = 40
     Height = 30
     AllowAllUp = True
@@ -44,8 +44,8 @@ inherited frmKUP4RS: TfrmKUP4RS
   end
   object btnIn3: TSpeedButton
     AlignWithMargins = True
-    Left = 110
-    Top = 115
+    Left = 111
+    Top = 117
     Width = 40
     Height = 30
     AllowAllUp = True
@@ -54,8 +54,8 @@ inherited frmKUP4RS: TfrmKUP4RS
   end
   object btnIn4: TSpeedButton
     AlignWithMargins = True
-    Left = 156
-    Top = 115
+    Left = 157
+    Top = 117
     Width = 40
     Height = 30
     AllowAllUp = True
@@ -64,8 +64,8 @@ inherited frmKUP4RS: TfrmKUP4RS
   end
   object btnIn5: TSpeedButton
     AlignWithMargins = True
-    Left = 202
-    Top = 115
+    Left = 203
+    Top = 117
     Width = 40
     Height = 30
     AllowAllUp = True
@@ -74,8 +74,8 @@ inherited frmKUP4RS: TfrmKUP4RS
   end
   object btnIn6: TSpeedButton
     AlignWithMargins = True
-    Left = 248
-    Top = 116
+    Left = 249
+    Top = 117
     Width = 40
     Height = 30
     AllowAllUp = True
@@ -84,8 +84,8 @@ inherited frmKUP4RS: TfrmKUP4RS
   end
   object btnIn7: TSpeedButton
     AlignWithMargins = True
-    Left = 294
-    Top = 115
+    Left = 295
+    Top = 117
     Width = 40
     Height = 30
     AllowAllUp = True
@@ -94,8 +94,8 @@ inherited frmKUP4RS: TfrmKUP4RS
   end
   object btnIn8: TSpeedButton
     AlignWithMargins = True
-    Left = 340
-    Top = 115
+    Left = 341
+    Top = 117
     Width = 40
     Height = 30
     AllowAllUp = True
@@ -182,8 +182,9 @@ inherited frmKUP4RS: TfrmKUP4RS
     Top = 272
     Width = 199
     Height = 17
-    Caption = #1055#1080#1090#1072#1085#1080#1077' '#1086#1090' '#1089#1077#1090#1080
+    Caption = #1055#1080#1090#1072#1085#1080#1077' '#1086#1090' '#1074#1085#1077#1096#1085#1077#1075#1086' '#1080#1089#1090#1086#1095#1085#1080#1082#1072
+    Checked = True
+    State = cbChecked
     TabOrder = 2
-    OnClick = chkPowLineClick
   end
 end
