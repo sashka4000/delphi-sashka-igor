@@ -156,22 +156,22 @@ begin
             b2 := FMyForm.btnSw4;
           end;
 
-          if (TR[3 + i] and $01) = $01 then
-          begin
-            SetBit(TA[5 + i], 0);
+          if (((TR[3 + i] and $01) or (TR[3 + i] and $CC)) and $0F) = $01 then  // Делаем маски
+          begin                                                                 // 1100 1100 - проверяем на наличее более $33
+            SetBit(TA[5 + i], 0);                                               // маскируем старшие 4 бита 0000 1111
             b2.Down := True;
             if (TR[3 + i] and $03) = $03 then
               TWaitTime.Create(b2, FMyForm.Handle);
           end;
 
 
-          if (TR[3 + i] and $03) = $02 then
+          if (((TR[3 + i] and $03) or (TR[3 + i] and $CC)) and $0F) = $02 then
           begin
                 ResetBit(TA[5 + i], 0);
                 b2.Down := False;
           end;
 
-            if (TR[3 + i] and $10) = $10 then
+            if (((TR[3 + i] and $10) or (TR[3 + i] and $CC)) and $F0) = $10 then
           begin
             SetBit(TA[5 + i], 0);
             b1.Down := True;
@@ -180,7 +180,7 @@ begin
           end;
 
 
-          if (TR[3 + i] and $30) = $20 then
+          if (((TR[3 + i] and $30) or (TR[3 + i] and $CC)) and $F0) = $20 then
           begin
                 ResetBit(TA[5 + i], 0);
                 b1.Down := False;
