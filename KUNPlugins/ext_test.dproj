@@ -100,6 +100,10 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="CRCUnit.pas"/>
+        <DCCReference Include="dev_kir16rs.pas">
+            <Form>frmKIR16RS</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <RcItem Include="beril-steu.txt">
             <ContainerId>ResourceItem</ContainerId>
             <ResourceType>RCDATA</ResourceType>

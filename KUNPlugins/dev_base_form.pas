@@ -29,6 +29,7 @@ type
    private
     FCB : TPGUSensorCallBack;
     FormClass : TFrmBaseClass;
+    FCreateTime : TDateTime;
    public
    MyForm : TfrmBase;
    FDevTime : TDateTime;
@@ -40,6 +41,7 @@ type
    function DestroyDevice : HRESULT; stdcall;
    function OnDataReceive (pd : PByte; PacketSize : Integer; MaxSize : Integer;  var AnswerSize : Integer) : HRESULT; virtual; stdcall;
    property CallBack : TPGUSensorCallBack read FCB;
+   property CreateDeviceTime : TDateTime read FCreateTime;
   end;
 
 implementation
@@ -53,6 +55,7 @@ begin
   FormClass := F;
   FDevTime := EncodeDate(2001,1,1) + EncodeTime(0,0,0,0);
   FCompTime := Now;
+  FCreateTime := Now;
   FDevTimeSync := False;
 end;
 

@@ -29,7 +29,8 @@ uses
   dev_mbus in 'dev_mbus.pas' {frmBase1},
   Emu in 'Emu.pas',
   dev_modbus in 'dev_modbus.pas' {frmModbus},
-  CRCUnit in 'CRCUnit.pas';
+  CRCUnit in 'CRCUnit.pas',
+  dev_kir16rs in 'dev_kir16rs.pas' {frmKIR16RS};
 
 {$R *.res}
 {$R style_res.res}
@@ -56,10 +57,11 @@ begin
   KUN.RegisterType(gKSLOtis, 'КСЛ-OTIS');
   KUN.RegisterType(gMBUS, 'M-Bus');
   KUN.RegisterType(gModbus, 'Modbus');
+  KUN.RegisterType(gKUP4RS, 'КУП-4RS');
   // Устройства, находящиеся в разработке  будут создаваться
   // только в режиме DEBUG сборки
   {$IFDEF DEBUG}
-    KUN.RegisterType(gKUP4RS, 'КУП-4RS');
+     KUN.RegisterType(gKIR16RS, 'КИР-16RS');
   {$ENDIF}
 end;
 
@@ -96,6 +98,11 @@ begin
   if IsEqualGUID(guidClass, gModbus) then
   begin
      RS := TModbus.Create (TfrmModbus);
+     Result := 0;
+  end;
+  if IsEqualGUID(guidClass, gKIR16RS) then
+  begin
+     RS := TKIR16RS.Create (TfrmKIR16RS);
      Result := 0;
   end;
 end;
