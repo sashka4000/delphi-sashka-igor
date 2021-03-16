@@ -17,6 +17,8 @@ type
     { Private declarations }
   public
     { Public declarations }
+    Cash : Variant;
+    procedure UpdateListValue (var T :TMessage); message WM_USER + 1;
   end;
 
   TModbus = class(TBaseDevice)
@@ -63,6 +65,12 @@ var
   VF : Single;
   vS : SHORT;
   FS: TFormatSettings;
+  procedure SetError;
+  begin
+     TA[1] := TA[1] + $80;
+     TA[2] := $02;
+     SetLength(TA,5);
+  end;
 begin
  Result := inherited;
 
@@ -98,12 +106,8 @@ begin
          SetLength(TA,Length(TA)-2);
       end
       else
-      begin
-        TA[1] := TA[1] + $80;
-        TA[2] := $02;
-        SetLength(TA,5);
-      end;
-      end;
+       SetError;
+     end;
    end;
    $03 :
    begin
@@ -138,11 +142,7 @@ begin
          SwapBuffer(TA,3,4);
         end;
       else
-      begin
-        TA[1] := TA[1] + $80;
-        TA[2] := $02;
-        SetLength(TA,5);
-      end;
+       SetError;
       end;
    end;
    $04 :
@@ -157,19 +157,77 @@ begin
          SetLength(TA,Length(TA)-2);
       end
       else
-      begin
-        TA[1] := TA[1] + $80;
-        TA[2] := $02;
-        SetLength(TA,5);
+       SetError;
       end;
+   end;
+   $05 :
+   begin
+     case mbAddress of
+      0,1 :
+      begin
+         if TR[4] = $FF
+         then
+           vW := 1
+         else
+           vW := 0;
+         FMyForm.Cash := vW;
+         PostMessage (FMyForm.Handle,WM_USER+1, 1,1+ mbAddress);
+         SetLength(TA,PacketSize);
+         Move(TR[0],TA[0],PacketSize);
+      end
+      else
+       SetError;
+     end;
+    end;
+    $10 :
+    begin
+     case mbAddress of
+      0 :
+      begin
+         vW := 0;
+         Move(TR[7],vW,2);
+         vW := Swap(vW);
+         FMyForm.Cash := vW;
+         PostMessage (FMyForm.Handle,WM_USER+1, 1,3);
+         SetLength(TA,8);
+         Move(TR[0],TA[0],8);
+      end;
+      1 :
+        begin
+         vS := 0;
+         Move(TR[7],vS,2);
+         vS := Swap(vS);
+         FMyForm.Cash := vS;
+         PostMessage (FMyForm.Handle,WM_USER+1, 1,4);
+         SetLength(TA,8);
+         Move(TR[0],TA[0],8);
+        end;
+      2 :
+       begin
+         vF := 0;
+         SwapBuffer(TR,7,4);
+         Move(TR[7],vF,4);
+         FMyForm.Cash := vF;
+         PostMessage (FMyForm.Handle,WM_USER+1, 1,5);
+         SetLength(TA,8);
+         Move(TR[0],TA[0],8);
+        end;
+      4 :
+        begin
+         vI := 0;
+         SwapBuffer(TR,7,4);
+         Move(TR[7],vI,4);
+         FMyForm.Cash := vI;
+         PostMessage (FMyForm.Handle,WM_USER+1, 1,6);
+         SetLength(TA,8);
+         Move(TR[0],TA[0],8);
+        end;
+      else
+       SetError;
       end;
    end
-    else
-      begin
-        TA[1] := TA[1] + $80;
-        TA[2] := $02;
-        SetLength(TA,5);
-      end;
+   else
+       SetError;
   end;
 
   TA[0] := FMyForm.seNumber.Value;
@@ -205,6 +263,13 @@ begin
       T[Pos + Count - 1 - i] := b;
    end;
 
+end;
+
+{ TfrmModbus }
+
+procedure TfrmModbus.UpdateListValue(var T: TMessage);
+begin
+  lst1.Cells [T.WParam,T.LParam] :=  Cash;
 end;
 
 end.
