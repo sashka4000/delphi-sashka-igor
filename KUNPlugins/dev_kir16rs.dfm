@@ -1,6 +1,7 @@
 inherited frmKIR16RS: TfrmKIR16RS
   Caption = 'frmKIR16RS'
   ClientHeight = 387
+  OnCreate = FormCreate
   ExplicitHeight = 387
   PixelsPerInch = 96
   TextHeight = 13
@@ -60,15 +61,16 @@ inherited frmKIR16RS: TfrmKIR16RS
     TabOrder = 1
     Value = 0
   end
-  object strngrdLoop: TStringGrid
+  object SG: TStringGrid
     Left = 18
     Top = 40
-    Width = 251
+    Width = 250
     Height = 292
-    ColCount = 4
-    DefaultColWidth = 60
+    ColCount = 3
+    DefaultColWidth = 105
     DefaultRowHeight = 16
     RowCount = 17
+    ScrollBars = ssNone
     TabOrder = 2
   end
   object cbbPow: TComboBox
