@@ -44,7 +44,7 @@ uses
 function TKIR16RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
   TR, TA: TArray<Byte>;
-  ValueLoop : array of Cardinal;  // выделение памяти для хранения данных сумматоров входов
+  ValueLoop : Cardinal;
   bSendAnswer: Boolean;
 //  tmp: string;
   FMyForm: TfrmKIR16RS;
@@ -108,7 +108,6 @@ begin
     PCKT_CURRENT:
       begin
         FDevBattery := FMyForm.cbbPow.ItemIndex;
-        SetLength(ValueLoop, 16);
         SetLength(TA, 83);
         FTime := (Now - FCompTime) + FDevTime;
         DecodeDate(FDevTime, Y, MM, D);
@@ -158,14 +157,15 @@ begin
        //Сумматоры
         for i := 0 to 15 do
         begin
-          ValueLoop[i] := FMyForm.SG.Cells[1, i + 1].ToInt64;
-          Move(ValueLoop[i], TA[9 + (4 * i)], 4);
+          ValueLoop := StrToIntDef(FMyForm.SG.Cells[1, i + 1],0);
+          Move(ValueLoop, TA[9 + (4 * i)], 4);
         end;
         // наработка TA[73]
-        FTime := Now - CreateDeviceTime;
-        DecodeDate(FTime, Y, MM, D);
-        DecodeTime(FTime, H, M, S, MS);
-        FDevTimeDifference:=
+        FDevTimeDifference := MinutesBetween(Now, CreateDeviceTime);
+        TA[73] := FDevTimeDifference mod 60;
+        FDevTimeDifference := FDevTimeDifference div 60;
+        Move(FDevTimeDifference, TA[74], 3);
+        //**************************
       end;
 
     PCKT_OPER:
