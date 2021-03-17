@@ -34,7 +34,9 @@ type
    MyForm : TfrmBase;
    FDevTime : TDateTime;
    FCompTime : TDateTime;
-   FDevTimeSync : Boolean;
+   FDevTimeSync : Boolean;    // флаг валидности установленного времени
+   FDevDataSend : Boolean;   // флаг готовности уст-ва передать оперативные данные
+   FDevBattery : Byte;       // флаг состояния АКБ
    constructor Create (F : TFrmBaseClass);
    function RegisterCallback (CBF : TPGUSensorCallBack) : HResult; stdcall;
    function CreateDeviceWindow (parentHWND: HWND; var createHWND : HWND) : Hresult; stdcall;
@@ -57,6 +59,8 @@ begin
   FCompTime := Now;
   FCreateTime := Now;
   FDevTimeSync := False;
+  FDevDataSend := False;
+  FDevBattery := $00;
 end;
 
 function TBaseDevice.CreateDeviceWindow(parentHWND: HWND;

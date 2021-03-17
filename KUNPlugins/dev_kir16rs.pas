@@ -44,15 +44,17 @@ uses
 function TKIR16RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
   TR, TA: TArray<Byte>;
+  ValueLoop : array of Cardinal;  // выделение памяти для хранения данных сумматоров входов
   bSendAnswer: Boolean;
-  tmp: string;
+//  tmp: string;
   FMyForm: TfrmKIR16RS;
-  bat: Double;
-  batInt: Integer;
+//  bat: Double;
+//  batInt: Integer;
   i: Integer;
   ver: string;
   FTime: TDateTime;
   Y, MM, D, H, M, S, MS: Word;
+  FDevTimeDifference : Cardinal;
 begin
   Result := inherited;
   FMyForm := TfrmKIR16RS(MyForm);
@@ -74,9 +76,13 @@ begin
       begin
   // Обработка состояния запроса типа устройства
         TA := TArray<Byte>.Create($80, $81, $03, $0A, $03, $01, $00);
-         if FDevTimeSync then
-          ResetBit(TA[5],0);
-      // SetBit(TA[5],1); если изменилось состояние дискретного входа или АКБ
+        if FDevTimeSync then
+          ResetBit(TA[5], 0);
+        if FDevDataSend then
+        begin
+          SetBit(TA[5], 1);  // изменилось состояние дискретного входа или АКБ
+          FDevDataSend := False;
+        end;
       end;
 
     PCKT_WRITE_TIME:
@@ -101,11 +107,65 @@ begin
 
     PCKT_CURRENT:
       begin
+        FDevBattery := FMyForm.cbbPow.ItemIndex;
+        SetLength(ValueLoop, 16);
         SetLength(TA, 83);
+        FTime := (Now - FCompTime) + FDevTime;
+        DecodeDate(FDevTime, Y, MM, D);
+        DecodeTime(FDevTime, H, M, S, MS);
+
         TA[0] := $80;
         TA[1] := $85;
         TA[2] := $4F;
-
+        // время
+        TA[3] := S;
+        TA[4] := M;
+        TA[5] := H;
+        TA[6] := D;
+        TA[7] := MM;
+        TA[8] := (Y - 2000);
+        //************************
+        // состояние дискретного входа, аккумулятора и настроек
+        if not(FMyForm.btnSensor.Down) then
+        begin
+           FDevDataSend := True;
+           SetBit(TA[81],0);
+        end;
+        if FDevBattery <> 0 then
+        begin
+           FDevDataSend := True;
+          case FDevBattery of
+            1:
+              begin
+               SetBit(TA[81],5);
+              end;
+            2:
+              begin
+               SetBit(TA[81],4);
+               SetBit(TA[81],5);
+              end;
+            3:
+              begin
+                SetBit(TA[81],6);
+              end;
+            4:
+              begin
+                SetBit(TA[81], 7);
+              end;
+          end;
+        end;
+       //****************************
+       //Сумматоры
+        for i := 0 to 15 do
+        begin
+          ValueLoop[i] := FMyForm.SG.Cells[1, i + 1].ToInt64;
+          Move(ValueLoop[i], TA[9 + (4 * i)], 4);
+        end;
+        // наработка TA[73]
+        FTime := Now - CreateDeviceTime;
+        DecodeDate(FTime, Y, MM, D);
+        DecodeTime(FTime, H, M, S, MS);
+        FDevTimeDifference:=
       end;
 
     PCKT_OPER:
@@ -161,7 +221,7 @@ end;
 // Формирование начальной формы и заполнение TStringGrid
 procedure TfrmKIR16RS.FormCreate(Sender: TObject);
 var
-  i: Integer;
+  i, j : Integer;
 begin
   inherited;
   with SG do
@@ -169,10 +229,12 @@ begin
     ColWidths[0] := 40;
     ColWidths[1] := 95;
     for i := 1 to 17 do
-    begin
       Cells[0, i] := i.ToString;
-
-    end;
+    for I := 1 to 2 do
+      begin
+        for j := 1 to 16 do
+          Cells[i, j] := '0';
+      end;
     Cells[0, 0] := 'Вход';
     Cells[1, 0] := 'Число импульсов';
     Cells[2, 0] := 'Состояние шлейфа';

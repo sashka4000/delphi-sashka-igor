@@ -24,6 +24,9 @@ inherited frmKIR16RS: TfrmKIR16RS
     Top = 67
     Width = 40
     Height = 25
+    AllowAllUp = True
+    GroupIndex = 1
+    Down = True
     Caption = #1044#1042
   end
   object lblSensor: TLabel
@@ -70,6 +73,7 @@ inherited frmKIR16RS: TfrmKIR16RS
     DefaultColWidth = 105
     DefaultRowHeight = 16
     RowCount = 17
+    Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing]
     ScrollBars = ssNone
     TabOrder = 2
   end
@@ -85,6 +89,6 @@ inherited frmKIR16RS: TfrmKIR16RS
       #1054#1090#1089#1091#1090#1089#1090#1074#1091#1077#1090
       #1047#1072#1084#1082#1085#1091#1090
       #1047#1072#1088#1103#1078#1072#1077#1090#1089#1103
-      #1063#1077#1075#1086'-'#1090#1086)
+      #1040#1050#1041)
   end
 end
