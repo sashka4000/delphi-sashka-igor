@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   dev_base_form, Vcl.Grids, Vcl.ValEdit, Vcl.Buttons, Vcl.Samples.Spin,
-  Vcl.StdCtrls, DateUtils, Vcl.Mask;
+  Vcl.StdCtrls, DateUtils, Vcl.Mask, Vcl.ComCtrls,  WinTypes;
 
 type
   TfrmKIR16RS = class(TfrmBase)
@@ -19,7 +19,12 @@ type
     SG: TStringGrid;
     cbbPow: TComboBox;
     lblAKB: TLabel;
+    CBSG1: TComboBox;
     procedure FormCreate(Sender: TObject);
+    procedure SGSelectCell(Sender: TObject; ACol, ARow: Integer;
+      var CanSelect: Boolean);
+    procedure CBSG1CloseUp(Sender: TObject);
+    procedure CBSG1Exit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -50,7 +55,7 @@ var
   FMyForm: TfrmKIR16RS;
 //  bat: Double;
 //  batInt: Integer;
-  i: Integer;
+  i, j : Integer;
   ver: string;
   FTime: TDateTime;
   Y, MM, D, H, M, S, MS: Word;
@@ -166,6 +171,21 @@ begin
         FDevTimeDifference := FDevTimeDifference div 60;
         Move(FDevTimeDifference, TA[74], 3);
         //**************************
+        // читаем состояние шлейфа
+//             FMyForm.CBSG1.ItemIndex;
+          for i := 0 to 3 do
+            begin
+              for j := 1 to 4 do
+                if FMyForm.SG.Cells[2, j + ( 4 * i )] = 'шлейф замкнут' then
+                 SetBit(TA[77 + i],(0 + (2 * (j -1))))
+                 else if FMyForm.SG.Cells[2, j + ( 4 * i )] = 'шлейф обрыв' then
+                  begin
+                    SetBit(TA[77 + i],(0 + (2 * (j -1))));
+                    SetBit(TA[77 + i],(1 + (2 * (j -1))))
+                  end;
+            end;
+        //
+
       end;
 
     PCKT_OPER:
@@ -216,6 +236,26 @@ begin
 end;
 
 
+// встраиваем ComboBox в StringGrid
+procedure TfrmKIR16RS.CBSG1CloseUp(Sender: TObject);
+begin
+  inherited;
+      {Перебросим выбранное в значение из ComboBox в grid}
+  SG.Cells[SG.Col, SG.Row] := CBSG1.Items[CBSG1.ItemIndex];
+  CBSG1.Visible := False;
+  SG.SetFocus;
+end;
+
+procedure TfrmKIR16RS.CBSG1Exit(Sender: TObject);
+begin
+  inherited;
+        {Перебросим выбранное в значение из ComboBox в grid}
+  SG.Cells[SG.Col, SG.Row] := CBSG1.Items[CBSG1.ItemIndex];
+  CBSG1.Visible := False;
+  SG.SetFocus;
+end;
+
+
 
 
 // Формирование начальной формы и заполнение TStringGrid
@@ -228,6 +268,7 @@ begin
   begin
     ColWidths[0] := 40;
     ColWidths[1] := 95;
+    ColWidths[2] := 120;
     for i := 1 to 17 do
       Cells[0, i] := i.ToString;
     for I := 1 to 2 do
@@ -239,7 +280,31 @@ begin
     Cells[1, 0] := 'Число импульсов';
     Cells[2, 0] := 'Состояние шлейфа';
   end;
+ SG.DefaultRowHeight := CBSG1.Height;
+ CBSG1.Visible := False;
+end;
 
+procedure TfrmKIR16RS.SGSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
+var
+  R: TRect;
+begin
+  inherited;
+  if ((ACol = 2) and (ARow <> 0)) then
+  begin
+    {Ширина и положение ComboBox должно соответствовать ячейке StringGrid}
+    R := SG.CellRect(ACol, ARow);
+    R.Left := R.Left + SG.Left;
+    R.Right := R.Right + SG.Left;
+    R.Top := R.Top + SG.Top;
+    R.Bottom := R.Bottom + SG.Top;
+    CBSG1.Left := R.Left + 1;
+    CBSG1.Top := R.Top + 1;
+    CBSG1.Width := (R.Right + 1) - R.Left;
+    CBSG1.Height := (R.Bottom + 1) - R.Top; {Покажем combobox}
+    CBSG1.Visible := True;
+    CBSG1.SetFocus;
+  end;
+  CanSelect := True;
 end;
 
 end.
