@@ -51,6 +51,7 @@ var
   TR, TA: TArray<Byte>;
   ValueLoop : Cardinal;
   bSendAnswer: Boolean;
+  FDevBattery : Byte;       // флаг состояния АКБ
 //  tmp: string;
   FMyForm: TfrmKIR16RS;
 //  bat: Double;
@@ -73,7 +74,7 @@ begin
   if TR[0] <> $80 + FMyForm.seNumber.Value then
     Exit;
 
-
+//     FDevBattery := $00;
   // формирую ответ на запрос
 
   case TR[1] of
@@ -187,13 +188,39 @@ begin
         //
 
       end;
-
     PCKT_OPER:
       begin
-
-
-        TA := TArray<Byte>.Create($D8, $89, $02, $00 ,$00  , $00);
-
+        FDevBattery := FMyForm.cbbPow.ItemIndex;
+        TA := TArray<Byte>.Create($80, $89, $01, $00, $00);
+      // состояние дискретного входа, аккумулятора и настроек
+        if not (FMyForm.btnSensor.Down) then
+        begin
+           FDevDataSend := True;
+           SetBit(TA[3],0);
+        end;
+        if FDevBattery <> 0 then
+        begin
+           FDevDataSend := True;
+          case FDevBattery of
+            1:
+              begin
+               SetBit(TA[3],5);
+              end;
+            2:
+              begin
+               SetBit(TA[3],4);
+               SetBit(TA[3],5);
+              end;
+            3:
+              begin
+                SetBit(TA[3],6);
+              end;
+            4:
+              begin
+                SetBit(TA[3], 7);
+              end;
+          end;
+        end;
       end;
 
     PCKT_VERSION:
@@ -269,13 +296,14 @@ begin
     ColWidths[0] := 40;
     ColWidths[1] := 95;
     ColWidths[2] := 120;
-    for i := 1 to 17 do
+    for i := 1 to 16 do
       Cells[0, i] := i.ToString;
-    for I := 1 to 2 do
-      begin
-        for j := 1 to 16 do
-          Cells[i, j] := '0';
-      end;
+        for i := 1 to 16 do
+        begin
+          Cells[1, i] := '0';
+          Cells[2, i] := 'шлейф норма';
+        end;
+
     Cells[0, 0] := 'Вход';
     Cells[1, 0] := 'Число импульсов';
     Cells[2, 0] := 'Состояние шлейфа';
