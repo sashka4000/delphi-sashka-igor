@@ -28,6 +28,7 @@ inherited frmKIR16RS: TfrmKIR16RS
     GroupIndex = 1
     Down = True
     Caption = #1044#1042
+    OnClick = btnSensorClick
   end
   object lblSensor: TLabel
     Left = 300
@@ -42,6 +43,13 @@ inherited frmKIR16RS: TfrmKIR16RS
     Width = 20
     Height = 13
     Caption = #1040#1050#1041
+  end
+  object lblTypeProtocol: TLabel
+    Left = 300
+    Top = 289
+    Width = 115
+    Height = 13
+    Caption = #1058#1080#1087' '#1087#1088#1086#1090#1086#1082#1086#1083#1072': 40 '#1073#1080#1090
   end
   object medtVer: TMaskEdit
     Left = 402
@@ -85,6 +93,7 @@ inherited frmKIR16RS: TfrmKIR16RS
     Height = 21
     TabOrder = 3
     Text = #1053#1086#1088#1084#1072
+    OnChange = cbbPowChange
     Items.Strings = (
       #1053#1086#1088#1084#1072
       #1054#1090#1089#1091#1090#1089#1090#1074#1091#1077#1090

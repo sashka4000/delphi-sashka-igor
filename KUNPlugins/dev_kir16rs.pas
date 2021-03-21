@@ -20,11 +20,14 @@ type
     cbbPow: TComboBox;
     lblAKB: TLabel;
     CBSG1: TComboBox;
+    lblTypeProtocol: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure SGSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
     procedure CBSG1CloseUp(Sender: TObject);
     procedure CBSG1Exit(Sender: TObject);
+    procedure btnSensorClick(Sender: TObject);
+    procedure cbbPowChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -43,6 +46,8 @@ implementation
 {$R *.dfm}
 uses
   IdGlobal, ext_global;
+  var
+  FDevDataSend : Boolean;   // флаг готовности уст-ва передать оперативные данные
 
 { TKIR16RS }
 
@@ -133,12 +138,10 @@ begin
         // состояние дискретного входа, аккумулятора и настроек
         if not(FMyForm.btnSensor.Down) then
         begin
-           FDevDataSend := True;
            SetBit(TA[81],0);
         end;
         if FDevBattery <> 0 then
         begin
-           FDevDataSend := True;
           case FDevBattery of
             1:
               begin
@@ -195,12 +198,10 @@ begin
       // состояние дискретного входа, аккумулятора и настроек
         if not (FMyForm.btnSensor.Down) then
         begin
-           FDevDataSend := True;
            SetBit(TA[3],0);
         end;
         if FDevBattery <> 0 then
         begin
-           FDevDataSend := True;
           case FDevBattery of
             1:
               begin
@@ -223,6 +224,19 @@ begin
         end;
       end;
 
+    PCKT_RESET:
+      begin
+        TA := TArray<Byte>.Create($80, $8B, $00, $00);
+        if (TR[3] and $01) = $01 then
+          FMyForm.lblTypeProtocol.Caption := 'Тип протокола: 106 бит'
+        else
+          FMyForm.lblTypeProtocol.Caption := 'Тип протокола: 40 бит';
+
+        if (TR[3] and $10) = $10 then
+          for i := 1 to 16 do
+            FMyForm.SG.Cells[1, i] := '0';
+      end;
+
     PCKT_VERSION:
       begin
         TA := TArray<Byte>.Create($80, $8D, $02, $00, $00, $00);
@@ -232,12 +246,6 @@ begin
         TA[4] := ver.ToInteger;
       end;
 
-    PCKT_WRITE_DATA:
-      begin
-     //Запись текущих данных устройства
-
-        TA := TArray<Byte>.Create($D8, $84, $00, $00);
-      end
   else
     Exit;
   end;
@@ -253,13 +261,24 @@ begin
     Result := 1;
     Exit;
   end;
-
   // подписываю буфер
   CRC(TA, AnswerSize);
 
   // записываю буфер ответа во входящий буфер
   move(TA[0], TR[0], AnswerSize);
 
+end;
+
+procedure TfrmKIR16RS.btnSensorClick(Sender: TObject);
+begin
+  inherited;
+  FDevDataSend := True;
+end;
+
+procedure TfrmKIR16RS.cbbPowChange(Sender: TObject);
+begin
+  inherited;
+  FDevDataSend := True;
 end;
 
 
@@ -288,9 +307,10 @@ end;
 // Формирование начальной формы и заполнение TStringGrid
 procedure TfrmKIR16RS.FormCreate(Sender: TObject);
 var
-  i, j : Integer;
+  i, j: Integer;
 begin
   inherited;
+  FDevDataSend := False;
   with SG do
   begin
     ColWidths[0] := 40;

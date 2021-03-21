@@ -9,6 +9,7 @@ const
   PCKT_WRITE_DATA = $04;
   PCKT_CURRENT = $05;
   PCKT_OPER = $09;
+  PCKT_RESET = $0B;
   PCKT_VERSION = $0D;
 
 
