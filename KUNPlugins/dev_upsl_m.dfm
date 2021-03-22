@@ -14,9 +14,9 @@ inherited frmUPSL_M: TfrmUPSL_M
     Caption = #1042#1077#1088#1089#1080#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
   end
   object lbl1: TLabel
-    Left = 371
+    Left = 392
     Top = 69
-    Width = 89
+    Width = 92
     Height = 13
     Caption = '0 - '#1085#1077' '#1087#1086#1076#1082#1083#1102#1095#1077#1085
   end
@@ -110,7 +110,7 @@ inherited frmUPSL_M: TfrmUPSL_M
   object seNumber: TSpinEdit
     Left = 272
     Top = 27
-    Width = 83
+    Width = 96
     Height = 22
     MaxValue = 7
     MinValue = 0
@@ -120,7 +120,7 @@ inherited frmUPSL_M: TfrmUPSL_M
   object cbbUPSLVyzov: TComboBox
     Left = 272
     Top = 107
-    Width = 83
+    Width = 96
     Height = 22
     Style = csOwnerDrawFixed
     ItemIndex = 0
@@ -131,12 +131,14 @@ inherited frmUPSL_M: TfrmUPSL_M
       #1054#1055#1069
       #1055#1088#1080#1103#1084#1086#1081
       #1050#1088#1099#1096#1072
-      #1050#1072#1073#1080#1085#1072)
+      #1050#1072#1073#1080#1085#1072
+      #1040#1073#1086#1085#1077#1085#1090
+      #1055#1088#1086#1074#1077#1088#1082#1072' '#1055#1057)
   end
   object seUPSL_KUN: TSpinEdit
     Left = 272
     Top = 69
-    Width = 83
+    Width = 96
     Height = 22
     MaxValue = 8
     MinValue = 0
