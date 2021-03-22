@@ -5,10 +5,25 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  dev_base_form;
+  dev_base_form, Vcl.StdCtrls, Vcl.Samples.Spin, Vcl.ExtCtrls, Vcl.Mask;
 
 type
   TfrmUPSL_M = class(TfrmBase)
+    chkAmp1: TCheckBox;
+    medtVer: TMaskEdit;
+    chkFire: TCheckBox;
+    chkAmp2: TCheckBox;
+    lbledtBat: TLabeledEdit;
+    chkBat: TCheckBox;
+    chkNet: TCheckBox;
+    seNumber: TSpinEdit;
+    cbbUPSLVyzov: TComboBox;
+    seUPSL_KUN: TSpinEdit;
+    lblVer: TLabel;
+    lbl1: TLabel;
+    lbl12: TLabel;
+    lbl21: TLabel;
+    lbl17: TLabel;
   private
     { Private declarations }
   public
