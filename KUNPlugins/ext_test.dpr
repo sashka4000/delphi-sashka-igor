@@ -18,7 +18,8 @@ uses
   Emu in 'Emu.pas',
   dev_modbus in 'dev_modbus.pas' {frmModbus},
   CRCUnit in 'CRCUnit.pas',
-  dev_kir16rs in 'dev_kir16rs.pas' {frmKIR16RS};
+  dev_kir16rs in 'dev_kir16rs.pas' {frmKIR16RS},
+  dev_upsl_m in 'dev_upsl_m.pas' {frmUPSL_M};
 
 {$R *.res}
 {$R style_res.res}
@@ -42,6 +43,7 @@ begin
       // Здесь необходимо регистрировать создаваемые устройства
       // Для создания устройства приложение вызовет CreateDevice
   KUN.RegisterType(gUPSLM, 'УПСЛ');
+  KUN.RegisterType(gUPSLM_2, 'УПСЛ-2');
   KUN.RegisterType(gKSLOtis, 'КСЛ-OTIS');
   KUN.RegisterType(gMBUS, 'M-Bus');
   KUN.RegisterType(gModbus, 'Modbus');
@@ -91,6 +93,11 @@ begin
   if IsEqualGUID(guidClass, gKIR16RS) then
   begin
      RS := TKIR16RS.Create (TfrmKIR16RS);
+     Result := 0;
+  end;
+    if IsEqualGUID(guidClass, gUPSLM_2) then
+  begin
+     RS := TUPSL_M.Create (TfrmUPSL_M);
      Result := 0;
   end;
 end;
