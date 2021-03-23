@@ -153,7 +153,7 @@ begin
         upsl_ch := 0;
         if FMyForm.cbbUPSLVyzov.ItemIndex > 0 then
         begin
-          upsl_b := 4;
+          upsl_b := 4; // вызов переговорной связи - CALL
           upsl_ch := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
         end;
 
@@ -174,9 +174,18 @@ begin
         if FMyForm.chkFire.Checked then
           SetBit(TA[3], 3);
 
-        //  заполняется ТА(5)
+        // обработка PGS & DISP
+        if FMyForm.cbbUPSLVyzov.ItemIndex = 5 then
+        begin
+          SetBit(TA[3], 1);    // PGS
+          SetBit(TA[6], 4);    // DISP
+          TA[4] and $C0;       // сброс CHANNEL
+          TA[6] and $10;       // сброс ECAB, EROOF, EPIT, EMEL
+        end;
+
+        //  заполняется ТА(7)
         bat := StrToFloatDef(FMyForm.lbledtBat.Text, 0);
-        TA[5] := Round(bat * 1000 / 67);
+        TA[7] := Round(bat * 10000 / 176);
 
       end;
     PCKT_OPER:
@@ -190,7 +199,7 @@ begin
           upsl_b := 4;
           upsl_ch := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
         end;
-        TA := TArray<Byte>.Create($D8, $89, $02, $00 + upsl_b, upsl_ch, $00);
+        TA := TArray<Byte>.Create($D8, $89, $03, $00 + upsl_b, upsl_ch, $00, $00);
 
         if FMyForm.chkNet.Checked then
           SetBit(TA[3], 7);

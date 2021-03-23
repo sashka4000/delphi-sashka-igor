@@ -16,7 +16,7 @@ inherited frmUPSL_M: TfrmUPSL_M
   object lbl1: TLabel
     Left = 392
     Top = 69
-    Width = 92
+    Width = 89
     Height = 13
     Caption = '0 - '#1085#1077' '#1087#1086#1076#1082#1083#1102#1095#1077#1085
   end
