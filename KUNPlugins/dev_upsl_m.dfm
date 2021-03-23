@@ -1,5 +1,5 @@
-inherited frmUPSL_M: TfrmUPSL_M
-  Caption = 'frmUPSL_M'
+inherited frmUPSLM: TfrmUPSLM
+  Caption = 'frmUPSLM'
   ClientHeight = 407
   ClientWidth = 504
   ExplicitWidth = 504
@@ -30,16 +30,16 @@ inherited frmUPSL_M: TfrmUPSL_M
   object lbl21: TLabel
     Left = 18
     Top = 107
-    Width = 70
+    Width = 82
     Height = 13
-    Caption = #1042#1099#1079#1086#1074' '#1089' '#1059#1055#1057#1051
+    Caption = #1042#1099#1079#1086#1074' '#1089' '#1059#1055#1057#1051'-'#1052
   end
   object lbl17: TLabel
     Left = 18
     Top = 27
-    Width = 54
+    Width = 56
     Height = 13
-    Caption = #1059#1055#1057#1051'-2 '#8470
+    Caption = #1059#1055#1057#1051'-'#1052' '#8470
   end
   object chkAmp1: TCheckBox
     Left = 272
@@ -89,7 +89,7 @@ inherited frmUPSL_M: TfrmUPSL_M
     LabelPosition = lpLeft
     LabelSpacing = 5
     TabOrder = 4
-    Text = '14'
+    Text = '5'
   end
   object chkBat: TCheckBox
     Left = 18

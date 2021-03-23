@@ -36,7 +36,7 @@ type
   end;
 
 const
-  gUPSLM: TGUID = '{24D56126-A92C-417A-AA7A-9BCB8551D775}';  // Глобальный идентификатор, генерируются по Ctrl+Shift+G
+  gUPSL: TGUID = '{24D56126-A92C-417A-AA7A-9BCB8551D775}';  // Глобальный идентификатор, генерируются по Ctrl+Shift+G
 
 implementation
 

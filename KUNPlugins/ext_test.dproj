@@ -105,7 +105,7 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="dev_upsl_m.pas">
-            <Form>frmUPSL_M</Form>
+            <Form>frmUPSLM</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <RcItem Include="beril-steu.txt">

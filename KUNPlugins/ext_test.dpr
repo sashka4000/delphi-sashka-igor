@@ -19,7 +19,7 @@ uses
   dev_modbus in 'dev_modbus.pas' {frmModbus},
   CRCUnit in 'CRCUnit.pas',
   dev_kir16rs in 'dev_kir16rs.pas' {frmKIR16RS},
-  dev_upsl_m in 'dev_upsl_m.pas' {frmUPSL_M};
+  dev_upsl_m in 'dev_upsl_m.pas' {frmUPSLM};
 
 {$R *.res}
 {$R style_res.res}
@@ -42,16 +42,16 @@ begin
   KUN.RegisterDriver(Driver);
       // Здесь необходимо регистрировать создаваемые устройства
       // Для создания устройства приложение вызовет CreateDevice
-  KUN.RegisterType(gUPSLM, 'УПСЛ');
-  KUN.RegisterType(gUPSLM_2, 'УПСЛ-2');
+  KUN.RegisterType(gUPSL, 'УПСЛ');
   KUN.RegisterType(gKSLOtis, 'КСЛ-OTIS');
   KUN.RegisterType(gMBUS, 'M-Bus');
   KUN.RegisterType(gModbus, 'Modbus');
   KUN.RegisterType(gKUP4RS, 'КУП-4RS');
+  KUN.RegisterType(gKIR16RS, 'КИР-16RS');
   // Устройства, находящиеся в разработке  будут создаваться
   // только в режиме DEBUG сборки
   {$IFDEF DEBUG}
-     KUN.RegisterType(gKIR16RS, 'КИР-16RS');
+  KUN.RegisterType(gUPSLM, 'УПСЛ-М');
   {$ENDIF}
 end;
 
@@ -65,7 +65,7 @@ begin
   Result := 1;
   RS := nil;
   // *
-  if IsEqualGUID(guidClass, gUPSLM) then
+  if IsEqualGUID(guidClass, gUPSL) then
   begin
      RS := TUPSL.Create (TfrmUPSL);
      Result := 0;
@@ -95,9 +95,9 @@ begin
      RS := TKIR16RS.Create (TfrmKIR16RS);
      Result := 0;
   end;
-    if IsEqualGUID(guidClass, gUPSLM_2) then
+    if IsEqualGUID(guidClass, gUPSLM) then
   begin
-     RS := TUPSL_M.Create (TfrmUPSL_M);
+     RS := TUPSLM.Create (TfrmUPSLM);
      Result := 0;
   end;
 end;

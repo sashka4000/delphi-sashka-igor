@@ -8,7 +8,7 @@ uses
   Vcl.Samples.Spin, ext_global, dev_base_form, Vcl.CheckLst, Vcl.ExtCtrls, DateUtils, Vcl.Mask;
 
 type
-  TfrmUPSL_M = class(TfrmBase)
+  TfrmUPSLM = class(TfrmBase)
     chkAmp1: TCheckBox;
     medtVer: TMaskEdit;
     chkFire: TCheckBox;
@@ -30,12 +30,12 @@ type
     { Public declarations }
   end;
 
-  TUPSL_M = class(TBaseDevice)
+  TUPSLM = class(TBaseDevice)
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
 
 const
-  gUPSLM_2: TGUID = '{DD24BED3-1DE3-42FF-A30C-5176FC964CD3}';  // Глобальный идентификатор, генерируются по Ctrl+Shift+G
+  gUPSLM: TGUID = '{DD24BED3-1DE3-42FF-A30C-5176FC964CD3}';  // Глобальный идентификатор, генерируются по Ctrl+Shift+G
 
 
 implementation
@@ -45,13 +45,13 @@ Uses IdGlobal;
 
 { TUPSL_M }
 
-function TUPSL_M.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
+function TUPSLM.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
   TR, TA: TArray<Byte>;
   bSendAnswer: Boolean;
   upsl_b, upsl_ch: Byte;
   tmp: string;
-  FMyForm: TfrmUPSL_M;
+  FMyForm: TfrmUPSLM;
   bat: Double;
   batInt: Integer;
   i: Integer;
@@ -61,7 +61,7 @@ var
 begin
   Result := inherited;
 
-  FMyForm := TfrmUPSL_M(MyForm);
+  FMyForm := TfrmUPSLM(MyForm);
   // преобразование указателя к типу массив байт
   TR := TArray<Byte>(pd);
 
@@ -151,13 +151,13 @@ begin
       // Чтение текущих данных устройства
         upsl_b := 0;
         upsl_ch := 0;
-        if FMyForm.cbbUPSLVyzov.ItemIndex > 0 then
+        if (FMyForm.cbbUPSLVyzov.ItemIndex > 0) then
         begin
           upsl_b := 4; // вызов переговорной связи - CALL
           upsl_ch := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
         end;
 
-        TA := TArray<Byte>.Create($D8, $85, $07, $00 + upsl_b, upsl_ch, $BB, $0C, $08, $00, $00, $00);
+        TA := TArray<Byte>.Create($D8, $85, $07, $00 + upsl_b, upsl_ch, $00, $00, $BB, $00, $00, $00);
        // заполняется ТА(3)
         if FMyForm.chkNet.Checked then
           SetBit(TA[3], 7);
@@ -182,7 +182,29 @@ begin
           TA[4] := TA[4] and $C0;       // сброс CHANNEL
           TA[6] := TA[6] and $10;       // сброс ECAB, EROOF, EPIT, EMEL
         end;
+        // заполняем  ТА(6) если DISP - 0
+        if (TA[6] and $10) <> $10 then
+        begin
+          case TA[4] and $07 of
+            $00:
+              begin
+                SetBit(TA[6], 0);
+              end;
+            $01:
+              begin
+                SetBit(TA[6], 1);
+              end;
+            $02:
+              begin
+                SetBit(TA[6], 2);
+              end;
+            $03:
+              begin
+                SetBit(TA[6], 3);
+              end;
+          end;
 
+        end;
         //  заполняется ТА(7)
         bat := StrToFloatDef(FMyForm.lbledtBat.Text, 0);
         TA[7] := Round(bat * 10000 / 176);
