@@ -24,6 +24,24 @@ type
     lbl12: TLabel;
     lbl21: TLabel;
     lbl17: TLabel;
+    cbbTest: TComboBox;
+    lblTest: TLabel;
+    chkCall: TCheckBox;
+    chkInd: TCheckBox;
+    chkPGS: TCheckBox;
+    chkA1_M1: TCheckBox;
+    chkA1_G1: TCheckBox;
+    chkA1_G2: TCheckBox;
+    chkA1_M2: TCheckBox;
+    chkTST_OK: TCheckBox;
+    chkA2_K2: TCheckBox;
+    chkA1_K2: TCheckBox;
+    chkA2_M1: TCheckBox;
+    chkA2_G1: TCheckBox;
+    chkA2_G2: TCheckBox;
+    chkA2_M2: TCheckBox;
+    lblControl: TLabel;
+    lblContact: TLabel;
   private
     { Private declarations }
   public
