@@ -179,8 +179,8 @@ begin
         begin
           SetBit(TA[3], 1);    // PGS
           SetBit(TA[6], 4);    // DISP
-          TA[4] and $C0;       // סבנמס CHANNEL
-          TA[6] and $10;       // סבנמס ECAB, EROOF, EPIT, EMEL
+          TA[4] := TA[4] and $C0;       // סבנמס CHANNEL
+          TA[6] := TA[6] and $10;       // סבנמס ECAB, EROOF, EPIT, EMEL
         end;
 
         //  חאןמכםÿועסÿ ְׂ(7)
