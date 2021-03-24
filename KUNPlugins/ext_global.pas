@@ -11,7 +11,8 @@ const
   PCKT_OPER = $09;
   PCKT_RESET = $0B;
   PCKT_VERSION = $0D;
-
+  PCKT_WRITE_ROM_Dev = $0E;
+  PCKT_READ_ROM_Dev = $0F;
 
 // рассчитать CRC для полного пакета
 function GET_CRC (TA : TArray<Byte>; Len : Integer) : Byte;

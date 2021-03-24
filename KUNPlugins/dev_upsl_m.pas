@@ -41,10 +41,12 @@ type
     chkROMAutoPGS: TCheckBox;
     lbl3: TLabel;
     edtROMTimer: TEdit;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
+    TST_EN : Boolean; // флаг автоматической проверки ПС
   end;
 
   TUPSLM = class(TBaseDevice)
@@ -260,9 +262,38 @@ begin
         TA := TArray<Byte>.Create($D8, $8D, $02, $00, $00, $00);
         // Чтение версии устройства
         ver := FMyForm.medtVer.EditText;
-        TA[3] := Fetch(ver,'.').ToInteger;
+        TA[3] := Fetch(ver, '.').ToInteger;
         TA[4] := ver.ToInteger;
       end;
+
+    PCKT_WRITE_ROM_Dev:
+      begin
+        // запись ПЗУ настроек устройства
+        TA := TArray<Byte>.Create($D8, $8E, $00, $00);
+
+        case TR[3] and $0F of
+          $01:
+            begin
+              FMyForm.cbbUPSLVyzov.ItemIndex := 4;
+            end;
+          $02:
+            begin
+              FMyForm.cbbUPSLVyzov.ItemIndex := 3;
+              FMyForm.TST_EN := True;
+            end;
+          $04:
+            begin
+              FMyForm.cbbUPSLVyzov.ItemIndex := 2;
+            end;
+          $08:
+            begin
+              FMyForm.cbbUPSLVyzov.ItemIndex := 1;
+            end;
+        end;
+
+        FMyForm.edtROMTimer.Text := TR[4].ToString;
+
+      end
 
   else
     Exit;
@@ -289,7 +320,11 @@ begin
 end;
 
 
-
+procedure TfrmUPSLM.FormCreate(Sender: TObject);
+begin
+  inherited;
+  TST_EN := False;
+end;
 
 end.
 

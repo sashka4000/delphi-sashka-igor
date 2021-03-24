@@ -2,6 +2,7 @@ inherited frmUPSLM: TfrmUPSLM
   Caption = 'frmUPSLM'
   ClientHeight = 407
   ClientWidth = 737
+  OnCreate = FormCreate
   ExplicitWidth = 737
   ExplicitHeight = 407
   PixelsPerInch = 96
