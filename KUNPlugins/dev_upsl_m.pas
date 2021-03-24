@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.StdCtrls,
-  Vcl.Samples.Spin, ext_global, dev_base_form, Vcl.CheckLst, Vcl.ExtCtrls, DateUtils, Vcl.Mask;
+  Vcl.Samples.Spin, ext_global, dev_base_form, Vcl.CheckLst, Vcl.ExtCtrls, DateUtils, Vcl.Mask, Dialogs;
 
 type
   TfrmUPSLM = class(TfrmBase)
@@ -61,7 +61,8 @@ implementation
 
 {$R *.dfm}
 Uses IdGlobal;
-
+var
+frmUPSLM : TfrmUPSLM;
 { TUPSL_M }
 
 function TUPSLM.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
@@ -331,23 +332,26 @@ end;
 
 procedure TfrmUPSLM.chkTST_OKClick(Sender: TObject);
 var
-  FMyForm: TfrmUPSLM;
   cb: TCheckBox;
-  i: Integer;
+  i,j: Integer;
 begin
   inherited;
-  if not (chkTST_OK.Checked) then
+  j :=0;
+  frmUPSLM := TfrmUPSLM.Create(nil);
+  if not(chkTST_OK.Checked) then
   begin
-    for i := 0 to FMyForm.ControlCount do
-      if FMyForm.Controls[i] is TCheckListBox then
+    for i := 0 to frmUPSLM.ControlCount - 1   do
+      if frmUPSLM.Controls[i] is TCheckBox then
       begin
-        cb := FMyForm.Controls[i] as TCheckBox;
+        cb := frmUPSLM.Controls[i] as TCheckBox;
         if cb.Tag = 100 then
         begin
       // что-то делать
+        Inc(j);
         end;
       end;
   end;
+  ShowMessage(IntToStr(j));
 end;
 
 end.
