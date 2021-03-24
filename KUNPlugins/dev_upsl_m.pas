@@ -61,8 +61,8 @@ implementation
 
 {$R *.dfm}
 Uses IdGlobal;
-var
-frmUPSLM : TfrmUPSLM;
+
+
 { TUPSL_M }
 
 function TUPSLM.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
@@ -317,41 +317,49 @@ end;
 
 procedure TfrmUPSLM.chkBatClick(Sender: TObject);
 begin
-  inherited;
   if not (chkBat.Checked) then
   begin
     lbledtBat.Text := '0';
-    lbledtBat.Enabled := False;
   end
   else
   begin
     lbledtBat.Text := '4';
-    lbledtBat.Enabled := True;
   end;
+   lbledtBat.Enabled := chkBat.Checked;
 end;
 
 procedure TfrmUPSLM.chkTST_OKClick(Sender: TObject);
 var
   cb: TCheckBox;
-  i,j: Integer;
+  i: Integer;
 begin
-  inherited;
-  j :=0;
-  frmUPSLM := TfrmUPSLM.Create(nil);
   if not(chkTST_OK.Checked) then
   begin
-    for i := 0 to frmUPSLM.ControlCount - 1   do
-      if frmUPSLM.Controls[i] is TCheckBox then
+    for i := 0 to Self.ControlCount - 1 do
+      if Controls[i] is TCheckBox then
       begin
-        cb := frmUPSLM.Controls[i] as TCheckBox;
+        cb := Controls[i] as TCheckBox;
         if cb.Tag = 100 then
         begin
-      // что-то делать
-        Inc(j);
+          cb.Checked := False;
+          cb.Enabled := False;
+        end;
+      end;
+  end
+  else
+  begin
+     for i := 0 to Self.ControlCount - 1 do
+      if Controls[i] is TCheckBox then
+      begin
+        cb := Controls[i] as TCheckBox;
+        if cb.Tag = 100 then
+        begin
+          cb.Enabled := True;
         end;
       end;
   end;
-  ShowMessage(IntToStr(j));
+
+
 end;
 
 end.
