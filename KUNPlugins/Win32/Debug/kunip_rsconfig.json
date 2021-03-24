@@ -8,17 +8,6 @@
    "Baud": 9600
   },
   "Active": true,
-  "ID": "{FA28155C-2CF0-4A5A-A4F9-723656F33218}",
-  "DevName": "йсо-4RS"
- },{
-  "Int": {
-   "InterfaceNumber": 1,
-   "Parity": "",
-   "Stop": "",
-   "Char": 0,
-   "Baud": 9600
-  },
-  "Active": true,
-  "ID": "{C8B1EF56-D63C-4711-B44A-AE6E7024286A}",
-  "DevName": "йхп-16RS"
+  "ID": "{DD24BED3-1DE3-42FF-A30C-5176FC964CD3}",
+  "DevName": "сояк-л"
  }]
