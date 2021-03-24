@@ -115,11 +115,14 @@ inherited frmUPSLM: TfrmUPSLM
   end
   object chkBat: TCheckBox
     Left = 8
-    Top = 148
+    Top = 143
     Width = 165
     Height = 17
     Caption = #1048#1089#1087#1088#1072#1074#1085#1086#1089#1090#1100' '#1072#1082#1082#1091#1084#1091#1083#1103#1090#1086#1088#1072
+    Checked = True
+    State = cbChecked
     TabOrder = 6
+    OnClick = chkBatClick
   end
   object chkNet: TCheckBox
     Left = 8
@@ -175,6 +178,7 @@ inherited frmUPSLM: TfrmUPSLM
     TabOrder = 10
   end
   object chkA1_M1: TCheckBox
+    Tag = 100
     Left = 64
     Top = 256
     Width = 157
@@ -183,6 +187,7 @@ inherited frmUPSLM: TfrmUPSLM
     TabOrder = 15
   end
   object chkA1_G1: TCheckBox
+    Tag = 100
     Left = 64
     Top = 279
     Width = 172
@@ -191,6 +196,7 @@ inherited frmUPSLM: TfrmUPSLM
     TabOrder = 17
   end
   object chkA1_G2: TCheckBox
+    Tag = 100
     Left = 64
     Top = 324
     Width = 126
@@ -199,6 +205,7 @@ inherited frmUPSLM: TfrmUPSLM
     TabOrder = 21
   end
   object chkA1_M2: TCheckBox
+    Tag = 100
     Left = 64
     Top = 301
     Width = 156
@@ -212,9 +219,13 @@ inherited frmUPSLM: TfrmUPSLM
     Width = 136
     Height = 17
     Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1074#1099#1087#1086#1083#1085#1077#1085#1072
+    Checked = True
+    State = cbChecked
     TabOrder = 12
+    OnClick = chkTST_OKClick
   end
   object chkA2_K2: TCheckBox
+    Tag = 100
     Left = 302
     Top = 235
     Width = 126
@@ -223,6 +234,7 @@ inherited frmUPSLM: TfrmUPSLM
     TabOrder = 14
   end
   object chkA1_K2: TCheckBox
+    Tag = 100
     Left = 64
     Top = 235
     Width = 136
@@ -231,6 +243,7 @@ inherited frmUPSLM: TfrmUPSLM
     TabOrder = 13
   end
   object chkA2_M1: TCheckBox
+    Tag = 100
     Left = 302
     Top = 258
     Width = 157
@@ -239,6 +252,7 @@ inherited frmUPSLM: TfrmUPSLM
     TabOrder = 16
   end
   object chkA2_G1: TCheckBox
+    Tag = 100
     Left = 302
     Top = 281
     Width = 126
@@ -247,6 +261,7 @@ inherited frmUPSLM: TfrmUPSLM
     TabOrder = 18
   end
   object chkA2_G2: TCheckBox
+    Tag = 100
     Left = 302
     Top = 324
     Width = 116
@@ -255,6 +270,7 @@ inherited frmUPSLM: TfrmUPSLM
     TabOrder = 22
   end
   object chkA2_M2: TCheckBox
+    Tag = 100
     Left = 302
     Top = 301
     Width = 157

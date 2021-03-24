@@ -41,6 +41,8 @@ type
     chkROMAutoPGS: TCheckBox;
     lbl3: TLabel;
     edtROMTimer: TEdit;
+    procedure chkBatClick(Sender: TObject);
+    procedure chkTST_OKClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -311,6 +313,42 @@ begin
   move(TA[0], TR[0], AnswerSize);
 end;
 
+
+procedure TfrmUPSLM.chkBatClick(Sender: TObject);
+begin
+  inherited;
+  if not (chkBat.Checked) then
+  begin
+    lbledtBat.Text := '0';
+    lbledtBat.Enabled := False;
+  end
+  else
+  begin
+    lbledtBat.Text := '4';
+    lbledtBat.Enabled := True;
+  end;
+end;
+
+procedure TfrmUPSLM.chkTST_OKClick(Sender: TObject);
+var
+  FMyForm: TfrmUPSLM;
+  cb: TCheckBox;
+  i: Integer;
+begin
+  inherited;
+  if not (chkTST_OK.Checked) then
+  begin
+    for i := 0 to FMyForm.ControlCount do
+      if FMyForm.Controls[i] is TCheckListBox then
+      begin
+        cb := FMyForm.Controls[i] as TCheckBox;
+        if cb.Tag = 100 then
+        begin
+      // что-то делать
+        end;
+      end;
+  end;
+end;
 
 end.
 
