@@ -41,12 +41,10 @@ type
     chkROMAutoPGS: TCheckBox;
     lbl3: TLabel;
     edtROMTimer: TEdit;
-    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
-    TST_EN : Boolean; // флаг автоматической проверки ПС
   end;
 
   TUPSLM = class(TBaseDevice)
@@ -265,34 +263,28 @@ begin
         TA[3] := Fetch(ver, '.').ToInteger;
         TA[4] := ver.ToInteger;
       end;
-
     PCKT_WRITE_ROM_Dev:
       begin
         // запись ПЗУ настроек устройства
         TA := TArray<Byte>.Create($D8, $8E, $00, $00);
 
-        case TR[3] and $0F of
-          $01:
-            begin
-              FMyForm.cbbUPSLVyzov.ItemIndex := 4;
-            end;
-          $02:
-            begin
-              FMyForm.cbbUPSLVyzov.ItemIndex := 3;
-              FMyForm.TST_EN := True;
-            end;
-          $04:
-            begin
-              FMyForm.cbbUPSLVyzov.ItemIndex := 2;
-            end;
-          $08:
-            begin
-              FMyForm.cbbUPSLVyzov.ItemIndex := 1;
-            end;
-        end;
+        if (TR[3] and $02) <> $02 then
+          FMyForm.chkROMAutoPGS.Checked := False
+        else
+          FMyForm.chkROMAutoPGS.Checked := True;
 
-        FMyForm.edtROMTimer.Text := TR[4].ToString;
+        FMyForm.edtROMTimer.Text := (TR[4] and $1F).ToString;
+      end;
 
+    PCKT_READ_ROM_Dev:
+      begin
+        // чтение ПЗУ настроек устройства
+        TA := TArray<Byte>.Create($D8, $8F, $02, $00, $00, $00);
+
+        if FMyForm.chkROMAutoPGS.Checked then
+          SetBit(TA[3], 1);
+
+        TA[4] := StrToIntDef(FMyForm.edtROMTimer.Text, 0) and $1F;
       end
 
   else
@@ -319,12 +311,6 @@ begin
   move(TA[0], TR[0], AnswerSize);
 end;
 
-
-procedure TfrmUPSLM.FormCreate(Sender: TObject);
-begin
-  inherited;
-  TST_EN := False;
-end;
 
 end.
 
