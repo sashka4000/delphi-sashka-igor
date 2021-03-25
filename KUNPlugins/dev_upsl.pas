@@ -22,8 +22,8 @@ type
     chkAmp1: TCheckBox;
     chkAmp2: TCheckBox;
     chkFire: TCheckBox;
-    medtVer: TMaskEdit;
     lblVer: TLabel;
+    cbbVersion: TComboBox;
     procedure cbbUPSLVyzovChange(Sender: TObject);
   private
     { Private declarations }
@@ -32,6 +32,8 @@ type
   end;
 
   TUPSL = class(TBaseDevice)
+    DISP : BOOLEAN;
+    constructor Create(F: TFrmBaseClass);
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
 
@@ -44,11 +46,16 @@ implementation
 Uses IdGlobal;
 { TUPSL }
 
+constructor TUPSL.Create(F: TFrmBaseClass);
+begin
+  inherited;
+  DISP := FALSE;
+end;
+
 function TUPSL.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
   TR, TA: TArray<Byte>;
   bSendAnswer: Boolean;
-  upsl_b, upsl_ch: Byte;
   tmp: string;
   FMyForm: TfrmUPSL;
   bat: Double;
@@ -87,15 +94,16 @@ begin
       end;
     PCKT_CURRENT:
       begin
-        upsl_b := 0;
-        upsl_ch := 0;
+        TA := TArray<Byte>.Create($D8, $85, $05, $00, $00, $BB, $0C, $08, $00);
         if FMyForm.cbbUPSLVyzov.ItemIndex > 0 then
         begin
-          upsl_b := 4;
-          upsl_ch := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
+           if DISP
+          then SetBit(TA[3], 1)      // PGS = 1
+          else SetBit(TA[3], 2);     // CALL = 1
+          TA[4] := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
         end;
 
-        TA := TArray<Byte>.Create($D8, $85, $05, $00 + upsl_b, upsl_ch, $BB, $0C, $08, $00);
+
        // заполняется ТА(3)
         if FMyForm.chkNet.Checked then
           SetBit(TA[3], 7);
@@ -119,15 +127,15 @@ begin
       end;
     PCKT_OPER:
       begin
-        upsl_b := 0;
-        upsl_ch := 0;
+        TA := TArray<Byte>.Create($D8, $89, $02, $00, $00, $00);
 
         if FMyForm.cbbUPSLVyzov.ItemIndex > 0 then
         begin
-          upsl_b := 4;
-          upsl_ch := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
+          if DISP
+          then SetBit(TA[3], 1)      // PGS = 1
+          else SetBit(TA[3], 2);     // CALL = 1
+          TA[4] := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
         end;
-        TA := TArray<Byte>.Create($D8, $89, $02, $00 + upsl_b, upsl_ch, $00);
 
         if FMyForm.chkNet.Checked then
           SetBit(TA[3], 7);
@@ -148,7 +156,7 @@ begin
       begin
         TA := TArray<Byte>.Create($D8, $8D, $02, $00, $00, $00);
         // Чтение версии устройства
-        ver := FMyForm.medtVer.EditText;
+        ver := FMyForm.cbbVersion.Text;
         TA[3] := Fetch(ver,'.').ToInteger;
         TA[4] := ver.ToInteger;
       end;
@@ -173,7 +181,8 @@ begin
     PCKT_WRITE_DATA:
       begin
      //Запись текущих данных устройства
-        case TR[3] of
+        DISP := GetBit (TR[3],4) = 1;
+        case TR[3] and $0F of
           0:
             begin
              FMyForm.cbbUPSLVyzov.ItemIndex := 0 ;
@@ -197,7 +206,6 @@ begin
         else
           Exit;
         end;
-
         TA := TArray<Byte>.Create($D8, $84, $00, $00);
       end
   else

@@ -135,15 +135,16 @@ inherited frmUPSL: TfrmUPSL
     Caption = #1054#1073#1098#1077#1076#1080#1085#1077#1085#1085#1099#1081' '#1087#1088#1080#1079#1085#1072#1082' "'#1087#1086#1078#1072#1088'" '#1086#1090' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072' '#1080' '#1091#1089#1080#1083#1080#1090#1077#1083#1077#1081' 1 '#1080' 2'
     TabOrder = 7
   end
-  object medtVer: TMaskEdit
-    Left = 374
+  object cbbVersion: TComboBox
+    Left = 384
     Top = 215
-    Width = 36
+    Width = 76
     Height = 21
-    Alignment = taCenter
-    EditMask = '!99\.99;1; '
-    MaxLength = 5
+    Style = csDropDownList
+    ItemIndex = 0
     TabOrder = 9
-    Text = '01.12'
+    Text = '1.12'
+    Items.Strings = (
+      '1.12')
   end
 end

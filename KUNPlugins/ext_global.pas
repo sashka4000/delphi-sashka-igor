@@ -23,6 +23,8 @@ procedure CRC (TA : TArray<Byte>;Len : Integer);
 procedure SetBit(var Src: Byte; bit: Integer);
 // сброс бита
 procedure ResetBit(var Src : Byte; bit: Integer);
+// провека бита
+function GetBit(Src : Byte; bit: Integer)  : Integer;
 
 implementation
 
@@ -52,5 +54,11 @@ procedure ResetBit(var Src : Byte; bit: Integer);
 begin
   Src := Src and not (1 shl Bit);
 end;
+
+function GetBit(Src : Byte; bit: Integer)  : Integer;
+begin
+   Result := (Src shr bit) and $01;
+end;
+
 end.
 
