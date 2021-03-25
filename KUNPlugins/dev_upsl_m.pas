@@ -68,6 +68,7 @@ Uses IdGlobal;
 function TUPSLM.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
   TR, TA: TArray<Byte>;
+  cb: TCheckBox;
   bSendAnswer: Boolean;
   upsl_b, upsl_ch: Byte;
   tmp: string;
@@ -151,17 +152,22 @@ begin
             begin
               FMyForm.cbbUPSLVyzov.ItemIndex := 4;
             end;
-          $10:
+          $20:
             begin
               FMyForm.cbbUPSLVyzov.ItemIndex := 5;
-            end;
-          $40:
-            begin
-              FMyForm.cbbUPSLVyzov.ItemIndex := 6;
             end
         else
           Exit;
         end;
+        // сбрасываем флаги ПС при DISP - 0
+         if (TR[3] and $10) = $00 then
+             TR[3] := TR[3] and $C0;
+
+         // сбрасываем флаг автоматическая проверка ПГС
+         if (TR[3] and $80) = $80  then
+             FMyForm.chkROMAutoPGS.Checked := False
+             else
+             FMyForm.chkROMAutoPGS.Checked := True;
 
         TA := TArray<Byte>.Create($D8, $84, $00, $00);
       end;
@@ -176,7 +182,7 @@ begin
           upsl_b := 4; // вызов переговорной связи - CALL
           upsl_ch := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
         end;
-
+                                // 1     2    3      4            5      6    7    8    9    10   11
         TA := TArray<Byte>.Create($D8, $85, $07, $00 + upsl_b, upsl_ch, $00, $00, $BB, $00, $00, $00);
        // заполняется ТА(3)
         if FMyForm.chkNet.Checked then
@@ -194,40 +200,78 @@ begin
         if FMyForm.chkFire.Checked then
           SetBit(TA[3], 3);
 
-        // обработка PGS & DISP
-        if FMyForm.cbbUPSLVyzov.ItemIndex = 5 then
-        begin
-          SetBit(TA[3], 1);    // PGS
-          SetBit(TA[6], 4);    // DISP
-          TA[4] := TA[4] and $C0;       // сброс CHANNEL
-          TA[6] := TA[6] and $10;       // сброс ECAB, EROOF, EPIT, EMEL
-        end;
-        // заполняем  ТА(6) если DISP - 0
-        if (TA[6] and $10) <> $10 then
+        // связь с индикатором
+        if FMyForm.chkInd.Checked then
+          SetBit(TA[3], 0)
+        else
+          ResetBit(TA[3], 0);
+
+
+//        // обработка PGS & DISP
+//        if FMyForm.cbbUPSLVyzov.ItemIndex = 5 then
+//        begin
+//          SetBit(TA[3], 1);    // PGS
+//          SetBit(TA[6], 4);    // DISP
+//          TA[4] := TA[4] and $C0;       // сброс CHANNEL
+//          TA[6] := TA[6] and $10;       // сброс ECAB, EROOF, EPIT, EMEL
+//        end;
+        // заполняем  ТА(7)
+        if (TA[7] and $10) <> $10 then
         begin
           case TA[4] and $07 of
             $00:
               begin
-                SetBit(TA[6], 0);
+                SetBit(TA[7], 0);
               end;
             $01:
               begin
-                SetBit(TA[6], 1);
+                SetBit(TA[7], 1);
               end;
             $02:
               begin
-                SetBit(TA[6], 2);
+                SetBit(TA[7], 2);
               end;
             $03:
               begin
-                SetBit(TA[6], 3);
+                SetBit(TA[7], 3);
               end;
           end;
 
         end;
-        //  заполняется ТА(7)
+        //  обрабатываем АКБ TA[5]
         bat := StrToFloatDef(FMyForm.lbledtBat.Text, 0);
-        TA[7] := Round(bat * 10000 / 176);
+        TA[5] := Round(bat * 10000 / 176);
+
+        // результаты автоматической проверки
+        if FMyForm.chkA2_K2.Checked then
+          SetBit(TA[8], 7);
+
+        if FMyForm.chkA1_K2.Checked then
+          SetBit(TA[8], 6);
+
+        if FMyForm.chkA2_G2.Checked then
+          SetBit(TA[9], 7);
+
+        if FMyForm.chkA1_G2.Checked then
+          SetBit(TA[9], 3);
+
+        if FMyForm.chkA2_M2.Checked then
+          SetBit(TA[9], 6);
+
+        if FMyForm.chkA1_M2.Checked then
+          SetBit(TA[9], 2);
+
+        if FMyForm.chkA2_G1.Checked then
+          SetBit(TA[9], 5);
+
+        if FMyForm.chkA1_G1.Checked then
+          SetBit(TA[9], 1);
+
+        if FMyForm.chkA2_M1.Checked then
+          SetBit(TA[9], 4);
+
+        if FMyForm.chkA1_M1.Checked then
+          SetBit(TA[9], 0);
 
       end;
     PCKT_OPER:
@@ -257,6 +301,53 @@ begin
 
         if FMyForm.chkFire.Checked then
           SetBit(TA[3], 3);
+
+      // автоматическая проверка
+        if FMyForm.chkROMAutoPGS.Checked then
+          SetBit(TA[4], 4);
+
+      // связь с индикатором
+        if FMyForm.chkInd.Checked then
+          SetBit(TA[3], 0)
+        else
+          ResetBit(TA[3], 0);
+
+
+      // результаты автоматической проверки
+        if FMyForm.chkA2_K2.Checked then
+          SetBit(TA[4], 7);
+
+        if FMyForm.chkA1_K2.Checked then
+          SetBit(TA[4], 6);
+
+        if FMyForm.chkA2_G2.Checked then
+          SetBit(TA[5], 7);
+
+        if FMyForm.chkA1_G2.Checked then
+          SetBit(TA[5], 3);
+
+        if FMyForm.chkA2_M2.Checked then
+          SetBit(TA[5], 6);
+
+        if FMyForm.chkA1_M2.Checked then
+          SetBit(TA[5], 2);
+
+        if FMyForm.chkA2_G1.Checked then
+          SetBit(TA[5], 5);
+
+        if FMyForm.chkA1_G1.Checked then
+          SetBit(TA[5], 1);
+
+        if FMyForm.chkA2_M1.Checked then
+          SetBit(TA[5], 4);
+
+        if FMyForm.chkA1_M1.Checked then
+          SetBit(TA[5], 0);
+      // автоматическая проверка выполнена,результаты корректны
+        if ((TA[5] and $FF) = $FF) and ((TA[4] and $C0) = $C0) and FMyForm.chkTST_OK.Checked then
+          SetBit(TA[4], 5);
+
+
       end;
     PCKT_VERSION:
       begin
