@@ -344,7 +344,7 @@ begin
         if FMyForm.chkA1_M1.Checked then
           SetBit(TA[5], 0);
       // автоматическая проверка выполнена,результаты корректны
-        if ((TA[5] and $FF) = $FF) and ((TA[4] and $C0) = $C0) and FMyForm.chkTST_OK.Checked then
+        if  FMyForm.chkTST_OK.Checked then
           SetBit(TA[4], 5);
 
 
