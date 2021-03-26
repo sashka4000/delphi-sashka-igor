@@ -51,7 +51,7 @@ type
   end;
 
   TUPSLM = class(TBaseDevice)
-    DISP: BOOLEAN;                     // флаг подключения ПС
+    DISP : BOOLEAN;                     // флаг подключения ПС
     constructor Create(F: TFrmBaseClass);
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
@@ -71,7 +71,7 @@ uses
 constructor TUPSLM.Create(F: TFrmBaseClass);
 begin
   inherited;
-  DISP := FALSE;
+  DISP := False;
 end;
 
 function TUPSLM.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
@@ -141,6 +141,7 @@ begin
     PCKT_WRITE_DATA:
       begin
         DISP := IsBitSet(TR[3], 4);
+
         //Запись текущих данных устройства
         case (TR[3] and $2F) of
           $00:
@@ -169,7 +170,7 @@ begin
             end;
         end;
 
-        if DISP then
+        if IsBitSet(TR[3], 6) then
           FMyForm.chkTST_OK.Checked := True;
 
         TA := TArray<Byte>.Create($D8, $84, $00, $00);
@@ -212,7 +213,7 @@ begin
           SetBit(TA[3], 0);
 
         //  обрабатываем АКБ TA[5]
-        bat := StrToFloatDef(FMyForm.lbledtBat.Text, 0);
+        bat := StrToFloatDef(StringReplace (FMyForm.lbledtBat.Text,'.',FS.DecimalSeparator,[rfReplaceAll]), 0);
         TA[5] := Round(bat * 10000 / 176);
 
         // заполняем  ТА(7) если DISP- поступил в команде $04
@@ -244,9 +245,11 @@ begin
 
         end;
 
-        // бит TST
-        if FMyForm.chkTST_OK.Checked then
-          SetBit(TA[7], 6);
+//        // если установлен бит TST
+//          if FMyForm.chkTST_OK.Checked then
+//            SetBit(TA[7], 6)
+//          else
+//            ResetBit(TA[7], 6);
 
         // результаты автоматической проверки
         if FMyForm.chkA2_K2.Checked then

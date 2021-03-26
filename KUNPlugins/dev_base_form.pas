@@ -35,6 +35,7 @@ type
     FDevTime: TDateTime;
     FCompTime: TDateTime;
     FDevTimeSync: Boolean;    // флаг валидности установленного времени
+    FS : TFormatSettings;
     constructor Create(F: TFrmBaseClass);
     function RegisterCallback(CBF: TPGUSensorCallBack): HResult; stdcall;
     function CreateDeviceWindow(parentHWND: HWND; var createHWND: HWND): Hresult; stdcall;
@@ -57,6 +58,7 @@ begin
   FCompTime := Now;
   FCreateTime := Now;
   FDevTimeSync := False;
+  FS := TFormatSettings.Create;
 end;
 
 function TBaseDevice.CreateDeviceWindow(parentHWND: HWND;

@@ -121,7 +121,7 @@ begin
           SetBit(TA[3], 3);
 
         //  заполняется ТА(5)
-        bat := StrToFloatDef(FMyForm.lbledtBat.Text, 0);
+        bat := StrToFloatDef(StringReplace(FMyForm.lbledtBat.Text, '.', FS.DecimalSeparator, [rfReplaceAll]), 0);
         TA[5] := Round(bat * 1000 / 67);
 
       end;

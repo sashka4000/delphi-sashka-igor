@@ -111,7 +111,7 @@ inherited frmUPSLM: TfrmUPSLM
     LabelPosition = lpLeft
     LabelSpacing = 5
     TabOrder = 8
-    Text = '4'
+    Text = '4,4'
   end
   object chkBat: TCheckBox
     Left = 8
@@ -219,8 +219,6 @@ inherited frmUPSLM: TfrmUPSLM
     Width = 136
     Height = 17
     Caption = #1055#1088#1086#1074#1077#1088#1082#1072' '#1074#1099#1087#1086#1083#1085#1077#1085#1072
-    Checked = True
-    State = cbChecked
     TabOrder = 12
     OnClick = chkTST_OKClick
   end
