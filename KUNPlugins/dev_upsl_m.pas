@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.StdCtrls,
-  Vcl.Samples.Spin, ext_global, dev_base_form, Vcl.CheckLst, Vcl.ExtCtrls, DateUtils, Vcl.Mask, Dialogs;
+  Vcl.Samples.Spin, ext_global, dev_base_form, Vcl.CheckLst, Vcl.ExtCtrls,
+  DateUtils, Vcl.Mask, Dialogs;
 
 type
   TfrmUPSLM = class(TfrmBase)
@@ -41,8 +42,8 @@ type
     chkROMAutoPGS: TCheckBox;
     lbl3: TLabel;
     edtROMTimer: TEdit;
-    procedure chkBatClick(Sender: TObject);
-    procedure chkTST_OKClick(Sender: TObject);
+    procedure chkBatClick(Sender: TObject);    // анализируем исправность АКБ
+    procedure chkTST_OKClick(Sender: TObject); // опрос чекбоксов - автоматической проверки
   private
     { Private declarations }
   public
@@ -50,33 +51,40 @@ type
   end;
 
   TUPSLM = class(TBaseDevice)
+    DISP: BOOLEAN;                     // флаг подключения ПС
+    constructor Create(F: TFrmBaseClass);
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
 
 const
   gUPSLM: TGUID = '{DD24BED3-1DE3-42FF-A30C-5176FC964CD3}';  // Глобальный идентификатор, генерируются по Ctrl+Shift+G
 
-
 implementation
 
 {$R *.dfm}
-Uses IdGlobal;
+uses
+  IdGlobal;
 
 
 { TUPSL_M }
+
+constructor TUPSLM.Create(F: TFrmBaseClass);
+begin
+  inherited;
+  DISP := FALSE;
+end;
 
 function TUPSLM.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
   TR, TA: TArray<Byte>;
   cb: TCheckBox;
   bSendAnswer: Boolean;
-  upsl_b, upsl_ch: Byte;
   tmp: string;
   FMyForm: TfrmUPSLM;
   bat: Double;
   batInt: Integer;
   i: Integer;
-  ver : string;
+  ver: string;
   FTime: TDateTime;
   Y, MM, D, H, M, S, MS: Word;
 begin
@@ -100,17 +108,19 @@ begin
 
     PCKT_TYPE:
       begin
-  // Обработка состояния запроса типа устройства
+        // Обработка состояния запроса типа устройства
         TA := TArray<Byte>.Create($D8, $81, $03, $08, $03, $00, $00);
         if FDevTimeSync then
           SetBit(TA[5], 0);  // часы и календарь валидны
-        if not (FMyForm.chkNet.Checked and FMyForm.chkBat.Checked and FMyForm.chkAmp1.Checked and FMyForm.chkAmp2.Checked and FMyForm.chkFire.Checked) then
+        if not (FMyForm.chkNet.Checked and FMyForm.chkBat.Checked
+         and FMyForm.chkAmp1.Checked and FMyForm.chkAmp2.Checked
+         and FMyForm.chkFire.Checked) then
           SetBit(TA[5], 1);  // появились срочные данные
       end;
 
     PCKT_WRITE_TIME:
       begin
-     //Запись времени устройства
+        //Запись времени устройства
         FDevTimeSync := True;
         FDevTime := EncodeDateTime(TR[8] + 2000, TR[7], TR[6], TR[5], TR[4], TR[3], 0);
         FCompTime := Now;
@@ -121,7 +131,7 @@ begin
 
     PCKT_READ_TIME:
       begin
-     //Чтение времени устройства
+        //Чтение времени устройства
         FTime := (Now - FCompTime) + FDevTime;
         DecodeDate(FTime, Y, MM, D);
         DecodeTime(FTime, H, M, S, MS);
@@ -130,8 +140,9 @@ begin
 
     PCKT_WRITE_DATA:
       begin
-     //Запись текущих данных устройства
-        case TR[3] of
+        DISP := IsBitSet(TR[3], 4);
+        //Запись текущих данных устройства
+        case (TR[3] and $2F) of
           $00:
             begin
               FMyForm.cbbUPSLVyzov.ItemIndex := 0;
@@ -155,36 +166,32 @@ begin
           $20:
             begin
               FMyForm.cbbUPSLVyzov.ItemIndex := 5;
-            end
-        else
-          Exit;
+            end;
         end;
-        // сбрасываем флаги ПС при DISP - 0
-         if (TR[3] and $10) = $00 then
-             TR[3] := TR[3] and $C0;
 
-         // сбрасываем флаг автоматическая проверка ПГС
-         if (TR[3] and $80) = $80  then
-             FMyForm.chkROMAutoPGS.Checked := False
-             else
-             FMyForm.chkROMAutoPGS.Checked := True;
+        if DISP then
+          FMyForm.chkTST_OK.Checked := True;
 
         TA := TArray<Byte>.Create($D8, $84, $00, $00);
       end;
 
     PCKT_CURRENT:
       begin
-      // Чтение текущих данных устройства
-        upsl_b := 0;
-        upsl_ch := 0;
-        if (FMyForm.cbbUPSLVyzov.ItemIndex > 0) then
+       // Чтение текущих данных устройства
+        TA := TArray<Byte>.Create($D8, $85, $08, $00, $00, $00, $00, $00, $18, $00, $00, $00);
+
+       // заполняется ТА(3) & TA[4]-CHANEL
+        if FMyForm.cbbUPSLVyzov.ItemIndex > 0 then
         begin
-          upsl_b := 4; // вызов переговорной связи - CALL
-          upsl_ch := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
+          begin
+            if DISP then
+              SetBit(TA[3], 1)      // PGS = 1
+            else
+              SetBit(TA[3], 2);     // CALL = 1
+            TA[4] := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
+          end;
         end;
-                                // 1     2    3      4            5      6    7    8    9    10   11
-        TA := TArray<Byte>.Create($D8, $85, $07, $00 + upsl_b, upsl_ch, $00, $00, $BB, $00, $00, $00);
-       // заполняется ТА(3)
+
         if FMyForm.chkNet.Checked then
           SetBit(TA[3], 7);
 
@@ -200,25 +207,19 @@ begin
         if FMyForm.chkFire.Checked then
           SetBit(TA[3], 3);
 
-        // связь с индикатором
+        // связь с индикатором IND
         if FMyForm.chkInd.Checked then
-          SetBit(TA[3], 0)
-        else
-          ResetBit(TA[3], 0);
+          SetBit(TA[3], 0);
 
+        //  обрабатываем АКБ TA[5]
+        bat := StrToFloatDef(FMyForm.lbledtBat.Text, 0);
+        TA[5] := Round(bat * 10000 / 176);
 
-//        // обработка PGS & DISP
-//        if FMyForm.cbbUPSLVyzov.ItemIndex = 5 then
-//        begin
-//          SetBit(TA[3], 1);    // PGS
-//          SetBit(TA[6], 4);    // DISP
-//          TA[4] := TA[4] and $C0;       // сброс CHANNEL
-//          TA[6] := TA[6] and $10;       // сброс ECAB, EROOF, EPIT, EMEL
-//        end;
-        // заполняем  ТА(7)
-        if (TA[7] and $10) <> $10 then
+        // заполняем  ТА(7) если DISP- поступил в команде $04
+        if DISP then
         begin
-          case TA[4] and $07 of
+          SetBit(TA[7], 4);
+          case FMyForm.cbbUPSLVyzov.ItemIndex - 1 of
             $00:
               begin
                 SetBit(TA[7], 0);
@@ -235,12 +236,17 @@ begin
               begin
                 SetBit(TA[7], 3);
               end;
+            $04:
+              begin
+                SetBit(TA[7], 5);
+              end;
           end;
 
         end;
-        //  обрабатываем АКБ TA[5]
-        bat := StrToFloatDef(FMyForm.lbledtBat.Text, 0);
-        TA[5] := Round(bat * 10000 / 176);
+
+        // бит TST
+        if FMyForm.chkTST_OK.Checked then
+          SetBit(TA[7], 6);
 
         // результаты автоматической проверки
         if FMyForm.chkA2_K2.Checked then
@@ -276,16 +282,20 @@ begin
       end;
     PCKT_OPER:
       begin
-      // чтение срочных данных устройства
-        upsl_b := 0;
-        upsl_ch := 0;
+        // чтение срочных данных устройства
+        TA := TArray<Byte>.Create($D8, $89, $03, $00, $00, $00, $00);
 
+        // состояние бита  TA[3] & TA[4]-CHANEL
         if FMyForm.cbbUPSLVyzov.ItemIndex > 0 then
         begin
-          upsl_b := 4;
-          upsl_ch := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
+          begin
+            if DISP then
+              SetBit(TA[3], 1)      // PGS = 1
+            else
+              SetBit(TA[3], 2);     // CALL = 1
+            TA[4] := FMyForm.cbbUPSLVyzov.ItemIndex - 1;
+          end;
         end;
-        TA := TArray<Byte>.Create($D8, $89, $03, $00 + upsl_b, upsl_ch, $00, $00);
 
         if FMyForm.chkNet.Checked then
           SetBit(TA[3], 7);
@@ -302,16 +312,13 @@ begin
         if FMyForm.chkFire.Checked then
           SetBit(TA[3], 3);
 
-      // автоматическая проверка
+        // автоматическая проверка
         if FMyForm.chkROMAutoPGS.Checked then
           SetBit(TA[4], 4);
 
-      // связь с индикатором
+        // связь с индикатором
         if FMyForm.chkInd.Checked then
-          SetBit(TA[3], 0)
-        else
-          ResetBit(TA[3], 0);
-
+          SetBit(TA[3], 0);
 
       // результаты автоматической проверки
         if FMyForm.chkA2_K2.Checked then
@@ -343,12 +350,12 @@ begin
 
         if FMyForm.chkA1_M1.Checked then
           SetBit(TA[5], 0);
-      // автоматическая проверка выполнена,результаты корректны
-        if  FMyForm.chkTST_OK.Checked then
+
+        // автоматическая проверка выполнена,результаты корректны
+        if FMyForm.chkTST_OK.Checked then
           SetBit(TA[4], 5);
-
-
       end;
+
     PCKT_VERSION:
       begin
         TA := TArray<Byte>.Create($D8, $8D, $02, $00, $00, $00);
@@ -357,6 +364,7 @@ begin
         TA[3] := Fetch(ver, '.').ToInteger;
         TA[4] := ver.ToInteger;
       end;
+
     PCKT_WRITE_ROM_Dev:
       begin
         // запись ПЗУ настроек устройства
@@ -405,7 +413,6 @@ begin
   move(TA[0], TR[0], AnswerSize);
 end;
 
-
 procedure TfrmUPSLM.chkBatClick(Sender: TObject);
 begin
   if not (chkBat.Checked) then
@@ -416,7 +423,7 @@ begin
   begin
     lbledtBat.Text := '4';
   end;
-   lbledtBat.Enabled := chkBat.Checked;
+  lbledtBat.Enabled := chkBat.Checked;
 end;
 
 procedure TfrmUPSLM.chkTST_OKClick(Sender: TObject);
@@ -424,7 +431,7 @@ var
   cb: TCheckBox;
   i: Integer;
 begin
-  if not(chkTST_OK.Checked) then
+  if not (chkTST_OK.Checked) then
   begin
     for i := 0 to Self.ControlCount - 1 do
       if Controls[i] is TCheckBox then
@@ -439,7 +446,7 @@ begin
   end
   else
   begin
-     for i := 0 to Self.ControlCount - 1 do
+    for i := 0 to Self.ControlCount - 1 do
       if Controls[i] is TCheckBox then
       begin
         cb := Controls[i] as TCheckBox;
@@ -449,7 +456,6 @@ begin
         end;
       end;
   end;
-
 
 end;
 

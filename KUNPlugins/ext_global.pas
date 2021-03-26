@@ -25,6 +25,7 @@ procedure SetBit(var Src: Byte; bit: Integer);
 procedure ResetBit(var Src : Byte; bit: Integer);
 // провека бита
 function GetBit(Src : Byte; bit: Integer)  : Integer;
+function IsBitSet(Src : Byte; bit: Integer)  : Boolean;
 
 implementation
 
@@ -60,5 +61,11 @@ begin
    Result := (Src shr bit) and $01;
 end;
 
+function IsBitSet (Src : Byte; bit: Integer)  : Boolean;
+begin
+   IsBitSet  := False;
+   if (Src shr bit) and $01 = 1 then
+   IsBitSet  := True;
+end;
 end.
 
