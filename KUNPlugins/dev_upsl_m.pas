@@ -245,11 +245,9 @@ begin
 
         end;
 
-//        // если установлен бит TST
-//          if FMyForm.chkTST_OK.Checked then
-//            SetBit(TA[7], 6)
-//          else
-//            ResetBit(TA[7], 6);
+        // установлен бит TST
+          if FMyForm.chkTST_OK.Checked then
+            SetBit(TA[7], 6);
 
         // результаты автоматической проверки
         if FMyForm.chkA2_K2.Checked then
