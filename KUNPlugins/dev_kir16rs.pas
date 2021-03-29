@@ -11,7 +11,6 @@ uses
 type
   TfrmKIR16RS = class(TfrmBase)
     lblVer: TLabel;
-    medtVer: TMaskEdit;
     seNumber: TSpinEdit;
     lbl17: TLabel;
     btnSensor: TSpeedButton;
@@ -21,6 +20,8 @@ type
     lblAKB: TLabel;
     CBSG1: TComboBox;
     lblTypeProtocol: TLabel;
+    lbl1: TLabel;
+    cbbVersion: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure SGSelectCell(Sender: TObject; ACol, ARow: Integer;
       var CanSelect: Boolean);
@@ -32,6 +33,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    FDevDataSend : Boolean;
   end;
 
   TKIR16RS = class(TBaseDevice)
@@ -46,8 +48,6 @@ implementation
 {$R *.dfm}
 uses
   IdGlobal, ext_global;
-  var
-  FDevDataSend : Boolean;   // флаг готовности уст-ва передать оперативные данные
 
 { TKIR16RS }
 
@@ -89,10 +89,10 @@ begin
         TA := TArray<Byte>.Create($80, $81, $03, $0A, $03, $01, $00);
         if FDevTimeSync then
           ResetBit(TA[5], 0);
-        if FDevDataSend then
+        if FMyForm.FDevDataSend then
         begin
           SetBit(TA[5], 1);  // изменилось состояние дискретного входа или АКБ
-          FDevDataSend := False;
+          FMyForm.FDevDataSend := False;
         end;
       end;
 
@@ -241,7 +241,7 @@ begin
       begin
         TA := TArray<Byte>.Create($80, $8D, $02, $00, $00, $00);
         // Чтение версии устройства
-        ver := FMyForm.medtVer.EditText;
+        ver := FMyForm.cbbVersion.Text;
         TA[3] := Fetch(ver, '.').ToInteger;
         TA[4] := ver.ToInteger;
       end;
@@ -271,13 +271,11 @@ end;
 
 procedure TfrmKIR16RS.btnSensorClick(Sender: TObject);
 begin
-  inherited;
   FDevDataSend := True;
 end;
 
 procedure TfrmKIR16RS.cbbPowChange(Sender: TObject);
 begin
-  inherited;
   FDevDataSend := True;
 end;
 

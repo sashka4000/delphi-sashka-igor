@@ -11,7 +11,6 @@ uses
 type
   TfrmUPSLM = class(TfrmBase)
     chkAmp1: TCheckBox;
-    medtVer: TMaskEdit;
     chkFire: TCheckBox;
     chkAmp2: TCheckBox;
     lbledtBat: TLabeledEdit;
@@ -42,8 +41,10 @@ type
     chkROMAutoPGS: TCheckBox;
     lbl3: TLabel;
     edtROMTimer: TEdit;
+    cbbVersion: TComboBox;
     procedure chkBatClick(Sender: TObject);    // анализируем исправность АКБ
-    procedure chkTST_OKClick(Sender: TObject); // опрос чекбоксов - автоматической проверки
+    procedure chkTST_OKClick(Sender: TObject);
+    procedure cbbUPSLVyzovChange(Sender: TObject); // опрос чекбоксов - автоматической проверки
   private
     { Private declarations }
   public
@@ -52,6 +53,7 @@ type
 
   TUPSLM = class(TBaseDevice)
     DISP : BOOLEAN;                     // флаг подключения ПС
+    ManualTESTGGS : BOOLEAN;
     constructor Create(F: TFrmBaseClass);
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
@@ -72,6 +74,7 @@ constructor TUPSLM.Create(F: TFrmBaseClass);
 begin
   inherited;
   DISP := False;
+  ManualTESTGGS := False;
 end;
 
 function TUPSLM.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
@@ -150,28 +153,38 @@ begin
             end;
           $01:
             begin
-              FMyForm.cbbUPSLVyzov.ItemIndex := 1;
+             if DISP then
+               FMyForm.cbbUPSLVyzov.ItemIndex := 1;
             end;
           $02:
             begin
+             if DISP then
               FMyForm.cbbUPSLVyzov.ItemIndex := 2;
             end;
           $04:
             begin
+             if DISP then
               FMyForm.cbbUPSLVyzov.ItemIndex := 3;
             end;
           $08:
             begin
+             if DISP then
               FMyForm.cbbUPSLVyzov.ItemIndex := 4;
             end;
           $20:
             begin
+             if DISP then
               FMyForm.cbbUPSLVyzov.ItemIndex := 5;
             end;
         end;
 
+        if not DISP then
+           FMyForm.cbbUPSLVyzov.ItemIndex := 0;
+
         if IsBitSet(TR[3], 6) then
           FMyForm.chkTST_OK.Checked := True;
+
+        ManualTESTGGS := DISP and IsBitSet(TR[3], 7);
 
         TA := TArray<Byte>.Create($D8, $84, $00, $00);
       end;
@@ -208,8 +221,8 @@ begin
         if FMyForm.chkFire.Checked then
           SetBit(TA[3], 3);
 
-        // связь с индикатором IND
-        if FMyForm.chkInd.Checked then
+        // связь с индикатором IND инверсия
+        if not FMyForm.chkInd.Checked then
           SetBit(TA[3], 0);
 
         //  обрабатываем АКБ TA[5]
@@ -280,6 +293,51 @@ begin
         if FMyForm.chkA1_M1.Checked then
           SetBit(TA[9], 0);
 
+        case FMyForm.cbbUPSLVyzov.ItemIndex of
+         0 :
+         begin
+           TA[10] := 0;
+         end;
+         1 :
+         begin
+           if DISP
+            then  TA[10] := 11
+            else  TA[10] := 13;
+         end;
+         2 :
+         begin
+           if DISP
+            then  TA[10] :=  8
+            else  TA[10] :=  10;
+         end;
+         3 :
+         begin
+           if DISP
+            then  TA[10] :=  5
+            else  TA[10] :=  7;
+         end;
+         4 :
+         begin
+           if DISP
+            then  TA[10] :=  2
+            else  TA[10] :=  4;
+         end;
+         5 :
+         begin
+           if DISP
+            then  TA[10] := 17
+            else  TA[10] := 18;
+         end;
+        end;
+
+        if ManualTESTGGS then
+          TA[10] := 19;
+
+        if FMyForm.chkFire.Checked then
+          TA[10] := 15;
+
+
+
       end;
     PCKT_OPER:
       begin
@@ -318,7 +376,7 @@ begin
           SetBit(TA[4], 4);
 
         // связь с индикатором
-        if FMyForm.chkInd.Checked then
+        if not FMyForm.chkInd.Checked then
           SetBit(TA[3], 0);
 
       // результаты автоматической проверки
@@ -361,7 +419,7 @@ begin
       begin
         TA := TArray<Byte>.Create($D8, $8D, $02, $00, $00, $00);
         // Чтение версии устройства
-        ver := FMyForm.medtVer.EditText;
+        ver := FMyForm.cbbVersion.Text;
         TA[3] := Fetch(ver, '.').ToInteger;
         TA[4] := ver.ToInteger;
       end;
@@ -382,10 +440,10 @@ begin
     PCKT_READ_ROM_Dev:
       begin
         // чтение ПЗУ настроек устройства
-        TA := TArray<Byte>.Create($D8, $8F, $02, $00, $00, $00);
+        TA := TArray<Byte>.Create($D8, $8F, $02, $0F, $00, $00);
 
-        if FMyForm.chkROMAutoPGS.Checked then
-          SetBit(TA[3], 1);
+        if not FMyForm.chkROMAutoPGS.Checked then
+          ResetBit(TA[3], 1);
 
         TA[4] := StrToIntDef(FMyForm.edtROMTimer.Text, 0) and $1F;
       end
@@ -412,6 +470,12 @@ begin
 
   // записываю буфер ответа во входящий буфер
   move(TA[0], TR[0], AnswerSize);
+end;
+
+procedure TfrmUPSLM.cbbUPSLVyzovChange(Sender: TObject);
+begin
+  if (seUPSL_KUN.Value > 0) and (cbbUPSLVyzov.ItemIndex > 0) then
+    CallBack(seUPSL_KUN.Value, 0);
 end;
 
 procedure TfrmUPSLM.chkBatClick(Sender: TObject);

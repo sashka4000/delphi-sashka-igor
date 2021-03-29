@@ -151,7 +151,7 @@ inherited frmKUP4RS: TfrmKUP4RS
   end
   object lblVer: TLabel
     Left = 18
-    Top = 225
+    Top = 262
     Width = 96
     Height = 13
     Caption = #1042#1077#1088#1089#1080#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
@@ -166,25 +166,28 @@ inherited frmKUP4RS: TfrmKUP4RS
     TabOrder = 0
     Value = 0
   end
-  object medtVer: TMaskEdit
-    Left = 123
-    Top = 223
-    Width = 36
-    Height = 21
-    Alignment = taCenter
-    EditMask = '!99\.99;1; '
-    MaxLength = 5
-    TabOrder = 1
-    Text = '01.12'
-  end
   object chkPowLine: TCheckBox
     Left = 18
-    Top = 272
+    Top = 229
     Width = 199
     Height = 17
     Caption = #1055#1080#1090#1072#1085#1080#1077' '#1086#1090' '#1074#1085#1077#1096#1085#1077#1075#1086' '#1080#1089#1090#1086#1095#1085#1080#1082#1072
     Checked = True
     State = cbChecked
+    TabOrder = 1
+  end
+  object cbbVersion: TComboBox
+    Left = 141
+    Top = 262
+    Width = 76
+    Height = 21
+    Style = csDropDownList
+    ItemIndex = 0
     TabOrder = 2
+    Text = '5.20'
+    OnChange = cbbVersionChange
+    Items.Strings = (
+      '5.20'
+      '-')
   end
 end

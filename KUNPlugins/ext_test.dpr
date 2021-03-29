@@ -19,7 +19,8 @@ uses
   dev_modbus in 'dev_modbus.pas' {frmModbus},
   CRCUnit in 'CRCUnit.pas',
   dev_kir16rs in 'dev_kir16rs.pas' {frmKIR16RS},
-  dev_upsl_m in 'dev_upsl_m.pas' {frmUPSLM};
+  dev_upsl_m in 'dev_upsl_m.pas' {frmUPSLM},
+  dev_kir8rs in 'dev_kir8rs.pas' {frmKIR8RS};
 
 {$R *.res}
 {$R style_res.res}
@@ -48,10 +49,10 @@ begin
   KUN.RegisterType(gModbus, 'Modbus');
   KUN.RegisterType(gKUP4RS, 'КУП-4RS');
   KUN.RegisterType(gKIR16RS, 'КИР-16RS');
+  KUN.RegisterType(gUPSLM, 'УПСЛ-М');
   // Устройства, находящиеся в разработке  будут создаваться
   // только в режиме DEBUG сборки
   {$IFDEF DEBUG}
-  KUN.RegisterType(gUPSLM, 'УПСЛ-М');
   {$ENDIF}
 end;
 

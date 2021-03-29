@@ -6,23 +6,23 @@ inherited frmKIR16RS: TfrmKIR16RS
   PixelsPerInch = 96
   TextHeight = 13
   object lblVer: TLabel
-    Left = 300
-    Top = 232
+    Left = 18
+    Top = 169
     Width = 96
     Height = 13
     Caption = #1042#1077#1088#1089#1080#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
   end
   object lbl17: TLabel
-    Left = 300
+    Left = 18
     Top = 16
     Width = 65
     Height = 13
     Caption = #1050#1048#1056'-16RS '#8470
   end
   object btnSensor: TSpeedButton
-    Left = 394
-    Top = 91
-    Width = 40
+    Left = 202
+    Top = 64
+    Width = 55
     Height = 25
     AllowAllUp = True
     GroupIndex = 1
@@ -31,39 +31,36 @@ inherited frmKIR16RS: TfrmKIR16RS
     OnClick = btnSensorClick
   end
   object lblSensor: TLabel
-    Left = 300
+    Left = 18
     Top = 64
     Width = 134
     Height = 13
     Caption = #1044#1072#1090#1095#1080#1082' '#1074#1089#1082#1088#1099#1090#1080#1103' '#1082#1086#1088#1087#1091#1089#1072
   end
   object lblAKB: TLabel
-    Left = 414
-    Top = 143
+    Left = 18
+    Top = 118
     Width = 20
     Height = 13
     Caption = #1040#1050#1041
   end
   object lblTypeProtocol: TLabel
-    Left = 300
-    Top = 289
+    Left = 18
+    Top = 239
     Width = 115
     Height = 13
     Caption = #1058#1080#1087' '#1087#1088#1086#1090#1086#1082#1086#1083#1072': 40 '#1073#1080#1090
+    Enabled = False
   end
-  object medtVer: TMaskEdit
-    Left = 402
-    Top = 229
-    Width = 36
-    Height = 21
-    Alignment = taCenter
-    EditMask = '!99\.99;1; '
-    MaxLength = 5
-    TabOrder = 0
-    Text = '01.12'
+  object lbl1: TLabel
+    Left = 18
+    Top = 211
+    Width = 239
+    Height = 13
+    Caption = #1050#1086#1085#1092#1080#1075#1091#1088#1072#1094#1080#1086#1085#1085#1099#1077' '#1087#1072#1088#1072#1084#1077#1090#1088#1099' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
   end
   object seNumber: TSpinEdit
-    Left = 383
+    Left = 202
     Top = 13
     Width = 55
     Height = 22
@@ -73,7 +70,7 @@ inherited frmKIR16RS: TfrmKIR16RS
     Value = 0
   end
   object SG: TStringGrid
-    Left = 18
+    Left = 379
     Top = 8
     Width = 263
     Height = 377
@@ -83,12 +80,12 @@ inherited frmKIR16RS: TfrmKIR16RS
     RowCount = 17
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing]
     ScrollBars = ssNone
-    TabOrder = 2
+    TabOrder = 0
     OnSelectCell = SGSelectCell
   end
   object cbbPow: TComboBox
-    Left = 318
-    Top = 170
+    Left = 202
+    Top = 115
     Width = 120
     Height = 21
     TabOrder = 3
@@ -102,11 +99,11 @@ inherited frmKIR16RS: TfrmKIR16RS
       #1040#1050#1041)
   end
   object CBSG1: TComboBox
-    Left = 160
-    Top = 24
+    Left = 529
+    Top = 32
     Width = 113
     Height = 21
-    TabOrder = 4
+    TabOrder = 2
     Text = #1096#1083#1077#1081#1092' '#1085#1086#1088#1084#1072
     OnCloseUp = CBSG1CloseUp
     OnExit = CBSG1Exit
@@ -114,5 +111,17 @@ inherited frmKIR16RS: TfrmKIR16RS
       #1096#1083#1077#1081#1092' '#1085#1086#1088#1084#1072
       #1096#1083#1077#1081#1092' '#1079#1072#1084#1082#1085#1091#1090
       #1096#1083#1077#1081#1092' '#1086#1073#1088#1099#1074)
+  end
+  object cbbVersion: TComboBox
+    Left = 202
+    Top = 169
+    Width = 76
+    Height = 21
+    Style = csDropDownList
+    ItemIndex = 0
+    TabOrder = 4
+    Text = '2.20'
+    Items.Strings = (
+      '2.20')
   end
 end

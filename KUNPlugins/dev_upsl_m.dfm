@@ -21,14 +21,14 @@ inherited frmUPSLM: TfrmUPSLM
     Caption = '0 - '#1085#1077' '#1087#1086#1076#1082#1083#1102#1095#1077#1085
   end
   object lbl12: TLabel
-    Left = 8
+    Left = 18
     Top = 64
     Width = 237
     Height = 13
     Caption = #1050#1072#1085#1072#1083' '#1055#1043#1057'  '#1050#1059#1053', '#1082' '#1082#1086#1090#1086#1088#1086#1084#1091' '#1087#1086#1076#1082#1083#1102#1095#1077#1085' '#1059#1055#1057#1051
   end
   object lbl21: TLabel
-    Left = 8
+    Left = 18
     Top = 91
     Width = 82
     Height = 13
@@ -42,7 +42,7 @@ inherited frmUPSLM: TfrmUPSLM
     Caption = #1059#1055#1057#1051'-'#1052' '#8470
   end
   object lblControl: TLabel
-    Left = 8
+    Left = 18
     Top = 217
     Width = 202
     Height = 13
@@ -69,21 +69,12 @@ inherited frmUPSLM: TfrmUPSLM
     Width = 165
     Height = 17
     Caption = #1045#1089#1090#1100' '#1086#1090#1074#1077#1090' '#1086#1090' '#1091#1089#1080#1083#1080#1090#1077#1083#1103' 1'
-    TabOrder = 3
-  end
-  object medtVer: TMaskEdit
-    Left = 169
-    Top = 360
-    Width = 45
-    Height = 21
-    Alignment = taCenter
-    EditMask = '!99\.99;1; '
-    MaxLength = 5
-    TabOrder = 23
-    Text = '03.04'
+    Checked = True
+    State = cbChecked
+    TabOrder = 4
   end
   object chkFire: TCheckBox
-    Left = 8
+    Left = 18
     Top = 193
     Width = 360
     Height = 17
@@ -96,11 +87,13 @@ inherited frmUPSLM: TfrmUPSLM
     Width = 165
     Height = 17
     Caption = #1045#1089#1090#1100' '#1086#1090#1074#1077#1090' '#1086#1090' '#1091#1089#1080#1083#1080#1090#1077#1083#1103' 2'
+    Checked = True
+    State = cbChecked
     TabOrder = 7
   end
   object lbledtBat: TLabeledEdit
-    Left = 168
-    Top = 166
+    Left = 175
+    Top = 169
     Width = 46
     Height = 21
     EditLabel.Width = 153
@@ -110,12 +103,12 @@ inherited frmUPSLM: TfrmUPSLM
     EditLabel.ParentBiDiMode = False
     LabelPosition = lpLeft
     LabelSpacing = 5
-    TabOrder = 8
-    Text = '4,4'
+    TabOrder = 9
+    Text = '4,1'
   end
   object chkBat: TCheckBox
-    Left = 8
-    Top = 143
+    Left = 18
+    Top = 148
     Width = 165
     Height = 17
     Caption = #1048#1089#1087#1088#1072#1074#1085#1086#1089#1090#1100' '#1072#1082#1082#1091#1084#1091#1083#1103#1090#1086#1088#1072
@@ -125,12 +118,14 @@ inherited frmUPSLM: TfrmUPSLM
     OnClick = chkBatClick
   end
   object chkNet: TCheckBox
-    Left = 8
-    Top = 129
+    Left = 18
+    Top = 126
     Width = 165
     Height = 17
     Caption = #1053#1072#1083#1080#1095#1080#1077' '#1089#1077#1090#1077#1074#1086#1075#1086' '#1087#1080#1090#1072#1085#1080#1103
-    TabOrder = 4
+    Checked = True
+    State = cbChecked
+    TabOrder = 3
   end
   object seNumber: TSpinEdit
     Left = 272
@@ -151,6 +146,7 @@ inherited frmUPSLM: TfrmUPSLM
     ItemIndex = 0
     TabOrder = 2
     Text = #1053#1077#1090
+    OnChange = cbbUPSLVyzovChange
     Items.Strings = (
       #1053#1077#1090
       #1054#1055#1069
@@ -175,6 +171,8 @@ inherited frmUPSLM: TfrmUPSLM
     Width = 156
     Height = 17
     Caption = #1045#1089#1090#1100' '#1089#1074#1103#1079#1100' '#1089' '#1080#1085#1076#1080#1082#1072#1090#1086#1088#1086#1084
+    Checked = True
+    State = cbChecked
     TabOrder = 10
   end
   object chkA1_M1: TCheckBox
@@ -279,9 +277,9 @@ inherited frmUPSLM: TfrmUPSLM
   object chkROMAutoPGS: TCheckBox
     Left = 495
     Top = 141
-    Width = 183
+    Width = 176
     Height = 17
-    Caption = #1040#1074#1090#1086#1084#1072#1090#1080#1095#1077#1089#1082#1072#1103' '#1087#1088#1086#1074#1077#1088#1082#1072' '#1055#1043#1057
+    Caption = #1040#1074#1090#1086#1084#1072#1090#1080#1095#1077#1089#1082#1072#1103' '#1087#1088#1086#1074#1077#1088#1082#1072' '#1055#1057
     Checked = True
     Enabled = False
     State = cbChecked
@@ -293,7 +291,20 @@ inherited frmUPSLM: TfrmUPSLM
     Width = 68
     Height = 21
     Enabled = False
-    TabOrder = 9
+    TabOrder = 8
     Text = '12'
+  end
+  object cbbVersion: TComboBox
+    Left = 138
+    Top = 359
+    Width = 76
+    Height = 21
+    Style = csDropDownList
+    ItemIndex = 1
+    TabOrder = 23
+    Text = '3.4'
+    Items.Strings = (
+      '2.4'
+      '3.4')
   end
 end

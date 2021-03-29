@@ -86,6 +86,8 @@ inherited frmUPSL: TfrmUPSL
     Width = 165
     Height = 17
     Caption = #1053#1072#1083#1080#1095#1080#1077' '#1089#1077#1090#1077#1074#1086#1075#1086' '#1087#1080#1090#1072#1085#1080#1103
+    Checked = True
+    State = cbChecked
     TabOrder = 3
   end
   object chkBat: TCheckBox
@@ -94,6 +96,8 @@ inherited frmUPSL: TfrmUPSL
     Width = 165
     Height = 17
     Caption = #1048#1089#1087#1088#1072#1074#1085#1086#1089#1090#1100' '#1072#1082#1082#1091#1084#1091#1083#1103#1090#1086#1088#1072
+    Checked = True
+    State = cbChecked
     TabOrder = 5
   end
   object lbledtBat: TLabeledEdit
@@ -117,6 +121,8 @@ inherited frmUPSL: TfrmUPSL
     Width = 165
     Height = 17
     Caption = #1045#1089#1090#1100' '#1086#1090#1074#1077#1090' '#1086#1090' '#1091#1089#1080#1083#1080#1090#1077#1083#1103' 1'
+    Checked = True
+    State = cbChecked
     TabOrder = 4
   end
   object chkAmp2: TCheckBox
@@ -125,6 +131,8 @@ inherited frmUPSL: TfrmUPSL
     Width = 165
     Height = 17
     Caption = #1045#1089#1090#1100' '#1086#1090#1074#1077#1090' '#1086#1090' '#1091#1089#1080#1083#1080#1090#1077#1083#1103' 2'
+    Checked = True
+    State = cbChecked
     TabOrder = 6
   end
   object chkFire: TCheckBox

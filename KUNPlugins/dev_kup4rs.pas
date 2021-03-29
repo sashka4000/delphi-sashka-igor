@@ -26,8 +26,9 @@ type
     lbl17: TLabel;
     seNumber: TSpinEdit;
     lblVer: TLabel;
-    medtVer: TMaskEdit;
     chkPowLine: TCheckBox;
+    cbbVersion: TComboBox;
+    procedure cbbVersionChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -186,15 +187,13 @@ begin
         end;
         end;
 
-        // Пример команды отжатия кнопки реле btnSW1 через 3 секунды
-        //  TWaitTime.Create(FMyForm.btnSW1, FMyForm.Handle);
-
-
     PCKT_VERSION:
       begin
+        if FMyForm.cbbVersion.Text = '-' then
+          Exit;
         TA := TArray<Byte>.Create($E0, $8D, $02, $00, $00, $00);
         // Чтение версии устройства
-        ver := FMyForm.medtVer.EditText;
+        ver := FMyForm.cbbVersion.Text;
         TA[3] := Fetch(ver,'.').ToInteger;
         TA[4] := ver.ToInteger;
       end
@@ -240,6 +239,21 @@ begin
   sleep (3000);
   // послать сообщение на отжатие кнопки
   PostMessage(FHWND, WM_USER + 1, Integer(FBTN), 0);
+end;
+
+procedure TfrmKUP4RS.cbbVersionChange(Sender: TObject);
+begin
+  if cbbVersion.Text = '-' then
+  begin
+    btnIn3.Down := False;
+    btnIn4.Down := False;
+    btnIn3.Enabled := False;
+    btnIn4.Enabled := False;
+  end else
+  begin
+    btnIn3.Enabled := True;
+    btnIn4.Enabled := True;
+  end;
 end;
 
 procedure TfrmKUP4RS.TimerMessage(var T: TMessage);
