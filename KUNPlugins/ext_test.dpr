@@ -53,6 +53,7 @@ begin
   // Устройства, находящиеся в разработке  будут создаваться
   // только в режиме DEBUG сборки
   {$IFDEF DEBUG}
+    KUN.RegisterType(gKIR8RS, 'КИР-8RS');
   {$ENDIF}
 end;
 
@@ -99,6 +100,11 @@ begin
     if IsEqualGUID(guidClass, gUPSLM) then
   begin
      RS := TUPSLM.Create (TfrmUPSLM);
+     Result := 0;
+  end;
+    if IsEqualGUID(guidClass, gKIR8RS) then
+  begin
+     RS := TKIR8RS.Create (TfrmKIR8RS);
      Result := 0;
   end;
 end;
