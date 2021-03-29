@@ -79,7 +79,6 @@ begin
   if TR[0] <> $80 + FMyForm.seNumber.Value then
     Exit;
 
-//     FDevBattery := $00;
   // формирую ответ на запрос
 
   case TR[1] of

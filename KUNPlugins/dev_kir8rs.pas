@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  dev_base_form, Vcl.Buttons, Vcl.StdCtrls, Vcl.Samples.Spin, Vcl.Grids;
+  dev_base_form, Vcl.Buttons, Vcl.StdCtrls, Vcl.Samples.Spin, Vcl.Grids, DateUtils;
 
 type
   TfrmKIR8RS = class(TfrmBase)
@@ -25,6 +25,8 @@ type
     procedure SGSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
     procedure CBSG1CloseUp(Sender: TObject);
     procedure CBSG1Exit(Sender: TObject);
+    procedure btnSensorClick(Sender: TObject);
+    procedure cbbPowChange(Sender: TObject);
 
   private
     { Private declarations }
@@ -43,6 +45,10 @@ const
 implementation
 
 {$R *.dfm}
+
+uses
+  IdGlobal, ext_global;
+
 function TKIR8RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
   TR, TA: TArray<Byte>;
@@ -64,49 +70,48 @@ begin
   // преобразование указателя к типу массив байт
   TR := TArray<Byte>(pd);
 
-//  // проверяю CRC пакета
-//  if GET_CRC(TR, PacketSize) <> TR[PacketSize - 1] then
-//    Exit;
-//  // проверяю адрес устройства в первом байте
-//  if TR[0] <> $80 + FMyForm.seNumber.Value then
-//    Exit;
-//
-////     FDevBattery := $00;
-//  // формирую ответ на запрос
-//
-//  case TR[1] of
-//    PCKT_TYPE:
-//      begin
-//  // Обработка состояния запроса типа устройства
-//        TA := TArray<Byte>.Create($80, $81, $03, $0A, $03, $01, $00);
-//        if FDevTimeSync then
-//          ResetBit(TA[5], 0);
-//        if FMyForm.FDevDataSend then
-//        begin
-//          SetBit(TA[5], 1);  // изменилось состояние дискретного входа или АКБ
-//          FMyForm.FDevDataSend := False;
-//        end;
-//      end;
-//
-//    PCKT_WRITE_TIME:
-//      begin
-//     //Запись времени устройства
-//        FDevTimeSync := True;
-//        FDevTime := EncodeDateTime(TR[8] + 2000, TR[7], TR[6], TR[5], TR[4], TR[3], 0);
-//        FCompTime := Now;
-//        DecodeDate(FDevTime, Y, MM, D);
-//        DecodeTime(FDevTime, H, M, S, MS);
-//        TA := TArray<Byte>.Create($80, $82, $06, S, M, H, D, MM, (Y - 2000), $00);
-//      end;
-//
-//    PCKT_READ_TIME:
-//      begin
-//     //Чтение времени устройства
-//        FTime := (Now - FCompTime) + FDevTime;
-//        DecodeDate(FTime, Y, MM, D);
-//        DecodeTime(FTime, H, M, S, MS);
-//        TA := TArray<Byte>.Create($80, $83, $06, S, M, H, D, MM, (Y - 2000), $00);
-//      end;
+  // проверяю CRC пакета
+  if GET_CRC(TR, PacketSize) <> TR[PacketSize - 1] then
+    Exit;
+  // проверяю адрес устройства в первом байте
+  if TR[0] <> $80 + FMyForm.seNumber.Value then
+    Exit;
+
+  // формирую ответ на запрос
+
+  case TR[1] of
+    PCKT_TYPE:
+      begin
+  // Обработка состояния запроса типа устройства
+        TA := TArray<Byte>.Create($80, $81, $03, $01, $07, $01, $00);
+        if FDevTimeSync then
+          ResetBit(TA[5], 0);
+        if FMyForm.FDevDataSend then
+        begin
+          SetBit(TA[5], 1);  // изменилось состояние дискретного входа или АКБ
+          FMyForm.FDevDataSend := False;
+        end;
+      end;
+
+    PCKT_WRITE_TIME:
+      begin
+     //Запись времени устройства
+        FDevTimeSync := True;
+        FDevTime := EncodeDateTime(TR[8] + 2000, TR[7], TR[6], TR[5], TR[4], TR[3], 0);
+        FCompTime := Now;
+        DecodeDate(FDevTime, Y, MM, D);
+        DecodeTime(FDevTime, H, M, S, MS);
+        TA := TArray<Byte>.Create($80, $82, $06, S, M, H, D, MM, (Y - 2000), $00);
+      end;
+
+    PCKT_READ_TIME:
+      begin
+     //Чтение времени устройства
+        FTime := (Now - FCompTime) + FDevTime;
+        DecodeDate(FTime, Y, MM, D);
+        DecodeTime(FTime, H, M, S, MS);
+        TA := TArray<Byte>.Create($80, $83, $06, S, M, H, D, MM, (Y - 2000), $00);
+      end;
 //
 //    PCKT_CURRENT:
 //      begin
@@ -259,17 +264,18 @@ begin
 //  move(TA[0], TR[0], AnswerSize);
 
 end;
+end;
 
-//procedure TfrmKIR16RS.btnSensorClick(Sender: TObject);
-//begin
-//  FDevDataSend := True;
-//end;
-//
-//procedure TfrmKIR16RS.cbbPowChange(Sender: TObject);
-//begin
-//  FDevDataSend := True;
-//end;
+procedure TfrmKIR8RS.btnSensorClick(Sender: TObject);
+begin
+  FDevDataSend := True;
+end;
 
+
+procedure TfrmKIR8RS.cbbPowChange(Sender: TObject);
+begin
+  FDevDataSend := True;
+end;
 
 
 // встраиваем ComboBox в StringGrid

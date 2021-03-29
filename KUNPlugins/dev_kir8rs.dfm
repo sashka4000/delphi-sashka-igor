@@ -48,6 +48,7 @@ inherited frmKIR8RS: TfrmKIR8RS
     GroupIndex = 1
     Down = True
     Caption = #1044#1042
+    OnClick = btnSensorClick
   end
   object lblVer: TLabel
     Left = 18
@@ -75,6 +76,7 @@ inherited frmKIR8RS: TfrmKIR8RS
     Height = 21
     TabOrder = 1
     Text = #1053#1086#1088#1084#1072
+    OnChange = cbbPowChange
     Items.Strings = (
       #1053#1086#1088#1084#1072
       #1054#1090#1089#1091#1090#1089#1090#1074#1091#1077#1090
@@ -86,7 +88,7 @@ inherited frmKIR8RS: TfrmKIR8RS
     Left = 379
     Top = 8
     Width = 263
-    Height = 213
+    Height = 206
     ColCount = 3
     DefaultColWidth = 105
     DefaultRowHeight = 22
