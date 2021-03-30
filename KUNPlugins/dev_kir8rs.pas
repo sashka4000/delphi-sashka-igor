@@ -186,37 +186,25 @@ begin
           end;
         end;
       end;
-
-//    PCKT_RESET:
-//      begin
-//        TA := TArray<Byte>.Create($80, $8B, $00, $00);
-//        if (TR[3] and $01) = $01 then
-//          FMyForm.lblTypeProtocol.Caption := 'Тип протокола: 106 бит'
-//        else
-//          FMyForm.lblTypeProtocol.Caption := 'Тип протокола: 40 бит';
-//
-//        if (TR[3] and $10) = $10 then
-//          for i := 1 to 16 do
-//            FMyForm.SG.Cells[1, i] := '0';
-//      end;
-//
-//    PCKT_VERSION:
-//      begin
-//        TA := TArray<Byte>.Create($80, $8D, $02, $00, $00, $00);
-//        // Чтение версии устройства
-//        ver := FMyForm.cbbVersion.Text;
-//        TA[3] := Fetch(ver, '.').ToInteger;
-//        TA[4] := ver.ToInteger;
-//      end;
-//
-      PCKT_WRITE_DATE_MD:
+    PCKT_WRITE_BLOCK_DATA:
       begin
-
+        TR[5] := 7;
+        TR[6] := 23;
+        TA := TArray<Byte>.Create($80, $8B, $00, $00);
       end;
 
-    PCKT_READ_DATE_MD:
+    PCKT_READ_BLOCK_DATA:
       begin
+        TA := TArray<Byte>.Create($80, $8C, $02, $07, $17, $00);
+      end;
 
+    PCKT_VERSION:
+      begin
+        TA := TArray<Byte>.Create($80, $8D, $02, $00, $00, $00);
+        // Чтение версии устройства
+        ver := FMyForm.cbbVersion.Text;
+        TA[3] := Fetch(ver, '.').ToInteger;
+        TA[4] := ver.ToInteger;
       end
 
   else

@@ -223,7 +223,7 @@ begin
         end;
       end;
 
-    PCKT_RESET:
+    PCKT_WRITE_BLOCK_DATA:
       begin
         TA := TArray<Byte>.Create($80, $8B, $00, $00);
         if (TR[3] and $01) = $01 then
@@ -243,7 +243,7 @@ begin
         ver := FMyForm.cbbVersion.Text;
         TA[3] := Fetch(ver, '.').ToInteger;
         TA[4] := ver.ToInteger;
-      end;
+      end
 
   else
     Exit;
