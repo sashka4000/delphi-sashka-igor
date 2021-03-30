@@ -183,7 +183,7 @@ begin
                  SetBit(TA[77 + i],(0 + (2 * (j -1))))
                  else if FMyForm.SG.Cells[2, j + ( 4 * i )] = 'רכויפ מבנûג' then
                   begin
-                    SetBit(TA[77 + i],(0 + (2 * (j -1))));
+ //                   SetBit(TA[77 + i],(0 + (2 * (j -1))));
                     SetBit(TA[77 + i],(1 + (2 * (j -1))))
                   end;
             end;

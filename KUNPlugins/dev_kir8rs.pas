@@ -112,114 +112,81 @@ begin
         DecodeTime(FTime, H, M, S, MS);
         TA := TArray<Byte>.Create($80, $83, $06, S, M, H, D, MM, (Y - 2000), $00);
       end;
-//
-//    PCKT_CURRENT:
-//      begin
-//        FDevBattery := FMyForm.cbbPow.ItemIndex;
-//        SetLength(TA, 83);
-//        FTime := (Now - FCompTime) + FDevTime;
-//        DecodeDate(FDevTime, Y, MM, D);
-//        DecodeTime(FDevTime, H, M, S, MS);
-//
-//        TA[0] := $80;
-//        TA[1] := $85;
-//        TA[2] := $4F;
-//        // время
-//        TA[3] := S;
-//        TA[4] := M;
-//        TA[5] := H;
-//        TA[6] := D;
-//        TA[7] := MM;
-//        TA[8] := (Y - 2000);
-//        //************************
-//        // состояние дискретного входа, аккумулятора и настроек
-//        if not(FMyForm.btnSensor.Down) then
-//        begin
-//           SetBit(TA[81],0);
-//        end;
-//        if FDevBattery <> 0 then
-//        begin
-//          case FDevBattery of
-//            1:
-//              begin
-//               SetBit(TA[81],5);
-//              end;
-//            2:
-//              begin
-//               SetBit(TA[81],4);
-//               SetBit(TA[81],5);
-//              end;
-//            3:
-//              begin
-//                SetBit(TA[81],6);
-//              end;
-//            4:
-//              begin
-//                SetBit(TA[81], 7);
-//              end;
-//          end;
-//        end;
-//       //****************************
-//       //Сумматоры
-//        for i := 0 to 15 do
-//        begin
-//          ValueLoop := StrToIntDef(FMyForm.SG.Cells[1, i + 1],0);
-//          Move(ValueLoop, TA[9 + (4 * i)], 4);
-//        end;
-//        // наработка TA[73]
-//        FDevTimeDifference := MinutesBetween(Now, CreateDeviceTime);
-//        TA[73] := FDevTimeDifference mod 60;
-//        FDevTimeDifference := FDevTimeDifference div 60;
-//        Move(FDevTimeDifference, TA[74], 3);
-//        //**************************
-//        // читаем состояние шлейфа
-////             FMyForm.CBSG1.ItemIndex;
-//          for i := 0 to 3 do
-//            begin
-//              for j := 1 to 4 do
-//                if FMyForm.SG.Cells[2, j + ( 4 * i )] = 'шлейф замкнут' then
-//                 SetBit(TA[77 + i],(0 + (2 * (j -1))))
-//                 else if FMyForm.SG.Cells[2, j + ( 4 * i )] = 'шлейф обрыв' then
-//                  begin
-//                    SetBit(TA[77 + i],(0 + (2 * (j -1))));
-//                    SetBit(TA[77 + i],(1 + (2 * (j -1))))
-//                  end;
-//            end;
-//        //
-//      end;
-//    PCKT_OPER:
-//      begin
-//        FDevBattery := FMyForm.cbbPow.ItemIndex;
-//        TA := TArray<Byte>.Create($80, $89, $01, $00, $00);
-//      // состояние дискретного входа, аккумулятора и настроек
-//        if not (FMyForm.btnSensor.Down) then
-//        begin
-//           SetBit(TA[3],0);
-//        end;
-//        if FDevBattery <> 0 then
-//        begin
-//          case FDevBattery of
-//            1:
-//              begin
-//               SetBit(TA[3],5);
-//              end;
-//            2:
-//              begin
-//               SetBit(TA[3],4);
-//               SetBit(TA[3],5);
-//              end;
-//            3:
-//              begin
-//                SetBit(TA[3],6);
-//              end;
-//            4:
-//              begin
-//                SetBit(TA[3], 7);
-//              end;
-//          end;
-//        end;
-//      end;
-//
+
+    PCKT_CURRENT:
+      begin
+        FDevBattery := FMyForm.cbbPow.ItemIndex;
+        SetLength(TA, 84);
+        FTime := (Now - FCompTime) + FDevTime;
+        DecodeDate(FDevTime, Y, MM, D);
+        DecodeTime(FDevTime, H, M, S, MS);
+
+        TA[0] := $80;
+        TA[1] := $85;
+        TA[2] := $50;
+        // время
+        TA[67] := M;
+        TA[68] := H;
+        TA[69] := D;
+        TA[70] := MM;
+        TA[71] := (Y - 2000);
+
+       //Сумматоры
+        for i := 0 to 7 do
+        begin
+          ValueLoop := StrToIntDef(FMyForm.SG.Cells[1, i + 1], 0);
+          Move(ValueLoop, TA[3 + ((4 * i) * 2)], 4);
+          ValueLoop := StrToIntDef(FMyForm.SG.Cells[2, i + 1], 0);
+          Move(ValueLoop, TA[7 + ((4 * i) * 2)], 4);
+        end;
+        // наработка TA[72]
+        FDevTimeDifference := MinutesBetween(Now, CreateDeviceTime);
+        TA[73] := FDevTimeDifference mod 60;
+        FDevTimeDifference := FDevTimeDifference div 60;
+        Move(FDevTimeDifference, TA[72], 3);
+        // читаем состояние шлейфа
+       for I := 0 to 7 do
+            if FMyForm.SG.Cells[3, i + 1] = 'шлейф замкнут' then
+                 SetBit(TA[75 + i], 0)
+             else if FMyForm.SG.Cells[3, i + 1] = 'шлейф обрыв' then
+                 SetBit(TA[75 + i], 1);
+      end;
+
+    PCKT_OPER:
+      begin
+        FDevBattery := FMyForm.cbbPow.ItemIndex;
+        TA := TArray<Byte>.Create($80, $89, $01, $00, $00);
+      // состояние дискретного входа, аккумулятора и настроек
+        if not (FMyForm.btnSensor.Down) then
+        begin
+          SetBit(TA[3], 0);
+        end;
+        if FDevBattery <> 0 then
+        begin
+          case FDevBattery of
+            1:
+              begin
+                SetBit(TA[3], 4);
+              end;
+            2:
+              begin
+                SetBit(TA[3], 4);
+                SetBit(TA[3], 5);
+              end;
+            3:
+              begin
+                SetBit(TA[3], 6);
+              end;
+            4:
+              begin
+                SetBit(TA[3], 4);
+                SetBit(TA[3], 5);
+                SetBit(TA[3], 6);
+              end;
+          end;
+        end;
+      end;
+
 //    PCKT_RESET:
 //      begin
 //        TA := TArray<Byte>.Create($80, $8B, $00, $00);
@@ -242,29 +209,39 @@ begin
 //        TA[4] := ver.ToInteger;
 //      end;
 //
-//  else
-//    Exit;
-//  end;
-//
-//  // устанавливаю правильный адрес устройства в первый байт
-//  TA[0] := $80 + FMyForm.seNumber.Value;
-//
-//  AnswerSize := Length(TA);
-//
-//  // проверяю что ответ не превысил размер буфера
-//  if AnswerSize > MaxSize then
-//  begin
-//    Result := 1;
-//    Exit;
-//  end;
-//  // подписываю буфер
-//  CRC(TA, AnswerSize);
-//
-//  // записываю буфер ответа во входящий буфер
-//  move(TA[0], TR[0], AnswerSize);
+      PCKT_WRITE_DATE_MD:
+      begin
+
+      end;
+
+    PCKT_READ_DATE_MD:
+      begin
+
+      end
+
+  else
+    Exit;
+  end;
+
+  // устанавливаю правильный адрес устройства в первый байт
+  TA[0] := $80 + FMyForm.seNumber.Value;
+
+  AnswerSize := Length(TA);
+
+  // проверяю что ответ не превысил размер буфера
+  if AnswerSize > MaxSize then
+  begin
+    Result := 1;
+    Exit;
+  end;
+  // подписываю буфер
+  CRC(TA, AnswerSize);
+
+  // записываю буфер ответа во входящий буфер
+  move(TA[0], TR[0], AnswerSize);
 
 end;
-end;
+//end;
 
 procedure TfrmKIR8RS.btnSensorClick(Sender: TObject);
 begin
@@ -308,19 +285,22 @@ begin
   with SG do
   begin
     ColWidths[0] := 40;
-    ColWidths[1] := 95;
-    ColWidths[2] := 120;
+    ColWidths[1] := 65;
+    ColWidths[2] := 65;
+    ColWidths[3] := 120;
     for i := 1 to 8 do
       Cells[0, i] := i.ToString;
     for i := 1 to 8 do
     begin
       Cells[1, i] := '0';
-      Cells[2, i] := 'шлейф норма';
+      Cells[2, i] := '0';
+      Cells[3, i] := 'шлейф норма';
     end;
 
     Cells[0, 0] := 'Вход';
-    Cells[1, 0] := 'Число импульсов';
-    Cells[2, 0] := 'Состояние шлейфа';
+    Cells[1, 0] := 'Тариф 1';
+    Cells[2, 0] := 'Тариф 2';
+    Cells[3, 0] := 'Состояние шлейфа';
   end;
   SG.DefaultRowHeight := CBSG1.Height;
   CBSG1.Visible := False;
@@ -331,7 +311,7 @@ var
   R: TRect;
 begin
   inherited;
-  if ((ACol = 2) and (ARow <> 0)) then
+  if ((ACol = 3) and (ARow <> 0)) then
   begin
     {Ширина и положение ComboBox должно соответствовать ячейке StringGrid}
     R := SG.CellRect(ACol, ARow);

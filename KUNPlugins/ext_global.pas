@@ -10,6 +10,8 @@ const
   PCKT_CURRENT = $05;
   PCKT_OPER = $09;
   PCKT_RESET = $0B;
+  PCKT_WRITE_DATE_MD = $10;
+  PCKT_READ_DATE_MD = $0C; //(MD - memory device)
   PCKT_VERSION = $0D;
   PCKT_WRITE_ROM_Dev = $0E;
   PCKT_READ_ROM_Dev = $0F;
