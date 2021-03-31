@@ -94,7 +94,7 @@ inherited frmKIR8RS: TfrmKIR8RS
     Height = 21
     TabOrder = 3
     Text = #1053#1086#1088#1084#1072
-    OnChange = cbbPowChange
+    OnChange = btnSensorClick
     Items.Strings = (
       #1053#1086#1088#1084#1072
       #1054#1090#1089#1091#1090#1089#1090#1074#1091#1077#1090' '#1040#1050#1041

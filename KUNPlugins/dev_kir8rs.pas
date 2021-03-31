@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
-  dev_base_form, Vcl.Buttons, Vcl.StdCtrls, Vcl.Samples.Spin, Vcl.Grids, DateUtils;
+  dev_base_form, Vcl.Buttons, Vcl.StdCtrls, Vcl.Samples.Spin, Vcl.Grids,
+  DateUtils;
 
 type
   TfrmKIR8RS = class(TfrmBase)
@@ -28,14 +29,19 @@ type
     procedure SGSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
     procedure CBSG1Exit(Sender: TObject);
     procedure btnSensorClick(Sender: TObject);
-    procedure cbbPowChange(Sender: TObject);
     procedure CBSG1Change(Sender: TObject);
-
   private
     { Private declarations }
   public
     { Public declarations }
     FDevDataSend: Boolean;
+    FDev_Count_record: Integer;  // количество записей
+  end;
+
+  TArcRecord = record
+    RecTime: TDateTime;
+    Sensor: Boolean;
+    AKB: Byte;
   end;
 
   TKIR8RS = class(TBaseDevice)
@@ -51,6 +57,9 @@ implementation
 
 uses
   IdGlobal, ext_global;
+
+var
+  ArcArray: array of TArcRecord;
 
 function TKIR8RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
@@ -201,14 +210,14 @@ begin
         TA := TArray<Byte>.Create($80, $8C, $02, $00, $00, $00);
         TA[3] := StrToInt(FMyForm.lblRateOne.Caption);
         TA[4] := StrToInt(FMyForm.lblRateTwo.Caption);
-      end;
-
-     PCKT_VERSION:
-      begin
-        // протокол не описывает ответ на этот запрос
-        // ну устройство отвечает каким-то "мусором"
-        TA := TArray<Byte>.Create($81, $81, $03, $01, $07, $00, $00);
       end
+
+//     PCKT_VERSION:
+//      begin
+//        // протокол не описывает ответ на этот запрос
+//        // ну устройство отвечает каким-то "мусором"
+//        TA := TArray<Byte>.Create($81, $81, $03, $01, $07, $00, $00);
+//      end
 
   else
     Exit;
@@ -237,12 +246,25 @@ end;
 procedure TfrmKIR8RS.btnSensorClick(Sender: TObject);
 begin
   FDevDataSend := True;
-end;
+  // формирую массив архивных данных
+  SetLength(ArcArray, 10);
 
+  if FDev_Count_record < 10 then
+  begin
+//   ArcArray[FDev_Count_record].RecTime := Now;
+   with  ArcArray[FDev_Count_record] do
+   begin
+     RecTime := Now;
+     Sensor := btnSensor.Down;
+     AKB := cbbPow.ItemIndex;
+   end;
+  Inc(FDev_Count_record);
+  end
+  else
+  begin
 
-procedure TfrmKIR8RS.cbbPowChange(Sender: TObject);
-begin
-  FDevDataSend := True;
+  end;
+
 end;
 
 
@@ -270,6 +292,7 @@ var
 begin
   inherited;
   FDevDataSend := False;
+  FDev_Count_record := 0;
   with SG do
   begin
     ColWidths[0] := 40;
@@ -307,7 +330,7 @@ begin
     R.Right := R.Right + SG.Left;
     R.Top := R.Top + SG.Top;
     R.Bottom := R.Bottom + SG.Top;
-    CBSG1.ItemIndex := CBSG1.Items.IndexOf(SG.Cells[ACol,Arow]);
+    CBSG1.ItemIndex := CBSG1.Items.IndexOf(SG.Cells[ACol, ARow]);
     CBSG1.Left := R.Left + 1;
     CBSG1.Top := R.Top + 1;
     CBSG1.Width := (R.Right + 1) - R.Left;
