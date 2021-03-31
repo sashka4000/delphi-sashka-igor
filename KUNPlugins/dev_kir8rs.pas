@@ -253,7 +253,7 @@ begin
 
   if FDev_Count_record < 10 then
   begin
-    with ArcArray[FDev_Count_record] do       // заполняем запись
+    with ArcArray[9 - FDev_Count_record] do       // заполняем запись
     begin
       RecTime := Now;
       Sensor := btnSensor.Down;
@@ -262,7 +262,7 @@ begin
     Inc(FDev_Count_record);                 // считаем количество записей
   end
   else
-  begin                                     // если больше 10 сдвигаем на одну позицию в лево
+  begin                                     // если больше 10 сдвигаем на одну позицию влево
     for i := 0 to 8 do
       ArcArray[9 - i] := ArcArray[8 - i];
     with ArcArray[0] do                    // записываем в первую позицию последнюю запись
