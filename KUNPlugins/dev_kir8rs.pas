@@ -10,7 +10,6 @@ uses
 type
   TfrmKIR8RS = class(TfrmBase)
     lblName: TLabel;
-    cbbVersion: TComboBox;
     CBSG1: TComboBox;
     cbbPow: TComboBox;
     SG: TStringGrid;
@@ -24,6 +23,7 @@ type
     lblRateOne: TLabel;
     lblRateTwo: TLabel;
     lbl1: TLabel;
+    lbl2: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure SGSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
     procedure CBSG1Exit(Sender: TObject);
@@ -191,8 +191,8 @@ begin
       end;
     PCKT_WRITE_BLOCK_DATA:
       begin
-//        FMyForm.lblRateOne.Caption := TR[5].ToString;
-//        FMyForm.lblRateTwo.Caption := TR[6].ToString;
+        FMyForm.lblRateOne.Caption := TR[5].ToString;
+        FMyForm.lblRateTwo.Caption := TR[6].ToString;
         TA := TArray<Byte>.Create($80, $8B, $00, $00);
       end;
 
@@ -203,13 +203,11 @@ begin
         TA[4] := StrToInt(FMyForm.lblRateTwo.Caption);
       end;
 
-    PCKT_VERSION:
+     PCKT_VERSION:
       begin
-        TA := TArray<Byte>.Create($80, $8D, $02, $00, $00, $00);
-        // Чтение версии устройства
-        ver := FMyForm.cbbVersion.Text;
-        TA[3] := Fetch(ver, '.').ToInteger;
-        TA[4] := ver.ToInteger;
+        // протокол не описывает ответ на этот запрос
+        // ну устройство отвечает каким-то "мусором"
+        TA := TArray<Byte>.Create($81, $81, $03, $01, $07, $00, $00);
       end
 
   else

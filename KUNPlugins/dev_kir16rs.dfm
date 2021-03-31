@@ -122,8 +122,8 @@ inherited frmKIR16RS: TfrmKIR16RS
     Style = csDropDownList
     ItemIndex = 0
     TabOrder = 4
-    Text = '2.20'
+    Text = '20.2'
     Items.Strings = (
-      '2.20')
+      '20.2')
   end
 end

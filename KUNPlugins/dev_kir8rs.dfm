@@ -37,36 +37,36 @@ inherited frmKIR8RS: TfrmKIR8RS
   end
   object lblVer: TLabel
     Left = 18
-    Top = 169
+    Top = 168
     Width = 96
     Height = 13
     Caption = #1042#1077#1088#1089#1080#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
   end
   object lblRate1: TLabel
-    Left = 18
-    Top = 230
+    Left = 29
+    Top = 234
     Width = 139
     Height = 13
     Caption = #1063#1072#1089' '#1087#1077#1088#1077#1093#1086#1076#1072' '#1085#1072' '#1090#1072#1088#1080#1092' 1 - '
   end
   object lblRate2: TLabel
-    Left = 18
-    Top = 249
+    Left = 29
+    Top = 253
     Width = 139
     Height = 13
     Caption = #1063#1072#1089' '#1087#1077#1088#1077#1093#1086#1076#1072' '#1085#1072' '#1090#1072#1088#1080#1092' 2 - '
   end
   object lblRateOne: TLabel
-    Left = 163
-    Top = 230
+    Left = 174
+    Top = 234
     Width = 6
     Height = 13
     Caption = '7'
     Enabled = False
   end
   object lblRateTwo: TLabel
-    Left = 163
-    Top = 248
+    Left = 174
+    Top = 252
     Width = 12
     Height = 13
     Caption = '23'
@@ -79,17 +79,13 @@ inherited frmKIR8RS: TfrmKIR8RS
     Height = 13
     Caption = #1050#1086#1085#1092#1080#1075#1091#1088#1072#1094#1080#1086#1085#1085#1099#1077' '#1087#1072#1088#1072#1084#1077#1090#1088#1099' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
   end
-  object cbbVersion: TComboBox
+  object lbl2: TLabel
     Left = 202
-    Top = 169
-    Width = 76
-    Height = 21
-    Style = csDropDownList
-    ItemIndex = 0
-    TabOrder = 4
-    Text = '2.20'
-    Items.Strings = (
-      '2.20')
+    Top = 168
+    Width = 166
+    Height = 13
+    Caption = #1091#1089#1090#1088#1086#1081#1089#1090#1074#1086' '#1085#1077' '#1087#1077#1088#1077#1076#1072#1077#1090' '#1074#1077#1088#1089#1080#1102
+    Enabled = False
   end
   object cbbPow: TComboBox
     Left = 202
