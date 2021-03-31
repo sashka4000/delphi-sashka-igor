@@ -244,6 +244,8 @@ end;
 //end;
 
 procedure TfrmKIR8RS.btnSensorClick(Sender: TObject);
+var
+  i: Integer;
 begin
   FDevDataSend := True;
   // формирую массив архивных данных
@@ -251,21 +253,29 @@ begin
 
   if FDev_Count_record < 10 then
   begin
-//   ArcArray[FDev_Count_record].RecTime := Now;
-   with  ArcArray[FDev_Count_record] do
-   begin
-     RecTime := Now;
-     Sensor := btnSensor.Down;
-     AKB := cbbPow.ItemIndex;
-   end;
-  Inc(FDev_Count_record);
+    with ArcArray[FDev_Count_record] do       // заполняем запись
+    begin
+      RecTime := Now;
+      Sensor := btnSensor.Down;
+      AKB := cbbPow.ItemIndex;
+    end;
+    Inc(FDev_Count_record);                 // считаем количество записей
   end
   else
-  begin
-
+  begin                                     // если больше 10 сдвигаем на одну позицию в лево
+    for i := 0 to 8 do
+      ArcArray[9 - i] := ArcArray[8 - i];
+    with ArcArray[0] do                    // записываем в первую позицию последнюю запись
+    begin
+      RecTime := Now;
+      Sensor := btnSensor.Down;
+      AKB := cbbPow.ItemIndex;
+    end;
   end;
 
 end;
+
+
 
 
 // встраиваем ComboBox в StringGrid
