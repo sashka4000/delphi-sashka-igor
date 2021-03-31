@@ -15,12 +15,15 @@ type
     cbbPow: TComboBox;
     SG: TStringGrid;
     seNumber: TSpinEdit;
-    lblTypeProtocol: TLabel;
     lblAKB: TLabel;
     lblSensor: TLabel;
     btnSensor: TSpeedButton;
     lblVer: TLabel;
-    lblParam: TLabel;
+    lblRate: TLabel;
+    lblRate1: TLabel;
+    lblRate2: TLabel;
+    lblRateOne: TLabel;
+    lblRateTwo: TLabel;
     procedure FormCreate(Sender: TObject);
     procedure SGSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
     procedure CBSG1CloseUp(Sender: TObject);
@@ -188,14 +191,16 @@ begin
       end;
     PCKT_WRITE_BLOCK_DATA:
       begin
-        TR[5] := 7;
-        TR[6] := 23;
+//        FMyForm.lblRateOne.Caption := TR[5].ToString;
+//        FMyForm.lblRateTwo.Caption := TR[6].ToString;
         TA := TArray<Byte>.Create($80, $8B, $00, $00);
       end;
 
     PCKT_READ_BLOCK_DATA:
       begin
-        TA := TArray<Byte>.Create($80, $8C, $02, $07, $17, $00);
+        TA := TArray<Byte>.Create($80, $8C, $02, $00, $00, $00);
+        TA[3] := StrToInt(FMyForm.lblRateOne.Caption);
+        TA[4] := StrToInt(FMyForm.lblRateTwo.Caption);
       end;
 
     PCKT_VERSION:

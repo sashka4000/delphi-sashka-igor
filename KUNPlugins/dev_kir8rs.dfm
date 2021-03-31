@@ -10,20 +10,12 @@ inherited frmKIR8RS: TfrmKIR8RS
     Height = 13
     Caption = #1050#1048#1056'-8RS '#8470
   end
-  object lblParam: TLabel
+  object lblRate: TLabel
     Left = 18
     Top = 211
-    Width = 220
+    Width = 79
     Height = 13
-    Caption = #1050#1086#1085#1092#1080#1075#1091#1088#1072#1094#1080#1086#1085#1085#1099#1077' '#1087#1072#1088#1072#1084#1077#1090#1088#1099' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
-  end
-  object lblTypeProtocol: TLabel
-    Left = 18
-    Top = 239
-    Width = 115
-    Height = 13
-    Caption = #1058#1080#1087' '#1087#1088#1086#1090#1086#1082#1086#1083#1072': 40 '#1073#1080#1090
-    Enabled = False
+    Caption = #1058#1072#1088#1080#1092#1085#1099#1081' '#1087#1083#1072#1085
   end
   object lblAKB: TLabel
     Left = 18
@@ -56,6 +48,36 @@ inherited frmKIR8RS: TfrmKIR8RS
     Width = 96
     Height = 13
     Caption = #1042#1077#1088#1089#1080#1103' '#1091#1089#1090#1088#1086#1081#1089#1090#1074#1072
+  end
+  object lblRate1: TLabel
+    Left = 18
+    Top = 230
+    Width = 139
+    Height = 13
+    Caption = #1063#1072#1089' '#1087#1077#1088#1077#1093#1086#1076#1072' '#1085#1072' '#1090#1072#1088#1080#1092' 1 - '
+  end
+  object lblRate2: TLabel
+    Left = 18
+    Top = 249
+    Width = 139
+    Height = 13
+    Caption = #1063#1072#1089' '#1087#1077#1088#1077#1093#1086#1076#1072' '#1085#1072' '#1090#1072#1088#1080#1092' 2 - '
+  end
+  object lblRateOne: TLabel
+    Left = 163
+    Top = 230
+    Width = 6
+    Height = 13
+    Caption = '7'
+    Enabled = False
+  end
+  object lblRateTwo: TLabel
+    Left = 163
+    Top = 248
+    Width = 12
+    Height = 13
+    Caption = '23'
+    Enabled = False
   end
   object cbbVersion: TComboBox
     Left = 202
