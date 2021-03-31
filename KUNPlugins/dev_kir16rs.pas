@@ -29,6 +29,7 @@ type
     procedure CBSG1Exit(Sender: TObject);
     procedure btnSensorClick(Sender: TObject);
     procedure cbbPowChange(Sender: TObject);
+    procedure CBSG1Change(Sender: TObject);
   private
     { Private declarations }
   public
@@ -280,10 +281,17 @@ end;
 
 
 // встраиваем ComboBox в StringGrid
+procedure TfrmKIR16RS.CBSG1Change(Sender: TObject);
+begin
+  {Перебросим выбранное в значение из ComboBox в grid}
+  SG.Cells[SG.Col, SG.Row] := CBSG1.Items[CBSG1.ItemIndex];
+  CBSG1.Visible := False;
+  SG.SetFocus;
+end;
+
 procedure TfrmKIR16RS.CBSG1CloseUp(Sender: TObject);
 begin
-  inherited;
-      {Перебросим выбранное в значение из ComboBox в grid}
+  {Перебросим выбранное в значение из ComboBox в grid}
   SG.Cells[SG.Col, SG.Row] := CBSG1.Items[CBSG1.ItemIndex];
   CBSG1.Visible := False;
   SG.SetFocus;
@@ -342,6 +350,7 @@ begin
     R.Right := R.Right + SG.Left;
     R.Top := R.Top + SG.Top;
     R.Bottom := R.Bottom + SG.Top;
+    CBSG1.ItemIndex := CBSG1.Items.IndexOf(SG.Cells[ACol,Arow]);
     CBSG1.Left := R.Left + 1;
     CBSG1.Top := R.Top + 1;
     CBSG1.Width := (R.Right + 1) - R.Left;

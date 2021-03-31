@@ -103,9 +103,11 @@ inherited frmKIR16RS: TfrmKIR16RS
     Top = 32
     Width = 113
     Height = 21
+    Style = csDropDownList
+    ItemIndex = 0
     TabOrder = 2
     Text = #1096#1083#1077#1081#1092' '#1085#1086#1088#1084#1072
-    OnCloseUp = CBSG1CloseUp
+    OnChange = CBSG1Change
     OnExit = CBSG1Exit
     Items.Strings = (
       #1096#1083#1077#1081#1092' '#1085#1086#1088#1084#1072
