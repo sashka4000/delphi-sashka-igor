@@ -154,7 +154,7 @@ begin
           Move(ValueLoop, TA[7 + ((4 * i) * 2)], 4);
         end;
         // наработка TA[72]
-        FDevTimeDifference := MinutesBetween(Now, CreateDeviceTime);
+        FDevTimeDifference := MinutesBetween(Now, CreateDeviceCompTime);
         TA[73] := FDevTimeDifference mod 60;
         FDevTimeDifference := FDevTimeDifference div 60;
         Move(FDevTimeDifference, TA[72], 3);
@@ -256,7 +256,7 @@ begin
   begin
     with ArcArray[19 - FDev_Count_record] do       // заполняем запись
     begin
-      RecTime := Now;
+      RecTime := CurrentDeviceTime;
       AKB := cbbPow.ItemIndex;
       if btnK1.Down then
         K1 := 1;
@@ -271,7 +271,7 @@ begin
       ArcArray[19 - i] := ArcArray[18 - i];
     with ArcArray[0] do                    // записываем в первую позицию последнюю запись
     begin
-      RecTime := Now;
+      RecTime := CurrentDeviceTime;
       AKB := cbbPow.ItemIndex;
       if btnK1.Down then
         K1 := 1;

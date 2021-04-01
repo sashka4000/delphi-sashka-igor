@@ -170,7 +170,7 @@ begin
           Move(ValueLoop, TA[9 + (4 * i)], 4);
         end;
         // наработка TA[73]
-        FDevTimeDifference := MinutesBetween(Now, CreateDeviceTime);
+        FDevTimeDifference := MinutesBetween(Now, CreateDeviceCompTime);
         TA[73] := FDevTimeDifference mod 60;
         FDevTimeDifference := FDevTimeDifference div 60;
         Move(FDevTimeDifference, TA[74], 3);

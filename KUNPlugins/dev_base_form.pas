@@ -14,13 +14,18 @@ uses
   }
 
 type
+  TGetTime = function  : TDateTime of Object;
+
   TfrmBase = class(TForm)
   private
     { Private declarations }
     FCallBack: TPGUSensorCallBack;
+    FDeviceTime : TGetTime;
+    function GetCurrentDeviceTime: TDateTime;
   public
     { Public declarations }
     property CallBack: TPGUSensorCallBack read FCallBack;
+    property CurrentDeviceTime : TDateTime read GetCurrentDeviceTime;
   end;
 
   TFrmBaseClass = class of TfrmBase;
@@ -29,7 +34,8 @@ type
   private
     FCB: TPGUSensorCallBack;
     FormClass: TFrmBaseClass;
-    FCreateTime: TDateTime;
+    FCreateDevCompTime: TDateTime;
+    function GetCurrentDeviceTime: TDateTime;
   public
     MyForm: TfrmBase;
     FDevTime: TDateTime;
@@ -42,7 +48,10 @@ type
     function DestroyDevice: HRESULT; stdcall;
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; virtual; stdcall;
     property CallBack: TPGUSensorCallBack read FCB;
-    property CreateDeviceTime: TDateTime read FCreateTime;
+    // врем€ создани€ устройсва по часам компьютера
+    property CreateDeviceCompTime: TDateTime read FCreateDevCompTime;
+    // текущее врем€ устройство по "внутренним часам"
+    property CurrentDeviceTime : TDateTime read GetCurrentDeviceTime;
   end;
 
 implementation
@@ -56,7 +65,7 @@ begin
   FormClass := F;
   FDevTime := EncodeDate(2001, 1, 1) + EncodeTime(0, 0, 0, 0);
   FCompTime := Now;
-  FCreateTime := Now;
+  FCreateDevCompTime := Now;
   FDevTimeSync := False;
   FS := TFormatSettings.Create;
 end;
@@ -69,6 +78,7 @@ begin
   createHWND := MyForm.Handle;
   MyForm.Visible := True;
   MyForm.FCallBack := FCB;
+  MyForm.FDeviceTime := GetCurrentDeviceTime;
   Result := 0;
 end;
 
@@ -76,6 +86,11 @@ function TBaseDevice.DestroyDevice: HRESULT;
 begin
   MyForm.Free;
   Result := 0;
+end;
+
+function TBaseDevice.GetCurrentDeviceTime: TDateTime;
+begin
+  Result := (Now - FCompTime) + FDevTime;
 end;
 
 function TBaseDevice.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer;
@@ -89,6 +104,13 @@ function TBaseDevice.RegisterCallback(CBF: TPGUSensorCallBack): HResult;
 begin
   FCB := CBF;
   Result := 0;
+end;
+
+{ TfrmBase }
+
+function TfrmBase.GetCurrentDeviceTime: TDateTime;
+begin
+  Result := FDeviceTime;
 end;
 
 end.
