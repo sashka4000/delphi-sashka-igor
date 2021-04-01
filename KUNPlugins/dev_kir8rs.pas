@@ -41,9 +41,9 @@ type
 
   TArcRecord = record
     RecTime: TDateTime;
-    K1 : Byte;
-    K2 : Byte;
     AKB: Byte;
+    K1: Byte;
+    K2: Byte;
   end;
 
   TKIR8RS = class(TBaseDevice)
@@ -250,33 +250,31 @@ var
   i: Integer;
 begin
   FDevDataSend := True;
-  // формирую массив архивных данных
-  SetLength(ArcArray, 20);
   if FDev_Count_record < 20 then
   begin
-    with ArcArray[19 - FDev_Count_record] do       // заполняем запись
+    with ArcArray[19 - FDev_Count_record] do
     begin
-      RecTime := Now;
+      RecTime := (Now -  FCompTime) + FDevTime;
       AKB := cbbPow.ItemIndex;
       if btnK1.Down then
-        K1 := 1;
+        K1 := 2;
       if btnK2.Down then
-        K2 := 2;
+        K2 := 1;
     end;
-    Inc(FDev_Count_record);                 // считаем количество записей
+    Inc(FDev_Count_record);
   end
   else
-  begin                                     // если больше 10 сдвигаем на одну позицию влево
+  begin
     for i := 0 to 18 do
       ArcArray[19 - i] := ArcArray[18 - i];
-    with ArcArray[0] do                    // записываем в первую позицию последнюю запись
+    with ArcArray[0] do
     begin
-      RecTime := Now;
+      RecTime :=  (Now - FCompTime) + FDevTime;
       AKB := cbbPow.ItemIndex;
       if btnK1.Down then
-        K1 := 1;
+        K1 := 2;
       if btnK2.Down then
-        K2 := 2;
+        K2 := 1;
 
     end;
   end;
@@ -312,6 +310,9 @@ begin
   FDevDataSend := False;
   FDev_Count_record := 0;
   cbbPow.ItemIndex :=0;
+    // формирую массив архивных данных
+  SetLength(ArcArray, 20);
+
   with SG do
   begin
     ColWidths[0] := 40;
