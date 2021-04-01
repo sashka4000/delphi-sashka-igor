@@ -25,7 +25,6 @@ type
     lblRateTwo: TLabel;
     lbl1: TLabel;
     lbl2: TLabel;
-    lblK2: TLabel;
     btnK2: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure SGSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
@@ -170,16 +169,12 @@ begin
     PCKT_OPER:
       begin
         FDevBattery := FMyForm.cbbPow.ItemIndex;
-        TA := TArray<Byte>.Create($80, $89, $01, $03, $00);
+        TA := TArray<Byte>.Create($80, $89, $01, $00, $00);
       // состояние дискретного входа, аккумулятора и настроек
-        if not (FMyForm.btnK1.Down)then
-        begin
-          ResetBit(TA[3], 0);
-        end;
-        if  not (FMyForm.btnK2.Down) then
-         begin
-          ResetBit(TA[3], 1);
-        end;
+        if not FMyForm.btnK1.Down then
+           SetBit(TA[3], 1);
+        if not FMyForm.btnK2.Down then
+           SetBit(TA[3], 0);
         if FDevBattery <> 0 then
         begin
           case FDevBattery of

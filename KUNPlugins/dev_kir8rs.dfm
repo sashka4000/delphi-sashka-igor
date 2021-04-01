@@ -20,19 +20,18 @@ inherited frmKIR8RS: TfrmKIR8RS
   object lblK1: TLabel
     Left = 18
     Top = 70
-    Width = 12
+    Width = 99
     Height = 13
-    Caption = 'K1'
+    Caption = #1044#1080#1089#1082#1088#1077#1090#1085#1099#1077' '#1074#1093#1086#1076#1099
   end
   object btnK1: TSpeedButton
-    Left = 59
+    Left = 202
     Top = 64
     Width = 55
     Height = 25
     AllowAllUp = True
     GroupIndex = 1
-    Down = True
-    Caption = #1044'1'
+    Caption = #1050'1'
     OnClick = btnK1Click
   end
   object lblVer: TLabel
@@ -87,22 +86,14 @@ inherited frmKIR8RS: TfrmKIR8RS
     Caption = #1091#1089#1090#1088#1086#1081#1089#1090#1074#1086' '#1085#1077' '#1087#1077#1088#1077#1076#1072#1077#1090' '#1074#1077#1088#1089#1080#1102
     Enabled = False
   end
-  object lblK2: TLabel
-    Left = 168
-    Top = 70
-    Width = 12
-    Height = 13
-    Caption = 'K2'
-  end
   object btnK2: TSpeedButton
-    Left = 202
+    Left = 267
     Top = 64
     Width = 55
     Height = 25
     AllowAllUp = True
     GroupIndex = 2
-    Down = True
-    Caption = #1044'2'
+    Caption = #1050'2'
     OnClick = btnK1Click
   end
   object cbbPow: TComboBox
