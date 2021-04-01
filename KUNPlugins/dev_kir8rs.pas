@@ -16,8 +16,8 @@ type
     SG: TStringGrid;
     seNumber: TSpinEdit;
     lblAKB: TLabel;
-    lblSensor: TLabel;
-    btnSensor: TSpeedButton;
+    lblK1: TLabel;
+    btnK1: TSpeedButton;
     lblVer: TLabel;
     lblRate1: TLabel;
     lblRate2: TLabel;
@@ -25,10 +25,12 @@ type
     lblRateTwo: TLabel;
     lbl1: TLabel;
     lbl2: TLabel;
+    lblK2: TLabel;
+    btnK2: TSpeedButton;
     procedure FormCreate(Sender: TObject);
     procedure SGSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
     procedure CBSG1Exit(Sender: TObject);
-    procedure btnSensorClick(Sender: TObject);
+    procedure btnK1Click(Sender: TObject);
     procedure CBSG1Change(Sender: TObject);
   private
     { Private declarations }
@@ -40,7 +42,8 @@ type
 
   TArcRecord = record
     RecTime: TDateTime;
-    Sensor: Boolean;
+    K1 : Byte;
+    K2 : Byte;
     AKB: Byte;
   end;
 
@@ -167,11 +170,15 @@ begin
     PCKT_OPER:
       begin
         FDevBattery := FMyForm.cbbPow.ItemIndex;
-        TA := TArray<Byte>.Create($80, $89, $01, $00, $00);
+        TA := TArray<Byte>.Create($80, $89, $01, $03, $00);
       // состояние дискретного входа, аккумулятора и настроек
-        if not (FMyForm.btnSensor.Down) then
+        if not (FMyForm.btnK1.Down)then
         begin
-          SetBit(TA[3], 0);
+          ResetBit(TA[3], 0);
+        end;
+        if  not (FMyForm.btnK2.Down) then
+         begin
+          ResetBit(TA[3], 1);
         end;
         if FDevBattery <> 0 then
         begin
@@ -243,33 +250,39 @@ begin
 end;
 //end;
 
-procedure TfrmKIR8RS.btnSensorClick(Sender: TObject);
+procedure TfrmKIR8RS.btnK1Click(Sender: TObject);
 var
   i: Integer;
 begin
   FDevDataSend := True;
   // формирую массив архивных данных
-  SetLength(ArcArray, 10);
-
-  if FDev_Count_record < 10 then
+  SetLength(ArcArray, 20);
+  if FDev_Count_record < 20 then
   begin
-    with ArcArray[9 - FDev_Count_record] do       // заполняем запись
+    with ArcArray[19 - FDev_Count_record] do       // заполняем запись
     begin
       RecTime := Now;
-      Sensor := btnSensor.Down;
       AKB := cbbPow.ItemIndex;
+      if btnK1.Down then
+        K1 := 1;
+      if btnK2.Down then
+        K2 := 2;
     end;
     Inc(FDev_Count_record);                 // считаем количество записей
   end
   else
   begin                                     // если больше 10 сдвигаем на одну позицию влево
-    for i := 0 to 8 do
-      ArcArray[9 - i] := ArcArray[8 - i];
+    for i := 0 to 18 do
+      ArcArray[19 - i] := ArcArray[18 - i];
     with ArcArray[0] do                    // записываем в первую позицию последнюю запись
     begin
       RecTime := Now;
-      Sensor := btnSensor.Down;
       AKB := cbbPow.ItemIndex;
+      if btnK1.Down then
+        K1 := 1;
+      if btnK2.Down then
+        K2 := 2;
+
     end;
   end;
 
@@ -303,6 +316,7 @@ begin
   inherited;
   FDevDataSend := False;
   FDev_Count_record := 0;
+  cbbPow.ItemIndex :=0;
   with SG do
   begin
     ColWidths[0] := 40;

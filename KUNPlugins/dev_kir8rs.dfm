@@ -17,23 +17,23 @@ inherited frmKIR8RS: TfrmKIR8RS
     Height = 13
     Caption = #1040#1050#1041
   end
-  object lblSensor: TLabel
+  object lblK1: TLabel
     Left = 18
-    Top = 64
-    Width = 134
+    Top = 70
+    Width = 12
     Height = 13
-    Caption = #1044#1072#1090#1095#1080#1082' '#1074#1089#1082#1088#1099#1090#1080#1103' '#1082#1086#1088#1087#1091#1089#1072
+    Caption = 'K1'
   end
-  object btnSensor: TSpeedButton
-    Left = 202
+  object btnK1: TSpeedButton
+    Left = 59
     Top = 64
     Width = 55
     Height = 25
     AllowAllUp = True
     GroupIndex = 1
     Down = True
-    Caption = #1044#1042
-    OnClick = btnSensorClick
+    Caption = #1044'1'
+    OnClick = btnK1Click
   end
   object lblVer: TLabel
     Left = 18
@@ -87,6 +87,24 @@ inherited frmKIR8RS: TfrmKIR8RS
     Caption = #1091#1089#1090#1088#1086#1081#1089#1090#1074#1086' '#1085#1077' '#1087#1077#1088#1077#1076#1072#1077#1090' '#1074#1077#1088#1089#1080#1102
     Enabled = False
   end
+  object lblK2: TLabel
+    Left = 168
+    Top = 70
+    Width = 12
+    Height = 13
+    Caption = 'K2'
+  end
+  object btnK2: TSpeedButton
+    Left = 202
+    Top = 64
+    Width = 55
+    Height = 25
+    AllowAllUp = True
+    GroupIndex = 2
+    Down = True
+    Caption = #1044'2'
+    OnClick = btnK1Click
+  end
   object cbbPow: TComboBox
     Left = 202
     Top = 115
@@ -94,7 +112,7 @@ inherited frmKIR8RS: TfrmKIR8RS
     Height = 21
     TabOrder = 3
     Text = #1053#1086#1088#1084#1072
-    OnChange = btnSensorClick
+    OnChange = btnK1Click
     Items.Strings = (
       #1053#1086#1088#1084#1072
       #1054#1090#1089#1091#1090#1089#1090#1074#1091#1077#1090' '#1040#1050#1041
