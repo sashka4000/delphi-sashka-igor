@@ -37,11 +37,11 @@ type
     { Public declarations }
     FDevDataSend: Boolean;
     FDev_Count_record, FDev_Number: Byte;
-    FRecord_Count: Word;
+//    FRecord_Count: Word;
   end;
 
   TArcRecord = record
-    Sensor: Byte;
+    InfoByte: Byte;
     RecTime: TDateTime;
     Rec_number: Byte;
   end;
@@ -53,15 +53,18 @@ type
 const
   gKIR8RS: TGUID = '{45ECF46A-AEE7-4B22-9305-6A60E388E425}';
 
+var
+  ArcArray: array of TArcRecord;
+
 implementation
+
 
 {$R *.dfm}
 
 uses
   IdGlobal, ext_global;
 
-var
-  ArcArray: array of TArcRecord;
+
 
 function TKIR8RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
@@ -73,7 +76,7 @@ var
   FMyForm: TfrmKIR8RS;
 //  bat: Double;
 //  batInt: Integer;
-  i, j: Integer;
+  i, j, k, l : Integer;
   ver: string;
   FTime: TDateTime;
   Y, MM, D, H, M, S, MS: Word;
@@ -106,7 +109,6 @@ begin
           FMyForm.FDevDataSend := False;
         end;
       end;
-
     PCKT_WRITE_TIME:
       begin
         //Запись времени устройства
@@ -170,8 +172,71 @@ begin
     PCKT_STATE_ARCHIVE:
       begin
         // состояние архива
-       TA := TArray<Byte>.Create($80, $86, $02, $00, $00, $00);
-       Move(FMyForm.FRecord_Count, TA[3], 2);
+//       TA := TArray<Byte>.Create($80, $86, $02, $00, $00, $00);
+//       Move(FMyForm.FRecord_Count, TA[3], 2);
+        TA := TArray<Byte>.Create($80, $86, $02, $02, $00, $00);
+      end;
+
+    PCKT_GET_ARCHIVE:
+      begin
+        // запрос архивный данных
+        k := 0;
+        SetLength(TA, 84);
+        TA[0] := $80;
+        TA[1] := $87;
+        TA[2] := $50;
+        // определяем номер архивной записи 0 или 1
+        if TR[3] = $00 then
+        begin
+          k := 1;
+          for j := 0 to 9 do
+          begin
+            if j < 9 then
+            begin
+              l := (8 * (j + k));
+              TA[3 + l] := ArcArray[19 - j].InfoByte;
+              TA[10 + l] := ArcArray[19 - j].Rec_number;
+              DecodeDateTime(arcArray[19 - j].RecTime, Y, MM, D, H, M, S, MS);
+              TA[4 + l] := S;
+              TA[5 + l] := M;
+              TA[6 + l] := H;
+              TA[7 + l] := D;
+              TA[8 + l] := MM;
+              TA[9 + l] := (Y - 2000);
+            end
+            else
+            begin
+              TA[3] := ArcArray[0].InfoByte;
+              TA[10] := ArcArray[0].Rec_number;
+              DecodeDateTime(arcArray[0].RecTime, Y, MM, D, H, M, S, MS);
+              TA[4] := S;
+              TA[5] := M;
+              TA[6] := H;
+              TA[7] := D;
+              TA[8] := MM;
+              TA[9] := (Y - 2000);
+              exit;
+            end;
+          end;
+        end
+        else if TR[3] = $01 then
+        begin
+          k := 9;
+          for j := 0 to 9 do
+          begin
+            l := (8 * j);
+            TA[3 + l] := ArcArray[19 - (j + k)].InfoByte;
+            TA[10 + l] := ArcArray[19 - (j + k)].Rec_number;
+            DecodeDateTime(arcArray[19 - (j + k)].RecTime, Y, MM, D, H, M, S, MS);
+            TA[4 + l] := S;
+            TA[5 + l] := M;
+            TA[6 + l] := H;
+            TA[7 + l] := D;
+            TA[8 + l] := MM;
+            TA[9 + l] := (Y - 2000);
+          end;
+        end;
+
       end;
 
     PCKT_OPER:
@@ -263,18 +328,18 @@ begin
     begin
       Inc(FDev_Number);
       if btnK1.Down then
-        Sensor := 2;
+        InfoByte := 2;
       if btnK2.Down then
-        Sensor := Sensor + 1;
+        InfoByte := InfoByte + 1;
       case cbbPow.ItemIndex of
         1:
-          Sensor := Sensor + $10;
+          InfoByte := InfoByte + $10;
         2:
-          Sensor := Sensor + $30;
+          InfoByte := InfoByte + $30;
         3:
-          Sensor := Sensor + $40;
+          InfoByte := InfoByte + $40;
         4:
-          Sensor := Sensor + $70;
+          InfoByte := InfoByte + $70;
       end;
 
       RecTime := CurrentDeviceTime;
@@ -290,30 +355,28 @@ begin
     with ArcArray[0] do
     begin
       Inc(FDev_Number);
-      Sensor := 0;
+      InfoByte := 0;
       if btnK1.Down then
-        Sensor := 2;
+        InfoByte := 2;
       if btnK2.Down then
-        Sensor := 1;
+        InfoByte := 1;
       case cbbPow.ItemIndex of
         1:
-          Sensor := Sensor + $10;
+          InfoByte := InfoByte + $10;
         2:
-          Sensor := Sensor + $30;
+          InfoByte := InfoByte + $30;
         3:
-          Sensor := Sensor + $20;
+          InfoByte := InfoByte + $20;
         4:
-          Sensor := Sensor + $70;
+          InfoByte := InfoByte + $70;
       end;
 
       RecTime := CurrentDeviceTime;
 
       Rec_number := FDev_Number;
-      if FDev_Number = 255 then     // защита от переполнения
-        FDev_Number := 0;
     end;
   end;
-  Inc(FRecord_Count);
+//  Inc(FRecord_Count);
 end;
 
 
@@ -345,7 +408,7 @@ begin
   FDevDataSend := False;
   FDev_Count_record := 0;    // количество записей
   FDev_Number := 0;          // номер записи
-  FRecord_Count := 0;        // общее количество записей
+//  FRecord_Count := 0;        // общее количество записей
   cbbPow.ItemIndex := 0;
     // формирую массив архивных данных
   SetLength(ArcArray, 20);
