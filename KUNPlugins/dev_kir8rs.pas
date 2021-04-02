@@ -37,7 +37,6 @@ type
     { Public declarations }
     FDevDataSend: Boolean;
     FDev_Count_record, FDev_Number: Byte;
-//    FRecord_Count: Word;
   end;
 
   TArcRecord = record
@@ -188,52 +187,33 @@ begin
         // определяем номер архивной записи 0 или 1
         if TR[3] = $00 then
         begin
-          k := 1;
-          for j := 0 to 9 do
-          begin
-            if j < 9 then
+          for i := 0 to 9 do
             begin
-              l := (8 * (j + k));
-              TA[3 + l] := ArcArray[19 - j].InfoByte;
-              TA[10 + l] := ArcArray[19 - j].Rec_number;
-              DecodeDateTime(arcArray[19 - j].RecTime, Y, MM, D, H, M, S, MS);
-              TA[4 + l] := S;
-              TA[5 + l] := M;
-              TA[6 + l] := H;
-              TA[7 + l] := D;
-              TA[8 + l] := MM;
-              TA[9 + l] := (Y - 2000);
+              TA[3 + (i * 8)] := ArcArray[i].InfoByte;
+              TA[10 + (i * 8)] := ArcArray[i].Rec_number;
+              DecodeDateTime(arcArray[i].RecTime, Y, MM, D, H, M, S, MS);
+              TA[4 + (i * 8)] := S;
+              TA[5 + (i * 8)] := M;
+              TA[6 + (i * 8)] := H;
+              TA[7 + (i * 8)] := D;
+              TA[8 + (i * 8)] := MM;
+              TA[9 + (i * 8)] := (Y - 2000);
             end
-            else
-            begin
-              TA[3] := ArcArray[0].InfoByte;
-              TA[10] := ArcArray[0].Rec_number;
-              DecodeDateTime(arcArray[0].RecTime, Y, MM, D, H, M, S, MS);
-              TA[4] := S;
-              TA[5] := M;
-              TA[6] := H;
-              TA[7] := D;
-              TA[8] := MM;
-              TA[9] := (Y - 2000);
-              exit;
-            end;
-          end;
+
         end
         else if TR[3] = $01 then
         begin
-          k := 9;
-          for j := 0 to 9 do
+          for i := 0 to 9 do
           begin
-            l := (8 * j);
-            TA[3 + l] := ArcArray[19 - (j + k)].InfoByte;
-            TA[10 + l] := ArcArray[19 - (j + k)].Rec_number;
-            DecodeDateTime(arcArray[19 - (j + k)].RecTime, Y, MM, D, H, M, S, MS);
-            TA[4 + l] := S;
-            TA[5 + l] := M;
-            TA[6 + l] := H;
-            TA[7 + l] := D;
-            TA[8 + l] := MM;
-            TA[9 + l] := (Y - 2000);
+            TA[3 + (i * 8)] := ArcArray[10 + i].InfoByte;
+            TA[10 + (i * 8)] := ArcArray[10 + i].Rec_number;
+            DecodeDateTime(arcArray[10 + i].RecTime, Y, MM, D, H, M, S, MS);
+            TA[4 + (i * 8)] := S;
+            TA[5 + (i * 8)] := M;
+            TA[6 + (i * 8)] := H;
+            TA[7 + (i * 8)] := D;
+            TA[8 + (i * 8)] := MM;
+            TA[9 + (i * 8)] := (Y - 2000);
           end;
         end;
 
@@ -322,61 +302,36 @@ var
   i: Integer;
 begin
   FDevDataSend := True;
-  if FDev_Count_record < 20 then
+  with ArcArray[FDev_Count_record] do
   begin
-    with ArcArray[19 - FDev_Count_record] do
-    begin
-      Inc(FDev_Number);
-      if btnK1.Down then
-        InfoByte := 2;
-      if btnK2.Down then
-        InfoByte := InfoByte + 1;
-      case cbbPow.ItemIndex of
-        1:
-          InfoByte := InfoByte + $10;
-        2:
-          InfoByte := InfoByte + $30;
-        3:
-          InfoByte := InfoByte + $40;
-        4:
-          InfoByte := InfoByte + $70;
-      end;
-
-      RecTime := CurrentDeviceTime;
-
-      Rec_number := FDev_Number;
+    InfoByte := 0;
+    if btnK1.Down then
+      InfoByte := 2;
+    if btnK2.Down then
+      InfoByte := InfoByte + 1;
+    case cbbPow.ItemIndex of
+      1:
+        InfoByte := InfoByte + $10;
+      2:
+        InfoByte := InfoByte + $30;
+      3:
+        InfoByte := InfoByte + $40;
+      4:
+        InfoByte := InfoByte + $70;
     end;
-    Inc(FDev_Count_record);
-  end
-  else
-  begin
-    for i := 0 to 18 do
-      ArcArray[19 - i] := ArcArray[18 - i];
-    with ArcArray[0] do
-    begin
-      Inc(FDev_Number);
-      InfoByte := 0;
-      if btnK1.Down then
-        InfoByte := 2;
-      if btnK2.Down then
-        InfoByte := 1;
-      case cbbPow.ItemIndex of
-        1:
-          InfoByte := InfoByte + $10;
-        2:
-          InfoByte := InfoByte + $30;
-        3:
-          InfoByte := InfoByte + $20;
-        4:
-          InfoByte := InfoByte + $70;
-      end;
 
-      RecTime := CurrentDeviceTime;
+    RecTime := CurrentDeviceTime;
 
-      Rec_number := FDev_Number;
-    end;
+    Rec_number := FDev_Number;
+
   end;
-//  Inc(FRecord_Count);
+  Inc(FDev_Number);
+
+  if FDev_Count_record = 19  then
+     FDev_Count_record := 255;
+   Inc(FDev_Count_record);
+
+
 end;
 
 
@@ -406,13 +361,11 @@ var
 begin
   inherited;
   FDevDataSend := False;
-  FDev_Count_record := 0;    // количество записей
-  FDev_Number := 0;          // номер записи
-//  FRecord_Count := 0;        // общее количество записей
+  FDev_Count_record := 1;    // количество записей
+  FDev_Number := 1;          // номер записи
   cbbPow.ItemIndex := 0;
     // формирую массив архивных данных
   SetLength(ArcArray, 20);
-
   with SG do
   begin
     ColWidths[0] := 40;
