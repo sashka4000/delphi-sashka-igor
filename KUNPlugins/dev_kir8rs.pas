@@ -36,14 +36,14 @@ type
   public
     { Public declarations }
     FDevDataSend: Boolean;
-    FDev_Count_record: Integer;  // количество записей
+    FDev_Count_record, FDev_Number: Byte;
+    FRecord_Count: Word;
   end;
 
   TArcRecord = record
+    Sensor: Byte;
     RecTime: TDateTime;
-    AKB: Byte;
-    K1: Byte;
-    K2: Byte;
+    Rec_number: Byte;
   end;
 
   TKIR8RS = class(TBaseDevice)
@@ -96,7 +96,7 @@ begin
   case TR[1] of
     PCKT_TYPE:
       begin
-  // ќбработка состо€ни€ запроса типа устройства
+        // ќбработка состо€ни€ запроса типа устройства
         TA := TArray<Byte>.Create($80, $81, $03, $01, $07, $01, $00);
         if FDevTimeSync then
           ResetBit(TA[5], 0);
@@ -109,7 +109,7 @@ begin
 
     PCKT_WRITE_TIME:
       begin
-     //«апись времени устройства
+        //«апись времени устройства
         FDevTimeSync := True;
         FDevTime := EncodeDateTime(TR[8] + 2000, TR[7], TR[6], TR[5], TR[4], TR[3], 0);
         FCompTime := Now;
@@ -120,7 +120,7 @@ begin
 
     PCKT_READ_TIME:
       begin
-     //„тение времени устройства
+        //„тение времени устройства
         FTime := (Now - FCompTime) + FDevTime;
         DecodeDate(FTime, Y, MM, D);
         DecodeTime(FTime, H, M, S, MS);
@@ -129,6 +129,7 @@ begin
 
     PCKT_CURRENT:
       begin
+        // «апрос текущих данных
         FDevBattery := FMyForm.cbbPow.ItemIndex;
         SetLength(TA, 84);
         FTime := (Now - FCompTime) + FDevTime;
@@ -159,11 +160,18 @@ begin
         FDevTimeDifference := FDevTimeDifference div 60;
         Move(FDevTimeDifference, TA[72], 3);
         // читаем состо€ние шлейфа
-       for I := 0 to 7 do
-            if FMyForm.SG.Cells[3, i + 1] = 'шлейф замкнут' then
-                 SetBit(TA[75 + i], 0)
-             else if FMyForm.SG.Cells[3, i + 1] = 'шлейф обрыв' then
-                 SetBit(TA[75 + i], 1);
+        for i := 0 to 7 do
+          if FMyForm.SG.Cells[3, i + 1] = 'шлейф замкнут' then
+            SetBit(TA[75 + i], 0)
+          else if FMyForm.SG.Cells[3, i + 1] = 'шлейф обрыв' then
+            SetBit(TA[75 + i], 1);
+      end;
+
+    PCKT_STATE_ARCHIVE:
+      begin
+        // состо€ние архива
+       TA := TArray<Byte>.Create($80, $86, $02, $00, $00, $00);
+       Move(FMyForm.FRecord_Count, TA[3], 2);
       end;
 
     PCKT_OPER:
@@ -172,9 +180,9 @@ begin
         TA := TArray<Byte>.Create($80, $89, $01, $00, $00);
       // состо€ние дискретного входа, аккумул€тора и настроек
         if not FMyForm.btnK1.Down then
-           SetBit(TA[3], 1);
+          SetBit(TA[3], 1);
         if not FMyForm.btnK2.Down then
-           SetBit(TA[3], 0);
+          SetBit(TA[3], 0);
         if FDevBattery <> 0 then
         begin
           case FDevBattery of
@@ -213,7 +221,6 @@ begin
         TA[3] := StrToInt(FMyForm.lblRateOne.Caption);
         TA[4] := StrToInt(FMyForm.lblRateTwo.Caption);
       end
-
 //     PCKT_VERSION:
 //      begin
 //        // протокол не описывает ответ на этот запрос
@@ -254,12 +261,25 @@ begin
   begin
     with ArcArray[19 - FDev_Count_record] do
     begin
-      RecTime := CurrentDeviceTime;
-      AKB := cbbPow.ItemIndex;
+      Inc(FDev_Number);
       if btnK1.Down then
-        K1 := 2;
+        Sensor := 2;
       if btnK2.Down then
-        K2 := 1;
+        Sensor := Sensor + 1;
+      case cbbPow.ItemIndex of
+        1:
+          Sensor := Sensor + $10;
+        2:
+          Sensor := Sensor + $30;
+        3:
+          Sensor := Sensor + $40;
+        4:
+          Sensor := Sensor + $70;
+      end;
+
+      RecTime := CurrentDeviceTime;
+
+      Rec_number := FDev_Number;
     end;
     Inc(FDev_Count_record);
   end
@@ -269,16 +289,31 @@ begin
       ArcArray[19 - i] := ArcArray[18 - i];
     with ArcArray[0] do
     begin
-      RecTime := CurrentDeviceTime;
-      AKB := cbbPow.ItemIndex;
+      Inc(FDev_Number);
+      Sensor := 0;
       if btnK1.Down then
-        K1 := 2;
+        Sensor := 2;
       if btnK2.Down then
-        K2 := 1;
+        Sensor := 1;
+      case cbbPow.ItemIndex of
+        1:
+          Sensor := Sensor + $10;
+        2:
+          Sensor := Sensor + $30;
+        3:
+          Sensor := Sensor + $20;
+        4:
+          Sensor := Sensor + $70;
+      end;
 
+      RecTime := CurrentDeviceTime;
+
+      Rec_number := FDev_Number;
+      if FDev_Number = 255 then     // защита от переполнени€
+        FDev_Number := 0;
     end;
   end;
-
+  Inc(FRecord_Count);
 end;
 
 
@@ -308,8 +343,10 @@ var
 begin
   inherited;
   FDevDataSend := False;
-  FDev_Count_record := 0;
-  cbbPow.ItemIndex :=0;
+  FDev_Count_record := 0;    // количество записей
+  FDev_Number := 0;          // номер записи
+  FRecord_Count := 0;        // общее количество записей
+  cbbPow.ItemIndex := 0;
     // формирую массив архивных данных
   SetLength(ArcArray, 20);
 
@@ -362,4 +399,4 @@ begin
 end;
 
 end.
-//end.
+
