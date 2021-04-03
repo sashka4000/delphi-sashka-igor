@@ -190,15 +190,17 @@ begin
           for i := 0 to 9 do
             begin
               TA[3 + (i * 8)] := ArcArray[i].InfoByte;
-              TA[10 + (i * 8)] := ArcArray[i].Rec_number;
-              DecodeDateTime(arcArray[i].RecTime, Y, MM, D, H, M, S, MS);
-              TA[4 + (i * 8)] := S;
-              TA[5 + (i * 8)] := M;
-              TA[6 + (i * 8)] := H;
-              TA[7 + (i * 8)] := D;
-              TA[8 + (i * 8)] := MM;
-              TA[9 + (i * 8)] := (Y - 2000);
-            end
+            TA[10 + (i * 8)] := ArcArray[i].Rec_number;
+            DecodeDateTime(arcArray[i].RecTime, Y, MM, D, H, M, S, MS);
+            if Y = 1899 then
+             Continue;
+            TA[4 + (i * 8)] := S;
+            TA[5 + (i * 8)] := M;
+            TA[6 + (i * 8)] := H;
+            TA[7 + (i * 8)] := D;
+            TA[8 + (i * 8)] := MM;
+            TA[9 + (i * 8)] := (Y - 2000);
+          end
 
         end
         else if TR[3] = $01 then
@@ -208,6 +210,8 @@ begin
             TA[3 + (i * 8)] := ArcArray[10 + i].InfoByte;
             TA[10 + (i * 8)] := ArcArray[10 + i].Rec_number;
             DecodeDateTime(arcArray[10 + i].RecTime, Y, MM, D, H, M, S, MS);
+            if Y = 1899 then
+             Continue;
             TA[4 + (i * 8)] := S;
             TA[5 + (i * 8)] := M;
             TA[6 + (i * 8)] := H;
