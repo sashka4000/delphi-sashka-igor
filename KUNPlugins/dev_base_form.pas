@@ -16,6 +16,13 @@ uses
 type
   TGetTime = function  : TDateTime of Object;
 
+  TArcRecord = record
+    InfoByte: Byte;
+    RecTime: TDateTime;
+    Rec_number: Byte;
+  end;
+
+
   TfrmBase = class(TForm)
   private
     { Private declarations }

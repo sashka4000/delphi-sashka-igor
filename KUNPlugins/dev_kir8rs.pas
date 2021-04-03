@@ -35,14 +35,9 @@ type
     { Private declarations }
   public
     { Public declarations }
+    ArcArray: array of TArcRecord;
     FDevDataSend: Boolean;
     FDev_Count_record, FDev_Number: Byte;
-  end;
-
-  TArcRecord = record
-    InfoByte: Byte;
-    RecTime: TDateTime;
-    Rec_number: Byte;
   end;
 
   TKIR8RS = class(TBaseDevice)
@@ -51,9 +46,6 @@ type
 
 const
   gKIR8RS: TGUID = '{45ECF46A-AEE7-4B22-9305-6A60E388E425}';
-
-var
-  ArcArray: array of TArcRecord;
 
 implementation
 
@@ -71,12 +63,8 @@ var
   ValueLoop: Cardinal;
   bSendAnswer: Boolean;
   FDevBattery: Byte;       // флаг состо€ни€ ј Ѕ
-//  tmp: string;
   FMyForm: TfrmKIR8RS;
-//  bat: Double;
-//  batInt: Integer;
-  i, j, k, l : Integer;
-  ver: string;
+  i, k : Integer;
   FTime: TDateTime;
   Y, MM, D, H, M, S, MS: Word;
   FDevTimeDifference: Cardinal;
@@ -171,8 +159,6 @@ begin
     PCKT_STATE_ARCHIVE:
       begin
         // состо€ние архива
-//       TA := TArray<Byte>.Create($80, $86, $02, $00, $00, $00);
-//       Move(FMyForm.FRecord_Count, TA[3], 2);
         TA := TArray<Byte>.Create($80, $86, $02, $02, $00, $00);
       end;
 
@@ -185,40 +171,22 @@ begin
         TA[1] := $87;
         TA[2] := $50;
         // определ€ем номер архивной записи 0 или 1
-        if TR[3] = $00 then
-        begin
-          for i := 0 to 9 do
-            begin
-              TA[3 + (i * 8)] := ArcArray[i].InfoByte;
-            TA[10 + (i * 8)] := ArcArray[i].Rec_number;
-            DecodeDateTime(arcArray[i].RecTime, Y, MM, D, H, M, S, MS);
-            if Y = 1899 then
-             Continue;
-            TA[4 + (i * 8)] := S;
-            TA[5 + (i * 8)] := M;
-            TA[6 + (i * 8)] := H;
-            TA[7 + (i * 8)] := D;
-            TA[8 + (i * 8)] := MM;
-            TA[9 + (i * 8)] := (Y - 2000);
-          end
+        if TR[3] = $01 then
+          k := 10;
 
-        end
-        else if TR[3] = $01 then
+        for i := 0 to 9 do
         begin
-          for i := 0 to 9 do
-          begin
-            TA[3 + (i * 8)] := ArcArray[10 + i].InfoByte;
-            TA[10 + (i * 8)] := ArcArray[10 + i].Rec_number;
-            DecodeDateTime(arcArray[10 + i].RecTime, Y, MM, D, H, M, S, MS);
-            if Y = 1899 then
-             Continue;
-            TA[4 + (i * 8)] := S;
-            TA[5 + (i * 8)] := M;
-            TA[6 + (i * 8)] := H;
-            TA[7 + (i * 8)] := D;
-            TA[8 + (i * 8)] := MM;
-            TA[9 + (i * 8)] := (Y - 2000);
-          end;
+          TA[3 + (i * 8)] := FMyForm.ArcArray[i + k].InfoByte;
+          TA[10 + (i * 8)] := FMyForm.ArcArray[i + k].Rec_number;
+          DecodeDateTime(FMyForm.arcArray[i + 10].RecTime, Y, MM, D, H, M, S, MS);
+          if Y = 1899 then
+            Continue;
+          TA[4 + (i * 8)] := S;
+          TA[5 + (i * 8)] := M;
+          TA[6 + (i * 8)] := H;
+          TA[7 + (i * 8)] := D;
+          TA[8 + (i * 8)] := MM;
+          TA[9 + (i * 8)] := (Y - 2000);
         end;
 
       end;
@@ -270,12 +238,6 @@ begin
         TA[3] := StrToInt(FMyForm.lblRateOne.Caption);
         TA[4] := StrToInt(FMyForm.lblRateTwo.Caption);
       end
-//     PCKT_VERSION:
-//      begin
-//        // протокол не описывает ответ на этот запрос
-//        // ну устройство отвечает каким-то "мусором"
-//        TA := TArray<Byte>.Create($81, $81, $03, $01, $07, $00, $00);
-//      end
 
   else
     Exit;
@@ -331,14 +293,11 @@ begin
   end;
   Inc(FDev_Number);
 
-  if FDev_Count_record = 19  then
-     FDev_Count_record := 255;
-   Inc(FDev_Count_record);
-
+  if FDev_Count_record > High(ArcArray) then
+    FDev_Count_record := 0;
+  Inc(FDev_Count_record);
 
 end;
-
-
 
 
 // встраиваем ComboBox в StringGrid
