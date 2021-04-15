@@ -4,19 +4,39 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Samples.Spin, dev_base_form, ext_global;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Samples.Spin, dev_base_form, ext_global,
+  Vcl.Buttons;
 
 type
   TfrmKBPRSM = class(TfrmBase)
     lblName: TLabel;
-    seUPSL_KUN: TSpinEdit;
     cbbKBPRSMVyzov: TComboBox;
     seNumber: TSpinEdit;
-    chkNet: TCheckBox;
-    chkAmp1: TCheckBox;
     lblkbprsm: TLabel;
-    lbl12: TLabel;
+    btnON1: TSpeedButton;
+    btnON2: TSpeedButton;
+    btnON3: TSpeedButton;
+    btnON4: TSpeedButton;
+    lblControl: TLabel;
+    lblContrl1: TLabel;
+    lblControl2: TLabel;
+    lblControl3: TLabel;
+    lblControl4: TLabel;
+    lblInDiscrete: TLabel;
+    btnDS2: TSpeedButton;
+    btnDS4: TSpeedButton;
+    btnDS3: TSpeedButton;
+    btnDS1: TSpeedButton;
+    btnDS5: TSpeedButton;
+    btnDS6: TSpeedButton;
+    lblControl_220: TLabel;
+    btnCTRL_220: TSpeedButton;
     lbl1: TLabel;
+    lbl2: TLabel;
+    lbl3: TLabel;
+    lbl4: TLabel;
+    lbl5: TLabel;
+    lbl6: TLabel;
   private
     { Private declarations }
   public
