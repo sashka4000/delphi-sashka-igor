@@ -20,7 +20,8 @@ uses
   CRCUnit in 'CRCUnit.pas',
   dev_kir16rs in 'dev_kir16rs.pas' {frmKIR16RS},
   dev_upsl_m in 'dev_upsl_m.pas' {frmUPSLM},
-  dev_kir8rs in 'dev_kir8rs.pas' {frmKIR8RS};
+  dev_kir8rs in 'dev_kir8rs.pas' {frmKIR8RS},
+  dev_kbprsm in 'dev_kbprsm.pas' {frmKBPRSM};
 
 {$R *.res}
 {$R style_res.res}
@@ -50,10 +51,11 @@ begin
   KUN.RegisterType(gKUP4RS, 'КУП-4RS');
   KUN.RegisterType(gKIR16RS, 'КИР-16RS');
   KUN.RegisterType(gUPSLM, 'УПСЛ-М');
-  // Устройства, находящиеся в разработке  будут создаваться
+  KUN.RegisterType(gKIR8RS, 'КИР-8RS');
+    // Устройства, находящиеся в разработке  будут создаваться
   // только в режиме DEBUG сборки
   {$IFDEF DEBUG}
-    KUN.RegisterType(gKIR8RS, 'КИР-8RS');
+     KUN.RegisterType(gKBPRSM, 'КБП-RSM');
   {$ENDIF}
 end;
 
@@ -105,6 +107,11 @@ begin
     if IsEqualGUID(guidClass, gKIR8RS) then
   begin
      RS := TKIR8RS.Create (TfrmKIR8RS);
+     Result := 0;
+  end;
+      if IsEqualGUID(guidClass, gKBPRSM) then
+  begin
+     RS := TKBPRSM.Create (TfrmKBPRSM);
      Result := 0;
   end;
 end;

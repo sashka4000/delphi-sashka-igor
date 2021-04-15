@@ -1,5 +1,5 @@
 inherited frmKIR8RS: TfrmKIR8RS
-  Caption = 'frmKIR8RS'
+  Caption = ''
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
