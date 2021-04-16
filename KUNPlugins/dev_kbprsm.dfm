@@ -3,7 +3,7 @@ object frmKBPRSM: TfrmKBPRSM
   Top = 0
   Caption = 'frmKBPRSM'
   ClientHeight = 372
-  ClientWidth = 724
+  ClientWidth = 581
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,14 +22,14 @@ object frmKBPRSM: TfrmKBPRSM
   end
   object lblkbprsm: TLabel
     Left = 18
-    Top = 62
+    Top = 69
     Width = 87
     Height = 13
     Caption = #1042#1099#1079#1086#1074' '#1089' '#1050#1041#1055'-RSM'
   end
   object btnON1: TSpeedButton
-    Left = 346
-    Top = 50
+    Left = 18
+    Top = 227
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -37,8 +37,8 @@ object frmKBPRSM: TfrmKBPRSM
     Caption = #1059#1055#1056'1'
   end
   object btnON2: TSpeedButton
-    Left = 346
-    Top = 90
+    Left = 79
+    Top = 227
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -46,8 +46,8 @@ object frmKBPRSM: TfrmKBPRSM
     Caption = #1059#1055#1056'2'
   end
   object btnON3: TSpeedButton
-    Left = 346
-    Top = 130
+    Left = 140
+    Top = 227
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -55,8 +55,8 @@ object frmKBPRSM: TfrmKBPRSM
     Caption = #1059#1055#1056'3'
   end
   object btnON4: TSpeedButton
-    Left = 346
-    Top = 170
+    Left = 200
+    Top = 227
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -64,50 +64,22 @@ object frmKBPRSM: TfrmKBPRSM
     Caption = #1059#1055#1056'4'
   end
   object lblControl: TLabel
-    Left = 352
-    Top = 26
-    Width = 100
+    Left = 18
+    Top = 195
+    Width = 94
     Height = 13
-    Caption = #1050#1085#1086#1087#1082#1080' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103
-  end
-  object lblContrl1: TLabel
-    Left = 423
-    Top = 55
-    Width = 130
-    Height = 13
-    Caption = #1042#1099#1082#1083#1102#1095#1077#1085#1080#1077' '#1087#1086#1076#1098#1105#1084#1085#1080#1082#1072
-  end
-  object lblControl2: TLabel
-    Left = 423
-    Top = 95
-    Width = 212
-    Height = 13
-    Caption = #1059#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1074#1093#1086#1076#1085#1086#1081' '#1076#1074#1077#1088#1100#1102' '#1074' '#1087#1086#1076#1098#1077#1079#1076#1077
-  end
-  object lblControl3: TLabel
-    Left = 423
-    Top = 135
-    Width = 191
-    Height = 13
-    Caption = #1059#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1086#1089#1074#1077#1097#1077#1085#1080#1077#1084' '#1087#1086#1076#1098#1105#1084#1085#1080#1082#1072
-  end
-  object lblControl4: TLabel
-    Left = 423
-    Top = 175
-    Width = 78
-    Height = 13
-    Caption = #1042#1099#1093#1086#1076' - '#1088#1077#1079#1077#1088#1074
+    Caption = #1050#1072#1085#1072#1083' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103
   end
   object lblInDiscrete: TLabel
     Left = 18
-    Top = 93
-    Width = 99
+    Top = 109
+    Width = 91
     Height = 13
-    Caption = #1044#1080#1089#1082#1088#1077#1090#1085#1099#1077' '#1074#1093#1086#1076#1099
+    Caption = #1044#1080#1089#1082#1088#1077#1090#1085#1099#1081' '#1074#1093#1086#1076
   end
   object btnDS2: TSpeedButton
-    Left = 18
-    Top = 157
+    Left = 79
+    Top = 143
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -115,8 +87,8 @@ object frmKBPRSM: TfrmKBPRSM
     Caption = #1044#1042'2'
   end
   object btnDS4: TSpeedButton
-    Left = 18
-    Top = 237
+    Left = 201
+    Top = 143
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -124,8 +96,8 @@ object frmKBPRSM: TfrmKBPRSM
     Caption = #1044#1042'4'
   end
   object btnDS3: TSpeedButton
-    Left = 18
-    Top = 197
+    Left = 140
+    Top = 143
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -134,7 +106,7 @@ object frmKBPRSM: TfrmKBPRSM
   end
   object btnDS1: TSpeedButton
     Left = 18
-    Top = 117
+    Top = 143
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -142,8 +114,8 @@ object frmKBPRSM: TfrmKBPRSM
     Caption = #1044#1042'1'
   end
   object btnDS5: TSpeedButton
-    Left = 18
-    Top = 276
+    Left = 262
+    Top = 143
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -151,75 +123,26 @@ object frmKBPRSM: TfrmKBPRSM
     Caption = #1044#1042'5'
   end
   object btnDS6: TSpeedButton
-    Left = 18
-    Top = 316
+    Left = 323
+    Top = 143
     Width = 55
     Height = 25
     AllowAllUp = True
     GroupIndex = 10
     Caption = #1044#1042'6'
   end
-  object lblControl_220: TLabel
-    Left = 346
-    Top = 230
-    Width = 251
-    Height = 13
-    Caption = #1042#1093#1086#1076' '#1082#1086#1085#1090#1088#1086#1083#1103' '#1085#1072#1087#1088#1103#1078#1077#1085#1080#1103' '#1087#1080#1090#1072#1085#1080#1103' '#1087#1086#1076#1098#1077#1084#1085#1080#1082#1072
-  end
   object btnCTRL_220: TSpeedButton
-    Left = 346
-    Top = 258
+    Left = 384
+    Top = 143
     Width = 55
     Height = 25
     AllowAllUp = True
     GroupIndex = 11
     Caption = '220 '#1042
   end
-  object lbl1: TLabel
-    Left = 94
-    Top = 119
-    Width = 97
-    Height = 13
-    Caption = #1044#1080#1089#1082#1088#1077#1090#1085#1099#1081' '#1074#1093#1086#1076'1'
-  end
-  object lbl2: TLabel
-    Left = 94
-    Top = 159
-    Width = 97
-    Height = 13
-    Caption = #1044#1080#1089#1082#1088#1077#1090#1085#1099#1081' '#1074#1093#1086#1076'2'
-  end
-  object lbl3: TLabel
-    Left = 94
-    Top = 199
-    Width = 97
-    Height = 13
-    Caption = #1044#1080#1089#1082#1088#1077#1090#1085#1099#1081' '#1074#1093#1086#1076'3'
-  end
-  object lbl4: TLabel
-    Left = 94
-    Top = 239
-    Width = 97
-    Height = 13
-    Caption = #1044#1080#1089#1082#1088#1077#1090#1085#1099#1081' '#1074#1093#1086#1076'4'
-  end
-  object lbl5: TLabel
-    Left = 94
-    Top = 278
-    Width = 97
-    Height = 13
-    Caption = #1044#1080#1089#1082#1088#1077#1090#1085#1099#1081' '#1074#1093#1086#1076'5'
-  end
-  object lbl6: TLabel
-    Left = 94
-    Top = 318
-    Width = 97
-    Height = 13
-    Caption = #1044#1080#1089#1082#1088#1077#1090#1085#1099#1081' '#1074#1093#1086#1076'6'
-  end
   object cbbKBPRSMVyzov: TComboBox
     Left = 200
-    Top = 62
+    Top = 69
     Width = 100
     Height = 22
     Style = csOwnerDrawFixed

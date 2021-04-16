@@ -18,10 +18,6 @@ type
     btnON3: TSpeedButton;
     btnON4: TSpeedButton;
     lblControl: TLabel;
-    lblContrl1: TLabel;
-    lblControl2: TLabel;
-    lblControl3: TLabel;
-    lblControl4: TLabel;
     lblInDiscrete: TLabel;
     btnDS2: TSpeedButton;
     btnDS4: TSpeedButton;
@@ -29,14 +25,7 @@ type
     btnDS1: TSpeedButton;
     btnDS5: TSpeedButton;
     btnDS6: TSpeedButton;
-    lblControl_220: TLabel;
     btnCTRL_220: TSpeedButton;
-    lbl1: TLabel;
-    lbl2: TLabel;
-    lbl3: TLabel;
-    lbl4: TLabel;
-    lbl5: TLabel;
-    lbl6: TLabel;
   private
     { Private declarations }
   public
@@ -63,14 +52,14 @@ implementation
 function TKBPRSM.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
   TR, TA: TArray<Byte>;
-  cb: TCheckBox;
+//  cb: TCheckBox;
   bSendAnswer: Boolean;
-  tmp: string;
+//  tmp: string;
   FMyForm: TfrmKBPRSM;
-  bat: Double;
-  batInt: Integer;
+//  bat: Double;
+//  batInt: Integer;
   i: Integer;
-  ver: string;
+//  ver: string;
   FTime: TDateTime;
   Y, MM, D, H, M, S, MS: Word;
 begin
@@ -90,11 +79,11 @@ begin
 
   // формирую ответ на запрос
 
-//  case TR[1] of
-//
-//    PCKT_TYPE:
-//      begin
-//        // Обработка состояния запроса типа устройства
+  case TR[1] of
+
+    PCKT_TYPE:
+      begin
+        // Обработка состояния запроса типа устройства
 //        TA := TArray<Byte>.Create($D8, $81, $03, $08, $03, $00, $00);
 //        if FDevTimeSync then
 //          SetBit(TA[5], 0);  // часы и календарь валидны
@@ -102,27 +91,27 @@ begin
 //         and FMyForm.chkAmp1.Checked and FMyForm.chkAmp2.Checked
 //         and FMyForm.chkFire.Checked) then
 //          SetBit(TA[5], 1);  // появились срочные данные
-//      end;
-//
-//    PCKT_WRITE_TIME:
-//      begin
-//        //Запись времени устройства
+      end;
+
+    PCKT_WRITE_TIME:
+      begin
+        //Запись времени устройства
 //        FDevTimeSync := True;
 //        FDevTime := EncodeDateTime(TR[8] + 2000, TR[7], TR[6], TR[5], TR[4], TR[3], 0);
 //        FCompTime := Now;
 //        DecodeDate(FDevTime, Y, MM, D);
 //        DecodeTime(FDevTime, H, M, S, MS);
 //        TA := TArray<Byte>.Create($D8, $82, $06, S, M, H, D, MM, (Y - 2000), $00);
-//      end;
-//
-//    PCKT_READ_TIME:
-//      begin
-//        //Чтение времени устройства
-//        FTime := (Now - FCompTime) + FDevTime;
-//        DecodeDate(FTime, Y, MM, D);
-//        DecodeTime(FTime, H, M, S, MS);
-//        TA := TArray<Byte>.Create($D8, $83, $06, S, M, H, D, MM, (Y - 2000), $00);
-//      end;
+      end;
+
+    PCKT_READ_TIME:
+      begin
+        //Чтение времени устройства
+        FTime := (Now - FCompTime) + FDevTime;
+        DecodeDate(FTime, Y, MM, D);
+        DecodeTime(FTime, H, M, S, MS);
+        TA := TArray<Byte>.Create($D8, $83, $06, S, M, H, D, MM, (Y - 2000), $00);
+      end;
 //
 //    PCKT_WRITE_DATA:
 //      begin
@@ -431,10 +420,10 @@ begin
 //        TA[4] := StrToIntDef(FMyForm.edtROMTimer.Text, 0) and $1F;
 //      end
 //
-//  else
-//    Exit;
-//  end;
-//
+  else
+    Exit;
+  end;
+
 
   // устанавливаю правильный адрес устройства в первый байт
   TA[0] := $D8 + FMyForm.seNumber.Value;
