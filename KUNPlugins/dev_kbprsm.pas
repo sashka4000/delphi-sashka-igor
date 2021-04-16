@@ -33,6 +33,7 @@ type
   end;
   TKBPRSM = class(TBaseDevice)
     PRPGS: BOOLEAN;                     // флаг подключения проверки ПГС
+    PGSON : Boolean;                    // флаг включения ПГС - диспетчером
 //    ManualTESTGGS: BOOLEAN;
     constructor Create(F: TFrmBaseClass);
 
@@ -57,6 +58,7 @@ constructor TKBPRSM.Create(F: TFrmBaseClass);
 begin
   inherited;
   PRPGS := False;
+  PGSON := False;
 //  ManualTESTGGS := False;
 end;
 
@@ -131,47 +133,45 @@ begin
         PRPGS := IsBitSet(TR[3], 7);
         if PRPGS then
           SetBit(TA[4], 7);
+
       // каналы ПГС
         FMyForm.cbbKBPRSMVyzov.ItemIndex := 0;
         if IsBitSet(TR[3], 6) then
         begin
           FMyForm.cbbKBPRSMVyzov.ItemIndex := 3;
           SetBit(TA[4], 6);
+          PGSON := True;
         end;
         if IsBitSet(TR[3], 5) then
         begin
           FMyForm.cbbKBPRSMVyzov.ItemIndex := 2;
           SetBit(TA[4], 5);
+          PGSON := True;
         end;
         if IsBitSet(TR[3], 4) then
         begin
           FMyForm.cbbKBPRSMVyzov.ItemIndex := 1;
           SetBit(TA[4], 4);
+          PGSON := True;
         end;
+
+        // Блокируем возможность изменения до сброса ПГС
+        FMyForm.cbbKBPRSMVyzov.Enabled :=  not PGSON;
+
       // управление
-        if IsBitSet(TR[3], 3) then
-        begin
-          FMyForm.btnON4.Down := True;
+        FMyForm.btnON4.Down :=  IsBitSet(TR[3], 3);
+        if  FMyForm.btnON4.Down then
           SetBit(TA[4], 3);
-        end;
-        if IsBitSet(TR[3], 2) then
-        begin
-          FMyForm.btnON3.Down := True;
+        FMyForm.btnON3.Down :=  IsBitSet(TR[3], 2);
+        if  FMyForm.btnON3.Down then
           SetBit(TA[4], 2);
-        end;
-        if IsBitSet(TR[3], 1) then
-        begin
-          FMyForm.btnON2.Down := True;
+        FMyForm.btnON2.Down :=  IsBitSet(TR[3], 1);
+        if  FMyForm.btnON2.Down then
           SetBit(TA[4], 1);
-        end;
-        if IsBitSet(TR[3], 0) then
-        begin
-          FMyForm.btnON1.Down := True;
+        FMyForm.btnON1.Down :=  IsBitSet(TR[3], 0);
+        if  FMyForm.btnON1.Down then
           SetBit(TA[4], 0);
-        end;
-
       end;
-
     PCKT_CURRENT:
       begin
        // Чтение текущих данных устройства
@@ -191,13 +191,29 @@ begin
         if FMyForm.btnCTRL_220.Down then
           SetBit(TA[3], 0);
 
-        case FMyForm.cbbKBPRSMVyzov.ItemIndex of
-          1:
-            SetBit(TA[4], 0);
-          2:
-            SetBit(TA[4], 1);
-          3:
-            SetBit(TA[4], 2);
+        if not PGSON then
+        begin
+          // если сейчас не включена ПГС, то считаем что была нажата кнопка
+          // вызов
+          case FMyForm.cbbKBPRSMVyzov.ItemIndex of
+            1:
+              SetBit(TA[4], 0);
+            2:
+              SetBit(TA[4], 1);
+            3:
+              SetBit(TA[4], 2);
+          end;
+        end else
+        begin
+           // если сейчас включена ПГС, то указывем какой канал включен
+          case FMyForm.cbbKBPRSMVyzov.ItemIndex of
+            1:
+              SetBit(TA[5], 4);
+            2:
+              SetBit(TA[5], 5);
+            3:
+              SetBit(TA[5], 6);
+          end;
         end;
 
         if PRPGS then
@@ -211,8 +227,6 @@ begin
           SetBit(TA[5], 1);
         if FMyForm.btnON1.Down then
           SetBit(TA[5], 0);
-
-
 
       end;
     PCKT_OPER:

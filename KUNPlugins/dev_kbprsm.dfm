@@ -147,7 +147,7 @@ object frmKBPRSM: TfrmKBPRSM
     Height = 22
     Style = csOwnerDrawFixed
     ItemIndex = 0
-    TabOrder = 0
+    TabOrder = 1
     Text = #1053#1077#1090
     Items.Strings = (
       #1053#1077#1090
@@ -162,7 +162,7 @@ object frmKBPRSM: TfrmKBPRSM
     Height = 22
     MaxValue = 7
     MinValue = 0
-    TabOrder = 1
+    TabOrder = 0
     Value = 0
   end
 end
