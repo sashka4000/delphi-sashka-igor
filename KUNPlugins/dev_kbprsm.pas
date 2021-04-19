@@ -127,32 +127,39 @@ begin
         //Запись текущих данных устройства
         TA := TArray<Byte>.Create($C8, $84, $02, $FF, $00, $00);
         PRPGS := IsBitSet(TR[3], 7);
+        // если пришла команда на включение ПГС - читаем состояние PG3...PG1
+        // выставляем флаг на блокирование cbbKBPRSMVyzov
         if PRPGS then
+        begin
           SetBit(TA[4], 7);
-
+          PGSON := True;
       // каналы ПГС
-        FMyForm.cbbKBPRSMVyzov.ItemIndex := 0;
-        if IsBitSet(TR[3], 6) then
-        begin
-          FMyForm.cbbKBPRSMVyzov.ItemIndex := 3;
-          SetBit(TA[4], 6);
-          PGSON := True;
-        end;
-        if IsBitSet(TR[3], 5) then
-        begin
-          FMyForm.cbbKBPRSMVyzov.ItemIndex := 2;
-          SetBit(TA[4], 5);
-          PGSON := True;
-        end;
-        if IsBitSet(TR[3], 4) then
-        begin
-          FMyForm.cbbKBPRSMVyzov.ItemIndex := 1;
-          SetBit(TA[4], 4);
-          PGSON := True;
-        end;
+//        FMyForm.cbbKBPRSMVyzov.ItemIndex := 0;
+          if IsBitSet(TR[3], 6) then
+          begin
+//            FMyForm.cbbKBPRSMVyzov.ItemIndex := 3;
+            SetBit(TA[4], 6);
+//          PGSON := True;
+          end;
+          if IsBitSet(TR[3], 5) then
+          begin
+//            FMyForm.cbbKBPRSMVyzov.ItemIndex := 2;
+            SetBit(TA[4], 5);
+//          PGSON := True;
+          end;
+          if IsBitSet(TR[3], 4) then
+          begin
+//            FMyForm.cbbKBPRSMVyzov.ItemIndex := 1;
+            SetBit(TA[4], 4);
+//          PGSON := True;
+          end;
+        end
+        else
+          PGSON := False;
+
 
         // Блокируем возможность изменения до сброса ПГС
-        FMyForm.cbbKBPRSMVyzov.Enabled :=  not PGSON;
+        FMyForm.cbbKBPRSMVyzov.Enabled := not PGSON;
 
       // управление
         FMyForm.btnON4.Down :=  IsBitSet(TR[3], 3);
@@ -228,7 +235,21 @@ begin
     PCKT_OPER:
       begin
         // чтение срочных данных устройства
-        TA := TArray<Byte>.Create($C8, $89, $02, $00, $00, $00);
+        TA := TArray<Byte>.Create($C8, $89, $02, $0C, $00, $00);
+
+        // блокируем кнопки К1...К3 при влюченном ПГС
+        if not (PRPGS) then
+        begin
+          case FMyForm.cbbKBPRSMVyzov.ItemIndex of
+            1:
+              SetBit(TA[3], 4);
+            2:
+              SetBit(TA[3], 5);
+            3:
+              SetBit(TA[3], 6);
+          end;
+        end;
+
 
         if FMyForm.btnON2.Down then
           SetBit(TA[3], 1);
