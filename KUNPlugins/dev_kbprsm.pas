@@ -34,7 +34,7 @@ type
   TKBPRSM = class(TBaseDevice)
     PRPGS: BOOLEAN;                     // флаг подключения проверки ПГС
     PGSON : Boolean;                    // флаг включения ПГС - диспетчером
-//    ManualTESTGGS: BOOLEAN;
+    AlertDate: BOOLEAN;                 // флаг наличия срочных данных
     constructor Create(F: TFrmBaseClass);
 
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
@@ -59,20 +59,15 @@ begin
   inherited;
   PRPGS := False;
   PGSON := False;
-//  ManualTESTGGS := False;
+  AlertDate := False;
 end;
 
 function TKBPRSM.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
   TR, TA: TArray<Byte>;
-//  cb: TCheckBox;
   bSendAnswer: Boolean;
-//  tmp: string;
   FMyForm: TfrmKBPRSM;
-//  bat: Double;
-//  batInt: Integer;
   i: Integer;
-//  ver: string;
   FTime: TDateTime;
   Y, MM, D, H, M, S, MS: Word;
 begin
@@ -100,10 +95,11 @@ begin
         TA := TArray<Byte>.Create($C8, $81, $03, $06, $03, $00, $00);
         if FDevTimeSync then
           SetBit(TA[5], 0);  // часы и календарь валидны
-//        if not (FMyForm.chkNet.Checked and FMyForm.chkBat.Checked
-//         and FMyForm.chkAmp1.Checked and FMyForm.chkAmp2.Checked
-//         and FMyForm.chkFire.Checked) then
-//          SetBit(TA[5], 1);  // появились срочные данные
+        if AlertDate then
+        begin
+          AlertDate := False;
+          SetBit(TA[5], 1);  // появились срочные данные
+          end;
       end;
 
     PCKT_WRITE_TIME:
@@ -253,6 +249,10 @@ begin
           SetBit(TA[4], 1);
         if FMyForm.btnCTRL_220.Down then
           SetBit(TA[4], 0);
+        // флаг появились срочные данные
+        if ((TA[3] and $73) or (TA[4] and $7F)) > 0 then
+          AlertDate := True;
+
       end
 
   else
