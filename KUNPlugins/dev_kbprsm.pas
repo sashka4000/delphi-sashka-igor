@@ -3,9 +3,10 @@ unit dev_kbprsm;
 interface
 
 uses
-  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Samples.Spin, dev_base_form, ext_global,
-  Vcl.Buttons, DateUtils;
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
+  Vcl.StdCtrls, Vcl.Samples.Spin, dev_base_form, ext_global, Vcl.Buttons,
+  DateUtils;
 
 type
   TfrmKBPRSM = class(TfrmBase)
@@ -31,18 +32,18 @@ type
   public
     { Public declarations }
   end;
+
   TKBPRSM = class(TBaseDevice)
     PRPGS: BOOLEAN;                     // флаг подключения проверки ПГС
-    PGSON : Boolean;                    // флаг включения ПГС - диспетчером
+    PGSON: Boolean;                    // флаг включения ПГС - диспетчером
     AlertDate: BOOLEAN;                 // флаг наличия срочных данных
+    PGS1, PGS2, PGS3: Boolean;         // каналы ПГС в режиме проверки каналов ПГС
     constructor Create(F: TFrmBaseClass);
-
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
 
 const
   gKBPRSM: TGUID = '{F5A76306-E115-4A9C-BF05-1244CDE385ED}';  // Глобальный идентификатор, генерируются по Ctrl+Shift+G
-
 
 var
   frmKBPRSM: TfrmKBPRSM;
@@ -99,7 +100,7 @@ begin
         begin
           AlertDate := False;
           SetBit(TA[5], 1);  // появились срочные данные
-          end;
+        end;
       end;
 
     PCKT_WRITE_TIME:
@@ -126,6 +127,9 @@ begin
       begin
         //Запись текущих данных устройства
         TA := TArray<Byte>.Create($C8, $84, $02, $FF, $00, $00);
+        PGS1 := False;
+        PGS2 := False;
+        PGS3 := False;
         PRPGS := IsBitSet(TR[3], 7);
         // если пришла команда на включение ПГС - читаем состояние PG3...PG1
         // выставляем флаг на блокирование cbbKBPRSMVyzov
@@ -139,18 +143,21 @@ begin
           begin
 //            FMyForm.cbbKBPRSMVyzov.ItemIndex := 3;
             SetBit(TA[4], 6);
+            PGS3 := True;
 //          PGSON := True;
           end;
           if IsBitSet(TR[3], 5) then
           begin
 //            FMyForm.cbbKBPRSMVyzov.ItemIndex := 2;
             SetBit(TA[4], 5);
+            PGS2 := True;
 //          PGSON := True;
           end;
           if IsBitSet(TR[3], 4) then
           begin
 //            FMyForm.cbbKBPRSMVyzov.ItemIndex := 1;
             SetBit(TA[4], 4);
+            PGS1 := True;
 //          PGSON := True;
           end;
         end
@@ -162,17 +169,17 @@ begin
         FMyForm.cbbKBPRSMVyzov.Enabled := not PGSON;
 
       // управление
-        FMyForm.btnON4.Down :=  IsBitSet(TR[3], 3);
-        if  FMyForm.btnON4.Down then
+        FMyForm.btnON4.Down := IsBitSet(TR[3], 3);
+        if FMyForm.btnON4.Down then
           SetBit(TA[4], 3);
-        FMyForm.btnON3.Down :=  IsBitSet(TR[3], 2);
-        if  FMyForm.btnON3.Down then
+        FMyForm.btnON3.Down := IsBitSet(TR[3], 2);
+        if FMyForm.btnON3.Down then
           SetBit(TA[4], 2);
-        FMyForm.btnON2.Down :=  IsBitSet(TR[3], 1);
-        if  FMyForm.btnON2.Down then
+        FMyForm.btnON2.Down := IsBitSet(TR[3], 1);
+        if FMyForm.btnON2.Down then
           SetBit(TA[4], 1);
-        FMyForm.btnON1.Down :=  IsBitSet(TR[3], 0);
-        if  FMyForm.btnON1.Down then
+        FMyForm.btnON1.Down := IsBitSet(TR[3], 0);
+        if FMyForm.btnON1.Down then
           SetBit(TA[4], 0);
       end;
     PCKT_CURRENT:
@@ -206,10 +213,20 @@ begin
             3:
               SetBit(TA[4], 2);
           end;
-        end else
+        end
+        else
         begin
            // если сейчас включена ПГС, то указывем какой канал включен
-          case FMyForm.cbbKBPRSMVyzov.ItemIndex of
+           // снимаю показания PG3...PG1
+          SetBit(TA[5], 7);
+          if PGS3 then
+            SetBit(TA[5], 6);
+          if PGS2 then
+            SetBit(TA[5], 5);
+          if PGS1 then
+            SetBit(TA[5], 4);
+
+{          case FMyForm.cbbKBPRSMVyzov.ItemIndex of
             1:
               SetBit(TA[5], 4);
             2:
@@ -217,10 +234,11 @@ begin
             3:
               SetBit(TA[5], 6);
           end;
+}
         end;
 
-        if PRPGS then
-          SetBit(TA[5], 7);
+//        if PRPGS then
+//          SetBit(TA[5], 7);
 
         if FMyForm.btnON4.Down then
           SetBit(TA[5], 3);
@@ -249,7 +267,6 @@ begin
               SetBit(TA[3], 6);
           end;
         end;
-
 
         if FMyForm.btnON2.Down then
           SetBit(TA[3], 1);
@@ -300,3 +317,4 @@ begin
 end;
 
 end.
+
