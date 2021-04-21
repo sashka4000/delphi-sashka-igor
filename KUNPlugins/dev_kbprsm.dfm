@@ -21,15 +21,15 @@ object frmKBPRSM: TfrmKBPRSM
     Caption = #1050#1041#1055'-RSM '#8470
   end
   object lblkbprsm: TLabel
-    Left = 18
-    Top = 69
+    Left = 19
+    Top = 119
     Width = 87
     Height = 13
     Caption = #1042#1099#1079#1086#1074' '#1089' '#1050#1041#1055'-RSM'
   end
   object btnON1: TSpeedButton
     Left = 18
-    Top = 227
+    Top = 273
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -38,7 +38,7 @@ object frmKBPRSM: TfrmKBPRSM
   end
   object btnON2: TSpeedButton
     Left = 79
-    Top = 227
+    Top = 273
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -47,7 +47,7 @@ object frmKBPRSM: TfrmKBPRSM
   end
   object btnON3: TSpeedButton
     Left = 140
-    Top = 227
+    Top = 273
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -56,7 +56,7 @@ object frmKBPRSM: TfrmKBPRSM
   end
   object btnON4: TSpeedButton
     Left = 200
-    Top = 227
+    Top = 273
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -65,21 +65,21 @@ object frmKBPRSM: TfrmKBPRSM
   end
   object lblControl: TLabel
     Left = 18
-    Top = 195
+    Top = 241
     Width = 94
     Height = 13
     Caption = #1050#1072#1085#1072#1083' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103
   end
   object lblInDiscrete: TLabel
     Left = 18
-    Top = 109
+    Top = 155
     Width = 91
     Height = 13
     Caption = #1044#1080#1089#1082#1088#1077#1090#1085#1099#1081' '#1074#1093#1086#1076
   end
   object btnDS2: TSpeedButton
     Left = 79
-    Top = 143
+    Top = 189
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -88,7 +88,7 @@ object frmKBPRSM: TfrmKBPRSM
   end
   object btnDS4: TSpeedButton
     Left = 201
-    Top = 143
+    Top = 189
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -97,7 +97,7 @@ object frmKBPRSM: TfrmKBPRSM
   end
   object btnDS3: TSpeedButton
     Left = 140
-    Top = 143
+    Top = 189
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -106,7 +106,7 @@ object frmKBPRSM: TfrmKBPRSM
   end
   object btnDS1: TSpeedButton
     Left = 18
-    Top = 143
+    Top = 189
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -115,7 +115,7 @@ object frmKBPRSM: TfrmKBPRSM
   end
   object btnDS5: TSpeedButton
     Left = 262
-    Top = 143
+    Top = 189
     Width = 55
     Height = 25
     AllowAllUp = True
@@ -124,31 +124,37 @@ object frmKBPRSM: TfrmKBPRSM
   end
   object btnDS6: TSpeedButton
     Left = 323
-    Top = 143
+    Top = 189
     Width = 55
     Height = 25
     AllowAllUp = True
     GroupIndex = 10
     Caption = #1044#1042'6'
   end
-  object btnCTRL_220: TSpeedButton
-    Left = 384
-    Top = 143
-    Width = 55
-    Height = 25
-    AllowAllUp = True
-    GroupIndex = 11
-    Caption = '220 '#1042
+  object lbl12: TLabel
+    Left = 20
+    Top = 72
+    Width = 229
+    Height = 13
+    Caption = #1050#1072#1085#1072#1083' '#1055#1043#1057'  '#1050#1059#1053', '#1082' '#1082#1086#1090#1086#1088#1086#1084#1091' '#1087#1086#1076#1082#1083#1102#1095#1077#1085' '#1050#1041#1055
+  end
+  object lbl1: TLabel
+    Left = 360
+    Top = 74
+    Width = 89
+    Height = 13
+    Caption = '0 - '#1085#1077' '#1087#1086#1076#1082#1083#1102#1095#1077#1085
   end
   object cbbKBPRSMVyzov: TComboBox
-    Left = 200
-    Top = 69
+    Left = 272
+    Top = 116
     Width = 100
     Height = 22
     Style = csOwnerDrawFixed
     ItemIndex = 0
-    TabOrder = 1
+    TabOrder = 2
     Text = #1053#1077#1090
+    OnChange = cbbKBPRSMVyzovChange
     Items.Strings = (
       #1053#1077#1090
       '1-'#1081' '#1082#1072#1085#1072#1083' '#1055#1043#1057
@@ -156,13 +162,33 @@ object frmKBPRSM: TfrmKBPRSM
       '3-'#1081' '#1082#1072#1085#1072#1083' '#1055#1043#1057)
   end
   object seNumber: TSpinEdit
-    Left = 200
-    Top = 30
+    Left = 273
+    Top = 27
     Width = 99
     Height = 22
     MaxValue = 7
     MinValue = 0
     TabOrder = 0
     Value = 0
+  end
+  object seKBP_KUN: TSpinEdit
+    Left = 273
+    Top = 69
+    Width = 80
+    Height = 22
+    MaxValue = 8
+    MinValue = 0
+    TabOrder = 1
+    Value = 0
+  end
+  object chkPower220: TCheckBox
+    Left = 18
+    Top = 324
+    Width = 195
+    Height = 17
+    Caption = #1053#1072#1083#1080#1095#1080#1077' '#1089#1077#1090#1077#1074#1086#1075#1086' '#1087#1080#1090#1072#1085#1080#1103' 220'#1042
+    Checked = True
+    State = cbChecked
+    TabOrder = 3
   end
 end

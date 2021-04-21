@@ -42,8 +42,8 @@ begin
   if Driver = nil then
     Driver := TDriver.Create;
   KUN.RegisterDriver(Driver);
-      // Здесь необходимо регистрировать создаваемые устройства
-      // Для создания устройства приложение вызовет CreateDevice
+  // Здесь необходимо регистрировать создаваемые устройства
+  // Для создания устройства приложение вызовет CreateDevice
   KUN.RegisterType(gUPSL, 'УПСЛ');
   KUN.RegisterType(gKSLOtis, 'КСЛ-OTIS');
   KUN.RegisterType(gMBUS, 'M-Bus');
@@ -52,10 +52,11 @@ begin
   KUN.RegisterType(gKIR16RS, 'КИР-16RS');
   KUN.RegisterType(gUPSLM, 'УПСЛ-М');
   KUN.RegisterType(gKIR8RS, 'КИР-8RS');
-    // Устройства, находящиеся в разработке  будут создаваться
+  KUN.RegisterType(gKBPRSM, 'КБП-RSM');
+  // Устройства, находящиеся в разработке  будут создаваться
   // только в режиме DEBUG сборки
   {$IFDEF DEBUG}
-     KUN.RegisterType(gKBPRSM, 'КБП-RSM');
+
   {$ENDIF}
 end;
 
