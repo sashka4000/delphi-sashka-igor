@@ -41,6 +41,7 @@ type
   end;
 
   TKIR8RS = class(TBaseDevice)
+    function Serialize (LoadSave: Integer; P: PChar; var PSize : DWORD): HRESULT; override; stdcall;
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
 
@@ -375,6 +376,24 @@ begin
     CBSG1.SetFocus;
   end;
   CanSelect := True;
+end;
+
+function TKIR8RS.Serialize(LoadSave: Integer; P: PChar;
+  var PSize: DWORD): HRESULT;
+var
+  FMyForm: TfrmKIR8RS;
+begin
+ FMyForm := TfrmKIR8RS(MyForm);
+ if LoadSave = 0 then
+ begin
+   Result := inherited;
+   FMyForm.seNumber.Text := FDeviceSettingsList.Values ['Address'];
+ end else
+ begin
+   FDeviceSettingsList.Clear;
+   FDeviceSettingsList.AddPair ('Address', FMyForm.seNumber.Text);
+   Result := inherited;
+ end;
 end;
 
 end.

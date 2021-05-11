@@ -34,6 +34,7 @@ type
   TUPSL = class(TBaseDevice)
     DISP : BOOLEAN;
     constructor Create(F: TFrmBaseClass);
+    function Serialize (LoadSave: Integer; P: PChar; var PSize : DWORD): HRESULT; override; stdcall;
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
 
@@ -229,6 +230,24 @@ begin
 
   // записываю буфер ответа во входящий буфер
   move(TA[0], TR[0], AnswerSize);
+end;
+
+function TUPSL.Serialize(LoadSave: Integer; P: PChar;
+  var PSize: DWORD): HRESULT;
+var
+  FMyForm: TfrmUPSL;
+begin
+ FMyForm := TfrmUPSL(MyForm);
+ if LoadSave = 0 then
+ begin
+   Result := inherited;
+   FMyForm.seNumber.Text := FDeviceSettingsList.Values ['Address'];
+ end else
+ begin
+   FDeviceSettingsList.Clear;
+   FDeviceSettingsList.AddPair ('Address', FMyForm.seNumber.Text);
+   Result := inherited;
+ end;
 end;
 
 procedure TfrmUPSL.cbbUPSLVyzovChange(Sender: TObject);

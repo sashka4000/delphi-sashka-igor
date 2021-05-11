@@ -37,6 +37,7 @@ type
   end;
 
   TKUP4RS = class(TBaseDevice)
+    function Serialize (LoadSave: Integer; P: PChar; var PSize : DWORD): HRESULT; override; stdcall;
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
 
@@ -221,6 +222,26 @@ begin
   move(TA[0], TR[0], AnswerSize);
 end;
 
+
+function TKUP4RS.Serialize(LoadSave: Integer; P: PChar;
+  var PSize: DWORD): HRESULT;
+var
+  FMyForm: TfrmKUP4RS;
+begin
+ FMyForm := TfrmKUP4RS(MyForm);
+ if LoadSave = 0 then
+ begin
+   Result := inherited;
+   FMyForm.seNumber.Text := FDeviceSettingsList.Values ['Address'];
+   FMyForm.cbbVersion.ItemIndex := FDeviceSettingsList.Values ['Version'].ToInteger;
+ end else
+ begin
+   FDeviceSettingsList.Clear;
+   FDeviceSettingsList.AddPair ('Address', FMyForm.seNumber.Text);
+   FDeviceSettingsList.AddPair ('Version', FMyForm.cbbVersion.ItemIndex.ToString);
+   Result := inherited;
+ end;
+end;
 
 { TWaitTime }
 

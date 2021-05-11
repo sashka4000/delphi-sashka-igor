@@ -55,6 +55,7 @@ type
     DISP : BOOLEAN;                     // флаг подключения ПС
     ManualTESTGGS : BOOLEAN;
     constructor Create(F: TFrmBaseClass);
+    function Serialize (LoadSave: Integer; P: PChar; var PSize : DWORD): HRESULT; override; stdcall;
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
 
@@ -470,6 +471,27 @@ begin
 
   // записываю буфер ответа во входящий буфер
   move(TA[0], TR[0], AnswerSize);
+end;
+
+function TUPSLM.Serialize(LoadSave: Integer; P: PChar;
+  var PSize: DWORD): HRESULT;
+var
+  FMyForm: TfrmUPSLM;
+begin
+ FMyForm := TfrmUPSLM(MyForm);
+ if LoadSave = 0 then
+ begin
+   Result := inherited;
+   FMyForm.seNumber.Text := FDeviceSettingsList.Values ['Address'];
+   FMyForm.cbbVersion.ItemIndex := FDeviceSettingsList.Values ['Version'].ToInteger;
+ end else
+ begin
+   FDeviceSettingsList.Clear;
+   FDeviceSettingsList.AddPair ('Address', FMyForm.seNumber.Text);
+   FDeviceSettingsList.AddPair ('Version', FMyForm.cbbVersion.ItemIndex.ToString);
+   Result := inherited;
+ end;
+
 end;
 
 procedure TfrmUPSLM.cbbUPSLVyzovChange(Sender: TObject);

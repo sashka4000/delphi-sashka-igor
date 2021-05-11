@@ -26,6 +26,7 @@ type
     procedure SwapBuffer (T : TArray<Byte>; Pos, Count : Integer);
     constructor Create (F : TFrmBaseClass);
     destructor  Destroy; override;
+    function Serialize (LoadSave: Integer; P: PChar; var PSize : DWORD): HRESULT; override; stdcall;
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
 
@@ -249,6 +250,38 @@ begin
   // записываю буфер ответа во входящий буфер
   move(TA[0], TR[0], AnswerSize);
 
+end;
+
+function TModbus.Serialize(LoadSave: Integer; P: PChar; var PSize: DWORD): HRESULT;
+var
+  FMyForm: TfrmModbus;
+  Values : String;
+  I: Integer;
+  V : TArray<string>;
+begin
+ FMyForm := TfrmModbus(MyForm);
+ if LoadSave = 0 then
+ begin
+   Result := inherited;
+   FMyForm.seNumber.Text := FDeviceSettingsList.Values ['Address'];
+   Values := FDeviceSettingsList.Values ['Values'];
+   V := Values.Split([';']);
+   for I := 1 to FMyForm.lst1.RowCount-1 do
+     if i >= Length (V)
+     then
+       Break
+     else
+       FMyForm.lst1.Cells [1,i] := V[i-1];
+ end else
+ begin
+   FDeviceSettingsList.Clear;
+   FDeviceSettingsList.AddPair ('Address', FMyForm.seNumber.Text);
+   for I := 1 to FMyForm.lst1.RowCount-1 do
+     Values := Values + ';' + FMyForm.lst1.Cells [1,i];
+   delete (Values,1,1);
+   FDeviceSettingsList.AddPair ('Values', Values);
+   Result := inherited;
+ end;
 end;
 
 procedure TModbus.SwapBuffer(T: TArray<Byte>; Pos, Count: Integer);

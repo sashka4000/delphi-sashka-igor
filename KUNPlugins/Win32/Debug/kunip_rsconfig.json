@@ -8,6 +8,7 @@
    "Baud": 9600
   },
   "Active": true,
-  "ID": "{F5A76306-E115-4A9C-BF05-1244CDE385ED}",
-  "DevName": " ¡œ-RSM"
+  "ID": "{1ADE3ADA-EA57-4663-9E1D-4DEB1A4CE17D}",
+  "DevName": "Modbus",
+  "InsideSettings": "Address=1,Values=1;1;15;-14;24.78;2487;15;1"
  }]

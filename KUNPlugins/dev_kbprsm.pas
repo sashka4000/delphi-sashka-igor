@@ -42,6 +42,7 @@ type
     PGSON: Boolean;                    // флаг включения ПГС - диспетчером
     AlertDate: BOOLEAN;                 // флаг наличия срочных данных
     constructor Create(F: TFrmBaseClass);
+    function Serialize (LoadSave: Integer; P: PChar; var PSize : DWORD): HRESULT; override; stdcall;
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
   end;
 
@@ -301,6 +302,24 @@ begin
 
   // записываю буфер ответа во входящий буфер
   move(TA[0], TR[0], AnswerSize);
+end;
+
+function TKBPRSM.Serialize(LoadSave: Integer; P: PChar;
+  var PSize: DWORD): HRESULT;
+var
+  FMyForm: TfrmKBPRSM;
+begin
+ FMyForm := TfrmKBPRSM(MyForm);
+ if LoadSave = 0 then
+ begin
+   Result := inherited;
+   FMyForm.seNumber.Text := FDeviceSettingsList.Values ['Address'];
+ end else
+ begin
+   FDeviceSettingsList.Clear;
+   FDeviceSettingsList.AddPair ('Address', FMyForm.seNumber.Text);
+   Result := inherited;
+ end;
 end;
 
 procedure TfrmKBPRSM.cbbKBPRSMVyzovChange(Sender: TObject);

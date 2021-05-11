@@ -49,11 +49,13 @@ type
     FCompTime: TDateTime;
     FDevTimeSync: Boolean;    // флаг валидности установленного времени
     FS : TFormatSettings;
+    FDeviceSettingsList : TStringList;
     constructor Create(F: TFrmBaseClass);
     function RegisterCallback(CBF: TPGUSensorCallBack): HResult; stdcall;
     function CreateDeviceWindow(parentHWND: HWND; var createHWND: HWND): Hresult; stdcall;
     function DestroyDevice: HRESULT; stdcall;
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; virtual; stdcall;
+    function Serialize (LoadSave: Integer; P: PChar; var  PSize : DWORD): HRESULT; virtual; stdcall;
     property CallBack: TPGUSensorCallBack read FCB;
     // время создания устройсва по часам компьютера
     property CreateDeviceCompTime: TDateTime read FCreateDevCompTime;
@@ -75,6 +77,7 @@ begin
   FCreateDevCompTime := Now;
   FDevTimeSync := False;
   FS := TFormatSettings.Create;
+  FDeviceSettingsList := TStringList.Create;
 end;
 
 function TBaseDevice.CreateDeviceWindow(parentHWND: HWND;
@@ -92,6 +95,7 @@ end;
 function TBaseDevice.DestroyDevice: HRESULT;
 begin
   MyForm.Free;
+  FDeviceSettingsList.Free;
   Result := 0;
 end;
 
@@ -110,6 +114,25 @@ end;
 function TBaseDevice.RegisterCallback(CBF: TPGUSensorCallBack): HResult;
 begin
   FCB := CBF;
+  Result := 0;
+end;
+
+function TBaseDevice.Serialize(LoadSave: Integer; P: PChar; var PSize : DWORD): HRESULT;
+begin
+  if LoadSave = 0 then
+  begin
+    FDeviceSettingsList.CommaText := P;
+  end else
+  begin
+    if Length (FDeviceSettingsList.CommaText) + 1 > PSize
+    then
+    begin
+      PSize := Length (FDeviceSettingsList.CommaText) + 1;
+      Exit (1);
+    end
+    else
+     StrPCopy(P,FDeviceSettingsList.CommaText);
+  end;
   Result := 0;
 end;
 

@@ -24,6 +24,7 @@ type
   end;
 
  TKSLOTis = class (TBaseDevice)
+   function Serialize (LoadSave: Integer; P: PChar; var PSize : DWORD): HRESULT; override; stdcall;
    function OnDataReceive (pd : PByte; PacketSize : Integer; MaxSize : Integer;  var AnswerSize : Integer) : HRESULT; override; stdcall;
   end;
 
@@ -129,6 +130,24 @@ begin
   cbbError.Enabled := not chkNoLift.Checked;
   seFloor.Enabled    := not chkNoLift.Checked;
   lbl8.Enabled       := not chkNoLift.Checked;
+end;
+
+function TKSLOTis.Serialize(LoadSave: Integer; P: PChar;
+  var PSize: DWORD): HRESULT;
+var
+  FMyForm: TfrmKSL;
+begin
+ FMyForm := TfrmKSL(MyForm);
+ if LoadSave = 0 then
+ begin
+   Result := inherited;
+   FMyForm.seNumber.Text := FDeviceSettingsList.Values ['Address'];
+ end else
+ begin
+   FDeviceSettingsList.Clear;
+   FDeviceSettingsList.AddPair ('Address', FMyForm.seNumber.Text);
+   Result := inherited;
+ end;
 end;
 
 end.
