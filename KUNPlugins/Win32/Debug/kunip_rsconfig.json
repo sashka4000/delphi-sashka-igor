@@ -1,14 +1,1 @@
-[
- {
-  "Int": {
-   "InterfaceNumber": 1,
-   "Parity": "",
-   "Stop": "",
-   "Char": 0,
-   "Baud": 9600
-  },
-  "Active": true,
-  "ID": "{1ADE3ADA-EA57-4663-9E1D-4DEB1A4CE17D}",
-  "DevName": "Modbus",
-  "InsideSettings": "Address=1,Values=1;1;15;-14;24.78;2487;15;1"
- }]
+[]
