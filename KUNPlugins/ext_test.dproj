@@ -61,8 +61,9 @@
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
-        <Debugger_HostApplication>Win32\Debug\kunip.exe</Debugger_HostApplication>
+        <Debugger_HostApplication>D:\Embarcadero\Project\Git_Tekon\KUNPlugins\Win32\Debug\kunip.exe</Debugger_HostApplication>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
+        <Debugger_CWD>D:\Embarcadero\Project\Git_Tekon\KUNPlugins\Win32\Debug</Debugger_CWD>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
@@ -114,6 +115,10 @@
         </DCCReference>
         <DCCReference Include="dev_kbprsm.pas">
             <Form>frmKBPRSM</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="dev_kup2rs.pas">
+            <Form>frmKUP2RS</Form>
             <FormType>dfm</FormType>
         </DCCReference>
         <RcItem Include="beril-steu.txt">
@@ -169,12 +174,18 @@
                     <VersionInfoKeys Name="Comments"/>
                 </VersionInfoKeys>
                 <Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k250.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
-                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp250.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dcloffice2k260.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+                    <Excluded_Packages Name="$(BDSBIN)\dclofficexp260.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
                 </Excluded_Packages>
             </Delphi.Personality>
             <Deployment Version="3">
                 <DeployFile LocalName="Win32\Debug\ext_test.dll" Configuration="Debug" Class="ProjectOutput">
+                    <Platform Name="Win32">
+                        <RemoteName>ext_test.dll</RemoteName>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="Win32\Release\ext_test.dll" Configuration="Release" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>ext_test.dll</RemoteName>
                         <Overwrite>true</Overwrite>
