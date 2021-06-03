@@ -43,15 +43,10 @@ var
   TR, TA: TArray<Byte>;
   bSendAnswer: Boolean;
   upsl_b, upsl_ch: Byte;
-  tmp: string;
   FMyForm: TfrmKUP2RS;
-  bat: Double;
-  batInt: Integer;
-  i: Integer;
-  ver: string;
-  FTime: TDateTime;
-  Y, MM, D, H, M, S, MS: Word;
-  b1, b2 : TSpeedButton;
+//  i: Integer;
+//  FTime: TDateTime;
+//  Y, MM, D, H, M, S, MS: Word;
 begin
   Result := inherited;
 
@@ -73,86 +68,9 @@ begin
     PCKT_TYPE:
       begin
   // Обработка состояния запроса типа устройства
-        TA := TArray<Byte>.Create($08, $81, $03, $09, $00, $00, $00);
+        TA := TArray<Byte>.Create($08, $04, $00, $00, $00, $00, $00);
 
-      end;
-    PCKT_WRITE_DATA:
-      begin
-        TA := TArray<Byte>.Create($08, $84, $06, TR[3], TR[4], $44, $44, $D4, $01, $00);
-
-        if FMyForm.chkPowLine.Checked then
-          SetBit(TA[7], 0);                //     0 -> 1
-        // Читаем состояние кнопок оптопар
-        if FMyForm.btnIn5.Down then
-          ResetBit(TA[5], 6);              //     6 -> 0
-
-        if FMyForm.btnIn6.Down then
-          ResetBit(TA[5], 2);              //     2 -> 0
-
-       //     2 -> 0
-       // Читаем состояние кнопок реле
-        if FMyForm.btnSw1.Down then
-          SetBit(TA[5], 4);                //     4 -> 1
-
-        if FMyForm.btnSw2.Down then
-          SetBit(TA[5], 0);                //     0 -> 1
-
-        // Записываем состояние концентратора
-        if FMyForm.btnIn1.Down then
-          ResetBit(TA[7], 2);              //     2 -> 0
-
-        if FMyForm.btnIn2.Down then
-          ResetBit(TA[7], 4);              //     4 -> 0
-
-           //     7 -> 0
-       // Читаем команды во входном пакете
-
-        for i := 0 to 1 do
-        begin
-          if i = 0 then
-          begin
-            b1 := FMyForm.btnSw1;
-            b2 := FMyForm.btnSw2;
-          end
-          else
-          begin
-//            b1 := FMyForm.btnSw3;
-//            b2 := FMyForm.btnSw4;
-          end;
-
-          if (TR[3 + i] and $0D) = $01 then          // маска 00001101
-          begin
-            SetBit(TA[5 + i], 0);
-            b2.Down := True;
-            if (TR[3 + i] and $03) = $03 then
-//              TWaitTime.Create(b2, FMyForm.Handle);
-          end;
-
-          if (TR[3 + i] and $0F) = $02 then          // маска 00001111
-          begin
-            ResetBit(TA[5 + i], 0);
-            b2.Down := False;
-          end;
-
-          if (TR[3 + i] and $D0) = $10 then          // маска 11010000
-          begin
-            SetBit(TA[5 + i], 0);
-            b1.Down := True;
-            if (TR[3 + i] and $30) = $30 then
-//              TWaitTime.Create(b1, FMyForm.Handle);
-          end;
-
-          if (TR[3 + i] and $F0) = $20 then         // маска 11110000
-          begin
-            ResetBit(TA[5 + i], 0);
-            b1.Down := False;
-          end;
-
-
-        end;
-        end;
-
-
+      end
 
   else
     Exit;
