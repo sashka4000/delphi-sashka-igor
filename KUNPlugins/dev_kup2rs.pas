@@ -9,21 +9,13 @@ uses
 
 type
   TfrmKUP2RS = class(TfrmBase)
-    btnIn8: TSpeedButton;
-    cbbVersion: TComboBox;
     chkPowLine: TCheckBox;
     seNumber: TSpinEdit;
-    lblVer: TLabel;
     lbl17: TLabel;
-    btnSw4: TSpeedButton;
-    btnSw3: TSpeedButton;
     btnSw2: TSpeedButton;
     btnSw1: TSpeedButton;
-    btnIn7: TSpeedButton;
     btnIn6: TSpeedButton;
     btnIn5: TSpeedButton;
-    btnIn4: TSpeedButton;
-    btnIn3: TSpeedButton;
     btnIn2: TSpeedButton;
     btnIn1: TSpeedButton;
     lblSw: TLabel;
@@ -42,15 +34,9 @@ type
 const
   gKUP2RS: TGUID = '{F9F3C848-4713-45BC-9FB5-C21F73D348D6}';  // √лобальный идентификатор, генерируютс€ по Ctrl+Shift+G
 
-
-var
-  frmKUP2RS: TfrmKUP2RS;
-
 implementation
 
 {$R *.dfm}
-uses
-  IdGlobal;
 
 function TKUP2RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
@@ -77,7 +63,7 @@ begin
   if GET_CRC(TR, PacketSize) <> TR[PacketSize - 1] then
     Exit;
   // провер€ю адрес устройства в первом байте
-  if TR[0] <> $E0 + FMyForm.seNumber.Value then
+  if TR[0] <> $08 + FMyForm.seNumber.Value then
     Exit;
 
 
@@ -87,12 +73,12 @@ begin
     PCKT_TYPE:
       begin
   // ќбработка состо€ни€ запроса типа устройства
-        TA := TArray<Byte>.Create($E0, $81, $03, $09, $00, $00, $00);
+        TA := TArray<Byte>.Create($08, $81, $03, $09, $00, $00, $00);
 
       end;
     PCKT_WRITE_DATA:
       begin
-        TA := TArray<Byte>.Create($E0, $84, $06, TR[3], TR[4], $44, $44, $D4, $01, $00);
+        TA := TArray<Byte>.Create($08, $84, $06, TR[3], TR[4], $44, $44, $D4, $01, $00);
 
         if FMyForm.chkPowLine.Checked then
           SetBit(TA[7], 0);                //     0 -> 1
@@ -103,11 +89,7 @@ begin
         if FMyForm.btnIn6.Down then
           ResetBit(TA[5], 2);              //     2 -> 0
 
-        if FMyForm.btnIn7.Down then
-          ResetBit(TA[6], 6);              //     6 -> 0
-
-        if FMyForm.btnIn8.Down then
-          ResetBit(TA[6], 2);              //     2 -> 0
+       //     2 -> 0
        // „итаем состо€ние кнопок реле
         if FMyForm.btnSw1.Down then
           SetBit(TA[5], 4);                //     4 -> 1
@@ -115,11 +97,6 @@ begin
         if FMyForm.btnSw2.Down then
           SetBit(TA[5], 0);                //     0 -> 1
 
-        if FMyForm.btnSw3.Down then
-          SetBit(TA[6], 4);                //     4 -> 1
-
-        if FMyForm.btnSw4.Down then
-          SetBit(TA[6], 0);                //     0 -> 1
         // «аписываем состо€ние концентратора
         if FMyForm.btnIn1.Down then
           ResetBit(TA[7], 2);              //     2 -> 0
@@ -127,11 +104,7 @@ begin
         if FMyForm.btnIn2.Down then
           ResetBit(TA[7], 4);              //     4 -> 0
 
-        if FMyForm.btnIn3.Down then
-          ResetBit(TA[7], 6);              //     6 -> 0
-
-        if FMyForm.btnIn4.Down then
-          ResetBit(TA[7], 7);              //     7 -> 0
+           //     7 -> 0
        // „итаем команды во входном пакете
 
         for i := 0 to 1 do
@@ -143,8 +116,8 @@ begin
           end
           else
           begin
-            b1 := FMyForm.btnSw3;
-            b2 := FMyForm.btnSw4;
+//            b1 := FMyForm.btnSw3;
+//            b2 := FMyForm.btnSw4;
           end;
 
           if (TR[3 + i] and $0D) = $01 then          // маска 00001101
@@ -179,23 +152,14 @@ begin
         end;
         end;
 
-    PCKT_VERSION:
-      begin
-        if FMyForm.cbbVersion.Text = '-' then
-          Exit;
-        TA := TArray<Byte>.Create($E0, $8D, $02, $00, $00, $00);
-        // „тение версии устройства
-        ver := FMyForm.cbbVersion.Text;
-        TA[3] := Fetch(ver,'.').ToInteger;
-        TA[4] := ver.ToInteger;
-      end
+
 
   else
     Exit;
   end;
 
   // устанавливаю правильный адрес устройства в первый байт
-  TA[0] := $E0 + FMyForm.seNumber.Value;
+  TA[0] := $08 + FMyForm.seNumber.Value;
 
   AnswerSize := Length(TA);
 
@@ -220,16 +184,16 @@ var
   FMyForm: TfrmKUP2RS;
 begin
  FMyForm := TfrmKUP2RS(MyForm);
-z if LoadSave = 0 then
+ if LoadSave = 0 then
  begin
    Result := inherited;
    FMyForm.seNumber.Text := FDeviceSettingsList.Values ['Address'];
-   FMyForm.cbbVersion.ItemIndex := FDeviceSettingsList.Values ['Version'].ToInteger;
+//   FMyForm.cbbVersion.ItemIndex := FDeviceSettingsList.Values ['Version'].ToInteger;
  end else
  begin
    FDeviceSettingsList.Clear;
    FDeviceSettingsList.AddPair ('Address', FMyForm.seNumber.Text);
-   FDeviceSettingsList.AddPair ('Version', FMyForm.cbbVersion.ItemIndex.ToString);
+//   FDeviceSettingsList.AddPair ('Version', FMyForm.cbbVersion.ItemIndex.ToString);
    Result := inherited;
  end;
 end;
