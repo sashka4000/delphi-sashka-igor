@@ -21,7 +21,9 @@ uses
   dev_kir16rs in 'dev_kir16rs.pas' {frmKIR16RS},
   dev_upsl_m in 'dev_upsl_m.pas' {frmUPSLM},
   dev_kir8rs in 'dev_kir8rs.pas' {frmKIR8RS},
-  dev_kbprsm in 'dev_kbprsm.pas' {frmKBPRSM};
+  dev_kbprsm in 'dev_kbprsm.pas' {frmKBPRSM},
+  dev_kup2rs in 'dev_kup2rs.pas' {frmKUP2RS};
+
 
 {$R *.res}
 {$R style_res.res}
@@ -56,7 +58,7 @@ begin
   // Устройства, находящиеся в разработке  будут создаваться
   // только в режиме DEBUG сборки
   {$IFDEF DEBUG}
-
+    KUN.RegisterType(gKUP2RS, 'КУП-2RS');
   {$ENDIF}
 end;
 
@@ -113,6 +115,10 @@ begin
       if IsEqualGUID(guidClass, gKBPRSM) then
   begin
      RS := TKBPRSM.Create (TfrmKBPRSM);
+     Result := 0;
+  end;
+    begin
+     RS := TKUP2RS.Create (TfrmKUP2RS);
      Result := 0;
   end;
 end;
