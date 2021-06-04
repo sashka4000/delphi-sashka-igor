@@ -43,7 +43,7 @@ object frmKUP2RS: TfrmKUP2RS
   end
   object btnIn6: TSpeedButton
     AlignWithMargins = True
-    Left = 156
+    Left = 110
     Top = 115
     Width = 40
     Height = 30
@@ -53,23 +53,13 @@ object frmKUP2RS: TfrmKUP2RS
   end
   object btnIn5: TSpeedButton
     AlignWithMargins = True
-    Left = 110
+    Left = 64
     Top = 115
     Width = 40
     Height = 30
     AllowAllUp = True
     GroupIndex = 5
     Caption = #1054#1057'1'
-  end
-  object btnIn2: TSpeedButton
-    AlignWithMargins = True
-    Left = 64
-    Top = 115
-    Width = 40
-    Height = 30
-    AllowAllUp = True
-    GroupIndex = 2
-    Caption = #1050'1'
   end
   object btnIn1: TSpeedButton
     AlignWithMargins = True

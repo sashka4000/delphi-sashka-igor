@@ -1,1 +1,14 @@
-[]
+[
+ {
+  "Int": {
+   "InterfaceNumber": 1,
+   "Parity": "",
+   "Stop": "",
+   "Char": 0,
+   "Baud": 9600
+  },
+  "Active": true,
+  "ID": "{F9F3C848-4713-45BC-9FB5-C21F73D348D6}",
+  "DevName": "йсо-2RS",
+  "InsideSettings": "Address=0"
+ }]

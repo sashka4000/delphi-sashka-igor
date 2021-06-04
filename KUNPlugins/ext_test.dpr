@@ -117,6 +117,7 @@ begin
      RS := TKBPRSM.Create (TfrmKBPRSM);
      Result := 0;
   end;
+   if IsEqualGUID(guidClass, gKUP2RS) then
     begin
      RS := TKUP2RS.Create (TfrmKUP2RS);
      Result := 0;
