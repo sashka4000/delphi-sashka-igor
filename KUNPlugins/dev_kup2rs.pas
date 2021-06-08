@@ -77,7 +77,7 @@ begin
     PCKT_TYPE:
       begin
         // состояния запроса типа устройства
-        TA := TArray<Byte>.Create($08, $04, TR[2], $44 , $00, TR[2], $00);
+        TA := TArray<Byte>.Create($08, $04, TR[2], $44 , $10, TR[2], $00);
 
         // питание концентратора
         if FMyForm.chkPowLine.Checked then
