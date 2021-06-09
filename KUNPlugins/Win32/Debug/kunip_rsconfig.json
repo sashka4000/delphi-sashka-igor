@@ -8,19 +8,7 @@
    "Baud": 9600
   },
   "Active": true,
-  "ID": "{F9F3C848-4713-45BC-9FB5-C21F73D348D6}",
-  "DevName": " ”œ-2RS",
-  "InsideSettings": "Address=0"
- },{
-  "Int": {
-   "InterfaceNumber": 1,
-   "Parity": "",
-   "Stop": "",
-   "Char": 0,
-   "Baud": 9600
-  },
-  "Active": true,
-  "ID": "{FA28155C-2CF0-4A5A-A4F9-723656F33218}",
-  "DevName": " ”œ-4RS",
+  "ID": "{C8B1EF56-D63C-4711-B44A-AE6E7024286A}",
+  "DevName": " »–-16RS",
   "InsideSettings": "Address=0,Version=0"
  }]

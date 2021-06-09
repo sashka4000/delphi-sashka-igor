@@ -124,6 +124,7 @@ inherited frmKIR16RS: TfrmKIR16RS
     TabOrder = 4
     Text = '20.2'
     Items.Strings = (
-      '20.2')
+      '20.2'
+      '21.1')
   end
 end

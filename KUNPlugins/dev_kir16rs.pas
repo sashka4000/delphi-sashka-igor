@@ -86,7 +86,7 @@ begin
   case TR[1] of
     PCKT_TYPE:
       begin
-  // ќбработка состо€ни€ запроса типа устройства
+        // ќбработка состо€ни€ запроса типа устройства
         TA := TArray<Byte>.Create($80, $81, $03, $0A, $03, $01, $00);
         if FDevTimeSync then
           ResetBit(TA[5], 0);
@@ -99,7 +99,7 @@ begin
 
     PCKT_WRITE_TIME:
       begin
-     //«апись времени устройства
+        //«апись времени устройства
         FDevTimeSync := True;
         FDevTime := EncodeDateTime(TR[8] + 2000, TR[7], TR[6], TR[5], TR[4], TR[3], 0);
         FCompTime := Now;
@@ -110,11 +110,44 @@ begin
 
     PCKT_READ_TIME:
       begin
-     //„тение времени устройства
+        //„тение времени устройства
         FTime := (Now - FCompTime) + FDevTime;
         DecodeDate(FTime, Y, MM, D);
         DecodeTime(FTime, H, M, S, MS);
         TA := TArray<Byte>.Create($80, $83, $06, S, M, H, D, MM, (Y - 2000), $00);
+      end;
+
+      // только дл€ версий прошивки концентратора >= 21.1
+      PCKT_WRITE_DATA:
+      begin
+        // «апись текущих данных устройства
+        if FMyForm.cbbVersion.ItemIndex = 0  then
+        Exit;
+
+        TA := TArray<Byte>.Create($80, $84, $02, $00, $06, $00);
+
+        if (TR[3] > 16) or (TR[3] = 0) then
+          Exit;
+        if (TR[4] > 10) or (TR[4] = 0) then
+        begin
+          // считываем из EEPROM - пока не знаю как
+          Exit;
+        end;
+
+        for i := 1 to 16 do
+        begin
+          if TR[3] = i then
+          begin
+            for j := 1 to 10 do
+              if TR[4] = j then
+              begin
+                TA[3] := i;
+                TA[4] := j;
+              end;
+          end;
+        end;
+
+
       end;
 
     PCKT_CURRENT:
