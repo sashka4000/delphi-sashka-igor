@@ -131,19 +131,17 @@ begin
         if (TR[4] > 10) or (TR[4] = 0) then
         begin
           // считываем из EEPROM - пока не знаю как
-          Exit;
+          TA[4] := 1;
         end;
 
         for i := 1 to 16 do
         begin
           if TR[3] = i then
           begin
+            TA[3] := i;
             for j := 1 to 10 do
               if TR[4] = j then
-              begin
-                TA[3] := i;
                 TA[4] := j;
-              end;
           end;
         end;
 
