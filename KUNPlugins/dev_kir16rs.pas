@@ -121,8 +121,8 @@ begin
       PCKT_WRITE_DATA:
       begin
         // Запись текущих данных устройства
-        if FMyForm.cbbVersion.ItemIndex = 0  then
-        Exit;
+        if FMyForm.cbbVersion.ItemIndex = 0 then
+          Exit;
 
         TA := TArray<Byte>.Create($80, $84, $02, $00, $06, $00);
 
@@ -131,21 +131,13 @@ begin
         if (TR[4] > 10) or (TR[4] = 0) then
         begin
           // считываем из EEPROM - пока не знаю как
+          TA[3] := TR[3];
           TA[4] := 1;
+          Exit;
         end;
 
-        for i := 1 to 16 do
-        begin
-          if TR[3] = i then
-          begin
-            TA[3] := i;
-            for j := 1 to 10 do
-              if TR[4] = j then
-                TA[4] := j;
-          end;
-        end;
-
-
+        TA[3] := TR[3];
+        TA[4] := TR[4];
       end;
 
     PCKT_CURRENT:
