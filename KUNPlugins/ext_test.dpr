@@ -55,10 +55,10 @@ begin
   KUN.RegisterType(gUPSLM, 'УПСЛ-М');
   KUN.RegisterType(gKIR8RS, 'КИР-8RS');
   KUN.RegisterType(gKBPRSM, 'КБП-RSM');
+  KUN.RegisterType(gKUP2RS, 'КУП-2RS');
   // Устройства, находящиеся в разработке  будут создаваться
   // только в режиме DEBUG сборки
   {$IFDEF DEBUG}
-    KUN.RegisterType(gKUP2RS, 'КУП-2RS');
   {$ENDIF}
 end;
 
