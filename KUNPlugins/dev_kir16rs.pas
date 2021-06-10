@@ -138,7 +138,7 @@ begin
             if (TR[4] > 10) or (TR[4] = 0) then
               TA[4] := arrEEPROM[i]
             else
-              arrEEPROM[i] := TA[4];
+              arrEEPROM[i] := TR[4];
           end;
         end;
 

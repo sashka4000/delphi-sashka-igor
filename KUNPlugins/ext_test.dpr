@@ -51,7 +51,7 @@ begin
   KUN.RegisterType(gMBUS, 'M-Bus');
   KUN.RegisterType(gModbus, 'Modbus');
   KUN.RegisterType(gKUP4RS, 'КУП-4RS');
-  KUN.RegisterType(gKIR16RS, 'КИР-16RS');
+
   KUN.RegisterType(gUPSLM, 'УПСЛ-М');
   KUN.RegisterType(gKIR8RS, 'КИР-8RS');
   KUN.RegisterType(gKBPRSM, 'КБП-RSM');
@@ -59,6 +59,7 @@ begin
   // Устройства, находящиеся в разработке  будут создаваться
   // только в режиме DEBUG сборки
   {$IFDEF DEBUG}
+    KUN.RegisterType(gKIR16RS, 'КИР-16RS');
   {$ENDIF}
 end;
 
