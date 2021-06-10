@@ -39,7 +39,6 @@ type
   TKIR16RS = class(TBaseDevice)
     function Serialize(LoadSave: Integer; P: PChar; var PSize: DWORD): HRESULT; override; stdcall;
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
-    constructor Create(F: TFrmBaseClass);
   end;
 
 const
@@ -53,21 +52,10 @@ uses
 
 { TKIR16RS }
 
-constructor TKIR16RS.Create(F: TFrmBaseClass);
-var
-arrEEPROM : array[1..16] of Integer;
-i : Integer;
-begin
-  inherited;
-for I := 1 to 16 do
-  arrEEPROM[i] := 6;
-end;
-
-
-
 function TKIR16RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
   TR, TA: TArray<Byte>;
+  arrEEPROM : array[1..16] of Integer;
   ValueLoop : Cardinal;
   bSendAnswer: Boolean;
   FDevBattery : Byte;       // флаг состояния АКБ
@@ -83,6 +71,8 @@ var
 begin
   Result := inherited;
   FMyForm := TfrmKIR16RS(MyForm);
+  for I := 1 to 16 do
+  arrEEPROM[i] := 6;
   // преобразование указателя к типу массив байт
   TR := TArray<Byte>(pd);
 
@@ -136,15 +126,18 @@ begin
         if FMyForm.cbbVersion.ItemIndex = 0 then
           Exit;
 
-        TA := TArray<Byte>.Create($80, $84, $02, $00, $06, $00);
+        TA := TArray<Byte>.Create($80, $84, $02, $00, $00, $00);
         if (TR[3] > 16) or (TR[3] = 0) then
           Exit;
 
         if (TR[4] > 10) or (TR[4] = 0) then
         begin
           // считываем из EEPROM - пока не знаю как
+          for I := 1 to 16 do
+          begin
           TA[3] := TR[3];
-          TA[4] := 6;
+          TA[4] := arrEEPROM[i] ;
+          end;
         end
         else
         begin
