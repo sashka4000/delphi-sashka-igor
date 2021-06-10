@@ -34,8 +34,8 @@ type
   public
     { Public declarations }
     FDevDataSend: Boolean;
+    arrEEPROM: array[1..16] of Integer;
   end;
-  //  инициализация массива
   TKIR16RS = class(TBaseDevice)
     function Serialize(LoadSave: Integer; P: PChar; var PSize: DWORD): HRESULT; override; stdcall;
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
@@ -129,10 +129,10 @@ begin
 
         TA[3] := TR[3];
         if (TR[4] > 10) or (TR[4] = 0) then
-          TA[4] := arrEEPROM[TR[3]]
+          TA[4] := FMyForm.arrEEPROM[TR[3]]
         else
         begin
-          arrEEPROM[TR[3]] := TR[4];
+          FMyForm.arrEEPROM[TR[3]] := TR[4];
           TA[4] := TR[4];
         end;
       end;
@@ -336,6 +336,9 @@ var
 begin
   inherited;
   FDevDataSend := False;
+  //  инициализация массива
+  for i := 1 to 16 do
+    arrEEPROM[i] := 6;
   with SG do
   begin
     ColWidths[0] := 40;
