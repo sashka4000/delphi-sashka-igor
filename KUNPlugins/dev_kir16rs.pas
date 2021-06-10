@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
   System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, Vcl.Dialogs,
   dev_base_form, Vcl.Grids, Vcl.ValEdit, Vcl.Buttons, Vcl.Samples.Spin,
-  Vcl.StdCtrls, DateUtils, Vcl.Mask, Vcl.ComCtrls,  WinTypes;
+  Vcl.StdCtrls, DateUtils, Vcl.Mask, Vcl.ComCtrls, WinTypes;
 
 type
   TfrmKIR16RS = class(TfrmBase)
@@ -23,8 +23,7 @@ type
     lbl1: TLabel;
     cbbVersion: TComboBox;
     procedure FormCreate(Sender: TObject);
-    procedure SGSelectCell(Sender: TObject; ACol, ARow: Integer;
-      var CanSelect: Boolean);
+    procedure SGSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
     procedure CBSG1CloseUp(Sender: TObject);
     procedure CBSG1Exit(Sender: TObject);
     procedure btnSensorClick(Sender: TObject);
@@ -34,8 +33,9 @@ type
     { Private declarations }
   public
     { Public declarations }
-    FDevDataSend : Boolean;
+    FDevDataSend: Boolean;
   end;
+
   TKIR16RS = class(TBaseDevice)
     function Serialize(LoadSave: Integer; P: PChar; var PSize: DWORD): HRESULT; override; stdcall;
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
@@ -55,24 +55,24 @@ uses
 function TKIR16RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
   TR, TA: TArray<Byte>;
-  arrEEPROM : array[1..16] of Integer;
-  ValueLoop : Cardinal;
+  arrEEPROM: array[1..16] of Integer;
+  ValueLoop: Cardinal;
   bSendAnswer: Boolean;
-  FDevBattery : Byte;       // флаг состояния АКБ
+  FDevBattery: Byte;       // флаг состояния АКБ
 //  tmp: string;
   FMyForm: TfrmKIR16RS;
 //  bat: Double;
 //  batInt: Integer;
-  i, j : Integer;
+  i, j: Integer;
   ver: string;
   FTime: TDateTime;
   Y, MM, D, H, M, S, MS: Word;
-  FDevTimeDifference : Cardinal;
+  FDevTimeDifference: Cardinal;
 begin
   Result := inherited;
   FMyForm := TfrmKIR16RS(MyForm);
-  for I := 1 to 16 do
-  arrEEPROM[i] := 6;
+  for i := 1 to 16 do
+    arrEEPROM[i] := 6;
   // преобразование указателя к типу массив байт
   TR := TArray<Byte>(pd);
 
@@ -130,18 +130,11 @@ begin
         if (TR[3] > 16) or (TR[3] = 0) then
           Exit;
 
-        for i := 1 to 16 do
-        begin
-          if TR[3] = i then
-          begin
-            TA[3] := TR[3];
-            if (TR[4] > 10) or (TR[4] = 0) then
-              TA[4] := arrEEPROM[i]
-            else
-              arrEEPROM[i] := TR[4];
-          end;
-        end;
-
+        TA[3] := TR[3];
+        if (TR[4] > 10) or (TR[4] = 0) then
+          TA[4] := arrEEPROM[TR[3]]
+        else
+          arrEEPROM[TR[3]] := TR[4];
       end;
 
     PCKT_CURRENT:
@@ -164,25 +157,25 @@ begin
         TA[8] := (Y - 2000);
         //************************
         // состояние дискретного входа, аккумулятора и настроек
-        if not(FMyForm.btnSensor.Down) then
+        if not (FMyForm.btnSensor.Down) then
         begin
-           SetBit(TA[81],0);
+          SetBit(TA[81], 0);
         end;
         if FDevBattery <> 0 then
         begin
           case FDevBattery of
             1:
               begin
-               SetBit(TA[81],5);
+                SetBit(TA[81], 5);
               end;
             2:
               begin
-               SetBit(TA[81],4);
-               SetBit(TA[81],5);
+                SetBit(TA[81], 4);
+                SetBit(TA[81], 5);
               end;
             3:
               begin
-                SetBit(TA[81],6);
+                SetBit(TA[81], 6);
               end;
             4:
               begin
@@ -194,7 +187,7 @@ begin
        //Сумматоры
         for i := 0 to 15 do
         begin
-          ValueLoop := StrToIntDef(FMyForm.SG.Cells[1, i + 1],0);
+          ValueLoop := StrToIntDef(FMyForm.SG.Cells[1, i + 1], 0);
           Move(ValueLoop, TA[9 + (4 * i)], 4);
         end;
         // наработка TA[73]
@@ -205,17 +198,17 @@ begin
         //**************************
         // читаем состояние шлейфа
 //             FMyForm.CBSG1.ItemIndex;
-          for i := 0 to 3 do
+        for i := 0 to 3 do
+        begin
+          for j := 1 to 4 do
+            if FMyForm.SG.Cells[2, j + (4 * i)] = 'шлейф замкнут' then
+              SetBit(TA[77 + i], (0 + (2 * (j - 1))))
+            else if FMyForm.SG.Cells[2, j + (4 * i)] = 'шлейф обрыв' then
             begin
-              for j := 1 to 4 do
-                if FMyForm.SG.Cells[2, j + ( 4 * i )] = 'шлейф замкнут' then
-                 SetBit(TA[77 + i],(0 + (2 * (j -1))))
-                 else if FMyForm.SG.Cells[2, j + ( 4 * i )] = 'шлейф обрыв' then
-                  begin
  //                   SetBit(TA[77 + i],(0 + (2 * (j -1))));
-                    SetBit(TA[77 + i],(1 + (2 * (j -1))))
-                  end;
+              SetBit(TA[77 + i], (1 + (2 * (j - 1))))
             end;
+        end;
         //
 
       end;
@@ -226,23 +219,23 @@ begin
       // состояние дискретного входа, аккумулятора и настроек
         if not (FMyForm.btnSensor.Down) then
         begin
-           SetBit(TA[3],0);
+          SetBit(TA[3], 0);
         end;
         if FDevBattery <> 0 then
         begin
           case FDevBattery of
             1:
               begin
-               SetBit(TA[3],5);
+                SetBit(TA[3], 5);
               end;
             2:
               begin
-               SetBit(TA[3],4);
-               SetBit(TA[3],5);
+                SetBit(TA[3], 4);
+                SetBit(TA[3], 5);
               end;
             3:
               begin
-                SetBit(TA[3],6);
+                SetBit(TA[3], 6);
               end;
             4:
               begin
@@ -294,7 +287,6 @@ begin
 
   // записываю буфер ответа во входящий буфер
   move(TA[0], TR[0], AnswerSize);
-
 end;
 
 procedure TfrmKIR16RS.btnSensorClick(Sender: TObject);
@@ -351,18 +343,18 @@ begin
     ColWidths[2] := 120;
     for i := 1 to 16 do
       Cells[0, i] := i.ToString;
-        for i := 1 to 16 do
-        begin
-          Cells[1, i] := '0';
-          Cells[2, i] := 'шлейф норма';
-        end;
+    for i := 1 to 16 do
+    begin
+      Cells[1, i] := '0';
+      Cells[2, i] := 'шлейф норма';
+    end;
 
     Cells[0, 0] := 'Вход';
     Cells[1, 0] := 'Число импульсов';
     Cells[2, 0] := 'Состояние шлейфа';
   end;
- SG.DefaultRowHeight := CBSG1.Height;
- CBSG1.Visible := False;
+  SG.DefaultRowHeight := CBSG1.Height;
+  CBSG1.Visible := False;
 end;
 
 procedure TfrmKIR16RS.SGSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
@@ -378,7 +370,7 @@ begin
     R.Right := R.Right + SG.Left;
     R.Top := R.Top + SG.Top;
     R.Bottom := R.Bottom + SG.Top;
-    CBSG1.ItemIndex := CBSG1.Items.IndexOf(SG.Cells[ACol,Arow]);
+    CBSG1.ItemIndex := CBSG1.Items.IndexOf(SG.Cells[ACol, ARow]);
     CBSG1.Left := R.Left + 1;
     CBSG1.Top := R.Top + 1;
     CBSG1.Width := (R.Right + 1) - R.Left;
@@ -389,24 +381,24 @@ begin
   CanSelect := True;
 end;
 
-function TKIR16RS.Serialize(LoadSave: Integer; P: PChar;
-  var PSize: DWORD): HRESULT;
+function TKIR16RS.Serialize(LoadSave: Integer; P: PChar; var PSize: DWORD): HRESULT;
 var
   FMyForm: TfrmKIR16RS;
 begin
- FMyForm := TfrmKIR16RS(MyForm);
- if LoadSave = 0 then
- begin
-   Result := inherited;
-   FMyForm.seNumber.Text := FDeviceSettingsList.Values ['Address'];
-   FMyForm.cbbVersion.ItemIndex := FDeviceSettingsList.Values ['Version'].ToInteger;
- end else
- begin
-   FDeviceSettingsList.Clear;
-   FDeviceSettingsList.AddPair ('Address', FMyForm.seNumber.Text);
-   FDeviceSettingsList.AddPair ('Version', FMyForm.cbbVersion.ItemIndex.ToString);
-   Result := inherited;
- end;
+  FMyForm := TfrmKIR16RS(MyForm);
+  if LoadSave = 0 then
+  begin
+    Result := inherited;
+    FMyForm.seNumber.Text := FDeviceSettingsList.Values['Address'];
+    FMyForm.cbbVersion.ItemIndex := FDeviceSettingsList.Values['Version'].ToInteger;
+  end
+  else
+  begin
+    FDeviceSettingsList.Clear;
+    FDeviceSettingsList.AddPair('Address', FMyForm.seNumber.Text);
+    FDeviceSettingsList.AddPair('Version', FMyForm.cbbVersion.ItemIndex.ToString);
+    Result := inherited;
+  end;
 end;
 
 end.
