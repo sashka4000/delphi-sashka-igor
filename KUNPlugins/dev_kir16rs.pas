@@ -36,10 +36,10 @@ type
     { Public declarations }
     FDevDataSend : Boolean;
   end;
-
   TKIR16RS = class(TBaseDevice)
-    function Serialize (LoadSave: Integer; P: PChar; var PSize : DWORD): HRESULT; override; stdcall;
+    function Serialize(LoadSave: Integer; P: PChar; var PSize: DWORD): HRESULT; override; stdcall;
     function OnDataReceive(pd: PByte; PacketSize: Integer; MaxSize: Integer; var AnswerSize: Integer): HRESULT; override; stdcall;
+    constructor Create(F: TFrmBaseClass);
   end;
 
 const
@@ -52,6 +52,18 @@ uses
   IdGlobal, ext_global;
 
 { TKIR16RS }
+
+constructor TKIR16RS.Create(F: TFrmBaseClass);
+var
+arrEEPROM : array[1..16] of Integer;
+i : Integer;
+begin
+  inherited;
+for I := 1 to 16 do
+  arrEEPROM[i] := 6;
+end;
+
+
 
 function TKIR16RS.OnDataReceive(pd: PByte; PacketSize, MaxSize: Integer; var AnswerSize: Integer): HRESULT;
 var
@@ -125,19 +137,20 @@ begin
           Exit;
 
         TA := TArray<Byte>.Create($80, $84, $02, $00, $06, $00);
-
         if (TR[3] > 16) or (TR[3] = 0) then
           Exit;
+
         if (TR[4] > 10) or (TR[4] = 0) then
         begin
           // считываем из EEPROM - пока не знаю как
           TA[3] := TR[3];
-          TA[4] := 1;
-          Exit;
+          TA[4] := 6;
+        end
+        else
+        begin
+          TA[3] := TR[3];
+          TA[4] := TR[4];
         end;
-
-        TA[3] := TR[3];
-        TA[4] := TR[4];
       end;
 
     PCKT_CURRENT:
