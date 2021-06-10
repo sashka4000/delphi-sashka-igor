@@ -130,20 +130,18 @@ begin
         if (TR[3] > 16) or (TR[3] = 0) then
           Exit;
 
-        if (TR[4] > 10) or (TR[4] = 0) then
+        for i := 1 to 16 do
         begin
-          // считываем из EEPROM - пока не знаю как
-          for I := 1 to 16 do
+          if TR[3] = i then
           begin
-          TA[3] := TR[3];
-          TA[4] := arrEEPROM[i] ;
+            TA[3] := TR[3];
+            if (TR[4] > 10) or (TR[4] = 0) then
+              TA[4] := arrEEPROM[i]
+            else
+              arrEEPROM[i] := TA[4];
           end;
-        end
-        else
-        begin
-          TA[3] := TR[3];
-          TA[4] := TR[4];
         end;
+
       end;
 
     PCKT_CURRENT:
