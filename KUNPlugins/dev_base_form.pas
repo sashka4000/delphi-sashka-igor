@@ -50,6 +50,7 @@ type
     FDevTimeSync: Boolean;    // флаг валидности установленного времени
     FS : TFormatSettings;
     FDeviceSettingsList : TStringList;
+    arrEEPROM: array[1..16] of Integer;
     constructor Create(F: TFrmBaseClass);
     function RegisterCallback(CBF: TPGUSensorCallBack): HResult; stdcall;
     function CreateDeviceWindow(parentHWND: HWND; var createHWND: HWND): Hresult; stdcall;
@@ -70,6 +71,8 @@ implementation
 { TBaseDevice }
 
 constructor TBaseDevice.Create(F: TFrmBaseClass);
+var
+i : Integer;
 begin
   FormClass := F;
   FDevTime := EncodeDate(2001, 1, 1) + EncodeTime(0, 0, 0, 0);
@@ -78,6 +81,8 @@ begin
   FDevTimeSync := False;
   FS := TFormatSettings.Create;
   FDeviceSettingsList := TStringList.Create;
+   for i := 1 to 16 do
+    arrEEPROM[i] := 6;
 end;
 
 function TBaseDevice.CreateDeviceWindow(parentHWND: HWND;
