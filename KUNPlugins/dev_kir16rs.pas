@@ -129,11 +129,17 @@ begin
 
         TA[3] := TR[3];
         if (TR[4] > 10) or (TR[4] = 0) then
+        begin
 //          TA[4] := FMyForm.arrEEPROM[TR[3]]
+            if (FMyForm.SG.Cells[3,TR[3]].ToInteger > 10)  or (FMyForm.SG.Cells[3,TR[3]].ToInteger = 0) then
+             FMyForm.SG.Cells[3,TR[3]] := '6';
             TA[4] := FMyForm.SG.Cells[3,TR[3]].ToInteger
+        end
         else
         begin
 //          FMyForm.arrEEPROM[TR[3]] := TR[4];
+          if (TR[4] > 10) or (TR[4] = 0) then
+          TR[4] := 6;
           FMyForm.SG.Cells[3, TR[3]] := TR[4].ToString;
           TA[4] := TR[4];
         end;

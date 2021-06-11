@@ -74,7 +74,7 @@ inherited frmKIR16RS: TfrmKIR16RS
   object SG: TStringGrid
     Left = 379
     Top = 8
-    Width = 310
+    Width = 320
     Height = 377
     ColCount = 4
     DefaultColWidth = 105
