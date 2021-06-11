@@ -1,7 +1,9 @@
 inherited frmKIR16RS: TfrmKIR16RS
   Caption = 'frmKIR8RS'
   ClientHeight = 441
+  ClientWidth = 734
   OnCreate = FormCreate
+  ExplicitWidth = 734
   ExplicitHeight = 441
   PixelsPerInch = 96
   TextHeight = 13
@@ -72,9 +74,9 @@ inherited frmKIR16RS: TfrmKIR16RS
   object SG: TStringGrid
     Left = 379
     Top = 8
-    Width = 263
+    Width = 310
     Height = 377
-    ColCount = 3
+    ColCount = 4
     DefaultColWidth = 105
     DefaultRowHeight = 22
     RowCount = 17

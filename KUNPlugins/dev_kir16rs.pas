@@ -34,7 +34,7 @@ type
   public
     { Public declarations }
     FDevDataSend: Boolean;
-    arrEEPROM: array[1..16] of Integer;
+//    arrEEPROM: array[1..16] of Integer;
   end;
   TKIR16RS = class(TBaseDevice)
     function Serialize(LoadSave: Integer; P: PChar; var PSize: DWORD): HRESULT; override; stdcall;
@@ -129,10 +129,12 @@ begin
 
         TA[3] := TR[3];
         if (TR[4] > 10) or (TR[4] = 0) then
-          TA[4] := FMyForm.arrEEPROM[TR[3]]
+//          TA[4] := FMyForm.arrEEPROM[TR[3]]
+            TA[4] := FMyForm.SG.Cells[3,TR[3]].ToInteger
         else
         begin
-          FMyForm.arrEEPROM[TR[3]] := TR[4];
+//          FMyForm.arrEEPROM[TR[3]] := TR[4];
+          FMyForm.SG.Cells[3, TR[3]] := TR[4].ToString;
           TA[4] := TR[4];
         end;
       end;
@@ -337,24 +339,27 @@ begin
   inherited;
   FDevDataSend := False;
   //  инициализация массива
-  for i := 1 to 16 do
-    arrEEPROM[i] := 6;
+//  for i := 1 to 16 do
+//    arrEEPROM[i] := 6;
   with SG do
   begin
     ColWidths[0] := 40;
     ColWidths[1] := 95;
     ColWidths[2] := 120;
+    ColWidths[3] := 55;
     for i := 1 to 16 do
       Cells[0, i] := i.ToString;
     for i := 1 to 16 do
     begin
       Cells[1, i] := '0';
       Cells[2, i] := 'шлейф норма';
+      Cells[3, i] := '6';
     end;
 
     Cells[0, 0] := 'Вход';
     Cells[1, 0] := 'Число импульсов';
     Cells[2, 0] := 'Состояние шлейфа';
+    Cells[3, 0] := 'Пауза';
   end;
   SG.DefaultRowHeight := CBSG1.Height;
   CBSG1.Visible := False;
