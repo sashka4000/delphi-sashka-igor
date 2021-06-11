@@ -29,6 +29,7 @@ type
     procedure btnSensorClick(Sender: TObject);
     procedure cbbPowChange(Sender: TObject);
     procedure CBSG1Change(Sender: TObject);
+    procedure SGExit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -371,9 +372,19 @@ begin
   CBSG1.Visible := False;
 end;
 
+procedure TfrmKIR16RS.SGExit(Sender: TObject);
+var
+   j: Integer;
+begin
+  inherited;
+  j := SG.Row;
+  if (SG.Cells[3, j].ToInteger > 10) or (SG.Cells[3, j].ToInteger = 0) then
+    SG.Cells[3, j] := '6';
+end;
 procedure TfrmKIR16RS.SGSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
 var
   R: TRect;
+  j: Integer;
 begin
   inherited;
   if ((ACol = 2) and (ARow <> 0)) then
@@ -393,6 +404,9 @@ begin
     CBSG1.SetFocus;
   end;
   CanSelect := True;
+  j := SG.Row;
+  if (SG.Cells[3, j].ToInteger > 10) or (SG.Cells[3, j].ToInteger = 0) then
+    SG.Cells[3, j] := '6';
 end;
 
 function TKIR16RS.Serialize(LoadSave: Integer; P: PChar; var PSize: DWORD): HRESULT;

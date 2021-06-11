@@ -83,6 +83,7 @@ inherited frmKIR16RS: TfrmKIR16RS
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing]
     ScrollBars = ssNone
     TabOrder = 0
+    OnExit = SGExit
     OnSelectCell = SGSelectCell
   end
   object cbbPow: TComboBox
