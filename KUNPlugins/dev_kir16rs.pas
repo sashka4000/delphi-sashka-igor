@@ -313,15 +313,15 @@ end;
 procedure TfrmKIR16RS.CBSG1Change(Sender: TObject);
 begin
   {Перебросим выбранное в значение из ComboBox в grid}
-  SG.Cells[SG.Col, SG.Row] := CBSG1.Items[CBSG1.ItemIndex];
-  CBSG1.Visible := False;
-  SG.SetFocus;
+  SG.Cells[SG.Col, SG.Row] := CBSG1.Text;
+  //CBSG1.Visible := False;
+  //SG.SetFocus;
 end;
 
 procedure TfrmKIR16RS.CBSG1CloseUp(Sender: TObject);
 begin
   {Перебросим выбранное в значение из ComboBox в grid}
-  SG.Cells[SG.Col, SG.Row] := CBSG1.Items[CBSG1.ItemIndex];
+  SG.Cells[SG.Col, SG.Row] := CBSG1.Text;
   CBSG1.Visible := False;
   SG.SetFocus;
 end;
@@ -329,8 +329,8 @@ end;
 procedure TfrmKIR16RS.CBSG1Exit(Sender: TObject);
 begin
   inherited;
-        {Перебросим выбранное в значение из ComboBox в grid}
-  SG.Cells[SG.Col, SG.Row] := CBSG1.Items[CBSG1.ItemIndex];
+  {Перебросим выбранное в значение из ComboBox в grid}
+  SG.Cells[SG.Col, SG.Row] := CBSG1.Text;
   CBSG1.Visible := False;
   SG.SetFocus;
 end;

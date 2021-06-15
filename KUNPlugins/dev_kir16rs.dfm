@@ -103,7 +103,7 @@ inherited frmKIR16RS: TfrmKIR16RS
   end
   object CBSG1: TComboBox
     Left = 529
-    Top = 32
+    Top = 33
     Width = 113
     Height = 21
     Style = csDropDownList
