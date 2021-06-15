@@ -83,7 +83,6 @@ inherited frmKIR16RS: TfrmKIR16RS
     Options = [goFixedVertLine, goFixedHorzLine, goVertLine, goHorzLine, goRangeSelect, goEditing]
     ScrollBars = ssNone
     TabOrder = 0
-    OnExit = SGExit
     OnSelectCell = SGSelectCell
   end
   object cbbPow: TComboBox
@@ -129,5 +128,29 @@ inherited frmKIR16RS: TfrmKIR16RS
     Items.Strings = (
       '20.2'
       '21.1')
+  end
+  object CBSG2: TComboBox
+    Left = 641
+    Top = 33
+    Width = 48
+    Height = 21
+    Style = csDropDownList
+    ItemIndex = 5
+    TabOrder = 5
+    Text = '6'
+    OnChange = CBSG2Change
+    OnCloseUp = CBSG2CloseUp
+    OnExit = CBSG2Exit
+    Items.Strings = (
+      '1'
+      '2'
+      '3'
+      '4'
+      '5'
+      '6'
+      '7'
+      '8'
+      '9'
+      '10')
   end
 end

@@ -22,6 +22,7 @@ type
     lblTypeProtocol: TLabel;
     lbl1: TLabel;
     cbbVersion: TComboBox;
+    CBSG2: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure SGSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
     procedure CBSG1CloseUp(Sender: TObject);
@@ -29,7 +30,9 @@ type
     procedure btnSensorClick(Sender: TObject);
     procedure cbbPowChange(Sender: TObject);
     procedure CBSG1Change(Sender: TObject);
-    procedure SGExit(Sender: TObject);
+    procedure CBSG2Change(Sender: TObject);
+    procedure CBSG2CloseUp(Sender: TObject);
+    procedure CBSG2Exit(Sender: TObject);
   private
     { Private declarations }
   public
@@ -336,6 +339,28 @@ begin
 end;
 
 
+procedure TfrmKIR16RS.CBSG2Change(Sender: TObject);
+begin
+  inherited;
+  SG.Cells[SG.Col, SG.Row] := CBSG2.Text;
+end;
+
+
+procedure TfrmKIR16RS.CBSG2CloseUp(Sender: TObject);
+begin
+  inherited;
+  SG.Cells[SG.Col, SG.Row] := CBSG2.Text;
+  CBSG2.Visible := False;
+  SG.SetFocus;
+end;
+
+procedure TfrmKIR16RS.CBSG2Exit(Sender: TObject);
+begin
+  inherited;
+  SG.Cells[SG.Col, SG.Row] := CBSG2.Text;
+  CBSG2.Visible := False;
+  SG.SetFocus;
+end;
 
 
 // Формирование начальной формы и заполнение TStringGrid
@@ -369,18 +394,11 @@ begin
     Cells[3, 0] := 'Пауза';
   end;
   SG.DefaultRowHeight := CBSG1.Height;
+  SG.DefaultRowHeight := CBSG2.Height;
   CBSG1.Visible := False;
+  CBSG2.Visible := False;
 end;
 
-procedure TfrmKIR16RS.SGExit(Sender: TObject);
-var
-   j: Integer;
-begin
-  inherited;
-  j := SG.Row;
-  if (SG.Cells[3, j].ToInteger > 10) or (SG.Cells[3, j].ToInteger = 0) then
-    SG.Cells[3, j] := '6';
-end;
 procedure TfrmKIR16RS.SGSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
 var
   R: TRect;
@@ -403,10 +421,28 @@ begin
     CBSG1.Visible := True;
     CBSG1.SetFocus;
   end;
+ // для задержки
+    if ((ACol = 3) and (ARow <> 0)) then
+  begin
+    {Ширина и положение ComboBox должно соответствовать ячейке StringGrid}
+    R := SG.CellRect(ACol, ARow);
+    R.Left := R.Left + SG.Left;
+    R.Right := R.Right + SG.Left;
+    R.Top := R.Top + SG.Top;
+    R.Bottom := R.Bottom + SG.Top;
+    CBSG2.ItemIndex := CBSG2.Items.IndexOf(SG.Cells[ACol, ARow]);
+    CBSG2.Left := R.Left + 1;
+    CBSG2.Top := R.Top + 1;
+    CBSG2.Width := (R.Right + 1) - R.Left;
+    CBSG2.Height := (R.Bottom + 1) - R.Top; {Покажем combobox}
+    CBSG2.Visible := True;
+    CBSG2.SetFocus;
+  end;
+
   CanSelect := True;
-  j := SG.Row;
-  if (SG.Cells[3, j].ToInteger > 10) or (SG.Cells[3, j].ToInteger = 0) then
-    SG.Cells[3, j] := '6';
+//  j := SG.Row;
+//  if (SG.Cells[3, j].ToInteger > 10) or (SG.Cells[3, j].ToInteger = 0) then
+//    SG.Cells[3, j] := '6';
 end;
 
 function TKIR16RS.Serialize(LoadSave: Integer; P: PChar; var PSize: DWORD): HRESULT;
