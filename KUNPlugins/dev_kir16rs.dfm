@@ -139,7 +139,6 @@ inherited frmKIR16RS: TfrmKIR16RS
     TabOrder = 5
     Text = '6'
     OnChange = CBSG2Change
-    OnCloseUp = CBSG2CloseUp
     OnExit = CBSG2Exit
     Items.Strings = (
       '1'

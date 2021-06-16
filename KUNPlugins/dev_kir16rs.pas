@@ -25,20 +25,17 @@ type
     CBSG2: TComboBox;
     procedure FormCreate(Sender: TObject);
     procedure SGSelectCell(Sender: TObject; ACol, ARow: Integer; var CanSelect: Boolean);
-    procedure CBSG1CloseUp(Sender: TObject);
     procedure CBSG1Exit(Sender: TObject);
     procedure btnSensorClick(Sender: TObject);
     procedure cbbPowChange(Sender: TObject);
     procedure CBSG1Change(Sender: TObject);
     procedure CBSG2Change(Sender: TObject);
-    procedure CBSG2CloseUp(Sender: TObject);
     procedure CBSG2Exit(Sender: TObject);
   private
     { Private declarations }
   public
     { Public declarations }
     FDevDataSend: Boolean;
-//    arrEEPROM: array[1..16] of Integer;
   end;
   TKIR16RS = class(TBaseDevice)
     function Serialize(LoadSave: Integer; P: PChar; var PSize: DWORD): HRESULT; override; stdcall;
@@ -62,10 +59,7 @@ var
   ValueLoop: Cardinal;
   bSendAnswer: Boolean;
   FDevBattery: Byte;       // флаг состояния АКБ
-//  tmp: string;
   FMyForm: TfrmKIR16RS;
-//  bat: Double;
-//  batInt: Integer;
   i, j: Integer;
   ver: string;
   FTime: TDateTime;
@@ -132,21 +126,16 @@ begin
           Exit;
 
         TA[3] := TR[3];
+
+        if (FMyForm.SG.Cells[3, TR[3]].ToInteger > 10) or (FMyForm.SG.Cells[3, TR[3]].ToInteger = 0) then
+          FMyForm.SG.Cells[3, TR[3]] := '6';
+        TA[4] := FMyForm.SG.Cells[3, TR[3]].ToInteger;
+
         if (TR[4] > 10) or (TR[4] = 0) then
-        begin
-//          TA[4] := FMyForm.arrEEPROM[TR[3]]
-            if (FMyForm.SG.Cells[3,TR[3]].ToInteger > 10)  or (FMyForm.SG.Cells[3,TR[3]].ToInteger = 0) then
-             FMyForm.SG.Cells[3,TR[3]] := '6';
-            TA[4] := FMyForm.SG.Cells[3,TR[3]].ToInteger
-        end
-        else
-        begin
-//          FMyForm.arrEEPROM[TR[3]] := TR[4];
-          if (TR[4] > 10) or (TR[4] = 0) then
           TR[4] := 6;
-          FMyForm.SG.Cells[3, TR[3]] := TR[4].ToString;
-          TA[4] := TR[4];
-        end;
+        FMyForm.SG.Cells[3, TR[3]] := TR[4].ToString;
+        TA[4] := TR[4];
+
       end;
 
     PCKT_CURRENT:
@@ -167,7 +156,6 @@ begin
         TA[6] := D;
         TA[7] := MM;
         TA[8] := (Y - 2000);
-        //************************
         // состояние дискретного входа, аккумулятора и настроек
         if not (FMyForm.btnSensor.Down) then
         begin
@@ -195,7 +183,6 @@ begin
               end;
           end;
         end;
-       //****************************
        //Сумматоры
         for i := 0 to 15 do
         begin
@@ -207,21 +194,15 @@ begin
         TA[73] := FDevTimeDifference mod 60;
         FDevTimeDifference := FDevTimeDifference div 60;
         Move(FDevTimeDifference, TA[74], 3);
-        //**************************
         // читаем состояние шлейфа
-//             FMyForm.CBSG1.ItemIndex;
         for i := 0 to 3 do
         begin
           for j := 1 to 4 do
             if FMyForm.SG.Cells[2, j + (4 * i)] = 'шлейф замкнут' then
               SetBit(TA[77 + i], (0 + (2 * (j - 1))))
             else if FMyForm.SG.Cells[2, j + (4 * i)] = 'шлейф обрыв' then
-            begin
- //                   SetBit(TA[77 + i],(0 + (2 * (j -1))));
               SetBit(TA[77 + i], (1 + (2 * (j - 1))))
-            end;
         end;
-        //
 
       end;
     PCKT_OPER:
@@ -321,13 +302,6 @@ begin
   //SG.SetFocus;
 end;
 
-procedure TfrmKIR16RS.CBSG1CloseUp(Sender: TObject);
-begin
-  {Перебросим выбранное в значение из ComboBox в grid}
-  SG.Cells[SG.Col, SG.Row] := CBSG1.Text;
-  CBSG1.Visible := False;
-  SG.SetFocus;
-end;
 
 procedure TfrmKIR16RS.CBSG1Exit(Sender: TObject);
 begin
@@ -341,22 +315,12 @@ end;
 
 procedure TfrmKIR16RS.CBSG2Change(Sender: TObject);
 begin
-  inherited;
   SG.Cells[SG.Col, SG.Row] := CBSG2.Text;
 end;
 
-
-procedure TfrmKIR16RS.CBSG2CloseUp(Sender: TObject);
-begin
-  inherited;
-  SG.Cells[SG.Col, SG.Row] := CBSG2.Text;
-  CBSG2.Visible := False;
-  SG.SetFocus;
-end;
 
 procedure TfrmKIR16RS.CBSG2Exit(Sender: TObject);
 begin
-  inherited;
   SG.Cells[SG.Col, SG.Row] := CBSG2.Text;
   CBSG2.Visible := False;
   SG.SetFocus;
@@ -370,9 +334,6 @@ var
 begin
   inherited;
   FDevDataSend := False;
-  //  инициализация массива
-//  for i := 1 to 16 do
-//    arrEEPROM[i] := 6;
   with SG do
   begin
     ColWidths[0] := 40;
@@ -440,9 +401,6 @@ begin
   end;
 
   CanSelect := True;
-//  j := SG.Row;
-//  if (SG.Cells[3, j].ToInteger > 10) or (SG.Cells[3, j].ToInteger = 0) then
-//    SG.Cells[3, j] := '6';
 end;
 
 function TKIR16RS.Serialize(LoadSave: Integer; P: PChar; var PSize: DWORD): HRESULT;
