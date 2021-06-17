@@ -10,5 +10,5 @@
   "Active": true,
   "ID": "{C8B1EF56-D63C-4711-B44A-AE6E7024286A}",
   "DevName": "КИР-16RS",
-  "InsideSettings": "Address=0,Version=0"
+  "InsideSettings": "Address=2,Version=0,UPS=3,\"Impulse=\"\"Число импульсов\"\",0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0\",\"Pause=Пауза,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6,6\""
  }]

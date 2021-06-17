@@ -90,7 +90,7 @@ inherited frmKIR16RS: TfrmKIR16RS
     Top = 115
     Width = 120
     Height = 21
-    TabOrder = 3
+    TabOrder = 4
     Text = #1053#1086#1088#1084#1072
     OnChange = cbbPowChange
     Items.Strings = (
@@ -123,8 +123,9 @@ inherited frmKIR16RS: TfrmKIR16RS
     Height = 21
     Style = csDropDownList
     ItemIndex = 0
-    TabOrder = 4
+    TabOrder = 5
     Text = '20.2'
+    OnChange = cbbVersionChange
     Items.Strings = (
       '20.2'
       '21.1')
@@ -136,7 +137,7 @@ inherited frmKIR16RS: TfrmKIR16RS
     Height = 21
     Style = csDropDownList
     ItemIndex = 5
-    TabOrder = 5
+    TabOrder = 3
     Text = '6'
     OnChange = CBSG2Change
     OnExit = CBSG2Exit

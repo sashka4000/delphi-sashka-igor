@@ -31,6 +31,7 @@ type
     procedure CBSG1Change(Sender: TObject);
     procedure CBSG2Change(Sender: TObject);
     procedure CBSG2Exit(Sender: TObject);
+    procedure cbbVersionChange(Sender: TObject);
   private
     { Private declarations }
   public
@@ -114,28 +115,19 @@ begin
         TA := TArray<Byte>.Create($80, $83, $06, S, M, H, D, MM, (Y - 2000), $00);
       end;
 
-      // только для версий прошивки концентратора >= 21.1
       PCKT_WRITE_DATA:
       begin
         // Запись текущих данных устройства
+        // только для версий прошивки концентратора >= 21.1
         if FMyForm.cbbVersion.ItemIndex = 0 then
           Exit;
-
         TA := TArray<Byte>.Create($80, $84, $02, $00, $00, $00);
-        if (TR[3] > 16) or (TR[3] = 0) then
+        if not (TR[3] in [1..16]) then
           Exit;
-
         TA[3] := TR[3];
-
-        if (FMyForm.SG.Cells[3, TR[3]].ToInteger > 10) or (FMyForm.SG.Cells[3, TR[3]].ToInteger = 0) then
-          FMyForm.SG.Cells[3, TR[3]] := '6';
+        if (TR[4] in [1..10]) then
+          FMyForm.SG.Cells[3, TR[3]] :=  TR[4].ToString;
         TA[4] := FMyForm.SG.Cells[3, TR[3]].ToInteger;
-
-        if (TR[4] > 10) or (TR[4] = 0) then
-          TR[4] := 6;
-        FMyForm.SG.Cells[3, TR[3]] := TR[4].ToString;
-        TA[4] := TR[4];
-
       end;
 
     PCKT_CURRENT:
@@ -293,6 +285,13 @@ begin
 end;
 
 
+procedure TfrmKIR16RS.cbbVersionChange(Sender: TObject);
+begin
+  if cbbVersion.ItemIndex = 0
+   then SG.ColWidths [3] := 1
+   else SG.ColWidths [3] := 55;
+end;
+
 // встраиваем ComboBox в StringGrid
 procedure TfrmKIR16RS.CBSG1Change(Sender: TObject);
 begin
@@ -413,12 +412,25 @@ begin
     Result := inherited;
     FMyForm.seNumber.Text := FDeviceSettingsList.Values['Address'];
     FMyForm.cbbVersion.ItemIndex := FDeviceSettingsList.Values['Version'].ToInteger;
+    if FDeviceSettingsList.Values['Pause'] <> '' then
+    begin
+      FMyForm.SG.Cols[3].DelimitedText := FDeviceSettingsList.Values['Pause'];
+    end;
+    if FDeviceSettingsList.Values['Impulse'] <> '' then
+    begin
+      FMyForm.SG.Cols[1].DelimitedText := FDeviceSettingsList.Values['Impulse'];
+    end;
+    FMyForm.cbbPow.ItemIndex := StrToIntDef(FDeviceSettingsList.Values['UPS'],0);
+    FMyForm.cbbVersionChange(nil);
   end
   else
   begin
     FDeviceSettingsList.Clear;
     FDeviceSettingsList.AddPair('Address', FMyForm.seNumber.Text);
     FDeviceSettingsList.AddPair('Version', FMyForm.cbbVersion.ItemIndex.ToString);
+    FDeviceSettingsList.AddPair('UPS', FMyForm.cbbPow.ItemIndex.ToString);
+    FDeviceSettingsList.AddPair('Impulse', FMyForm.SG.Cols[1].DelimitedText);
+    FDeviceSettingsList.AddPair('Pause', FMyForm.SG.Cols[3].DelimitedText);
     Result := inherited;
   end;
 end;
